@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ The MIT License (MIT)
+  ~
+  ~ Copyright (c) 2014 abel533@gmail.com
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in
+  ~ all copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  ~ THE SOFTWARE.
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zyx.mapper.pg.CircleMapper">
+    <resultMap id="CircleResultMap" type="com.zyx.entity.pg.Circle">
+        <id column="Id" property="id" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="create_id" property="createId" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <result column="state" property="state" jdbcType="INTEGER"/>
+        <result column="admin_ids" property="adminIds" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="circle_master_id" property="circleMasterId" jdbcType="INTEGER"/>
+        <result column="details" property="details" jdbcType="VARCHAR"/>
+        <result column="head_img_url" property="headImgUrl" jdbcType="VARCHAR"/>
+        <result column="top" property="top" jdbcType="INTEGER"/>
+        <result column="hot" property="hot" jdbcType="INTEGER"/>
+        <result column="tag" property="tag" jdbcType="INTEGER"/>
+        <result column="group_id" property="groupId" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <resultMap id="CircleListDtoResultMap" type="com.zyx.vo.pg.CircleListVo">
+        <id column="Id" property="id" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="create_id" property="createId" jdbcType="INTEGER"/>
+        <result column="details" property="details" jdbcType="VARCHAR"/>
+        <result column="head_img_url" property="headImgUrl" jdbcType="VARCHAR"/>
+        <association property="circleItemCount" column="id" select="selectCircleItemCount"/>
+    </resultMap>
+    <resultMap id="DevaCircleResultMap" type="com.zyx.vo.pg.DevaCircleVo">
+        <id column="Id" property="id" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="create_id" property="createId" jdbcType="INTEGER"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="head_img_url" property="headImgUrl" jdbcType="VARCHAR"/>
+        <result column="top" property="top" jdbcType="INTEGER"/>
+        <result column="hot" property="hot" jdbcType="INTEGER"/>
+        <association property="circleItemCount" column="id" select="selectCircleItemCount"/>
+    </resultMap>
+
+    <resultMap id="CircleJxDtoResultMap" type="com.zyx.vo.pg.JxCircleVo" extends="CircleResultMap">
+        <result column="sequence" property="sequence" jdbcType="INTEGER"/>
+        <result column="area" property="area" jdbcType="INTEGER"/>
+        <result column="types" property="types" jdbcType="INTEGER"/>
+        <association property="circleItemCount" column="id" select="selectCircleItemCount"/>
+    </resultMap>
+
+    <select id="circleList" resultMap="CircleResultMap">
+        SELECT * FROM circle WHERE state!=-1 ORDER BY create_time DESC
+        <if test="#{max} !=null">
+            limit 0, #{max}
+        </if>
+    </select>
+
+    <select id="existMaster" resultMap="CircleResultMap">
+        SELECT * FROM circle where id=#{id} and circle_master_id=#{master_id}
+    </select>
+
+    <update id="setMaster">
+        UPDATE circle SET circle_master_id = #{master_id} WHERE id=#{circle_id}
+    </update>
+
+    <update id="deleteCircle">
+        UPDATE circle SET state=-1 WHERE id=#{circle_id}
+    </update>
+
+    <update id="setTop">
+        UPDATE circle SET top=1 where id=#{circle_id}
+    </update>
+
+    <select id="findById" resultMap="CircleResultMap">
+        SELECT * FROM circle WHERE id=#{id} AND state!=-1
+    </select>
+
+    <update id="closeMaster">
+        UPDATE circle SET circle_master_id=null WHERE id=#{circleId} AND create_id=#{oldMasterId}
+    </update>
+
+    <update id="updateHeadImg">
+         UPDATE circle SET head_img_url=#{headImgUrl} WHERE id=#{circleId}
+    </update>
+
+    <update id="setAdminIds">
+        UPDATE circle SET admin_ids=#{adminIds} WHERE id=#{circleId}
+    </update>
+
+    <select id="myCreateList" parameterType="int" resultMap="CircleListDtoResultMap">
+        SELECT * FROM circle WHERE create_id=#{create_id} AND state!=-1
+    </select>
+
+    <select id="selectCircleItemCount" parameterType="int" resultType="int">
+        SELECT count(*) FROM circle_item WHERE circle_id=#{circle_id} AND state!=-1
+    </select>
+
+    <select id="myConcernList" parameterType="int" resultMap="CircleListDtoResultMap">
+    SELECT * FROM circle WHERE id IN (select concern_id from myconcern where account_id = #{account_id} and concern_type = 4) AND state!=-1
+    </select>
+
+
+    <select id="jxCircle" resultMap="CircleJxDtoResultMap">
+    SELECT
+        circle.title,
+        circle.id,
+        circle.head_img_url,
+        devaluation.sequence,
+        devaluation.area,
+        devaluation.model as types
+    FROM
+        circle
+    INNER JOIN devaluation ON circle.id = devaluation.model_id
+    WHERE
+        devaluation.model = #{devTypes} AND  circle.state!=-1
+    ORDER BY
+        sequence DESC
+    LIMIT 0,#{max}
+    </select>
+
+    <select id="selectDevaCircle" resultMap="DevaCircleResultMap">
+        SELECT
+        circle.id,
+        circle.title,
+        circle.head_img_url,
+        circle.create_time
+        FROM
+        circle
+        WHERE
+        circle.id IN
+        <foreach collection="ids" index="index" item="tag" open="("
+                 separator="," close=")">
+            #{tag}
+        </foreach>
+    </select>
+</mapper>

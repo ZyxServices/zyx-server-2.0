@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zyx.mapper.activity.PageViewsMapper">
+
+    <resultMap id="pageViews" type="com.zyx.entity.activity.PageViews">
+        <id column="id" property="id" ></id>
+        <result column="pageviews" property="pageviews"></result>
+        <result column="types" property="types"></result>
+        <result column="typeId" property="typeId"></result>
+    </resultMap>
+
+    <select id="queryPageView" resultMap="pageViews">
+        SELECT * FROM pageviews WHERE types=#{types} AND typeId = #{typeId}
+    </select>
+
+</mapper>

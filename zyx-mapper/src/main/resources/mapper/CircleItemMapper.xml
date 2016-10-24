@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ The MIT License (MIT)
+  ~
+  ~ Copyright (c) 2014 abel533@gmail.com
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in
+  ~ all copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  ~ THE SOFTWARE.
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zyx.mapper.pg.CircleItemMapper">
+    <resultMap id="CircleItemResultMap" type="com.zyx.entity.pg.CircleItem">
+        <id column="Id" property="id" jdbcType="INTEGER"/>
+        <result column="circle_id" property="circleId" jdbcType="INTEGER"/>
+        <result column="create_id" property="createId" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="img_url" property="imgUrl" jdbcType="VARCHAR"/>
+        <result column="hot" property="hot" jdbcType="VARCHAR"/>
+        <result column="top" property="top" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <result column="base_content" property="baseContent" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="CircleItemCustomMap" type="com.zyx.vo.pg.CircleItemVo" extends="CircleItemResultMap">
+        <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
+        <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
+        <result column="authInfo" property="authInfo" jdbcType="VARCHAR"/>
+        <!--<result column="zanCount" property="zanCount" jdbcType="INTEGER"/>-->
+        <!--<result column="meetCount" property="meetCount" jdbcType="INTEGER"/>-->
+        <result column="circleTitle" property="circleTitle" jdbcType="VARCHAR"/>
+        <association property="zanCount" column="Id" select="zanSelect"/>
+        <association property="meetCount" column="id" select="meetSelect"/>
+    </resultMap>
+    <resultMap id="CircleResultMap" type="com.zyx.entity.pg.Circle">
+        <id column="Id" property="id" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="create_id" property="createId" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <result column="state" property="state" jdbcType="INTEGER"/>
+        <result column="admin_ids" property="adminIds" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="circle_master_id" property="circleMasterId" jdbcType="INTEGER"/>
+        <result column="details" property="details" jdbcType="VARCHAR"/>
+        <result column="head_img_url" property="headImgUrl" jdbcType="VARCHAR"/>
+        <result column="top" property="top" jdbcType="INTEGER"/>
+        <result column="hot" property="hot" jdbcType="INTEGER"/>
+        <result column="tag" property="tag" jdbcType="INTEGER"/>
+        <result column="group_id" property="groupId" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <resultMap id="CircleItemLunBoMap" type="com.zyx.vo.pg.CircleItemLunBoVo" extends="CircleItemResultMap">
+        <association property="userVo" column="create_id" select="userVoSelect"/>
+        <association property="circleVo" column="circle_id" select="circleVoSelect"/>
+        <association property="userAuthVo" column="create_id" select="userAuthSelect"/>
+    </resultMap>
+
+    <select id="userAuthSelect" parameterType="int" resultType="com.zyx.vo.pg.UserAuthVo">
+        SELECT authInfo FROM `user_auth` WHERE user_id=#{user_id}
+    </select>
+
+    <select id="circleVoSelect" parameterType="int" resultMap="CircleResultMap">
+        SELECT * FROM circle WHERE id=#{circleId} AND  state!=-1
+    </select>
+
+    <select id="userVoSelect" parameterType="int" resultType="com.zyx.vo.pg.UserVo">
+        SELECT nickname,avatar,id,authenticate FROM `user` WHERE id=#{user_id}
+    </select>
+    <select id="meetSelect" parameterType="int" resultType="int">
+        SELECT count(id) from comment where comment_id=#{circle_item_id} AND comment_type=1
+    </select>
+
+    <select id="zanSelect" parameterType="int" resultType="int">
+        SELECT count(id) from zan where body_type=5 AND body_id=#{circle_item_id}
+    </select>
+
+    <select id="circleItemList" resultMap="CircleItemCustomMap">
+        SELECT
+        circle_item.id,
+        circle_item.circle_id,
+        circle_item.img_url,
+        circle_item.create_id,
+        circle_item.title,
+        circle_item.content,
+        circle_item.hot,
+        circle_item.create_time,
+        circle_item.top,
+        circle_item.state,
+        `user`.nickname,
+        `user`.avatar,
+        circle.title AS circleTitle,
+        circle_item.base_content
+        FROM
+        circle_item
+        INNER JOIN `user` ON circle_item.create_id = `user`.id
+        INNER JOIN circle ON circle_item.circle_id = circle.id
+        WHERE
+        <if test="circleId!=null">
+            circle_item.circle_id=#{circleId}
+            AND circle_item.state!=-1
+        </if>
+        <if test="circleId==null">
+            circle_item.state!=-1
+        </if>
+
+        ORDER BY circle_item.create_time DESC
+        limit #{start},#{end}
+    </select>
+
+    <select id="selectCircleItemById" resultType="java.lang.Integer" resultMap="CircleItemCustomMap">
+            SELECT
+            circle_item.id,
+            circle_item.circle_id,
+            circle_item.img_url,
+            circle_item.create_id,
+            circle_item.title,
+            circle_item.content,
+            circle_item.hot,
+            circle_item.create_time,
+            circle_item.top,
+            circle_item.state,
+            `user`.nickname,
+            `user`.avatar,
+            `user_auth`.authinfo AS authInfo,
+            circle.title AS circleTitle,
+            circle_item.base_content
+            FROM
+            circle_item
+            INNER JOIN `user` ON circle_item.create_id = `user`.id
+            LEFT JOIN `user_auth` ON circle_item.create_id = `user_auth`.user_id
+            INNER JOIN circle ON circle_item.circle_id = circle.id
+            WHERE
+            circle_item.id=#{id}
+    </select>
+    <select id="selectCircleItemByIds" resultType="java.util.List" resultMap="CircleItemCustomMap">
+        SELECT
+        circle_item.id,
+        circle_item.circle_id,
+        circle_item.img_url,
+        circle_item.create_id,
+        circle_item.title,
+        circle_item.content,
+        circle_item.hot,
+        circle_item.create_time,
+        circle_item.top,
+        circle_item.state,
+        `user`.nickname,
+        `user`.avatar,
+        `user_auth`.authinfo AS authInfo,
+        circle.title AS circleTitle,
+        circle_item.base_content
+        FROM
+        circle_item
+        INNER JOIN `user` ON circle_item.create_id = `user`.id
+        LEFT JOIN `user_auth` ON circle_item.create_id = `user_auth`.user_id
+        INNER JOIN circle ON circle_item.circle_id = circle.id
+        WHERE
+        circle_item.id in
+        <foreach collection="ids" index="index" item="tag" open="("
+                 separator="," close=")">
+            #{tag}
+        </foreach>
+    </select>
+
+    <update id="setTop">
+        UPDATE circle_item SET top=#{top} WHERE id=#{circleItemId}
+    </update>
+
+    <select id="topList" resultMap="CircleItemResultMap">
+        SELECT * FROM circle_item where circle_id=#{circleId} AND top!='null' AND state!=-1 ORDER BY create_time DESC,top DESC limit 0,#{max}
+    </select>
+
+    <select id="getCircleItemCounts" resultType="java.lang.Integer">
+        SELECT COUNT(*) as circleItemCount FROM circle_item WHERE circle_id=#{circleId} AND state!=-1
+    </select>
+
+    <select id="findById" resultMap="CircleItemResultMap">
+        SELECT * FROM circle_item WHERE  id=#{circleItemId}
+    </select>
+
+    <update id="delByThisUser">
+        UPDATE circle_item SET state=-1 WHERE create_id=#{createThisId} AND id=#{circleItemId}
+    </update>
+
+    <select id="getLunBo" resultMap="CircleItemLunBoMap">
+          SELECT
+            circle_item.id,
+            circle_item.create_id,
+            devaluation.image_url as tjImgae_url
+        FROM
+            devaluation
+        INNER JOIN circle_item ON circle_item.id = devaluation.model_id
+        WHERE devaluation.model=6 AND devaluation.area=3 AND circle_item.state!=-1
+        ORDER BY
+            devaluation.sequence DESC
+        LIMIT 0,#{max}
+    </select>
+
+    <select id="getOneCircleItem" resultMap="CircleItemLunBoMap">
+        SELECT * FROM circle_item WHERE id=#{id}
+    </select>
+
+    <select id="getTjCircleItem" resultMap="CircleItemCustomMap">
+        SELECT
+        circle_item.id,
+        circle_item.circle_id,
+        circle_item.create_id,
+        circle_item.title,
+        circle_item.content,
+        circle_item.hot,
+        circle_item.create_time,
+        circle_item.top,
+        circle_item.state,
+        `user`.nickname,
+        `user`.avatar,
+        circle.title as circleTitle,
+        circle_item.img_url,
+        circle_item.base_content
+        FROM
+        circle_item
+        INNER JOIN devaluation ON circle_item.id = devaluation.model_id
+        INNER JOIN `user` ON circle_item.create_id = `user`.id
+        INNER JOIN circle ON circle_item.circle_id = circle.id
+        where model=6 and area=2 and circle_item.state!=-1
+        LIMIT #{start},#{end}
+    </select>
+
+</mapper>
