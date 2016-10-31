@@ -12,4 +12,3 @@ target/
 *.class
 *.log
 lib/
-zyx-dubbo-test/

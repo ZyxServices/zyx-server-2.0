@@ -14,9 +14,14 @@ import tk.mybatis.mapper.annotation.ColumnType;
 /**
  * 
  * @描述: 基础实体类，包含各实体公用属性 .
+ * @作者: zhanghr
+ * @版本: 1.0 .
  */
 public class BaseEntity implements Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = -3016616055266736380L;
 
 	/** 主键ID **/

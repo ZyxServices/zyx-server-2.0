@@ -20,7 +20,6 @@
         <module>zyx-vo</module>
         <module>zyx-param</module>
         <module>zyx-dubbo-coin</module>
-        <module>zyx-dubbo-activity</module>
     </modules>
 
     <properties>
