@@ -19,6 +19,7 @@
         <module>zyx-constants</module>
         <module>zyx-vo</module>
         <module>zyx-param</module>
+        <module>zyx-dubbo-coin</module>
     </modules>
 
     <properties>
