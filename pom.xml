@@ -29,7 +29,8 @@
         <module>zyx-param</module>
         <!--<module>zyx-dubbo-collection</module>-->
         <!--<module>zyx-exception</module>-->
-        <module>zyx-dubbo-point</module>
+        <!--<module>zyx-dubbo-point</module>-->
+        <module>zyx-dubbo-coin</module>
     </modules>
 
     <properties>
