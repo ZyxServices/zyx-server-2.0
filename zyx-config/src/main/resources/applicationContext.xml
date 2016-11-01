@@ -84,7 +84,7 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations">
-            <value>classpath:mapper/*.xml</value>
+            <value>classpath*:mapper/*.xml,classpath*:mapper/point/*.xml</value>
         </property>
         <property name="typeAliasesPackage"
                   value="com.zyx.entity.live,com.zyx.entity.shop,com.zyx.entity.pg,com.zyx.entity.activity,com.zyx.entity.coin"/>
