@@ -25,8 +25,6 @@ public class UserPointParam extends BaseParam {
 
     private Long pointCount;
 
-    private Long pointTotal;
-
     /**
      * 积分记录的表名
      */
@@ -88,14 +86,6 @@ public class UserPointParam extends BaseParam {
 
     public void setPointCount(Long pointCount) {
         this.pointCount = pointCount;
-    }
-
-    public Long getPointTotal() {
-        return pointTotal;
-    }
-
-    public void setPointTotal(Long pointTotal) {
-        this.pointTotal = pointTotal;
     }
 
     public String getDetailTable() {

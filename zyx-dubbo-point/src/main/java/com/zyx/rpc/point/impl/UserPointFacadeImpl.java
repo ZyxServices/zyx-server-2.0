@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * Created by wms on 2016/10/31.
@@ -25,6 +26,8 @@ public class UserPointFacadeImpl implements UserPointFacade {
 
     @Autowired
     private UserPointService userPointService;
+
+    private ReentrantReadWriteLock rwl = new ReentrantReadWriteLock();
 
     @Override
     public Map<String, Object> queryUserPoint(UserPointParam userPointParam) {
@@ -58,11 +61,10 @@ public class UserPointFacadeImpl implements UserPointFacade {
         Long t = System.currentTimeMillis();
         userPointParam.setModifyTime(t);
         userPointParam.setId(userPointVo.getId());
-        userPointParam.setPointTotal(userPointVo.getPointCount() + userPointParam.getPointCount());
 
         try {
             if (userPointService.modifyUserPoint(userPointParam) >= 1) {
-                return MapUtils.buildSuccessMap(PointConstants.SUCCESS, "积分+" + userPointParam.getPointCount(), null);
+                return MapUtils.buildSuccessMap(PointConstants.SUCCESS, "积分" + userPointParam.getPointCount(), null);
             }
             return MapUtils.buildErrorMap(PointConstants.ERROR, PointConstants.ERROR_MSG);
         } catch (Exception e) {
@@ -81,13 +83,22 @@ public class UserPointFacadeImpl implements UserPointFacade {
         userPointInfo.setPointType(userPointParam.getPointType());
         userPointParam.setModifyTime(t);
         try {
-            if (userPointService.insertUserPoint(userPointInfo, userPointParam) >= 1) {
-                return MapUtils.buildSuccessMap(PointConstants.SUCCESS, "积分+" + userPointParam.getPointCount(), null);
+            // 插入方法加锁实现
+            rwl.writeLock().lock();
+            UserPointVo userPointVo = userPointService.queryUserPoint(userPointParam);
+            if (null == userPointVo) {
+                if (userPointService.insertUserPoint(userPointInfo, userPointParam) >= 1) {
+                    return MapUtils.buildSuccessMap(PointConstants.SUCCESS, "积分" + userPointParam.getPointCount(), null);
+                }
+            } else {
+                return modifyUserPoint(userPointVo, userPointParam);
             }
             return MapUtils.buildErrorMap(PointConstants.ERROR, PointConstants.ERROR_MSG);
         } catch (Exception e) {
             e.printStackTrace();
             return PointConstants.MAP_500;
+        } finally {
+            rwl.writeLock().unlock();
         }
 
     }

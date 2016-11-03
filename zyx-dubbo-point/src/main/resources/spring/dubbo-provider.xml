@@ -17,6 +17,6 @@
     <dubbo:protocol name="dubbo" port="20891" threads="200"/>
 
     <!-- 积分接口 -->
-    <dubbo:service interface="com.zyx.rpc.point.UserPointFacade" ref="userPointFacade" timeout="10000"/>
+    <dubbo:service interface="com.zyx.rpc.point.UserPointFacade" ref="userPointFacade" timeout="100000"/>
 
 </beans>
