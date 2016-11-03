@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyx.mapper.coin.SportCoinMapper">
+
+	<!-- 用户信息表 -->
+	 <sql id="liveInfo"> t_sport_coin</sql>
+
+	<resultMap id="SportCoinVo" type="com.zyx.vo.coin.SportCoinVo">
+
+	</resultMap>
+
+	<select id="selectSportCoin" resultType="com.zyx.vo.coin.SportCoinVo" parameterType="java.lang.Integer">
+		SELECT user_id,coin,state
+		FROM t_sport_coin
+		WHERE
+		user_id = #{userId}
+	</select>
+</mapper>

@@ -3,9 +3,15 @@ package com.zyx.param.account;
 import java.io.Serializable;
 
 /**
- * Created by Rainbow on 2016/11/1.
+ * Created by wms on 2016/7/25.
+ *
+ * @author WeiMinSheng
+ * @version V1.0
+ *          Copyright (c)2016 tyj-版权所有
+ * @title AccountInfoParam.java
  */
 public class AccountInfoParam implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private Integer id;
 
@@ -91,5 +97,19 @@ public class AccountInfoParam implements Serializable {
 
     public void setSignature(String signature) {
         this.signature = signature;
+    }
+
+    @Override
+    public String toString() {
+        return "AccountInfoParam{" +
+                "id=" + id +
+                ", token='" + token + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", sex=" + sex +
+                ", avatar='" + avatar + '\'' +
+                ", birthday=" + birthday +
+                ", address='" + address + '\'' +
+                ", signature='" + signature + '\'' +
+                '}';
     }
 }

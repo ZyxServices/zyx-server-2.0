@@ -3,10 +3,16 @@ package com.zyx.param.account;
 import com.zyx.param.BaseParam;
 
 /**
- * Created by Rainbow on 2016/11/1.
+ * Created by wms on 2016/9/18.
+ *
+ * @author WeiMinSheng
+ * @version V1.0
+ *          Copyright (c)2016 tyj-版权所有
+ * @since 2016/9/18
  */
 public class UserAuthParam extends BaseParam {
 
+    private static final long serialVersionUID = 4884863210309653763L;
     private Integer id;
 
     private Integer userId;
@@ -106,4 +112,5 @@ public class UserAuthParam extends BaseParam {
     public void setModifyTime(long modifyTime) {
         this.modifyTime = modifyTime;
     }
+
 }
