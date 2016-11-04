@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>tiyujia-parent</groupId>
+        <groupId>tiyujia-parent-2</groupId>
         <artifactId>zyx-parent-2.0</artifactId>
-        <version>0.0.2-SNAPSHOT</version>
+        <version>2.0</version>
     </parent>
     <artifactId>zyx-common-2.0</artifactId>
     <dependencies>

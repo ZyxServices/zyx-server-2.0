@@ -3,9 +3,9 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>tiyujia-parent</groupId>
+    <groupId>tiyujia-parent-2</groupId>
     <artifactId>zyx-parent-2.0</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>2.0</version>
   </parent>
   <artifactId>zyx-utils-2.0</artifactId>
   <properties>
@@ -25,8 +25,8 @@
           <artifactId>slf4j-api</artifactId>
       </dependency>
       <dependency>
-          <groupId>tiyujia-parent</groupId>
-          <artifactId>zyx-constants</artifactId>
+          <groupId>tiyujia-parent-2</groupId>
+          <artifactId>zyx-constants-2.0</artifactId>
           <version>${zyx.constants.version}</version>
       </dependency>
       <dependency>

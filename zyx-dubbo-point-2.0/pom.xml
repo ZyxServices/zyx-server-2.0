@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>zyx-parent-2.0</artifactId>
-        <groupId>tiyujia-parent</groupId>
-        <version>0.0.2-SNAPSHOT</version>
+        <groupId>tiyujia-parent-2</groupId>
+        <version>2.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -18,48 +18,48 @@
 
     <dependencies>
         <dependency>
-            <groupId>tiyujia-parent</groupId>
-            <artifactId>zyx-common</artifactId>
+            <groupId>tiyujia-parent-2</groupId>
+            <artifactId>zyx-common-2.0</artifactId>
             <version>${zyx.common.version}</version>
         </dependency>
         <dependency>
-            <groupId>tiyujia-parent</groupId>
-            <artifactId>zyx-entity</artifactId>
+            <groupId>tiyujia-parent-2</groupId>
+            <artifactId>zyx-entity-2.0</artifactId>
             <version>${zyx.entity.version}</version>
         </dependency>
         <dependency>
-            <groupId>tiyujia-parent</groupId>
-            <artifactId>zyx-config</artifactId>
+            <groupId>tiyujia-parent-2</groupId>
+            <artifactId>zyx-config-2.0</artifactId>
             <version>${zyx.config.version}</version>
         </dependency>
         <dependency>
-            <groupId>tiyujia-parent</groupId>
-            <artifactId>zyx-entity</artifactId>
+            <groupId>tiyujia-parent-2</groupId>
+            <artifactId>zyx-entity-2.0</artifactId>
             <version>${zyx.entity.version}</version>
         </dependency>
         <dependency>
-            <groupId>tiyujia-parent</groupId>
-            <artifactId>zyx-core</artifactId>
+            <groupId>tiyujia-parent-2</groupId>
+            <artifactId>zyx-core-2.0</artifactId>
             <version>${zyx.core.version}</version>
         </dependency>
         <dependency>
-            <groupId>tiyujia-parent</groupId>
-            <artifactId>zyx-utils</artifactId>
+            <groupId>tiyujia-parent-2</groupId>
+            <artifactId>zyx-utils-2.0</artifactId>
             <version>${zyx.utils.version}</version>
         </dependency>
         <dependency>
-            <groupId>tiyujia-parent</groupId>
-            <artifactId>zyx-services</artifactId>
+            <groupId>tiyujia-parent-2</groupId>
+            <artifactId>zyx-services-2.0</artifactId>
             <version>${zyx.services.version}</version>
         </dependency>
         <dependency>
-            <groupId>tiyujia-parent</groupId>
-            <artifactId>zyx-file</artifactId>
+            <groupId>tiyujia-parent-2</groupId>
+            <artifactId>zyx-file-2.0</artifactId>
             <version>${zyx.file.version}</version>
         </dependency>
         <dependency>
-            <groupId>tiyujia-parent</groupId>
-            <artifactId>zyx-mapper</artifactId>
+            <groupId>tiyujia-parent-2</groupId>
+            <artifactId>zyx-mapper-2.0</artifactId>
             <version>${zyx.mapper.version}</version>
         </dependency>
         <dependency>
