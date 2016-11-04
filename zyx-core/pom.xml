@@ -5,34 +5,34 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>tiyujia-parent-2</groupId>
-        <artifactId>zyx-parent-2.0</artifactId>
+        <artifactId>zyx-parent</artifactId>
         <version>2.0</version>
     </parent>
-    <artifactId>zyx-core-2.0</artifactId>
+    <artifactId>zyx-core</artifactId>
     <dependencies>
         <dependency>
             <groupId>tiyujia-parent-2</groupId>
-            <artifactId>zyx-common-2.0</artifactId>
+            <artifactId>zyx-common</artifactId>
             <version>${zyx.common.version}</version>
         </dependency>
         <dependency>
             <groupId>tiyujia-parent-2</groupId>
-            <artifactId>zyx-constants-2.0</artifactId>
+            <artifactId>zyx-constants</artifactId>
             <version>${zyx.constants.version}</version>
         </dependency>
         <dependency>
             <groupId>tiyujia-parent-2</groupId>
-            <artifactId>zyx-config-2.0</artifactId>
+            <artifactId>zyx-config</artifactId>
             <version>${zyx.config.version}</version>
         </dependency>
         <dependency>
             <groupId>tiyujia-parent-2</groupId>
-            <artifactId>zyx-entity-2.0</artifactId>
+            <artifactId>zyx-entity</artifactId>
             <version>${zyx.entity.version}</version>
         </dependency>
         <dependency>
             <groupId>tiyujia-parent-2</groupId>
-            <artifactId>zyx-services-2.0</artifactId>
+            <artifactId>zyx-services</artifactId>
             <version>${zyx.services.version}</version>
         </dependency>
 

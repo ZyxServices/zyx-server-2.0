@@ -5,14 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>tiyujia-parent-2</groupId>
-        <artifactId>zyx-parent-2.0</artifactId>
+        <artifactId>zyx-parent</artifactId>
         <version>2.0</version>
     </parent>
-    <artifactId>zyx-entity-2.0</artifactId>
+    <artifactId>zyx-entity</artifactId>
     <dependencies>
         <dependency>
             <groupId>tiyujia-parent-2</groupId>
-            <artifactId>zyx-common-2.0</artifactId>
+            <artifactId>zyx-common</artifactId>
             <version>${zyx.common.version}</version>
         </dependency>
 

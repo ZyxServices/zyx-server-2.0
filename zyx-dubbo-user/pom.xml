@@ -3,19 +3,19 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>zyx-parent-2.0</artifactId>
+        <artifactId>zyx-parent</artifactId>
         <groupId>tiyujia-parent-2</groupId>
         <version>2.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>zyx-dubbo-user-2.0</artifactId>
+    <artifactId>zyx-dubbo-user</artifactId>
 
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>
             <groupId>tiyujia-parent-2</groupId>
-            <artifactId>zyx-param-2.0</artifactId>
+            <artifactId>zyx-param</artifactId>
             <version>${zyx.param.version}</version>
         </dependency>
         <dependency>
@@ -28,7 +28,7 @@
         </dependency>
         <dependency>
             <groupId>tiyujia-parent-2</groupId>
-            <artifactId>zyx-vo-2.0</artifactId>
+            <artifactId>zyx-vo</artifactId>
             <version>${zyx.vo.version}</version>
         </dependency>
         <dependency>
@@ -37,17 +37,17 @@
         </dependency>
         <dependency>
             <groupId>tiyujia-parent-2</groupId>
-            <artifactId>zyx-constants-2.0</artifactId>
+            <artifactId>zyx-constants</artifactId>
             <version>${zyx.constants.version}</version>
         </dependency>
         <dependency>
             <groupId>tiyujia-parent-2</groupId>
-            <artifactId>zyx-utils-2.0</artifactId>
+            <artifactId>zyx-utils</artifactId>
             <version>${zyx.utils.version}</version>
         </dependency>
         <dependency>
             <groupId>tiyujia-parent-2</groupId>
-            <artifactId>zyx-services-2.0</artifactId>
+            <artifactId>zyx-services</artifactId>
             <version>${zyx.services.version}</version>
         </dependency>
     </dependencies>

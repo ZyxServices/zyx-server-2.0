@@ -4,12 +4,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>tiyujia-parent-2</groupId>
-        <artifactId>zyx-parent-2.0</artifactId>
+        <artifactId>zyx-parent</artifactId>
         <version>2.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>zyx-config-2.0</artifactId>
+    <artifactId>zyx-config</artifactId>
     <dependencies>
+        <dependency>
+            <groupId>tiyujia-parent-2</groupId>
+            <artifactId>zyx-mapper</artifactId>
+            <version>${zyx.mapper.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
@@ -45,11 +50,7 @@
             <artifactId>jackson-mapper-asl</artifactId>
             <version>1.9.2</version>
         </dependency>-->
-        <dependency>
-            <groupId>tiyujia-parent-2</groupId>
-            <artifactId>zyx-mapper-2.0</artifactId>
-            <version>${zyx.mapper.version}</version>
-        </dependency>
+
     </dependencies>
 
     <build>

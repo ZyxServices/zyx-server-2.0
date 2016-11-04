@@ -2,34 +2,34 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>tiyujia-parent-2</groupId>
-    <artifactId>zyx-parent-2.0</artifactId>
+    <artifactId>zyx-parent</artifactId>
     <version>2.0</version>
     <packaging>pom</packaging>
-    <description>zyx-parent-2.0</description>
+    <description>zyx-parent</description>
     <modules>
-        <module>zyx-common-2.0</module>
-        <module>zyx-config-2.0</module>
-        <module>zyx-file-2.0</module>
-        <module>zyx-services-2.0</module>
-        <module>zyx-mapper-2.0</module>
-        <module>zyx-entity-2.0</module>
-        <module>zyx-core-2.0</module>
-        <module>zyx-utils-2.0</module>
-        <module>zyx-dubbo-user-2.0</module>
-        <module>zyx-dubbo-activity-2.0</module>
+        <module>zyx-common</module>
+        <module>zyx-config</module>
+        <module>zyx-file</module>
+        <module>zyx-services</module>
+        <module>zyx-mapper</module>
+        <module>zyx-entity</module>
+        <module>zyx-core</module>
+        <module>zyx-utils</module>
+        <module>zyx-dubbo-user</module>
+        <module>zyx-dubbo-activity</module>
         <!--<module>zyx-rpc-shop</module>-->
         <!--<module>zyx-dubbo-pg</module>-->
         <!--<module>zyx-dubbo-live</module>-->
-        <module>zyx-constants-2.0</module>
-        <module>zyx-vo-2.0</module>
+        <module>zyx-constants</module>
+        <module>zyx-vo</module>
         <!--<module>zyx-dubbo-system</module>-->
         <!--<module>zyx-dubbo-task-scheduler</module>-->
         <!--<module>zyx-dubbo-attention</module>-->
-        <module>zyx-param-2.0</module>
+        <module>zyx-param</module>
         <!--<module>zyx-dubbo-collection</module>-->
         <!--<module>zyx-exception</module>-->
-        <module>zyx-dubbo-point-2.0</module>
-        <module>zyx-dubbo-coin-2.0</module>
+        <module>zyx-dubbo-point</module>
+        <module>zyx-dubbo-coin</module>
     </modules>
 
     <properties>
