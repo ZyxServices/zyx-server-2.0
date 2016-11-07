@@ -1,5 +1,7 @@
 package com.zyx.rpc.activity;
 
+import com.zyx.param.activity.ActivityParam;
+
 import java.util.Map;
 
 /**
@@ -13,7 +15,7 @@ import java.util.Map;
 public interface ActivityFacade {
 
 
-    Map<String, Object> insertActivity();
+    Map<String, Object> insertActivity(ActivityParam activityParam);
 
 
 }

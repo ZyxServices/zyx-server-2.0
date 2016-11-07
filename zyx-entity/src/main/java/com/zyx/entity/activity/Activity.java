@@ -25,6 +25,13 @@ public class Activity extends BaseEntity {
     private String title;
 
     /**
+     * 活动描述
+     */
+    @Column
+    @ColumnType(jdbcType = JdbcType.LONGVARCHAR)
+    private String descContent;
+
+    /**
      * 活动图片
      */
     @Column
@@ -32,11 +39,12 @@ public class Activity extends BaseEntity {
     private String imgUrls;
 
     /**
-     * 活动描述
+     * 活动分类
+     * 0 求约, 1 求带
      */
     @Column
-    @ColumnType(jdbcType = JdbcType.LONGVARCHAR)
-    private String descContent;
+    @ColumnType(jdbcType = JdbcType.INTEGER)
+    private Integer type;
 
     /**
      * 活动开始时间
@@ -67,18 +75,11 @@ public class Activity extends BaseEntity {
     private Integer maxPeople;
 
     /**
-     * 活动可见范围 0 所有可见, 1 朋友可见
-     */
-    @Column
-    @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer visible;
-
-    /**
-     * 咨询电话
+     * 活动地址
      */
     @Column
     @ColumnType(jdbcType = JdbcType.VARCHAR)
-    private String phone;
+    private String address;
 
     /**
      * 活动价格
@@ -88,47 +89,105 @@ public class Activity extends BaseEntity {
     private double price;
 
     /**
-     * 活动分类
-     * 0 线上活动, 1  线下活动
-     */
-    @Column
-    @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer type;
-
-    /**
-     * 线上活动跳转地址
-     */
-    @Column
-    @ColumnType(jdbcType = JdbcType.VARCHAR)
-    private String targetUrl;
-
-    /**
-     * 活动地址
-     */
-    @Column
-    @ColumnType(jdbcType = JdbcType.VARCHAR)
-    private String address;
-
-    /**
-     * 活动是否需要审核（活动发起者审核）
-     * 0 不许要审核 , 1 需要审核
-     */
-    @Column
-    @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer examine;
-
-    /**
-     * 报名活动模板
-     */
-    @Column
-    @ColumnType(jdbcType = JdbcType.VARCHAR)
-    private String memberTemplate;
-
-    /**
      * 是否屏蔽（0正常 1屏蔽）
      */
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer mask;
 
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescContent() {
+        return descContent;
+    }
+
+    public void setDescContent(String descContent) {
+        this.descContent = descContent;
+    }
+
+    public String getImgUrls() {
+        return imgUrls;
+    }
+
+    public void setImgUrls(String imgUrls) {
+        this.imgUrls = imgUrls;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public Long getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Long startTime) {
+        this.startTime = startTime;
+    }
+
+    public Long getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Long endTime) {
+        this.endTime = endTime;
+    }
+
+    public Long getLastTime() {
+        return lastTime;
+    }
+
+    public void setLastTime(Long lastTime) {
+        this.lastTime = lastTime;
+    }
+
+    public Integer getMaxPeople() {
+        return maxPeople;
+    }
+
+    public void setMaxPeople(Integer maxPeople) {
+        this.maxPeople = maxPeople;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public Integer getMask() {
+        return mask;
+    }
+
+    public void setMask(Integer mask) {
+        this.mask = mask;
+    }
 }
