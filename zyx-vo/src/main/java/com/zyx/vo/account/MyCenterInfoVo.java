@@ -3,13 +3,12 @@ package com.zyx.vo.account;
 import java.io.Serializable;
 
 /**
- * Created by wms on 2016/8/15.
- * 个人中心用户信息
+ * Created by wms on 2016/11/7.
  *
  * @author WeiMinSheng
- * @version V1.0
+ * @version V2.0
  *          Copyright (c)2016 tyj-版权所有
- * @title MyCenterInfoVo.java
+ * @since 2016/11/7
  */
 public class MyCenterInfoVo implements Serializable {
     private static final long serialVersionUID = -8232637143152445582L;

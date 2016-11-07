@@ -3,11 +3,12 @@ package com.zyx.vo.account;
 import java.io.Serializable;
 
 /**
- * Created by wms on 2016/8/15.
+ * Created by wms on 2016/11/7.
  *
  * @author WeiMinSheng
- * @version V1.0
+ * @version V2.0
  *          Copyright (c)2016 tyj-版权所有
+ * @since 2016/11/7
  */
 public class AccountAuthVo implements Serializable {
     private static final long serialVersionUID = 7196206868032273866L;

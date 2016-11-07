@@ -15,11 +15,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Created by wms on 2016/6/13.
+ * Created by wms on 2016/10/31.
  *
  * @author WeiMinSheng
- * @version V1.0
+ * @version V2.0
  *          Copyright (c)2016 tyj-版权所有
+ * @since 2016/10/31
  */
 @Service("accountInfoService")
 public class AccountInfoServiceImpl extends BaseServiceImpl<AccountInfo> implements AccountInfoService {

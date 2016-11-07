@@ -3,7 +3,7 @@ package com.zyx.rpc.account.impl;
 import com.zyx.constants.account.AccountConstants;
 import com.zyx.entity.account.AccountInfo;
 import com.zyx.param.account.UserLoginParam;
-import com.zyx.rpc.account.RegisterFacade;
+import com.zyx.rpc.account.AccountRegisterFacade;
 import com.zyx.service.account.AccountInfoService;
 import com.zyx.service.account.AccountRedisService;
 import com.zyx.utils.MapUtils;
@@ -18,14 +18,15 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by WeiMinSheng on 2016/6/12.
+ * Created by wms on 2016/11/7.
  *
  * @author WeiMinSheng
- * @version V1.0
+ * @version V2.0
  *          Copyright (c)2016 tyj-版权所有
+ * @since 2016/11/7
  */
-@Service("registerFacade")
-public class RegisterFacadeImpl implements RegisterFacade {
+@Service("accountRegisterFacade")
+public class AccountRegisterFacadeImpl implements AccountRegisterFacade {
 
     @Autowired
     private AccountInfoService accountInfoService;

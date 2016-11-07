@@ -4,24 +4,24 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class UserPointDubboProvider {
+public class AccountDubboProvider {
 
-    private static final Log log = LogFactory.getLog(UserPointDubboProvider.class);
+    private static final Log log = LogFactory.getLog(AccountDubboProvider.class);
 
     public static void main(String[] args) {
         try {
             System.out.println("测试...");
             ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring/spring-context.xml");
-            System.out.println(UserPointDubboProvider.class.getName() + " : start");
+            System.out.println(AccountDubboProvider.class.getName() + " : start");
             context.start();
             System.in.read();
         } catch (Exception e) {
-            log.error("== UserPointDubboProvider context start error:", e);
+            log.error("== AccountDubboProvider context start error:", e);
         }
-//		synchronized (UserPointDubboProvider.class) {
+//		synchronized (AccountDubboProvider.class) {
 //			while (true) {
 //				try {
-//					UserPointDubboProvider.class.wait();
+//					AccountDubboProvider.class.wait();
 //				} catch (InterruptedException e) {
 //					log.error("== synchronized error:",e);
 //				}
