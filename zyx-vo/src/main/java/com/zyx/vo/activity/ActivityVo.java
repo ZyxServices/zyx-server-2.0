@@ -1,121 +1,106 @@
-package com.zyx.entity.activity;
+package com.zyx.vo.activity;
 
-import com.zyx.entity.BaseEntity;
-import org.apache.ibatis.type.JdbcType;
-import tk.mybatis.mapper.annotation.ColumnType;
-
-import javax.persistence.Column;
+import java.io.Serializable;
 
 /**
- * Created by Rainbow on 2016/10/25.
+ * Created by Rainbow
+ *
+ * @author SubDong
+ * @version V2.0
+ *          Copyright (c)2016 zyx-版权所有
+ * @since 2016/11/7
  */
-public class Activity extends BaseEntity {
+public class ActivityVo implements Serializable {
+
+    private Integer id;
+
     /**
      * 创建者(用户ID)
      */
-    @Column
-    @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer userId;
 
     /**
      * 活动标题
      */
-    @Column
-    @ColumnType(jdbcType = JdbcType.VARCHAR)
     private String title;
 
     /**
      * 活动描述
      */
-    @Column
-    @ColumnType(jdbcType = JdbcType.LONGVARCHAR)
     private String descContent;
 
     /**
      * 活动图片
      */
-    @Column
-    @ColumnType(jdbcType = JdbcType.VARCHAR)
     private String imgUrls;
 
     /**
      * 活动分类
      * 0 求约, 1 求带
      */
-    @Column
-    @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer activityType;
 
     /**
      * 活动分类模块
      * （活动模块（1攀岩 2跑步 3羽毛球 4网球 4单车 5滑雪 6见面会））
      */
-    @Column
-    @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer activityModule;
 
     /**
      * 活动开始时间
      */
-    @Column
-    @ColumnType(jdbcType = JdbcType.BIGINT)
     private Long startTime;
 
     /**
      * 活动结束时间
      */
-    @Column
-    @ColumnType(jdbcType = JdbcType.BIGINT)
     private Long endTime;
 
     /**
      * 报名截至时间
      */
-    @Column
-    @ColumnType(jdbcType = JdbcType.BIGINT)
     private Long lastTime;
 
     /**
      * 活动人数上限
      */
-    @Column
-    @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer maxPeople;
 
     /**
      * 活动地址
      */
-    @Column
-    @ColumnType(jdbcType = JdbcType.VARCHAR)
     private String address;
 
     /**
      * 活动价格
      */
-    @Column
-    @ColumnType(jdbcType = JdbcType.DECIMAL)
     private double price;
 
     /**
      * 线上地址
      */
-    @Column
-    @ColumnType(jdbcType = JdbcType.VARCHAR)
     private String targetUrl;
+
+    /** 创建时间 **/
+    private Long createTime;
 
     /**
      * 活动是否删除(0正常， 1删除)
      */
-    @Column
-    @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer del;
 
     /**
      * 是否屏蔽（0正常 1屏蔽）
      */
-    @Column
-    @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer mask;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getUserId() {
         return userId;
@@ -155,6 +140,14 @@ public class Activity extends BaseEntity {
 
     public void setActivityType(Integer activityType) {
         this.activityType = activityType;
+    }
+
+    public Integer getActivityModule() {
+        return activityModule;
+    }
+
+    public void setActivityModule(Integer activityModule) {
+        this.activityModule = activityModule;
     }
 
     public Long getStartTime() {
@@ -205,22 +198,6 @@ public class Activity extends BaseEntity {
         this.price = price;
     }
 
-    public Integer getMask() {
-        return mask;
-    }
-
-    public void setMask(Integer mask) {
-        this.mask = mask;
-    }
-
-    public Integer getActivityModule() {
-        return activityModule;
-    }
-
-    public void setActivityModule(Integer activityModule) {
-        this.activityModule = activityModule;
-    }
-
     public String getTargetUrl() {
         return targetUrl;
     }
@@ -235,5 +212,21 @@ public class Activity extends BaseEntity {
 
     public void setDel(Integer del) {
         this.del = del;
+    }
+
+    public Integer getMask() {
+        return mask;
+    }
+
+    public void setMask(Integer mask) {
+        this.mask = mask;
+    }
+
+    public Long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
     }
 }
