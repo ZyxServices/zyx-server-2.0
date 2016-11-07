@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>tiyujia-parent</groupId>
+        <groupId>tiyujia-parent-2</groupId>
         <artifactId>zyx-parent</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>2.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>zyx-services</artifactId>
@@ -12,37 +12,42 @@
         <!-- <dependency> <groupId>tiyujia-parent</groupId> <artifactId>zyx-dao</artifactId>
             <version>${zyx.dao.version}</version> </dependency> -->
         <dependency>
-            <groupId>tiyujia-parent</groupId>
+            <groupId>tiyujia-parent-2</groupId>
             <artifactId>zyx-constants</artifactId>
             <version>${zyx.constants.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>tiyujia-parent</groupId>
+            <groupId>tiyujia-parent-2</groupId>
             <artifactId>zyx-mapper</artifactId>
             <version>${zyx.mapper.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>tiyujia-parent</groupId>
+            <groupId>tiyujia-parent-2</groupId>
             <artifactId>zyx-config</artifactId>
             <version>${zyx.config.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>tiyujia-parent</groupId>
+            <groupId>tiyujia-parent-2</groupId>
             <artifactId>zyx-entity</artifactId>
             <version>${zyx.entity.version}</version>
         </dependency>
         <dependency>
-            <groupId>tiyujia-parent</groupId>
+            <groupId>tiyujia-parent-2</groupId>
             <artifactId>zyx-vo</artifactId>
-            <version>${zyx.entity.version}</version>
+            <version>${zyx.vo.version}</version>
         </dependency>
         <dependency>
-            <groupId>tiyujia-parent</groupId>
+            <groupId>tiyujia-parent-2</groupId>
             <artifactId>zyx-utils</artifactId>
             <version>${zyx.utils.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>tiyujia-parent-2</groupId>
+            <artifactId>zyx-param</artifactId>
+            <version>${zyx.param.version}</version>
         </dependency>
 
         <dependency>
@@ -207,11 +212,8 @@
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
         </dependency>
-        <dependency>
-            <groupId>tiyujia-parent</groupId>
-            <artifactId>zyx-param</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+
+
 
     </dependencies>
     <build>

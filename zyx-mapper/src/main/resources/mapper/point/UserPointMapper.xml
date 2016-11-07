@@ -39,7 +39,7 @@
     </select>
 
     <insert id="modifyUserPoint" parameterType="com.zyx.param.point.UserPointParam">
-        update user_point set modify_time = #{modifyTime}, point_count = #{pointTotal} where id = #{id}
+        update user_point set modify_time = #{modifyTime}, point_count = point_count + #{pointCount} where id = #{id}
     </insert>
 
     <insert id="insertPointDetail" parameterType="com.zyx.param.point.UserPointDetailParam">

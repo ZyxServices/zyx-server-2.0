@@ -65,7 +65,7 @@
         <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
         <property name="timeBetweenEvictionRunsMillis" value="60000"/>
         <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
-        <property name="minEvictableIdleTimeMillis" value="300000"></property>
+        <property name="minEvictableIdleTimeMillis" value="300000"/>
 
         <property name="validationQuery" value="SELECT 'x'"/>
         <property name="testWhileIdle" value="true"/>
@@ -84,7 +84,10 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations">
-            <value>classpath*:mapper/*.xml,classpath*:mapper/point/*.xml</value>
+            <list>
+                <value>classpath*:mapper/*.xml</value>
+                <value>classpath*:mapper/point/*.xml</value>
+            </list>
         </property>
         <property name="typeAliasesPackage"
                   value="com.zyx.entity.live,com.zyx.entity.shop,com.zyx.entity.pg,com.zyx.entity.activity,com.zyx.entity.coin"/>

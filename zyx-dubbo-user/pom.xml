@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>zyx-parent</artifactId>
-        <groupId>tiyujia-parent</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <groupId>tiyujia-parent-2</groupId>
+        <version>2.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -14,9 +14,9 @@
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>
-            <groupId>tiyujia-parent</groupId>
+            <groupId>tiyujia-parent-2</groupId>
             <artifactId>zyx-param</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${zyx.param.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -27,28 +27,28 @@
             <artifactId>spring-context</artifactId>
         </dependency>
         <dependency>
-            <groupId>tiyujia-parent</groupId>
+            <groupId>tiyujia-parent-2</groupId>
             <artifactId>zyx-vo</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${zyx.vo.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-redis</artifactId>
         </dependency>
         <dependency>
-            <groupId>tiyujia-parent</groupId>
+            <groupId>tiyujia-parent-2</groupId>
             <artifactId>zyx-constants</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${zyx.constants.version}</version>
         </dependency>
         <dependency>
-            <groupId>tiyujia-parent</groupId>
+            <groupId>tiyujia-parent-2</groupId>
             <artifactId>zyx-utils</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${zyx.utils.version}</version>
         </dependency>
         <dependency>
-            <groupId>tiyujia-parent</groupId>
+            <groupId>tiyujia-parent-2</groupId>
             <artifactId>zyx-services</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${zyx.services.version}</version>
         </dependency>
     </dependencies>
     <properties>
