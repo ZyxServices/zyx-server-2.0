@@ -1,7 +1,7 @@
 package com.zyx.vo.zoom;
 
 
-import com.zyx.entity.activity.PageViews;
+//import com.zyx.entity.activity.PageViews;
 import com.zyx.entity.zoom.Concern;
 
 /**
@@ -15,7 +15,7 @@ public class MyFollowVo extends Concern {
     private Integer zanCounts;
     private Integer commentCounts;
     UserAuthVo userAuthVo;
-    PageViews pageViews;
+//    PageViews pageViews;
 
     public Integer getZanCounts() {
         return zanCounts;
@@ -50,11 +50,11 @@ public class MyFollowVo extends Concern {
         this.userAuthVo = userAuthVo;
     }
 
-    public PageViews getPageViews() {
-        return pageViews;
-    }
-
-    public void setPageViews(PageViews pageViews) {
-        this.pageViews = pageViews;
-    }
+//    public PageViews getPageViews() {
+//        return pageViews;
+//    }
+//
+//    public void setPageViews(PageViews pageViews) {
+//        this.pageViews = pageViews;
+//    }
 }

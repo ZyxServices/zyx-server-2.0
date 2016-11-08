@@ -80,7 +80,7 @@ public interface PgFacade {
      * @return
      * @type 类型，1为个人，2为活动，3为明星
      */
-    Map<String, Object> starRandom(Integer type, Integer n);
+//    Map<String, Object> starRandom(Integer type, Integer n);
 
 
     /**
@@ -92,7 +92,7 @@ public interface PgFacade {
      * @param content
      * @return
      */
-    Map<String, Object> addCircleItem(Integer circle_id, Integer create_id, String title, String content,String img_url);
+//    Map<String, Object> addCircleItem(Integer circle_id, Integer create_id, String title, String content,String img_url);
 
     /**
      * 圈子设置圈主
@@ -118,15 +118,15 @@ public interface PgFacade {
      * @param
      * @return
      */
-    Map<String, Object> circleItemList(Integer circleId,Integer start,Integer pageSize);
+//    Map<String, Object> circleItemList(Integer circleId,Integer start,Integer pageSize);
 
-    /**
-     * 设置置顶帖子
-     *
-     * @param circleItemId
-     * @return
-     */
-    Map<String, Object> setTop(Integer tooSize, Integer circleItemId);
+//    /**
+//     * 设置置顶帖子
+//     *
+//     * @param circleItemId
+//     * @return
+//     */
+//    Map<String, Object> setTop(Integer tooSize, Integer circleItemId);
 
     /**
      * 获取圈子置顶数据
@@ -232,12 +232,12 @@ public interface PgFacade {
      */
     Map<String,Object> lbCircleItem(Integer max);
 
-    /**
-     * 根据登录用户获取该用户关注动态列表
-     * @param loginUserId
-     * @return
-     */
-    Map<String, Object> getMyFollowList(Integer loginUserId,Integer start,Integer pageSize);
+//    /**
+//     * 根据登录用户获取该用户关注动态列表
+//     * @param loginUserId
+//     * @return
+//     */
+//    Map<String, Object> getMyFollowList(Integer loginUserId,Integer start,Integer pageSize);
 
     /**
      *大咖动态
@@ -246,12 +246,12 @@ public interface PgFacade {
      */
     Map<String, Object> starConcern(Integer start,Integer pageSize);
 
-    /**
-     * 获取动态详情
-     * @param concernId
-     * @return
-     */
-    Map<String, Object> getOneConcern(Integer concernId,Integer accountId);
+//    /**
+//     * 获取动态详情
+//     * @param concernId
+//     * @return
+//     */
+//    Map<String, Object> getOneConcern(Integer concernId,Integer accountId);
 
     /**
      * 获取帖子详情

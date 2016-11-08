@@ -1,4 +1,4 @@
-package com.zyx.service.pg;
+package com.zyx.service.zoom;
 
 import com.zyx.entity.zoom.CircleItem;
 import com.zyx.service.BaseService;

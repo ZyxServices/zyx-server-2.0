@@ -1,16 +1,16 @@
-package com.zyx.service.pg.impl;
+package com.zyx.service.zoom.impl;
 
 import com.zyx.constants.Constants;
-import com.zyx.constants.pg.PgConstants;
+import com.zyx.constants.zoom.ZoomConstants;
 import com.zyx.entity.zoom.Circle;
 import com.zyx.entity.zoom.MyConcern;
-import com.zyx.mapper.pg.CircleItemMapper;
-import com.zyx.mapper.pg.CircleMapper;
-import com.zyx.mapper.pg.MeetMapper;
-import com.zyx.mapper.pg.MyConcernMapper;
+import com.zyx.mapper.zoom.CircleItemMapper;
+import com.zyx.mapper.zoom.CircleMapper;
+import com.zyx.mapper.zoom.MeetMapper;
+import com.zyx.mapper.zoom.MyConcernMapper;
 import com.zyx.service.BaseServiceImpl;
-import com.zyx.service.pg.CircleService;
-import com.zyx.service.pg.MeetService;
+import com.zyx.service.zoom.CircleService;
+import com.zyx.service.zoom.MeetService;
 import com.zyx.utils.DateUtils;
 import com.zyx.utils.MapUtils;
 import com.zyx.vo.zoom.CircleListVo;
@@ -49,37 +49,37 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
         try {
             Circle insertCircle = new Circle();
             if (title == null || Objects.equals(title, "")) {
-                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30006, PgConstants.PG_ERROR_CODE_30006_MSG);
+                return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30006, ZoomConstants.PG_ERROR_CODE_30006_MSG);
             }
             Optional.ofNullable(title).ifPresent(insertCircle::setTitle);
             if (createId == null || Objects.equals(createId, "")) {
-                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30005, PgConstants.PG_ERROR_CODE_30005_MSG);
+                return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30005, ZoomConstants.PG_ERROR_CODE_30005_MSG);
             }
             Optional.ofNullable(createId).ifPresent(insertCircle::setCreateId);
             if (circleType == null) {
-                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30025, PgConstants.PG_ERROR_CODE_30025_MSG);
+                return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30025, ZoomConstants.PG_ERROR_CODE_30025_MSG);
             }
             Optional.ofNullable(circleType).ifPresent(insertCircle::setCircleType);
            /* if (state == null) {
-                map.put(Constants.STATE, PgConstants.PG_ERROR_CODE_30011);
-                map.put(Constants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30011_MSG);
+                map.put(Constants.STATE, ZoomConstants.PG_ERROR_CODE_30011);
+                map.put(Constants.ERROR_MSG, ZoomConstants.PG_ERROR_CODE_30011_MSG);
                 return map;
             }*/
 //            if (type == null) {
-//                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30012, PgConstants.PG_ERROR_CODE_30012_MSG);
+//                return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30012, ZoomConstants.PG_ERROR_CODE_30012_MSG);
 //
 //            }
 //            Optional.ofNullable(type).ifPresent(insertCircle::setType);
             if (details == null || Objects.equals(details, "")) {
-                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30010, PgConstants.PG_ERROR_CODE_30010_MSG);
+                return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30010, ZoomConstants.PG_ERROR_CODE_30010_MSG);
             }
             Optional.ofNullable(details).ifPresent(insertCircle::setDetails);
 //            if (headImgUrl == null || Objects.equals(headImgUrl, "")) {
-//                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30013, PgConstants.PG_ERROR_CODE_30013_MSG);
+//                return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30013, ZoomConstants.PG_ERROR_CODE_30013_MSG);
 //            }
             Optional.ofNullable(headImgUrl).ifPresent(insertCircle::setHeadImgUrl);
 //            if (tag == null) {
-//                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30027, PgConstants.PG_ERROR_CODE_30027_MSG);
+//                return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30027, ZoomConstants.PG_ERROR_CODE_30027_MSG);
 //            }
             Optional.ofNullable(tag).ifPresent(insertCircle::setTag);
             insertCircle.setType(0);
@@ -87,8 +87,8 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
             insertCircle.setState(0);
             insertCircle.setGroupId(groupId);
             Integer result = mapper.insert(insertCircle);
-//            map.put(Constants.STATE, PgConstants.SUCCESS);
-//            map.put(Constants.SUCCESS_MSG, PgConstants.MSG_SUCCESS);
+//            map.put(Constants.STATE, ZoomConstants.SUCCESS);
+//            map.put(Constants.SUCCESS_MSG, ZoomConstants.MSG_SUCCESS);
 //            return map;
             if (result > 0) {
                 MyConcern myConcern = new MyConcern();
@@ -98,11 +98,11 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
                 myConcern.setCreateTime(new Date().getTime());
                 myConcernMapper.insert(myConcern);
             }
-            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_33000_MSG, insertCircle.getId());
+            return MapUtils.buildSuccessMap(ZoomConstants.SUCCESS, ZoomConstants.PG_ERROR_CODE_33000_MSG, insertCircle.getId());
 
         } catch (Exception e) {
             e.printStackTrace();
-            return PgConstants.MAP_500;
+            return ZoomConstants.MAP_500;
         }
     }
 
@@ -117,53 +117,53 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
         try {
             Optional.ofNullable(max).orElse(10);
             List<Circle> list = circleMapper.circleList(max);
-            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, list);
+            return MapUtils.buildSuccessMap(ZoomConstants.SUCCESS, ZoomConstants.PG_ERROR_CODE_34000_MSG, list);
 
         } catch (Exception e) {
             e.printStackTrace();
-            return PgConstants.MAP_500;
+            return ZoomConstants.MAP_500;
         }
     }
 
     @Override
     public Map<String, Object> setMaster(Integer circle_id, Integer master_id, Integer account_id) {
         if (circle_id == null) {
-//            resultMap.put(PgConstants.STATE, PgConstants.PG_ERROR_CODE_30001);
-//            resultMap.put(Constants.MSG_ERROR, PgConstants.PG_ERROR_CODE_30001_MSG);
+//            resultMap.put(ZoomConstants.STATE, ZoomConstants.PG_ERROR_CODE_30001);
+//            resultMap.put(Constants.MSG_ERROR, ZoomConstants.PG_ERROR_CODE_30001_MSG);
 //            return resultMap;
-            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30001, PgConstants.PG_ERROR_CODE_30001_MSG);
+            return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30001, ZoomConstants.PG_ERROR_CODE_30001_MSG);
 
         }
         if (master_id == null) {
-//            resultMap.put(PgConstants.STATE, PgConstants.PG_ERROR_CODE_30002);
-//            resultMap.put(Constants.MSG_ERROR, PgConstants.PG_ERROR_CODE_30002_MSG);
+//            resultMap.put(ZoomConstants.STATE, ZoomConstants.PG_ERROR_CODE_30002);
+//            resultMap.put(Constants.MSG_ERROR, ZoomConstants.PG_ERROR_CODE_30002_MSG);
 //            return resultMap;
-            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30002, PgConstants.PG_ERROR_CODE_30002_MSG);
+            return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30002, ZoomConstants.PG_ERROR_CODE_30002_MSG);
 
         }
         if (account_id == null) {
-//            resultMap.put(PgConstants.STATE, PgConstants.PG_ERROR_CODE_30003);
-//            resultMap.put(Constants.MSG_ERROR, PgConstants.PG_ERROR_CODE_30003_MSG);
+//            resultMap.put(ZoomConstants.STATE, ZoomConstants.PG_ERROR_CODE_30003);
+//            resultMap.put(Constants.MSG_ERROR, ZoomConstants.PG_ERROR_CODE_30003_MSG);
 //            return resultMap;
-            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30003, PgConstants.PG_ERROR_CODE_30003_MSG);
+            return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30003, ZoomConstants.PG_ERROR_CODE_30003_MSG);
 
         }
         Circle existCircle = circleMapper.existMaster(circle_id, master_id);
         if (existCircle != null) {
-//            resultMap.put(PgConstants.STATE, PgConstants.PG_ERROR_CODE_30004);
-//            resultMap.put(Constants.MSG_ERROR, PgConstants.PG_ERROR_CODE_30004_MSG);
+//            resultMap.put(ZoomConstants.STATE, ZoomConstants.PG_ERROR_CODE_30004);
+//            resultMap.put(Constants.MSG_ERROR, ZoomConstants.PG_ERROR_CODE_30004_MSG);
 //            return resultMap;
-            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30004, PgConstants.PG_ERROR_CODE_30004_MSG);
+            return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30004, ZoomConstants.PG_ERROR_CODE_30004_MSG);
 
         }
         Integer result = circleMapper.setMaster(circle_id, master_id, account_id);
         if (result > 0) {
 //            resultMap.put(Constants.STATE, Constants.SUCCESS);
-//            resultMap.put(PgConstants.SUCCESS_MSG, PgConstants.MSG_SUCCESS);
+//            resultMap.put(ZoomConstants.SUCCESS_MSG, ZoomConstants.MSG_SUCCESS);
 //            return resultMap;
-            return MapUtils.buildSuccessMap(Constants.SUCCESS, PgConstants.PG_ERROR_CODE_33000_MSG, null);
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, ZoomConstants.PG_ERROR_CODE_33000_MSG, null);
         } else {
-            return PgConstants.MAP_500;
+            return ZoomConstants.MAP_500;
         }
     }
 
@@ -172,13 +172,13 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
         try {
             Integer result = circleMapper.deleteCircle(circle_id);
             if (result > 0) {
-                return MapUtils.buildSuccessMap(Constants.SUCCESS, PgConstants.PG_ERROR_CODE_33000_MSG, null);
+                return MapUtils.buildSuccessMap(Constants.SUCCESS, ZoomConstants.PG_ERROR_CODE_33000_MSG, null);
             } else {
-                return PgConstants.MAP_500;
+                return ZoomConstants.MAP_500;
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return PgConstants.MAP_500;
+            return ZoomConstants.MAP_500;
         }
     }
 
@@ -188,13 +188,13 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
             Optional.ofNullable(circle_id).orElse(-1);
             Integer result = circleMapper.setTop(circle_id);
             if (result > 0) {
-                return MapUtils.buildSuccessMap(Constants.SUCCESS, PgConstants.PG_ERROR_CODE_33000_MSG, null);
+                return MapUtils.buildSuccessMap(Constants.SUCCESS, ZoomConstants.PG_ERROR_CODE_33000_MSG, null);
             } else {
-                return PgConstants.MAP_500;
+                return ZoomConstants.MAP_500;
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return PgConstants.MAP_500;
+            return ZoomConstants.MAP_500;
         }
     }
 
@@ -202,10 +202,10 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
     @Override
     public Map<String, Object> getOne(Integer circleId, Integer accountId) {
         if (circleId == null) {
-            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30001, PgConstants.PG_ERROR_CODE_30001_MSG);
+            return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30001, ZoomConstants.PG_ERROR_CODE_30001_MSG);
         }
 //        if (accountId == null) {
-//            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30014, PgConstants.PG_ERROR_CODE_30014_MSG);
+//            return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30014, ZoomConstants.PG_ERROR_CODE_30014_MSG);
 //        }
         Map<String, Object> resultMap = new HashMap<>();
         Boolean isConcern = false;
@@ -223,7 +223,7 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
         resultMap.put("circle", circleMapper.findById(circleId));
         resultMap.put("isMeet", meetMapper.existTodayMeet(accountId, circleId, DateUtils.setDateStart(0).getTime(), DateUtils.setDateEnd(0).getTime()));
 
-        return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, resultMap);
+        return MapUtils.buildSuccessMap(ZoomConstants.SUCCESS, ZoomConstants.PG_ERROR_CODE_34000_MSG, resultMap);
     }
 
     @Override
@@ -234,19 +234,19 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
                 if (Objects.equals(circleFind.getCreateId(), accountId)) {
                     Integer result = circleMapper.closeMaster(circleId, accountId);
                     if (result > 0) {
-                        return MapUtils.buildErrorMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_39000_MSG);
+                        return MapUtils.buildErrorMap(ZoomConstants.SUCCESS, ZoomConstants.PG_ERROR_CODE_39000_MSG);
                     } else {
-                        return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
+                        return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_35000, ZoomConstants.PG_ERROR_CODE_35000_MSG);
                     }
                 } else {
-                    return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30029, PgConstants.PG_ERROR_CODE_30029_MSG);
+                    return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30029, ZoomConstants.PG_ERROR_CODE_30029_MSG);
                 }
             } else {
-                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30031, PgConstants.PG_ERROR_CODE_30031_MSG);
+                return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30031, ZoomConstants.PG_ERROR_CODE_30031_MSG);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
+            return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_35000, ZoomConstants.PG_ERROR_CODE_35000_MSG);
         }
 
     }
@@ -256,13 +256,13 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
         try {
             Integer result = circleMapper.updateHeadImg(headImgUrl, circleId);
             if (result > 0) {
-                return MapUtils.buildErrorMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_39000_MSG);
+                return MapUtils.buildErrorMap(ZoomConstants.SUCCESS, ZoomConstants.PG_ERROR_CODE_39000_MSG);
             } else {
-                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
+                return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_35000, ZoomConstants.PG_ERROR_CODE_35000_MSG);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
+            return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_35000, ZoomConstants.PG_ERROR_CODE_35000_MSG);
         }
     }
 
@@ -274,18 +274,18 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
                 if (Objects.equals(circleFind.getCreateId(), createId)) {
                     Integer result = circleMapper.setAdminIds(adminIds, circleId);
                     if (result > 0) {
-                        return MapUtils.buildErrorMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_39000_MSG);
+                        return MapUtils.buildErrorMap(ZoomConstants.SUCCESS, ZoomConstants.PG_ERROR_CODE_39000_MSG);
                     }
                 } else {
-                    return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30029, PgConstants.PG_ERROR_CODE_30029_MSG);
+                    return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30029, ZoomConstants.PG_ERROR_CODE_30029_MSG);
                 }
             } else {
-                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30031, PgConstants.PG_ERROR_CODE_30031_MSG);
+                return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30031, ZoomConstants.PG_ERROR_CODE_30031_MSG);
             }
             return null;
         } catch (Exception e) {
             e.printStackTrace();
-            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
+            return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_35000, ZoomConstants.PG_ERROR_CODE_35000_MSG);
         }
     }
 
@@ -325,10 +325,10 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
         try {
             Optional.ofNullable(max).orElse(3);
             List<JxCircleVo> jxCircleVos = circleMapper.jxCircle(2, max);
-            return MapUtils.buildSuccessMap(Constants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, jxCircleVos);
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, ZoomConstants.PG_ERROR_CODE_34000_MSG, jxCircleVos);
         } catch (Exception e) {
             e.printStackTrace();
-            return PgConstants.MAP_500;
+            return ZoomConstants.MAP_500;
         }
     }
 

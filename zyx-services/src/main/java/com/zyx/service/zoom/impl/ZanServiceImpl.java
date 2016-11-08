@@ -1,10 +1,10 @@
-package com.zyx.service.pg.impl;
+package com.zyx.service.zoom.impl;
 
-import com.zyx.constants.pg.PgConstants;
+import com.zyx.constants.zoom.ZoomConstants;
 import com.zyx.entity.zoom.Zan;
-import com.zyx.mapper.pg.ZanMapper;
+import com.zyx.mapper.zoom.ZanMapper;
 import com.zyx.service.BaseServiceImpl;
-import com.zyx.service.pg.ZanService;
+import com.zyx.service.zoom.ZanService;
 import com.zyx.utils.MapUtils;
 import com.zyx.vo.zoom.ZanCountVo;
 import com.zyx.vo.zoom.ZanVo;
@@ -34,48 +34,48 @@ public class ZanServiceImpl extends BaseServiceImpl<Zan> implements ZanService {
         try {
             Zan zan = new Zan();
             if (body_id == null) {
-//                map.put(PgConstants.STATE, PgConstants.PG_ERROR_CODE_30009);
-//                map.put(PgConstants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30009_MSG);
+//                map.put(ZoomConstants.STATE, ZoomConstants.PG_ERROR_CODE_30009);
+//                map.put(ZoomConstants.ERROR_MSG, ZoomConstants.PG_ERROR_CODE_30009_MSG);
 //                return map;
-                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30009, PgConstants.PG_ERROR_CODE_30009_MSG);
+                return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30009, ZoomConstants.PG_ERROR_CODE_30009_MSG);
 
             }
             Optional.ofNullable(body_id).ifPresent(zan::setBodyId);
             if (body_type == null) {
-//                map.put(PgConstants.STATE, PgConstants.PG_ERROR_CODE_30017);
-//                map.put(PgConstants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30017_MSG);
+//                map.put(ZoomConstants.STATE, ZoomConstants.PG_ERROR_CODE_30017);
+//                map.put(ZoomConstants.ERROR_MSG, ZoomConstants.PG_ERROR_CODE_30017_MSG);
 //                return map;
-                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30017, PgConstants.PG_ERROR_CODE_30017_MSG);
+                return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30017, ZoomConstants.PG_ERROR_CODE_30017_MSG);
 
             }
             Optional.ofNullable(body_type).ifPresent(zan::setBodyType);
             if (account_id == null) {
-//                map.put(PgConstants.STATE, PgConstants.PG_ERROR_CODE_30014);
-//                map.put(PgConstants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30014_MSG);
+//                map.put(ZoomConstants.STATE, ZoomConstants.PG_ERROR_CODE_30014);
+//                map.put(ZoomConstants.ERROR_MSG, ZoomConstants.PG_ERROR_CODE_30014_MSG);
 //                return map;
-                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30014, PgConstants.PG_ERROR_CODE_30014_MSG);
+                return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30014, ZoomConstants.PG_ERROR_CODE_30014_MSG);
 
             }
             Optional.ofNullable(account_id).ifPresent(zan::setAccountId);
             Integer result = zanMapper.exist(body_id, body_type, account_id);
             if (Objects.equals(result, 0)) {
                 save(zan);
-                return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_33000_MSG, null);
+                return MapUtils.buildSuccessMap(ZoomConstants.SUCCESS, ZoomConstants.PG_ERROR_CODE_33000_MSG, null);
             } else {
                 Integer deleteResult = zanMapper.cancelZan(body_id, body_type, account_id);
                 if (deleteResult > 0)
-                    return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_30040_MSG, null);
+                    return MapUtils.buildSuccessMap(ZoomConstants.SUCCESS, ZoomConstants.PG_ERROR_CODE_30040_MSG, null);
                 else
-                    return PgConstants.MAP_500;
+                    return ZoomConstants.MAP_500;
             }
-//            map.put(PgConstants.STATE, PgConstants.SUCCESS);
-//            map.put(PgConstants.SUCCESS_MSG, PgConstants.MSG_SUCCESS);
+//            map.put(ZoomConstants.STATE, ZoomConstants.SUCCESS);
+//            map.put(ZoomConstants.SUCCESS_MSG, ZoomConstants.MSG_SUCCESS);
 //            return map;
 
 
         } catch (Exception e) {
             e.printStackTrace();
-            return PgConstants.MAP_500;
+            return ZoomConstants.MAP_500;
         }
     }
 

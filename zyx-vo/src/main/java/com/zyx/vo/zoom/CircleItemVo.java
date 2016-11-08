@@ -1,6 +1,6 @@
 package com.zyx.vo.zoom;
 
-import com.zyx.entity.activity.PageViews;
+//import com.zyx.entity.activity.PageViews;
 import com.zyx.entity.zoom.CircleItem;
 
 /**
@@ -16,7 +16,7 @@ public class CircleItemVo extends CircleItem {
     private Integer meetCount;
     private String circleTitle;
     private String authInfo;
-    private PageViews pageViews;
+//    private PageViews pageViews;
 
     public Integer getZanCount() {
         return zanCount;
@@ -65,12 +65,12 @@ public class CircleItemVo extends CircleItem {
     public void setAuthInfo(String authInfo) {
         this.authInfo = authInfo;
     }
-
-    public PageViews getPageViews() {
-        return pageViews;
-    }
-
-    public void setPageViews(PageViews pageViews) {
-        this.pageViews = pageViews;
-    }
+//
+//    public PageViews getPageViews() {
+//        return pageViews;
+//    }
+//
+//    public void setPageViews(PageViews pageViews) {
+//        this.pageViews = pageViews;
+//    }
 }
