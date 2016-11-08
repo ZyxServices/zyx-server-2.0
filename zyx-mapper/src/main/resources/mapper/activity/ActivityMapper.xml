@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zyx.mapper.activity.ActivityMapper">
+    <resultMap id="activityVo" type="com.zyx.vo.activity.ActivityVo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="desc_content" property="descContent" jdbcType="LONGTEXT"/>
+        <result column="img_urls" property="imgUrls" jdbcType="VARCHAR"/>
+        <result column="activity_type" property="activityType" jdbcType="INTEGER"/>
+        <result column="activity_module" property="activityModule" jdbcType="INTEGER"/>
+        <result column="start_time" property="startTime" jdbcType="BIGINT"/>
+        <result column="endTime" property="endTime" jdbcType="BIGINT"/>
+        <result column="lastTime" property="lastTime" jdbcType="BIGINT"/>
+        <result column="maxPeople" property="maxPeople" jdbcType="INTEGER"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="price" property="price" jdbcType="DECIMAL"/>
+        <result column="targetUrl" property="targetUrl" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <select id="queryActivity" parameterType="com.zyx.param.activity.QueryActivityParam" resultMap="activityVo">
+        select * from activity where 1=1
+        <if test="activityState == 1">
+           AND nowTime &lt; last_time
+        </if>
+        <if test="activityState == 2">
+           AND (end_time - start_time) &lt; 0
+        </if>
+        <if test="activityType == 1">
+            AND activity_type = 1
+        </if>
+        <if test="activityType == 2">
+            AND activity_type = 2
+        </if>
+        AND del != 1 AND mask = 0
+        ORDER BY a.create_time desc
+        <if test="pageNumber != null and page != null">
+            limit #{page}, #{pageNumber}
+        </if>
+    </select>
+
+</mapper>

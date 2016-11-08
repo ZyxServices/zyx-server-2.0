@@ -16,12 +16,18 @@ public interface PointConstants extends Constants {
     /**
      * 攀岩
      */
-    int PANYAN_TYPE = 1;
+    int POINT_TYPE_PANYAN = 1;
 
     //======================积分记录表。表名=============================
     /**
      * 攀岩表
      */
-    String PANYAN_TABLE = "user_point_panyan_detail";
+    String TABLE_PANYAN = "user_point_panyan_detail";
+
+    //======================获取途径类型=================================
+    /**
+     * 评论
+     */
+    int DETAIL_TYPE_PL = 1;
 
 }
