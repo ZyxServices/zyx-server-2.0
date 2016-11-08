@@ -18,7 +18,7 @@
         <module>zyx-dubbo-user</module>
         <module>zyx-dubbo-activity</module>
         <!--<module>zyx-rpc-shop</module>-->
-        <!--<module>zyx-dubbo-pg</module>-->
+        <module>zyx-dubbo-zoom</module>
         <!--<module>zyx-dubbo-live</module>-->
         <module>zyx-constants</module>
         <module>zyx-vo</module>
