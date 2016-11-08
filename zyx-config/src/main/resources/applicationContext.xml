@@ -50,8 +50,11 @@
         <!-- 基本属性driverClassName、 url、user、password -->
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <!--211.157.152.200:  192.168.1.200:-->
-        <property name="url"
+        <!--<property name="url"
                   value="jdbc:mysql://119.61.66.55:3306/zyx2.0?characterEncoding=UTF-8&amp;autoReconnect=true&amp;zeroDateTimeBehavior=convertToNull&amp;transformedBitIsBoolean=true&amp;useUnicode=true"/>
+ -->
+        <property name="url"
+                  value="jdbc:mysql://192.168.1.200:3306/zyx2.0?characterEncoding=UTF-8&amp;autoReconnect=true&amp;zeroDateTimeBehavior=convertToNull&amp;transformedBitIsBoolean=true&amp;useUnicode=true"/>
         <property name="username" value="tiyujia"/>
         <property name="password" value="tiyujia_2016"/>
         <!-- 配置初始化大小、最小、最大 -->
@@ -90,7 +93,7 @@
             </list>
         </property>
         <property name="typeAliasesPackage"
-                  value="com.zyx.entity.live,com.zyx.entity.shop,com.zyx.entity.zoom,com.zyx.entity.activity,com.zyx.entity.coin"/>
+                  value="com.zyx.entity.live,com.zyx.entity.shop,com.zyx.entity.pg,com.zyx.entity.activity,com.zyx.entity.coin,com.zyx.entity.record"/>
         <property name="plugins">
             <bean class="com.github.pagehelper.PageHelper">
                 <!-- 这里的几个配置主要演示如何使用，如果不理解，一定要去掉下面的配置 -->

@@ -3,7 +3,7 @@
 <mapper namespace="com.zyx.mapper.coin.SportCoinMapper">
 
 	<!-- 用户信息表 -->
-	 <sql id="liveInfo"> t_sport_coin</sql>
+	 <sql id="sportCoin"> t_sport_coin</sql>
 
 	<resultMap id="SportCoinVo" type="com.zyx.vo.coin.SportCoinVo">
 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyx.mapper.record.SportRecordMapper">
+
+    <!-- 用户信息表 -->
+    <sql id="sportRecord"> t_sport_record</sql>
+
+    <resultMap id="SportOverviewVo" type="com.zyx.vo.record.SportOverviewVo">
+        <result column="times" property="sportTime"></result>
+        <result column="total_score" property="totalScore"></result>
+    </resultMap>
+    <select id="selectTimesScore" resultMap="SportOverviewVo" parameterType="java.lang.Integer">
+        SELECT
+        COUNT(t_sport_record.id) AS times,SUM(t_sport_info.score) AS total_score
+        FROM t_sport_record LEFT JOIN t_sport_info ON t_sport_record.sport_info_id = t_sport_info.id
+        WHERE
+        t_sport_record.user_id = ${userId}
+    </select>
+</mapper>

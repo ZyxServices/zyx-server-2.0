@@ -3,6 +3,7 @@ package com.zyx.service.coin.impl;
 import com.zyx.constants.coin.CoinConstants;
 import com.zyx.entity.coin.CoinLog;
 import com.zyx.entity.coin.SportCoin;
+import com.zyx.mapper.coin.CoinLogMapper;
 import com.zyx.mapper.coin.SportCoinMapper;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.coin.CoinLogService;
@@ -25,16 +26,14 @@ public class SportCoinServiceImpl extends BaseServiceImpl<SportCoin> implements 
     @Autowired
     SportCoinMapper sportCoinMapper;
     @Autowired
-    CoinLogService coinLogService;
+    CoinLogMapper coinLogMapper;
 
     @Override
     public void modifyCoin(Integer userId, Integer operType, Long coin) {
-
-
         CoinLog clog = new CoinLog();
         clog.setUserId(userId);
         clog.setOperId(operType);
-        int count = coinLogService.selectCount(clog);
+        int count = coinLogMapper.selectCount(clog);
         if(CoinConstants.COIN_OPER_UPPER_TIMES.get(operType)==null||CoinConstants.COIN_OPER_UPPER_TIMES.get(operType) <= count) {
             return;
         }
@@ -71,7 +70,7 @@ public class SportCoinServiceImpl extends BaseServiceImpl<SportCoin> implements 
         log.setState(n > 0 ? 1 : -1);
         log.setOperId(operType);
 //        System.out.println(JSON.toJSONString(record));
-        coinLogService.save(log);
+        coinLogMapper.insert(log);
     }
 
     @Override

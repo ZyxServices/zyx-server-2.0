@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyx.mapper.venue.VenueMapper">
+
+    <!-- 用户信息表 -->
+    <sql id="venue"> t_venue </sql>
+
+    <!--<resultMap id="VenueVo" type="com.zyx.vo.venue.VenueVo">-->
+
+    <!--<result></result>-->
+    <!--</resultMap>-->
+    <sql id="FULL_COLUMS">id,create_time,type,name,longitude,latituede,city,mark,desc</sql>
+    <select id="selectVenues" parameterType="com.zyx.param.venue.VenueParam" resultType="com.zyx.entity.venue.Venue">
+        SELECT *
+        FROM t_venue
+        WHERE
+        1=1
+        AND
+        ABS(ABS(longitude)-ABS(${longitude})) <![CDATA[<]]> ${radius}
+        AND
+        ABS(ABS(latitude)-ABS(${latitude})) <![CDATA[<]]> ${radius}
+    </select>
+
+    <select id="selectUserFpVenus" parameterType="java.lang.Integer" resultType="com.zyx.entity.venue.Venue">
+        SELECT
+        <include refid="FULL_COLUMS"></include>
+        FROM
+        t_footprint LEFT JOIN t_venue ON t_footprint.`venue_id` = t_venue.`id`
+        WHERE
+        t_footprint.`user_id`=${userId}
+    </select>
+
+    <select id="countUserFpCity" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT
+        COUNT(DISTINCT(t_venue.`city`))
+        FROM
+        t_footprint LEFT JOIN t_venue ON t_footprint.`venue_id` = t_venue.`id`
+        WHERE
+        t_footprint.`user_id`=${userId}
+    </select>
+</mapper>

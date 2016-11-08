@@ -14,6 +14,10 @@ public class Pager implements Serializable {
     private Long count;
     private Integer offset;
 
+    public Pager( ) {
+
+    }
+
     public Pager(Integer pageNum, Integer pageSize) {
         this.pageSize = pageSize;
         this.pageNum = pageNum;
