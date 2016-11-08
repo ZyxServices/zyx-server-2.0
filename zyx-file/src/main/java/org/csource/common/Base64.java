@@ -144,7 +144,7 @@ public class Base64
       // covered quotient
       int outputLength = ((b.length + 2) / 3) * 4;
 
-      // account for trailing newlines, on all but the very last line
+      // user for trailing newlines, on all but the very last line
       if ( lineLength != 0 )
          {
           int lines =  ( outputLength + lineLength -1 ) / lineLength - 1;

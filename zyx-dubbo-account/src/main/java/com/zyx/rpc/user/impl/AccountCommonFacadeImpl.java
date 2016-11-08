@@ -1,8 +1,8 @@
-package com.zyx.rpc.account.impl;
+package com.zyx.rpc.user.impl;
 
 import com.zyx.constants.Constants;
 import com.zyx.constants.account.AccountConstants;
-import com.zyx.rpc.account.AccountCommonFacade;
+import com.zyx.rpc.user.AccountCommonFacade;
 import com.zyx.service.account.AccountInfoService;
 import com.zyx.service.account.AccountRedisService;
 import com.zyx.util.HttpSender;

@@ -1,9 +1,9 @@
-package com.zyx.rpc.account.impl;
+package com.zyx.rpc.user.impl;
 
 import com.zyx.constants.account.AccountConstants;
 import com.zyx.entity.account.AccountInfo;
 import com.zyx.param.account.AccountLoginParam;
-import com.zyx.rpc.account.AccountRegisterFacade;
+import com.zyx.rpc.user.AccountRegisterFacade;
 import com.zyx.service.account.AccountInfoService;
 import com.zyx.utils.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
