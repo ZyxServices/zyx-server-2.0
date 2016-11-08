@@ -2,8 +2,8 @@ package com.zyx.service.account;
 
 import com.zyx.entity.account.AccountInfo;
 import com.zyx.param.account.AccountInfoParam;
+import com.zyx.param.account.AccountLoginParam;
 import com.zyx.param.account.UserAuthParam;
-import com.zyx.param.account.UserLoginParam;
 import com.zyx.service.BaseService;
 import com.zyx.vo.account.AccountAuthVo;
 import com.zyx.vo.account.AccountInfoVo;
@@ -28,13 +28,13 @@ public interface AccountInfoService extends BaseService<AccountInfo> {
     /**
      * 通过参数查询用户列表
      */
-    List<AccountInfoVo> selectAccountByParam(UserLoginParam userLoginParam);
+    List<AccountInfoVo> selectAccountByParam(AccountLoginParam userLoginParam);
 
 
     /**
      * 更新密码
      */
-    int renewpwd(UserLoginParam userLoginParam);
+    int renewpwd(AccountLoginParam userLoginParam);
 
     /**
      * 修改用户信息
@@ -49,7 +49,7 @@ public interface AccountInfoService extends BaseService<AccountInfo> {
     /**
      * 个人中心用户信息查询接口
      */
-    MyCenterInfoVo queryMyCenterInfo(UserLoginParam userLoginParam);
+    MyCenterInfoVo queryMyCenterInfo(AccountLoginParam userLoginParam);
 
     /**
      * 审核信息提交接口

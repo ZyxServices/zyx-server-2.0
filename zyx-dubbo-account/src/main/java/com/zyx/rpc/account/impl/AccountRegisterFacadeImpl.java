@@ -2,7 +2,7 @@ package com.zyx.rpc.account.impl;
 
 import com.zyx.constants.account.AccountConstants;
 import com.zyx.entity.account.AccountInfo;
-import com.zyx.param.account.UserLoginParam;
+import com.zyx.param.account.AccountLoginParam;
 import com.zyx.rpc.account.AccountRegisterFacade;
 import com.zyx.service.account.AccountInfoService;
 import com.zyx.service.account.AccountRedisService;
@@ -38,7 +38,7 @@ public class AccountRegisterFacadeImpl implements AccountRegisterFacade {
     private AccountRedisService accountRedisService;
 
     @Override
-    public Map<String, Object> validatePhoneCode(UserLoginParam userLoginParam) {
+    public Map<String, Object> validatePhoneCode(AccountLoginParam userLoginParam) {
         try {
             // 判断缓存中手机号码和验证码是否对应
             String redis_code = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_PHONE_CODE + userLoginParam.getPhone());
@@ -62,7 +62,7 @@ public class AccountRegisterFacadeImpl implements AccountRegisterFacade {
     }
 
     @Override
-    public Map<String, Object> registerAccount(UserLoginParam userLoginParam) {
+    public Map<String, Object> registerAccount(AccountLoginParam userLoginParam) {
         try {
             // 判断手机号是否已经注册
             int count = accountInfoService.selectAccountByPhone(userLoginParam.getPhone());
@@ -100,7 +100,7 @@ public class AccountRegisterFacadeImpl implements AccountRegisterFacade {
     }
 
     @Override
-    public Map<String, Object> renewpwd(UserLoginParam userLoginParam) {
+    public Map<String, Object> renewpwd(AccountLoginParam userLoginParam) {
         try {
             String phone = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_TOKEN + userLoginParam.getToken());
             // 判断token是否失效
@@ -126,7 +126,7 @@ public class AccountRegisterFacadeImpl implements AccountRegisterFacade {
     }
 
     @Override
-    public Map<String, Object> retrievepwd(UserLoginParam userLoginParam) {
+    public Map<String, Object> retrievepwd(AccountLoginParam userLoginParam) {
         try {
             // 判断缓存中手机号码和验证码是否对应
             String redis_code = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_PHONE_CODE + userLoginParam.getPhone());

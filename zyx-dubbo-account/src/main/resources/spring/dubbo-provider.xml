@@ -16,10 +16,13 @@
     <!-- 用dubbo协议在20892端口暴露服务 -->
     <dubbo:protocol name="dubbo" port="20884" threads="200"/>
 
-    <!-- 账号注册接口 -->
+    <!-- 注册接口 -->
     <dubbo:service interface="com.zyx.rpc.account.AccountRegisterFacade" ref="accountRegisterFacade" timeout="10000"/>
 
-    <!-- 账号公共接口 -->
+    <!-- 登录接口 -->
+    <dubbo:service interface="com.zyx.rpc.account.AccountLoginFacade" ref="accountLoginFacade" timeout="10000"/>
+
+    <!-- 公共接口 -->
     <dubbo:service interface="com.zyx.rpc.account.AccountCommonFacade" ref="accountCommonFacade" timeout="10000"/>
 
 </beans>
