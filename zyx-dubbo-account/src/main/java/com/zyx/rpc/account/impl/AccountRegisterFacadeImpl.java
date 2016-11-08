@@ -32,6 +32,22 @@ public class AccountRegisterFacadeImpl implements AccountRegisterFacade {
     protected RedisTemplate<String, String> stringRedisTemplate;
 
     @Override
+    public Map<String, Object> validatePhone(AccountLoginParam userLoginParam) {
+        try {
+            // 判断手机号是否已经注册
+            int count = accountInfoService.selectAccountByPhone(userLoginParam.getPhone());
+            if (count != 0) {// 手机号码重复
+                return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_40005, AccountConstants.ACCOUNT_ERROR_CODE_40005_MSG);
+            } else {
+                return MapUtils.buildSuccessMap();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return AccountConstants.MAP_500;
+        }
+    }
+
+    @Override
     public Map<String, Object> validatePhoneCode(AccountLoginParam userLoginParam) {
         try {
             // 判断缓存中手机号码和验证码是否对应

@@ -15,6 +15,11 @@ import java.util.Map;
 public interface AccountRegisterFacade {
 
     /**
+     * 验证手机号码时候注册
+     */
+    Map<String, Object> validatePhone(AccountLoginParam userLoginParam);
+
+    /**
      * 验证手机验证码
      */
     Map<String, Object> validatePhoneCode(AccountLoginParam userLoginParam);
