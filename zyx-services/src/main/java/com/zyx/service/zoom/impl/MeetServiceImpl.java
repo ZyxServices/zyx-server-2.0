@@ -1,12 +1,12 @@
-package com.zyx.service.pg.impl;
+package com.zyx.service.zoom.impl;
 
-import com.zyx.constants.pg.PgConstants;
+import com.zyx.constants.zoom.ZoomConstants;
 import com.zyx.entity.zoom.Meet;
 import com.zyx.entity.zoom.MyConcern;
-import com.zyx.mapper.pg.MeetMapper;
-import com.zyx.mapper.pg.MyConcernMapper;
+import com.zyx.mapper.zoom.MeetMapper;
+import com.zyx.mapper.zoom.MyConcernMapper;
 import com.zyx.service.BaseServiceImpl;
-import com.zyx.service.pg.MeetService;
+import com.zyx.service.zoom.MeetService;
 import com.zyx.utils.DateUtils;
 import com.zyx.utils.MapUtils;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 import static com.zyx.constants.Constants.SUCCESS;
-import static com.zyx.constants.pg.PgConstants.*;
+import static com.zyx.constants.zoom.ZoomConstants.*;
 
 /**
  * @author XiaoWei
@@ -45,15 +45,15 @@ public class MeetServiceImpl extends BaseServiceImpl<Meet> implements MeetServic
         Meet meet = new Meet();
         try {
             if (circleId == null) {
-//                map.put(PgConstants.STATE, PG_ERROR_CODE_30001);
-//                map.put(PgConstants.ERROR_MSG, PG_ERROR_CODE_30001_MSG);
+//                map.put(ZoomConstants.STATE, PG_ERROR_CODE_30001);
+//                map.put(ZoomConstants.ERROR_MSG, PG_ERROR_CODE_30001_MSG);
 //                return map;
                 return MapUtils.buildErrorMap(PG_ERROR_CODE_30001, PG_ERROR_CODE_30001_MSG);
             }
             Optional.ofNullable(circleId).ifPresent(meet::setCircleId);
             if (accountId == null) {
-//                map.put(PgConstants.STATE, PgConstants.PG_ERROR_CODE_30014);
-//                map.put(PgConstants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30014_MSG);
+//                map.put(ZoomConstants.STATE, ZoomConstants.PG_ERROR_CODE_30014);
+//                map.put(ZoomConstants.ERROR_MSG, ZoomConstants.PG_ERROR_CODE_30014_MSG);
 //                return map;
                 return MapUtils.buildErrorMap(PG_ERROR_CODE_30014, PG_ERROR_CODE_30014_MSG);
 
@@ -67,14 +67,14 @@ public class MeetServiceImpl extends BaseServiceImpl<Meet> implements MeetServic
                     save(meet);
                     return MapUtils.buildSuccessMap(SUCCESS, PG_ERROR_CODE_33000_MSG, null);
                 } else {
-                    return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30028, PG_ERROR_CODE_30028_MSG);
+                    return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30028, PG_ERROR_CODE_30028_MSG);
                 }
             }else{
-                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30041, PG_ERROR_CODE_30041_MSG);
+                return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30041, PG_ERROR_CODE_30041_MSG);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return PgConstants.MAP_500;
+            return ZoomConstants.MAP_500;
         }
     }
 }

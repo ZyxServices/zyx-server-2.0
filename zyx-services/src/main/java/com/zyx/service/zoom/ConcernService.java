@@ -1,4 +1,4 @@
-package com.zyx.service.pg;
+package com.zyx.service.zoom;
 
 import com.zyx.entity.zoom.Concern;
 import com.zyx.param.account.UserConcernParam;
@@ -16,9 +16,9 @@ public interface ConcernService extends BaseService<Concern> {
 
     Map<String, Object> delCern(Integer id, Integer loginUserId);
 
-    Map<String, Object> starRandom(Integer type, Integer n);
+//    Map<String, Object> starRandom(Integer type, Integer n);
 
-    Map<String, Object> getMyFollowList(Integer loginUserId, Integer start, Integer end);
+//    Map<String, Object> getMyFollowList(Integer loginUserId, Integer start, Integer end);
 
     List<MyFollowVo> queryMyConcernList(UserConcernParam userConcernParam);
 
@@ -32,8 +32,8 @@ public interface ConcernService extends BaseService<Concern> {
      * @param formObj
      * @return
      */
-    Integer fromConcern(Integer fromId, Integer fromType, Object formObj);
+//    Integer fromConcern(Integer fromId, Integer fromType, Object formObj);
 
-    Map<String, Object> getOne(Integer concernId, Integer accountId);
+//    Map<String, Object> getOne(Integer concernId, Integer accountId);
 
 }

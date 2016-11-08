@@ -1,7 +1,7 @@
 package com.zyx.rpc.pg;
 
 import com.zyx.vo.zoom.ZanCountVo;
-import com.zyx.service.pg.*;
+import com.zyx.service.zoom.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,16 +60,16 @@ public class PgFacadeImpl implements PgFacade {
     public Map<String, Object> circleList(Integer max) {
         return circleService.circleList(max);
     }
+//
+//    @Override
+//    public Map<String, Object> starRandom(Integer type, Integer n) {
+//        return concernService.starRandom(type, n);
+//    }
 
-    @Override
-    public Map<String, Object> starRandom(Integer type, Integer n) {
-        return concernService.starRandom(type, n);
-    }
-
-    @Override
-    public Map<String, Object> addCircleItem(Integer circle_id, Integer create_id, String title, String content, String img_url) {
-        return circleItemService.addCircleItem(circle_id, create_id, title, content, img_url);
-    }
+//    @Override
+//    public Map<String, Object> addCircleItem(Integer circle_id, Integer create_id, String title, String content, String img_url) {
+//        return circleItemService.addCircleItem(circle_id, create_id, title, content, img_url);
+//    }
 
     @Override
     public Map<String, Object> setMaster(Integer circle_id, Integer master_id, Integer account_id) {
@@ -81,15 +81,15 @@ public class PgFacadeImpl implements PgFacade {
         return circleService.delete(circle_id);
     }
 
-    @Override
-    public Map<String, Object> circleItemList(Integer circleId, Integer start, Integer pageSize) {
-        return circleItemService.circleItemList(circleId, start, pageSize);
-    }
+//    @Override
+//    public Map<String, Object> circleItemList(Integer circleId, Integer start, Integer pageSize) {
+//        return circleItemService.circleItemList(circleId, start, pageSize);
+//    }
 
-    @Override
-    public Map<String, Object> setTop(Integer tooSize, Integer circleItemId) {
-        return circleItemService.setTop(tooSize, circleItemId);
-    }
+//    @Override
+//    public Map<String, Object> setTop(Integer tooSize, Integer circleItemId) {
+//        return circleItemService.setTop(tooSize, circleItemId);
+//    }
 
     @Override
     public Map<String, Object> top(Integer max, Integer circleId) {
@@ -152,20 +152,20 @@ public class PgFacadeImpl implements PgFacade {
         return circleItemService.lbCircleItem(max);
     }
 
-    @Override
-    public Map<String, Object> getMyFollowList(Integer loginUserId, Integer start, Integer pageSize) {
-        return concernService.getMyFollowList(loginUserId, start, pageSize);
-    }
+//    @Override
+//    public Map<String, Object> getMyFollowList(Integer loginUserId, Integer start, Integer pageSize) {
+//        return concernService.getMyFollowList(loginUserId, start, pageSize);
+//    }
 
     @Override
     public Map<String, Object> starConcern(Integer start, Integer pageSize) {
         return concernService.starConcern(start, pageSize);
     }
 
-    @Override
-    public Map<String, Object> getOneConcern(Integer concernId, Integer accountId) {
-        return concernService.getOne(concernId, accountId);
-    }
+//    @Override
+//    public Map<String, Object> getOneConcern(Integer concernId, Integer accountId) {
+//        return concernService.getOne(concernId, accountId);
+//    }
 
     @Override
     public Map<String, Object> getOneCircleItem(Integer circleItemId, Integer accountId) {

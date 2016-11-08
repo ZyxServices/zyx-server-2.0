@@ -1,10 +1,10 @@
-package com.zyx.service.pg.impl;
+package com.zyx.service.zoom.impl;
 
-import com.zyx.constants.pg.PgConstants;
+import com.zyx.constants.zoom.ZoomConstants;
 import com.zyx.entity.zoom.CircleType;
-import com.zyx.mapper.pg.CircleTypeMapper;
+import com.zyx.mapper.zoom.CircleTypeMapper;
 import com.zyx.service.BaseServiceImpl;
-import com.zyx.service.pg.CircleTypeService;
+import com.zyx.service.zoom.CircleTypeService;
 import com.zyx.utils.MapUtils;
 import org.springframework.stereotype.Service;
 
@@ -29,10 +29,10 @@ public class CircleTypeServiceImpl extends BaseServiceImpl<CircleType> implement
     @Override
     public Map<String, Object> getList() {
         try {
-            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, circleTypeMapper.getList());
+            return MapUtils.buildSuccessMap(ZoomConstants.SUCCESS, ZoomConstants.PG_ERROR_CODE_34000_MSG, circleTypeMapper.getList());
         } catch (Exception e) {
             e.printStackTrace();
-            return PgConstants.MAP_500;
+            return ZoomConstants.MAP_500;
         }
     }
 }

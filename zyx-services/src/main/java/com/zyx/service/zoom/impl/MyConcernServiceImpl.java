@@ -1,10 +1,10 @@
-package com.zyx.service.pg.impl;
+package com.zyx.service.zoom.impl;
 
-import com.zyx.constants.pg.PgConstants;
+import com.zyx.constants.zoom.ZoomConstants;
 import com.zyx.entity.zoom.MyConcern;
-import com.zyx.mapper.pg.MyConcernMapper;
+import com.zyx.mapper.zoom.MyConcernMapper;
 import com.zyx.service.BaseServiceImpl;
-import com.zyx.service.pg.MyConcernService;
+import com.zyx.service.zoom.MyConcernService;
 import com.zyx.utils.MapUtils;
 import org.springframework.stereotype.Service;
 
@@ -33,55 +33,55 @@ public class MyConcernServiceImpl extends BaseServiceImpl<MyConcern> implements 
         try {
             MyConcern myConcern = new MyConcern();
             if (concernId == null) {
-//                map.put(PgConstants.STATE, PgConstants.PG_ERROR_CODE_30015);
-//                map.put(PgConstants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30015_MSG);
+//                map.put(ZoomConstants.STATE, ZoomConstants.PG_ERROR_CODE_30015);
+//                map.put(ZoomConstants.ERROR_MSG, ZoomConstants.PG_ERROR_CODE_30015_MSG);
 //                return map;
-                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30015, PgConstants.PG_ERROR_CODE_30015_MSG);
+                return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30015, ZoomConstants.PG_ERROR_CODE_30015_MSG);
 
             }
             Optional.ofNullable(concernId).ifPresent(myConcern::setConcernId);
             if (concern_type == null) {
-//                map.put(PgConstants.STATE, PgConstants.PG_ERROR_CODE_30016);
-//                map.put(PgConstants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30016_MSG);
+//                map.put(ZoomConstants.STATE, ZoomConstants.PG_ERROR_CODE_30016);
+//                map.put(ZoomConstants.ERROR_MSG, ZoomConstants.PG_ERROR_CODE_30016_MSG);
 //                return map;
-                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30016, PgConstants.PG_ERROR_CODE_30016_MSG);
+                return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30016, ZoomConstants.PG_ERROR_CODE_30016_MSG);
 
             }
             Optional.ofNullable(concern_type).ifPresent(myConcern::setConcernType);
             if (accountId == null) {
-//                map.put(PgConstants.STATE, PgConstants.PG_ERROR_CODE_30014);
-//                map.put(PgConstants.ERROR_MSG, PgConstants.PG_ERROR_CODE_30014_MSG);
+//                map.put(ZoomConstants.STATE, ZoomConstants.PG_ERROR_CODE_30014);
+//                map.put(ZoomConstants.ERROR_MSG, ZoomConstants.PG_ERROR_CODE_30014_MSG);
 //                return map;
-                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30014, PgConstants.PG_ERROR_CODE_30014_MSG);
+                return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30014, ZoomConstants.PG_ERROR_CODE_30014_MSG);
 
             }
             Optional.ofNullable(accountId).ifPresent(myConcern::setAccountId);
             myConcern.setCreateTime(new Date().getTime());
             MyConcern myConcernFind = myConcernMapper.existConcern(accountId, concernId, concern_type);
             if (myConcernFind != null) {
-                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30028, PgConstants.PG_ERROR_CODE_30028_MSG);
+                return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30028, ZoomConstants.PG_ERROR_CODE_30028_MSG);
             }
             save(myConcern);
-//            map.put(PgConstants.STATE, PgConstants.SUCCESS);
-//            map.put(PgConstants.SUCCESS_MSG, PgConstants.MSG_SUCCESS);
+//            map.put(ZoomConstants.STATE, ZoomConstants.SUCCESS);
+//            map.put(ZoomConstants.SUCCESS_MSG, ZoomConstants.MSG_SUCCESS);
 //            return map;
-            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_33000_MSG, null);
+            return MapUtils.buildSuccessMap(ZoomConstants.SUCCESS, ZoomConstants.PG_ERROR_CODE_33000_MSG, null);
         } catch (Exception e) {
             e.printStackTrace();
-            return PgConstants.MAP_500;
+            return ZoomConstants.MAP_500;
         }
     }
 
     @Override
     public Map<String, Object> findByParams(Integer concernId, Integer concernType,String keyWord) {
         if (concernId == null) {
-            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30015, PgConstants.PG_ERROR_CODE_30015_MSG);
+            return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30015, ZoomConstants.PG_ERROR_CODE_30015_MSG);
         }
         if (concernType == null) {
-            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30016, PgConstants.PG_ERROR_CODE_30016_MSG);
+            return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30016, ZoomConstants.PG_ERROR_CODE_30016_MSG);
         }
 
-        return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, myConcernMapper.findByParams(concernId, concernType,keyWord));
+        return MapUtils.buildSuccessMap(ZoomConstants.SUCCESS, ZoomConstants.PG_ERROR_CODE_34000_MSG, myConcernMapper.findByParams(concernId, concernType,keyWord));
     }
 
     @Override
@@ -91,14 +91,14 @@ public class MyConcernServiceImpl extends BaseServiceImpl<MyConcern> implements 
             if (Objects.equals(accountId, myConcernFind.getAccountId())) {
                 Integer result = myConcernMapper.delMyConcern(myConcernFind.getId());
                 if (result > 0) {
-                  return  MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_39000_MSG, null);
+                  return  MapUtils.buildSuccessMap(ZoomConstants.SUCCESS, ZoomConstants.PG_ERROR_CODE_39000_MSG, null);
                 }
             } else {
-                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30029, PgConstants.PG_ERROR_CODE_30029_MSG);
+                return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30029, ZoomConstants.PG_ERROR_CODE_30029_MSG);
             }
         } else {
-            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30031, PgConstants.PG_ERROR_CODE_30031_MSG);
+            return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30031, ZoomConstants.PG_ERROR_CODE_30031_MSG);
         }
-        return PgConstants.MAP_500;
+        return ZoomConstants.MAP_500;
     }
 }
