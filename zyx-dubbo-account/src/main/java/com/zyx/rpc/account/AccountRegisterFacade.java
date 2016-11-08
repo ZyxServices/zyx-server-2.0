@@ -23,15 +23,4 @@ public interface AccountRegisterFacade {
      * 注册
      */
     Map<String, Object> registerAccount(AccountLoginParam userLoginParam);
-
-    /**
-     * 更新密码
-     */
-    Map<String, Object> renewpwd(AccountLoginParam userLoginParam);
-
-    /**
-     * 忘记密码
-     */
-    Map<String, Object> retrievepwd(AccountLoginParam userLoginParam);
-
 }

@@ -19,6 +19,9 @@
     <!-- 注册接口 -->
     <dubbo:service interface="com.zyx.rpc.account.AccountRegisterFacade" ref="accountRegisterFacade" timeout="10000"/>
 
+    <!-- 密码接口 -->
+    <dubbo:service interface="com.zyx.rpc.account.AccountSecretFacade" ref="accountSecretFacade" timeout="10000"/>
+
     <!-- 登录接口 -->
     <dubbo:service interface="com.zyx.rpc.account.AccountLoginFacade" ref="accountLoginFacade" timeout="10000"/>
 
