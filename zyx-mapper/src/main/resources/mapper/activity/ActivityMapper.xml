@@ -49,4 +49,7 @@
         </if>
     </select>
 
+    <select id="activityById" parameterType="java.lang.Integer" resultMap="activityVo">
+        select * from activity where id = #{activityId} AND del != 1 AND mask = 0
+    </select>
 </mapper>

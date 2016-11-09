@@ -1,6 +1,7 @@
 package com.zyx.vo.activity;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Rainbow
@@ -72,6 +73,11 @@ public class ActivityVo implements Serializable {
     private String address;
 
     /**
+     * 活动发布城市
+     */
+    private String city;
+
+    /**
      * 活动价格
      */
     private double price;
@@ -81,18 +87,15 @@ public class ActivityVo implements Serializable {
      */
     private String targetUrl;
 
-    /** 创建时间 **/
+    /**
+     * 创建时间
+     **/
     private Long createTime;
 
     /**
-     * 活动是否删除(0正常， 1删除)
+     * 编辑状态下返回内容图片URL
      */
-    private Integer del;
-
-    /**
-     * 是否屏蔽（0正常 1屏蔽）
-     */
-    private Integer mask;
+    private List<String> editDescImgUrl;
 
     public Integer getId() {
         return id;
@@ -206,27 +209,27 @@ public class ActivityVo implements Serializable {
         this.targetUrl = targetUrl;
     }
 
-    public Integer getDel() {
-        return del;
-    }
-
-    public void setDel(Integer del) {
-        this.del = del;
-    }
-
-    public Integer getMask() {
-        return mask;
-    }
-
-    public void setMask(Integer mask) {
-        this.mask = mask;
-    }
-
     public Long getCreateTime() {
         return createTime;
     }
 
     public void setCreateTime(Long createTime) {
         this.createTime = createTime;
+    }
+
+    public List<String> getEditDescImgUrl() {
+        return editDescImgUrl;
+    }
+
+    public void setEditDescImgUrl(List<String> editDescImgUrl) {
+        this.editDescImgUrl = editDescImgUrl;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

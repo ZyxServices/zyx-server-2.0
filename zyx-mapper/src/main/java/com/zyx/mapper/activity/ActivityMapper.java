@@ -35,4 +35,11 @@ public interface ActivityMapper extends BaseMapper<Activity> {
      * @return
      */
     List<ActivityVo> myActivityList(MyActivityListParam myActivityListParam);
+
+    /**
+     * 通过ID查询活动详细信息
+     * @param activityId
+     * @return
+     */
+    ActivityVo activityById(Integer activityId);
 }
