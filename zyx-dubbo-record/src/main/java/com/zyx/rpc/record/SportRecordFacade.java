@@ -59,10 +59,9 @@ public interface SportRecordFacade {
 
     /**
      * 获取自身的排名信息
-     * @param userId
      * @return
      */
-    public RankVo getSelfRank(Integer userId);
+    public RankVo getSelfRank(RankParam param);
 
     /**
      * 获取排行榜信息

@@ -1,6 +1,7 @@
 package com.zyx.vo.zoom;
 
 import com.zyx.entity.system.Reply;
+import com.zyx.vo.account.UserIconVo;
 
 /**
  * @author XiaoWei
@@ -9,22 +10,22 @@ import com.zyx.entity.system.Reply;
  * Create by XiaoWei on 2016/9/6
  */
 public class ReplyVo extends Reply {
-    private UserVo fromUserVo;
-    private UserVo toUserVo;
+    private UserIconVo fromUserIconVo;
+    private UserIconVo toUserIconVo;
 
-    public UserVo getFromUserVo() {
-        return fromUserVo;
+    public UserIconVo getFromUserIconVo() {
+        return fromUserIconVo;
     }
 
-    public void setFromUserVo(UserVo fromUserVo) {
-        this.fromUserVo = fromUserVo;
+    public void setFromUserIconVo(UserIconVo fromUserIconVo) {
+        this.fromUserIconVo = fromUserIconVo;
     }
 
-    public UserVo getToUserVo() {
-        return toUserVo;
+    public UserIconVo getToUserIconVo() {
+        return toUserIconVo;
     }
 
-    public void setToUserVo(UserVo toUserVo) {
-        this.toUserVo = toUserVo;
+    public void setToUserIconVo(UserIconVo toUserIconVo) {
+        this.toUserIconVo = toUserIconVo;
     }
 }

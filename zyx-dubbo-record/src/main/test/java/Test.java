@@ -2,6 +2,7 @@ import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.fastjson.JSON;
 import com.zyx.entity.venue.Venue;
+import com.zyx.param.record.RankParam;
 import com.zyx.param.record.SportRecordParam;
 import com.zyx.param.venue.VenueParam;
 import com.zyx.rpc.record.SportRecordFacade;
@@ -55,7 +56,7 @@ public class Test extends TestCase {
 //			System.out.println(JSON.toJSONString(test.getFootprints(1,null)));
 
 			//获取各人运动概况
-			System.out.println(JSON.toJSONString(test.getSelfRecordOverview(1)));
+//			System.out.println(JSON.toJSONString(test.getSelfRecordOverview(1)));
 
 			//获取场馆列表
 //			VenueParam param =  new VenueParam();
@@ -68,10 +69,14 @@ public class Test extends TestCase {
 			//保存运动记录
 //			test.uploadSportRecord(1,2,2,500L);
 
-			SportRecordParam param =new SportRecordParam();
-			param.setUserId(1);
-			System.out.println(JSON.toJSONString(test.getHistoryRecords(param)));
+//			SportRecordParam param =new SportRecordParam();
+//			param.setUserId(1);
+//			System.out.println(JSON.toJSONString(test.getHistoryRecords(param)));
 
+			RankParam param = new RankParam();
+			System.out.println(JSON.toJSONString(test.getRanks(param)));
+			param.setUserId(169);
+			System.out.println(JSON.toJSONString(test.getSelfRank(param)));
 //			test.getFootprints(1,null);
 
 //			System.out.println(JSON.toJSONString(test.getVenueFootprints(1,"北京")));

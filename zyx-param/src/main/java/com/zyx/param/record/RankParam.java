@@ -8,8 +8,8 @@ import com.zyx.param.Pager;
  */
 public class RankParam extends Pager{
     private Integer userId;
-    private Integer start;
-    private Integer end;
+    private Integer startTime;
+    private Integer endTime;
 
     public Integer getUserId() {
         return userId;
@@ -19,19 +19,19 @@ public class RankParam extends Pager{
         this.userId = userId;
     }
 
-    public Integer getStart() {
-        return start;
+    public Integer getStartTime() {
+        return startTime;
     }
 
-    public void setStart(Integer start) {
-        this.start = start;
+    public void setStartTime(Integer startTime) {
+        this.startTime = startTime;
     }
 
-    public Integer getEnd() {
-        return end;
+    public Integer getEndTime() {
+        return endTime;
     }
 
-    public void setEnd(Integer end) {
-        this.end = end;
+    public void setEndTime(Integer endTime) {
+        this.endTime = endTime;
     }
 }
