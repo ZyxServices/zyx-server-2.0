@@ -81,4 +81,40 @@
         t_sport_record.user_id=#{userId}
         GROUP BY vsiv.city
     </select>
+
+
+    <resultMap id="RankVo" type="com.zyx.vo.record.RankVo">
+        <result column="row_num" property="rankNum"></result>
+        <result column="user_id" property="userId"></result>
+        <result column="total_score" property="totalScore"></result>
+        <association column="user_id" property="userIconVo" select="selectUserIcon"></association>
+    </resultMap>
+    <select id="selectRankList" resultMap="RankVo" parameterType="com.zyx.param.record.RankParam">
+        SELECT @row := @row + 1 AS row_num,sr.user_id,SUM(si.score) AS total_score
+        FROM
+        t_sport_record sr LEFT JOIN t_sport_info si ON sr.sport_info_id=si.id,(SELECT @row := 0) r
+        GROUP BY sr.user_id
+        ORDER BY total_score DESC
+    </select>
+    <select id="selectUserIcon" parameterType="java.lang.Integer" resultType="com.zyx.vo.account.UserIconVo">
+          SELECT
+          u.nickname,u.avatar,u.authenticate
+          FROM user u
+          WHERE
+          id=#{userId}
+    </select>
+
+    <select id="selectSelfRank" resultMap="RankVo" parameterType="com.zyx.param.record.RankParam">
+        SELECT
+        *
+        FROM(
+        SELECT @row := @row + 1 AS row_num,sr.user_id,SUM(si.score) AS total_score
+        FROM
+        t_sport_record sr LEFT JOIN t_sport_info si ON sr.sport_info_id=si.id,(SELECT @row := 0) r
+        GROUP BY sr.user_id
+        ) sort_table
+        WHERE
+        user_id=#{userId}
+        ORDER BY total_score
+    </select>
 </mapper>
