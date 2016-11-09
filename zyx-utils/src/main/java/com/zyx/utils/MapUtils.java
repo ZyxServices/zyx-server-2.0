@@ -6,14 +6,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by skmbg on 2016/6/29.
+ * Created by wms on 2016/6/29.
  *
  * @author WeiMinSheng
- * @version V1.0
+ * @version V2.0
  *          Copyright (c)2016 tyj-版权所有
  * @title MapUtils
  */
 public final class MapUtils {
+
+    public static Map<String, Object> buildSuccessMap() {
+        return buildSuccessMap(null);
+    }
 
     public static Map<String, Object> buildSuccessMap(Object data) {
         return buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, data);

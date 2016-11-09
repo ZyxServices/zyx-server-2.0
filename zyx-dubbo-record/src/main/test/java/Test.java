@@ -2,6 +2,7 @@ import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.fastjson.JSON;
 import com.zyx.entity.venue.Venue;
+import com.zyx.param.record.SportRecordParam;
 import com.zyx.param.venue.VenueParam;
 import com.zyx.rpc.record.SportRecordFacade;
 import junit.framework.TestCase;
@@ -50,8 +51,32 @@ public class Test extends TestCase {
 //			List<Venue> list = test.getVenues(param);
 //			System.out.println(JSON.toJSONString(list));
 
-			System.out.println(JSON.toJSONString(test.getSelfRecord(1)));
-//			System.out.println();
+//			获取用户足迹
+//			System.out.println(JSON.toJSONString(test.getFootprints(1,null)));
+
+			//获取各人运动概况
+			System.out.println(JSON.toJSONString(test.getSelfRecordOverview(1)));
+
+			//获取场馆列表
+//			VenueParam param =  new VenueParam();
+//			param.setLatitude(120.000000);
+//			param.setLongitude(100.000000);
+//			param.setRadius(10.000000);
+//			List<Venue> list = test.getVenues(param);
+//			System.out.println(JSON.toJSONString(list));
+
+			//保存运动记录
+//			test.uploadSportRecord(1,2,2,500L);
+
+			SportRecordParam param =new SportRecordParam();
+			param.setUserId(1);
+			System.out.println(JSON.toJSONString(test.getHistoryRecords(param)));
+
+//			test.getFootprints(1,null);
+
+//			System.out.println(JSON.toJSONString(test.getVenueFootprints(1,"北京")));
+
+//			System.out.println(JSON.toJSONString(test.getCityFootprints(1)));
 		} catch (Exception e) {
 			e.printStackTrace();
 			// log.error("== DubboProvider context start error:",e);

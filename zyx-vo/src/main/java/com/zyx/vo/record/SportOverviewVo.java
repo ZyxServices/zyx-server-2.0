@@ -8,7 +8,7 @@ public class SportOverviewVo {
     /**
      * 运动次数
      */
-    private Integer sportTime;
+    private Integer sportTimes;
     /**
      * 总分
      */
@@ -18,12 +18,17 @@ public class SportOverviewVo {
      */
     private Integer fpNumber;
 
-    public Integer getSportTime() {
-        return sportTime;
+    /**
+     * 城市数量
+     */
+    private Integer cityNumber;
+
+    public Integer getSportTimes() {
+        return sportTimes;
     }
 
-    public void setSportTime(Integer sportTime) {
-        this.sportTime = sportTime;
+    public void setSportTimes(Integer sportTimes) {
+        this.sportTimes = sportTimes;
     }
 
     public Integer getTotalScore() {
@@ -40,5 +45,13 @@ public class SportOverviewVo {
 
     public void setFpNumber(Integer fpNumber) {
         this.fpNumber = fpNumber;
+    }
+
+    public Integer getCityNumber() {
+        return cityNumber;
+    }
+
+    public void setCityNumber(Integer cityNumber) {
+        this.cityNumber = cityNumber;
     }
 }

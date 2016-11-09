@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ The MIT License (MIT)
+  ~
+  ~ Copyright (c) 2014 abel533@gmail.com
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in
+  ~ all copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  ~ THE SOFTWARE.
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zyx.mapper.account.AccountInfoMapper">
+    <resultMap id="AccountInfoMap" type="com.zyx.vo.account.AccountInfoVo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="phone" property="phone" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <resultMap id="queryAccountInfo" type="com.zyx.vo.account.QueryUserInfoVo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
+        <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="INTEGER"/>
+        <result column="birthday" property="birthday" jdbcType="BIGINT"/>
+        <result column="sex" property="sex" jdbcType="INTEGER"/>
+        <result column="idcard" property="idcard" jdbcType="VARCHAR"/>
+        <result column="mask" property="mask" jdbcType="INTEGER"/>
+        <result column="offcial" property="offcial" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <resultMap id="QueryAccountAttentionVo" type="com.zyx.vo.account.AccountAttentionVo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
+        <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
+        <result column="authInfo" property="authInfo" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="MyCenterInfoVoResultMap" type="com.zyx.vo.account.MyCenterInfoVo">
+        <id column="Id" property="id" jdbcType="INTEGER"/>
+        <association property="gz" column="id" select="selectGZCount"></association>
+        <association property="fs" column="id" select="selectFSCount"></association>
+        <association property="dt" column="id" select="selectDTCount"></association>
+        <association property="accountAuth" column="id" select="selectAuthByUserId"></association>
+    </resultMap>
+
+    <select id="selectAccountByPhone" parameterType="String" resultType="int">
+        select count("id") from user where phone = #{phone}
+    </select>
+
+    <select id="selectAccountByParam" parameterType="com.zyx.param.account.AccountLoginParam" resultMap="AccountInfoMap">
+        select * from user where 1 = 1
+        <if test="phone != null and phone != ''">
+            and phone = #{phone}
+        </if>
+        <if test="password != null and password != ''">
+            and password = #{password}
+        </if>
+        <if test="id != null">
+            and id = #{id}
+        </if>
+        AND del != 1
+    </select>
+
+    <select id="queryUserDevaluation" parameterType="java.util.List" resultMap="AccountInfoMap">
+        select * from user where del != 1 AND id IN
+        <foreach item="item" index="index" collection="list"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+
+        ORDER BY create_time desc limit 0,10
+    </select>
+
+    <select id="selectAccountById" parameterType="java.lang.Integer" resultMap="queryAccountInfo">
+        SELECT * FROM user WHERE id = #{id} AND del != 1
+    </select>
+
+    <select id="selectAttentionAccountById" parameterType="java.lang.Integer" resultMap="QueryAccountAttentionVo">
+        SELECT u.id,u.nickname,u.avatar,ua.authinfo as authInfo FROM user as u LEFT JOIN user_auth as ua ON u.id = ua.user_id WHERE u.id = #{id} AND u.del != 1
+    </select>
+
+    <select id="selectAttentionDKAccountById" parameterType="java.lang.Integer" resultMap="QueryAccountAttentionVo">
+        SELECT * FROM user WHERE id = #{id} AND del != 1 AND authenticate = 2
+    </select>
+
+    <update id="renewpwd" parameterType="com.zyx.param.account.AccountLoginParam">
+        update user set password = #{password2} where phone = #{phone}
+    </update>
+
+    <update id="updateAccountByParam" parameterType="com.zyx.param.account.AccountInfoParam">
+        update user set id = #{id}
+        <if test="avatar != null and avatar != ''">
+            , avatar = #{avatar}
+        </if>
+        <if test="nickname != null and nickname != ''">
+            , nickname = #{nickname}
+        </if>
+        <if test="sex != null">
+            , sex = #{sex}
+        </if>
+        <if test="birthday != null and birthday != ''">
+            , birthday = #{birthday}
+        </if>
+        <if test="address != null and address != ''">
+            , address = #{address}
+        </if>
+        <if test="signature != null and signature != ''">
+            , signature = #{signature}
+        </if>
+        where id = #{id}
+    </update>
+
+    <update id="updateAccountAuthStatusByParam" parameterType="com.zyx.param.account.UserAuthParam">
+        update user set id = #{id}
+        <if test="authenticate != null">
+            , authenticate = #{authenticate}
+        </if>
+        where id = #{id}
+    </update>
+
+    <select id="queryMyCenterInfo" parameterType="com.zyx.param.account.AccountLoginParam"
+            resultMap="MyCenterInfoVoResultMap">
+        select * from user where 1 = 1
+        <if test="id != null">
+            and id = #{id}
+        </if>
+    </select>
+
+    <select id="selectAuthByUserId" parameterType="int" resultType="com.zyx.vo.account.AccountAuthVo">
+        SELECT * FROM user_auth where user_id = #{user_id}
+    </select>
+
+    <select id="queryMyAuthInfo" parameterType="int" resultType="com.zyx.vo.account.AccountAuthVo">
+        SELECT * FROM user_auth where user_id = #{user_id}
+    </select>
+
+    <select id="selectGZCount" parameterType="int" resultType="int">
+        SELECT count(id) FROM USER_ATTENTION WHERE from_user_id = #{user_id} and rel_type = 1
+    </select>
+
+    <select id="selectFSCount" parameterType="int" resultType="int">
+        SELECT count(id) FROM USER_ATTENTION WHERE to_user_id = #{user_id} and rel_type = 1
+    </select>
+
+    <select id="selectDTCount" parameterType="int" resultType="int">
+        SELECT count(id) FROM concern WHERE user_id = #{user_id}
+    </select>
+
+    <select id="selectAccountAuthCount" parameterType="int" resultType="int">
+         SELECT count(id) FROM user_auth WHERE user_id = #{user_id}
+    </select>
+
+    <insert id="insertAccountAuthByParam" parameterType="com.zyx.param.account.UserAuthParam">
+        INSERT INTO user_auth (user_id,authname,authidcard,authmob,authfile,authinfo,authfilework,modify_time) VALUES (#{userId},#{authName},#{authIDCard},#{authMob},#{authFile},#{authInfo},#{authFileWork},#{modifyTime})
+    </insert>
+
+    <update id="updateAccountAuthByParam" parameterType="com.zyx.param.account.UserAuthParam">
+        UPDATE user_auth SET user_id = #{userId}
+        <if test="authName != null and authName != ''">
+            , authname = #{authName}
+        </if>
+        <if test="authIDCard != null and authIDCard != ''">
+            , authidcard = #{authIDCard}
+        </if>
+        <if test="authMob != null and authMob != ''">
+            , authmob = #{authMob}
+        </if>
+        <if test="authFileWork != null and authFileWork != ''">
+            , authfilework = #{authFileWork}
+        </if>
+        <if test="authInfo != null and authInfo != ''">
+            , authinfo = #{authInfo}
+        </if>
+        <if test="authFile != null and authFile != ''">
+            , authfile = #{authFile}
+        </if>
+        <if test="modifyTime != null">
+            , modify_time = #{modifyTime}
+        </if>
+        WHERE user_id = #{userId}
+    </update>
+
+</mapper>

@@ -89,6 +89,8 @@
         <property name="mapperLocations">
             <list>
                 <value>classpath*:mapper/*.xml</value>
+                <value>classpath*:mapper/account/*.xml</value>
+                <value>classpath*:mapper/attention/*.xml</value>
                 <value>classpath*:mapper/point/*.xml</value>
                 <value>classpath*:mapper/activity/*.xml</value>
             </list>

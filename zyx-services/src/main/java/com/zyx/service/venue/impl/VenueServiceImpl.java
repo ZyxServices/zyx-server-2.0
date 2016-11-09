@@ -25,13 +25,13 @@ public class VenueServiceImpl extends BaseServiceImpl<Venue> implements VenueSer
         return venueMapper.selectVenues(param);
     }
 
-    @Override
-    public List<Venue> getUserFpVenus(Integer userId) {
-        return venueMapper.selectUserFpVenus(userId);
-    }
+//    @Override
+//    public List<Venue> getUserFpVenus(Integer userId) {
+//        return venueMapper.selectUserFpVenus(userId);
+//    }
 
-    @Override
-    public Integer countUserFpCity(Integer userId) {
-        return venueMapper.countUserFpCity(userId);
-    }
+//    @Override
+//    public Integer countUserFpCity(Integer userId) {
+//        return venueMapper.countUserFpCity(userId);
+//    }
 }
