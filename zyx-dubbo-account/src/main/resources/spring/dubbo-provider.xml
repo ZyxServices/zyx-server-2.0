@@ -17,15 +17,15 @@
     <dubbo:protocol name="dubbo" port="20884" threads="200"/>
 
     <!-- 注册接口 -->
-    <dubbo:service interface="com.zyx.rpc.user.AccountRegisterFacade" ref="accountRegisterFacade" timeout="10000"/>
+    <dubbo:service interface="com.zyx.rpc.account.AccountRegisterFacade" ref="accountRegisterFacade" timeout="10000"/>
 
     <!-- 密码接口 -->
-    <dubbo:service interface="com.zyx.rpc.user.AccountSecretFacade" ref="accountSecretFacade" timeout="10000"/>
+    <dubbo:service interface="com.zyx.rpc.account.AccountSecretFacade" ref="accountSecretFacade" timeout="10000"/>
 
     <!-- 登录接口 -->
-    <dubbo:service interface="com.zyx.rpc.user.AccountLoginFacade" ref="accountLoginFacade" timeout="10000"/>
+    <dubbo:service interface="com.zyx.rpc.account.AccountLoginFacade" ref="accountLoginFacade" timeout="10000"/>
 
     <!-- 公共接口 -->
-    <dubbo:service interface="com.zyx.rpc.user.AccountCommonFacade" ref="accountCommonFacade" timeout="10000"/>
+    <dubbo:service interface="com.zyx.rpc.account.AccountCommonFacade" ref="accountCommonFacade" timeout="10000"/>
 
 </beans>

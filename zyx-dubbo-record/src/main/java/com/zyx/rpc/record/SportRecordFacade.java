@@ -42,7 +42,7 @@ public interface SportRecordFacade {
      * 上传用户运动记录
      *
      * @param userId
-     * @param type
+     * @param type 默认1
      * @param sportInfoId
      * @param spendTime
      */

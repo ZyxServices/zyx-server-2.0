@@ -10,9 +10,12 @@ import com.zyx.param.activity.QueryActivityParam;
 import com.zyx.service.activity.ActivityService;
 import com.zyx.utils.MapUtils;
 import com.zyx.vo.activity.ActivityVo;
+import org.apache.ibatis.javassist.expr.NewArray;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -71,11 +74,28 @@ public class ActivityServiceImpl implements ActivityService {
             queryParam.setPageNumber((queryParam.getPageNumber() - 1) * queryParam.getNumber());
             queryParam.setNowTime(System.currentTimeMillis());
             List<ActivityVo> activityVo = activityMapper.queryActivity(queryParam);
-            if (activityVo.size() > 0) {
-                return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", activityVo);
-            }else{
-                return MapUtils.buildSuccessMap(Constants.SUCCESS, "查无数据", null);
+            if (queryParam.getEditState() != 0) {
+                activityVo.stream().filter(e -> e.getDescContent() != null && !e.getDescContent().equals("")).forEach(s -> {
+                    String[] strings = s.getDescContent().split("<img");
+                    List<String> editImage = new ArrayList<>();
+                    String editText = "";
+                    for (String string : strings) {
+                        if (string.contains("src=")) {
+                            editImage.add(string.substring(string.indexOf("src=\"") + 5, string.indexOf("\"/")));
+                        } else {
+                            if (editText.equals(string)) {
+                                editText = string;
+                            } else {
+                                editText += string;
+                            }
+
+                        }
+                    }
+                    s.setEditDescImgUrl(editImage);
+                    s.setDescContent(editText);
+                });
             }
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", activityVo);
         } else {
             return Constants.MAP_PARAM_MISS;
         }
@@ -83,17 +103,26 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public Map<String, Object> myActivityList(MyActivityListParam listParam) {
-        if(listParam.getUserId() != null && listParam.getNumber() == null && listParam.getPageNumber() != null){
+        if (listParam.getUserId() != null && listParam.getNumber() != null && listParam.getPageNumber() != null) {
             if (listParam.getPageNumber() == 0) {
                 return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10003, "分页参数无效");
             }
+            listParam.setPageNumber((listParam.getPageNumber() - 1) * listParam.getNumber());
             List<ActivityVo> myActivityList = activityMapper.myActivityList(listParam);
-            if(myActivityList.size() > 0){
-                return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", myActivityList);
-            }else{
-                return MapUtils.buildSuccessMap(Constants.SUCCESS, "查无数据", null);
-            }
-        }else{
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", myActivityList);
+        } else {
+            return Constants.MAP_PARAM_MISS;
+        }
+    }
+
+    @Override
+    public Map<String, Object> activityById(Integer activityId) {
+        if (activityId != null && activityId > 0) {
+            ActivityVo activityVo = activityMapper.activityById(activityId);
+            List<ActivityVo> activities = new ArrayList<>();
+            activities.add(activityVo);
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", activities);
+        } else {
             return Constants.MAP_PARAM_MISS;
         }
     }

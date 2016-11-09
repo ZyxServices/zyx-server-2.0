@@ -1,9 +1,11 @@
 package com.zyx.vo.record;
 
+import java.io.Serializable;
+
 /**
  * Created by MrDeng on 2016/11/9.
  */
-public class CityFootprintVo {
+public class CityFootprintVo implements Serializable {
     private String city;
     private Integer fpNumber;
 

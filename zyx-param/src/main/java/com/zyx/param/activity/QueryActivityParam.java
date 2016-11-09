@@ -37,6 +37,16 @@ public class QueryActivityParam implements Serializable {
      */
     private Long nowTime;
 
+    /**
+     * 活动发布城市
+     */
+    private String city;
+
+    /**
+     * 是否编辑
+     */
+    private Integer editState;
+
     public Integer getActivityState() {
         return activityState;
     }
@@ -75,5 +85,21 @@ public class QueryActivityParam implements Serializable {
 
     public void setNowTime(Long nowTime) {
         this.nowTime = nowTime;
+    }
+
+    public Integer getEditState() {
+        return editState;
+    }
+
+    public void setEditState(Integer editState) {
+        this.editState = editState;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

@@ -1,10 +1,12 @@
 package com.zyx.vo.record;
 
+import java.io.Serializable;
+
 /**
  * Created by MrDeng on 2016/11/8.
  * 场馆足迹
  */
-public class FootprintVo {
+public class FootprintVo implements Serializable {
     private String city;
     private Integer venueId;
     private String venueName;

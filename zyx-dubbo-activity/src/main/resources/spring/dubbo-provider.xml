@@ -17,4 +17,6 @@
 
 
     <dubbo:service interface="com.zyx.rpc.activity.ActivityFacade" ref="activityFacade"/>
+
+    <dubbo:service interface="com.zyx.rpc.activity.ActivityMemberFacade" ref="activityMemberFacade"/>
 </beans>

@@ -31,4 +31,11 @@ public interface ActivityService {
      * @return
      */
     Map<String, Object> myActivityList(MyActivityListParam myActivityListParam);
+
+    /**
+     * 通过ID查询活动详细信息
+     * @param activityId
+     * @return
+     */
+    Map<String, Object> activityById(Integer activityId);
 }

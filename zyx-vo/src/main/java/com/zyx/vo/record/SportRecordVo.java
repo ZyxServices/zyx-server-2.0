@@ -1,9 +1,11 @@
 package com.zyx.vo.record;
 
+import java.io.Serializable;
+
 /**
  * Created by MrDeng on 2016/11/4.
  */
-public class SportRecordVo {
+public class SportRecordVo implements Serializable {
     private Integer id;
     private Long createTime;
     private Integer userId;
