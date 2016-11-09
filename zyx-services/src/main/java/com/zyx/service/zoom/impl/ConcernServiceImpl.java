@@ -3,12 +3,10 @@ package com.zyx.service.zoom.impl;
 
 import com.zyx.constants.Constants;
 import com.zyx.constants.zoom.ZoomConstants;
-import com.zyx.entity.activity.Activity;
-import com.zyx.entity.zoom.CircleItem;
 import com.zyx.entity.zoom.Concern;
 import com.zyx.mapper.zoom.ConcernMapper;
 import com.zyx.mapper.zoom.ZanMapper;
-import com.zyx.param.account.UserConcernParam;
+import com.zyx.param.user.UserConcernParam;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.zoom.ConcernService;
 import com.zyx.utils.MapUtils;
@@ -17,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Created by XiaoWei on 2016/6/7.

@@ -1,9 +1,9 @@
-package com.zyx.rpc.user.impl;
+package com.zyx.rpc.account.impl;
 
 import com.zyx.constants.account.AccountConstants;
 import com.zyx.entity.account.AccountInfo;
 import com.zyx.param.account.AccountLoginParam;
-import com.zyx.rpc.user.AccountRegisterFacade;
+import com.zyx.rpc.account.AccountRegisterFacade;
 import com.zyx.service.account.AccountInfoService;
 import com.zyx.utils.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +61,7 @@ public class AccountRegisterFacadeImpl implements AccountRegisterFacade {
                 return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_40006, AccountConstants.ACCOUNT_ERROR_CODE_40006_MSG);
             }
             // 验证成功
-            Map<String, Object> map = new HashMap<String, Object>();
+            Map<String, Object> map = new HashMap<>();
             map.put("phone", userLoginParam.getPhone());
             map.put("code", userLoginParam.getCode());
             return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "手机号和验证码匹配成功", map);

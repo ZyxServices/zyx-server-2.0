@@ -1,14 +1,15 @@
-package com.zyx.rpc.manager;
+package com.zyx.manager;
 
 
-import com.zyx.rpc.token.TokenModel;
+import com.zyx.token.TokenModel;
 
 /**
- * Created by wms on 2016/7/6.
+ * Created by wms on 2016/11/9.
  *
  * @author WeiMinSheng
- * @version V1.0
+ * @version V2.0
  *          Copyright (c)2016 tyj-版权所有
+ * @since 2016/11/9
  */
 public interface TokenManager {
     /**

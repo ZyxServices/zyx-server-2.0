@@ -16,10 +16,10 @@
     <!-- 用dubbo协议在20885端口暴露服务 -->
     <dubbo:protocol name="dubbo" port="20885" threads="200"/>
 
-    <!-- 用户服务接口 -->
-    <dubbo:service interface="com.zyx.rpc.user.AccountInfoFacade" ref="accountInfoFacade" timeout="10000"/>
-
     <!-- 我的关注接口 -->
     <dubbo:service interface="com.zyx.rpc.user.MyAttentionFacade" ref="myAttentionFacade" timeout="10000"/>
+
+    <!-- 我的动态接口 -->
+    <dubbo:service interface="com.zyx.rpc.user.MyConcernFacade" ref="myConcernFacade" timeout="10000"/>
 
 </beans>

@@ -1,7 +1,7 @@
 package com.zyx.service.zoom;
 
 import com.zyx.entity.zoom.Concern;
-import com.zyx.param.account.UserConcernParam;
+import com.zyx.param.user.UserConcernParam;
 import com.zyx.service.BaseService;
 import com.zyx.vo.zoom.MyFollowVo;
 

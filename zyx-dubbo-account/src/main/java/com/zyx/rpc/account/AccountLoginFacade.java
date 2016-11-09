@@ -1,4 +1,4 @@
-package com.zyx.rpc.user;
+package com.zyx.rpc.account;
 
 import java.util.Map;
 

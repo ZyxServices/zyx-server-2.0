@@ -6,11 +6,12 @@ import com.zyx.param.account.UserAuthParam;
 import java.util.Map;
 
 /**
- * Created by wms on 2016/6/17.
+ * Created by wms on 2016/11/8.
  *
  * @author WeiMinSheng
- * @version V1.0
+ * @version V2.0
  *          Copyright (c)2016 tyj-版权所有
+ * @since 2016/11/8
  */
 public interface AccountInfoFacade {
     Map<String, Object> queryAccountInfo(String token, int userId);

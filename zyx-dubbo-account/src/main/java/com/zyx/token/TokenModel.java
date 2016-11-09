@@ -1,12 +1,12 @@
-package com.zyx.rpc.token;
+package com.zyx.token;
 
 /**
- * Created by WMS on 2016/7/5.
- * Token的Model类，可以增加字段提高安全性，例如时间戳、url签名
+ * Created by wms on 2016/11/9.
  *
  * @author WeiMinSheng
- * @version V1.0
+ * @version V2.0
  *          Copyright (c)2016 tyj-版权所有
+ * @since 2016/11/9
  */
 public class TokenModel {
 
