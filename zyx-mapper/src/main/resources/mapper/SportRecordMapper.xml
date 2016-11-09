@@ -6,14 +6,79 @@
     <sql id="sportRecord"> t_sport_record</sql>
 
     <resultMap id="SportOverviewVo" type="com.zyx.vo.record.SportOverviewVo">
-        <result column="times" property="sportTime"></result>
+        <result column="times" property="sportTimes"></result>
+        <result column="ft_number" property="fpNumber"></result>
         <result column="total_score" property="totalScore"></result>
+        <result column="city_number" property="cityNumber"></result>
     </resultMap>
-    <select id="selectTimesScore" resultMap="SportOverviewVo" parameterType="java.lang.Integer">
-        SELECT
-        COUNT(t_sport_record.id) AS times,SUM(t_sport_info.score) AS total_score
-        FROM t_sport_record LEFT JOIN t_sport_info ON t_sport_record.sport_info_id = t_sport_info.id
+
+    <resultMap id="SportRecordVo" type="com.zyx.vo.record.SportRecordVo">
+        <id column="id" property="id"></id>
+        <result column="create_time" property="createTime"></result>
+        <result column="user_id" property="userId"></result>
+        <!--type为运动类型1-攀岩 暂不开放使用-->
+        <!--<result column="type" property="type"></result>-->
+        <result column="sport_info_id" property="sportInfoId"></result>
+        <result column="spend_time" property="spendTime"></result>
+        <result column="concern_id" property="concernId"></result>
+        <result column="venue_id" property="venueId"></result>
+        <result column="venue_name" property="venueName"></result>
+        <result column="path" property="path"></result>
+        <result column="level" property="level"></result>
+    </resultMap>
+
+    <select id="selectRecordOverview" resultMap="SportOverviewVo" parameterType="java.lang.Integer">
+        SELECT COUNT(DISTINCT(t_sport_record.`id`))AS times,COUNT(DISTINCT(t_sport_info.`venue_id`))AS ft_number ,SUM(t_sport_info.`score`)AS total_score
+        FROM t_sport_record
+        LEFT JOIN t_sport_info ON t_sport_record.`sport_info_id`=t_sport_info.`id`
         WHERE
         t_sport_record.user_id = ${userId}
+    </select>
+
+    <select id="selectHistoryRecords" resultMap="SportRecordVo" parameterType="com.zyx.param.record.SportRecordParam">
+        SELECT
+        *
+        FROM
+        t_sport_record LEFT JOIN view_sport_info_venue vsiv
+        ON t_sport_record.`sport_info_id` = vsiv.id
+        WHERE
+        t_sport_record.`user_id`=#{userId}
+    </select>
+
+
+    <resultMap id="FootprintVO" type="com.zyx.vo.record.FootprintVo">
+        <result column="city" property="city"></result>
+        <result column="venue_id" property="venueId"></result>
+        <result column="venue_name" property="venueName"></result>
+        <result column="address" property="address"></result>
+        <result column="fp_number" property="fpNumber"></result>
+        <result column="longitude" property="longitude"></result>
+        <result column="latitude" property="latitude"></result>
+    </resultMap>
+
+    <select id="selectVenueFootprints" resultMap="FootprintVO">
+        SELECT
+        vsiv.city,vsiv.venue_id,vsiv.venue_name,vsiv.address,COUNT(vsiv.venue_id)AS fp_number,vsiv.longitude,vsiv.latitude
+        FROM
+        t_sport_record LEFT JOIN view_sport_info_venue vsiv ON t_sport_record.`sport_info_id` = vsiv.`id`
+        WHERE
+        t_sport_record.user_id=#{userId}
+        AND
+        city=#{city}
+	    GROUP BY vsiv.venue_id
+    </select>
+
+    <resultMap id="CityFootprintVO" type="com.zyx.vo.record.CityFootprintVo">
+        <result column="city" property="city"></result>
+        <result column="fp_number" property="fpNumber"></result>
+    </resultMap>
+    <select id="selectCityFootprints" resultMap="CityFootprintVO">
+        SELECT
+        vsiv.city,COUNT(vsiv.venue_id)AS fp_number
+        FROM
+        t_sport_record LEFT JOIN view_sport_info_venue vsiv ON t_sport_record.`sport_info_id` = vsiv.`id`
+        WHERE
+        t_sport_record.user_id=#{userId}
+        GROUP BY vsiv.city
     </select>
 </mapper>
