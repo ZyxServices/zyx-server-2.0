@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zyx.mapper.attention.UserAttentionMapper">
+    <resultMap id="MyCenterGZVoResultMap" type="com.zyx.vo.attention.AttentionVo">
+        <id column="Id" property="id" jdbcType="INTEGER"/>
+        <association property="attentions" column="to_user_id"
+                     select="com.zyx.mapper.account.AccountInfoMapper.selectAttentionAccountById"></association>
+    </resultMap>
+
+    <resultMap id="MyCenterFSVoResultMap" type="com.zyx.vo.attention.AttentionVo">
+        <id column="Id" property="id" jdbcType="INTEGER"/>
+        <association property="attentions" column="from_user_id"
+                     select="com.zyx.mapper.account.AccountInfoMapper.selectAttentionAccountById"></association>
+    </resultMap>
+
+    <resultMap id="MyCenterDKGZVoResultMap" type="com.zyx.vo.attention.AttentionVo">
+        <id column="Id" property="id" jdbcType="INTEGER"/>
+        <association property="attentions" column="to_user_id"
+                     select="com.zyx.mapper.account.AccountInfoMapper.selectAttentionDKAccountById"></association>
+    </resultMap>
+
+    <select id="selectAttentionCount" parameterType="int" resultType="int">
+        SELECT count(id) FROM user_attention where 1 = 1
+        <if test="fromId != null">
+            and from_user_id = #{fromId}
+        </if>
+        <if test="toId != null">
+            and to_user_id = #{toId}
+        </if>
+        <if test="type != null">
+            and rel_type = #{type}
+        </if>
+    </select>
+
+    <select id="selectAttention" parameterType="java.util.Map" resultType="com.zyx.vo.account.AccountAuthVo">
+        SELECT * FROM user_auth where from_user_id = #{user_id} AND  to_user_id = #{toUser_id}
+    </select>
+
+    <select id="myGZList" parameterType="int" resultMap="MyCenterGZVoResultMap">
+        SELECT * FROM user_attention where from_user_id = #{fromId}
+    </select>
+
+    <select id="myFSList" parameterType="int" resultMap="MyCenterFSVoResultMap">
+        SELECT * FROM user_attention where to_user_id = #{toId}
+    </select>
+
+    <select id="myDKGZList" parameterType="int" resultMap="MyCenterDKGZVoResultMap">
+        SELECT * FROM user_attention where from_user_id = #{fromId}
+    </select>
+
+    <delete id="deleteAttention" parameterType="com.zyx.param.attention.AttentionParam">
+        DELETE FROM user_attention WHERE from_user_id = #{fromId} AND to_user_id = #{toId} AND rel_type = #{type}
+    </delete>
+</mapper>

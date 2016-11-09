@@ -1,10 +1,10 @@
-package com.zyx.rpc.account.impl;
+package com.zyx.rpc.user.impl;
 
 import com.zyx.constants.account.AccountConstants;
 import com.zyx.param.account.AccountInfoParam;
+import com.zyx.param.account.AccountLoginParam;
 import com.zyx.param.account.UserAuthParam;
-import com.zyx.param.account.UserLoginParam;
-import com.zyx.rpc.account.AccountInfoFacade;
+import com.zyx.rpc.user.AccountInfoFacade;
 import com.zyx.rpc.common.TokenFacade;
 import com.zyx.service.account.AccountInfoService;
 import com.zyx.utils.MapUtils;
@@ -41,7 +41,7 @@ public class AccountInfoFacadeImpl implements AccountInfoFacade {
             if (map != null) {
                 return map;
             }
-            UserLoginParam userLoginParam = new UserLoginParam();
+            AccountLoginParam userLoginParam = new AccountLoginParam();
             userLoginParam.setToken(token);
             userLoginParam.setId(userId);
             List<AccountInfoVo> list = accountInfoService.selectAccountByParam(userLoginParam);
@@ -107,7 +107,7 @@ public class AccountInfoFacadeImpl implements AccountInfoFacade {
             if (map != null) {
                 return map;
             }
-            UserLoginParam userLoginParam = new UserLoginParam();
+            AccountLoginParam userLoginParam = new AccountLoginParam();
             userLoginParam.setId(userId);
             MyCenterInfoVo _info = accountInfoService.queryMyCenterInfo(userLoginParam);
             if (_info == null) {

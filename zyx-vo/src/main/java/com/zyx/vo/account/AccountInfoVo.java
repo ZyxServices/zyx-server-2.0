@@ -3,17 +3,15 @@ package com.zyx.vo.account;
 import java.io.Serializable;
 
 /**
- * Created by wms on 2016/6/14.
+ * Created by wms on 2016/11/7.
  *
  * @author WeiMinSheng
- * @version V1.0
+ * @version V2.0
  *          Copyright (c)2016 tyj-版权所有
- * @title AccountInfoVo.java
+ * @since 2016/11/7
  */
 public class AccountInfoVo implements Serializable {
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 3007058842595308501L;
 
     private static final String OBJECT_KEY = "TYJ_USER";

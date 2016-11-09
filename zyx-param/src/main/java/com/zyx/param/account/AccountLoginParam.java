@@ -3,14 +3,14 @@ package com.zyx.param.account;
 import java.io.Serializable;
 
 /**
- * Created by wms on 2016/6/13.
+ * Created by wms on 2016/11/8.
  *
  * @author WeiMinSheng
- * @version V1.0
+ * @version V2.0
  *          Copyright (c)2016 tyj-版权所有
- * @title UserLoginParam.java
+ * @since 2016/11/8
  */
-public class UserLoginParam implements Serializable {
+public class AccountLoginParam implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -36,6 +36,14 @@ public class UserLoginParam implements Serializable {
     private String avatar;
 
     private String nickname;
+
+    public AccountLoginParam() {
+    }
+
+    public AccountLoginParam(String phone, String password) {
+        this.phone = phone;
+        this.password = password;
+    }
 
     public Integer getId() {
         return id;

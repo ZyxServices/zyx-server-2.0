@@ -3,8 +3,8 @@ package com.zyx.service.account.impl;
 import com.zyx.entity.account.AccountInfo;
 import com.zyx.mapper.account.AccountInfoMapper;
 import com.zyx.param.account.AccountInfoParam;
+import com.zyx.param.account.AccountLoginParam;
 import com.zyx.param.account.UserAuthParam;
-import com.zyx.param.account.UserLoginParam;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.account.AccountInfoService;
 import com.zyx.vo.account.AccountAuthVo;
@@ -15,11 +15,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Created by wms on 2016/6/13.
+ * Created by wms on 2016/10/31.
  *
  * @author WeiMinSheng
- * @version V1.0
+ * @version V2.0
  *          Copyright (c)2016 tyj-版权所有
+ * @since 2016/10/31
  */
 @Service("accountInfoService")
 public class AccountInfoServiceImpl extends BaseServiceImpl<AccountInfo> implements AccountInfoService {
@@ -35,13 +36,13 @@ public class AccountInfoServiceImpl extends BaseServiceImpl<AccountInfo> impleme
     }
 
     @Override
-    public List<AccountInfoVo> selectAccountByParam(UserLoginParam userLoginParam) {
+    public List<AccountInfoVo> selectAccountByParam(AccountLoginParam userLoginParam) {
         AccountInfoMapper accountInfoMapper = (AccountInfoMapper) mapper;
         return accountInfoMapper.selectAccountByParam(userLoginParam);
     }
 
     @Override
-    public int renewpwd(UserLoginParam userLoginParam) {
+    public int renewpwd(AccountLoginParam userLoginParam) {
         AccountInfoMapper accountInfoMapper = (AccountInfoMapper) mapper;
         return accountInfoMapper.renewpwd(userLoginParam);
     }
@@ -58,7 +59,7 @@ public class AccountInfoServiceImpl extends BaseServiceImpl<AccountInfo> impleme
     }
 
     @Override
-    public MyCenterInfoVo queryMyCenterInfo(UserLoginParam userLoginParam) {
+    public MyCenterInfoVo queryMyCenterInfo(AccountLoginParam userLoginParam) {
         AccountInfoMapper accountInfoMapper = (AccountInfoMapper) mapper;
         return accountInfoMapper.queryMyCenterInfo(userLoginParam);
     }
