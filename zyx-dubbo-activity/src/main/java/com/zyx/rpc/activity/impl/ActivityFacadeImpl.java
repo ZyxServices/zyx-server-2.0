@@ -2,6 +2,7 @@ package com.zyx.rpc.activity.impl;
 
 import com.zyx.constants.Constants;
 import com.zyx.param.activity.ActivityParam;
+import com.zyx.param.activity.MyActivityListParam;
 import com.zyx.param.activity.QueryActivityParam;
 import com.zyx.rpc.activity.ActivityFacade;
 import com.zyx.service.activity.ActivityService;
@@ -42,6 +43,17 @@ public class ActivityFacadeImpl implements ActivityFacade {
     public Map<String, Object> queryActivity(QueryActivityParam queryParam) {
         try {
             return activityService.queryActivity(queryParam);
+        } catch (Exception e) {
+            logger.error(e);
+            e.printStackTrace();
+            return Constants.MAP_500;
+        }
+    }
+
+    @Override
+    public Map<String, Object> myActivityList(MyActivityListParam listParam) {
+        try {
+            return activityService.myActivityList(listParam);
         } catch (Exception e) {
             logger.error(e);
             e.printStackTrace();

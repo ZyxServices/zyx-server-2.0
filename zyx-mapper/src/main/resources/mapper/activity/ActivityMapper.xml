@@ -5,7 +5,7 @@
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
-        <result column="desc_content" property="descContent" jdbcType="LONGTEXT"/>
+        <result column="desc_content" property="descContent" jdbcType="VARCHAR"/>
         <result column="img_urls" property="imgUrls" jdbcType="VARCHAR"/>
         <result column="activity_type" property="activityType" jdbcType="INTEGER"/>
         <result column="activity_module" property="activityModule" jdbcType="INTEGER"/>
@@ -22,7 +22,7 @@
     <select id="queryActivity" parameterType="com.zyx.param.activity.QueryActivityParam" resultMap="activityVo">
         select * from activity where 1=1
         <if test="activityState == 1">
-           AND nowTime &lt; last_time
+           AND last_time &gt; #{nowTime}
         </if>
         <if test="activityState == 2">
            AND (end_time - start_time) &lt; 0
@@ -34,9 +34,18 @@
             AND activity_type = 2
         </if>
         AND del != 1 AND mask = 0
-        ORDER BY a.create_time desc
-        <if test="pageNumber != null and page != null">
-            limit #{page}, #{pageNumber}
+        ORDER BY  create_time desc
+        <if test="pageNumber != null and number != null">
+            limit #{pageNumber}, #{number}
+        </if>
+    </select>
+
+    <select id="myActivityList" parameterType="com.zyx.param.activity.MyActivityListParam" resultMap="activityVo">
+        select * from activity where user_id = #{userId}
+        AND del != 1 AND mask = 0
+        ORDER BY  create_time desc
+        <if test="pageNumber != null and number != null">
+            limit #{pageNumber}, #{number}
         </if>
     </select>
 

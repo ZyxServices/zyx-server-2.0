@@ -90,6 +90,7 @@
             <list>
                 <value>classpath*:mapper/*.xml</value>
                 <value>classpath*:mapper/point/*.xml</value>
+                <value>classpath*:mapper/activity/*.xml</value>
             </list>
         </property>
         <property name="typeAliasesPackage"

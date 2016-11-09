@@ -5,6 +5,7 @@ import com.zyx.constants.activity.ActivityConstants;
 import com.zyx.entity.activity.Activity;
 import com.zyx.mapper.activity.ActivityMapper;
 import com.zyx.param.activity.ActivityParam;
+import com.zyx.param.activity.MyActivityListParam;
 import com.zyx.param.activity.QueryActivityParam;
 import com.zyx.service.activity.ActivityService;
 import com.zyx.utils.MapUtils;
@@ -67,7 +68,8 @@ public class ActivityServiceImpl implements ActivityService {
             if (queryParam.getPageNumber() == 0) {
                 return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10003, "分页参数无效");
             }
-            queryParam.setPageNumber((queryParam.getPageNumber() - 1) * queryParam.getPageNumber());
+            queryParam.setPageNumber((queryParam.getPageNumber() - 1) * queryParam.getNumber());
+            queryParam.setNowTime(System.currentTimeMillis());
             List<ActivityVo> activityVo = activityMapper.queryActivity(queryParam);
             if (activityVo.size() > 0) {
                 return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", activityVo);
@@ -75,6 +77,23 @@ public class ActivityServiceImpl implements ActivityService {
                 return MapUtils.buildSuccessMap(Constants.SUCCESS, "查无数据", null);
             }
         } else {
+            return Constants.MAP_PARAM_MISS;
+        }
+    }
+
+    @Override
+    public Map<String, Object> myActivityList(MyActivityListParam listParam) {
+        if(listParam.getUserId() != null && listParam.getNumber() == null && listParam.getPageNumber() != null){
+            if (listParam.getPageNumber() == 0) {
+                return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10003, "分页参数无效");
+            }
+            List<ActivityVo> myActivityList = activityMapper.myActivityList(listParam);
+            if(myActivityList.size() > 0){
+                return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", myActivityList);
+            }else{
+                return MapUtils.buildSuccessMap(Constants.SUCCESS, "查无数据", null);
+            }
+        }else{
             return Constants.MAP_PARAM_MISS;
         }
     }
