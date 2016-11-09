@@ -1,4 +1,4 @@
-package com.zyx.rpc.pg.provider;
+package com.zyx.rpc.zoom.provider;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

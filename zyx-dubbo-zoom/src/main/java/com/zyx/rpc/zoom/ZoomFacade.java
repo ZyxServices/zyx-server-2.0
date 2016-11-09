@@ -1,4 +1,4 @@
-package com.zyx.rpc.pg;
+package com.zyx.rpc.zoom;
 
 import com.zyx.vo.zoom.ZanCountVo;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.Map;
  * @package com.zyx.zoom
  * Create by XiaoWei on 2016/6/14
  */
-public interface PgFacade {
+public interface ZoomFacade {
     /**
      * 圈子签到
      *

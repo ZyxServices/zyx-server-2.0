@@ -1,4 +1,4 @@
-package com.zyx.rpc.pg;
+package com.zyx.rpc.zoom;
 
 import com.zyx.vo.zoom.ZanCountVo;
 import com.zyx.service.zoom.*;
@@ -15,7 +15,7 @@ import java.util.Map;
  * Create by XiaoWei on 2016/6/14
  */
 @Service("pgFacade")
-public class PgFacadeImpl implements PgFacade {
+public class ZoomFacadeImpl implements ZoomFacade {
     @Autowired
     private CircleService circleService;
     @Autowired

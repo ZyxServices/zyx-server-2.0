@@ -20,7 +20,7 @@
 	 <!--<dubbo:service interface="com.zyx.pgrvice" ref="pgService" />-->
 
 	<!--操场-->
-	<dubbo:service interface="com.zyx.rpc.pg.PgFacade" ref="pgFacade" timeout="10000"/>
+	<dubbo:service interface="com.zyx.rpc.zoom.ZoomFacade" ref="pgFacade" timeout="10000"/>
 
 
 
