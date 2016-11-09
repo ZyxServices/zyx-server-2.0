@@ -57,13 +57,13 @@ public class SportRecordFacdeImpl implements SportRecordFacade {
     }
 
     @Override
-    public RankVo getSelfRank(Integer userId) {
-        return null;
+    public RankVo getSelfRank(RankParam param) {
+        return sportRecordService.getSelfRank(param);
     }
 
     @Override
     public List<RankVo> getRanks(RankParam param) {
-        return null;
+        return sportRecordService.getRankList(param);
     }
 
     @Override

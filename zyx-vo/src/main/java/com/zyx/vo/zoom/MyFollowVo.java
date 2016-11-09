@@ -3,6 +3,7 @@ package com.zyx.vo.zoom;
 
 //import com.zyx.entity.activity.PageViews;
 import com.zyx.entity.zoom.Concern;
+import com.zyx.vo.account.UserIconVo;
 
 /**
  * @author XiaoWei
@@ -11,7 +12,7 @@ import com.zyx.entity.zoom.Concern;
  * Create by XiaoWei on 2016/8/15
  */
 public class MyFollowVo extends Concern {
-    UserVo userVo;
+    UserIconVo userIconVo;
     private Integer zanCounts;
     private Integer commentCounts;
     UserAuthVo userAuthVo;
@@ -34,12 +35,12 @@ public class MyFollowVo extends Concern {
     }
 
 
-    public UserVo getUserVo() {
-        return userVo;
+    public UserIconVo getUserIconVo() {
+        return userIconVo;
     }
 
-    public void setUserVo(UserVo userVo) {
-        this.userVo = userVo;
+    public void setUserIconVo(UserIconVo userIconVo) {
+        this.userIconVo = userIconVo;
     }
 
     public UserAuthVo getUserAuthVo() {

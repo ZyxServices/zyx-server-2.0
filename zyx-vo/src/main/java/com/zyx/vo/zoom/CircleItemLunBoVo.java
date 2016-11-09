@@ -2,6 +2,7 @@ package com.zyx.vo.zoom;
 
 import com.zyx.entity.zoom.Circle;
 import com.zyx.entity.zoom.CircleItem;
+import com.zyx.vo.account.UserIconVo;
 
 /**
  * @author XiaoWei
@@ -10,7 +11,7 @@ import com.zyx.entity.zoom.CircleItem;
  * Create by XiaoWei on 2016/8/15
  */
 public class CircleItemLunBoVo extends CircleItem {
-    private UserVo userVo;
+    private UserIconVo userIconVo;
     private String tjImgae_url;
     private Circle circleVo;
     UserAuthVo userAuthVo;
@@ -23,12 +24,12 @@ public class CircleItemLunBoVo extends CircleItem {
         this.tjImgae_url = tjImgae_url;
     }
 
-    public UserVo getUserVo() {
-        return userVo;
+    public UserIconVo getUserIconVo() {
+        return userIconVo;
     }
 
-    public void setUserVo(UserVo userVo) {
-        this.userVo = userVo;
+    public void setUserIconVo(UserIconVo userIconVo) {
+        this.userIconVo = userIconVo;
     }
 
     public Circle getCircleVo() {

@@ -1,4 +1,4 @@
-package com.zyx.vo.zoom;
+package com.zyx.vo.account;
 
 import java.io.Serializable;
 
@@ -7,8 +7,10 @@ import java.io.Serializable;
  * @version V 1.0
  * @package com.zyx.entity.zoom.dto
  * Create by XiaoWei on 2016/8/16
+ *
+ * 注：用户头像信息
  */
-public class UserVo implements Serializable {
+public class UserIconVo implements Serializable {
     private String nickName;
     private String avatar;
     private Integer authenticate;
