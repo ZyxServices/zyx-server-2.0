@@ -7,11 +7,13 @@ import com.zyx.param.account.AccountLoginParam;
 import com.zyx.param.account.UserAuthParam;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.account.AccountInfoService;
+import com.zyx.vo.account.AccountAttentionVo;
 import com.zyx.vo.account.AccountAuthVo;
 import com.zyx.vo.account.AccountInfoVo;
 import com.zyx.vo.account.MyCenterInfoVo;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -28,6 +30,9 @@ public class AccountInfoServiceImpl extends BaseServiceImpl<AccountInfo> impleme
     public AccountInfoServiceImpl() {
         super(AccountInfo.class);
     }
+
+    @Resource
+    private AccountInfoMapper accountInfoMapper;
 
     @Override
     public int selectAccountByPhone(String phone) {
@@ -83,6 +88,11 @@ public class AccountInfoServiceImpl extends BaseServiceImpl<AccountInfo> impleme
     public AccountAuthVo queryMyAuthInfo(int userId) {
         AccountInfoMapper accountInfoMapper = (AccountInfoMapper) mapper;
         return accountInfoMapper.queryMyAuthInfo(userId);
+    }
+
+    @Override
+    public List<AccountAttentionVo> getNoAttentionUser(Integer loginUserId) {
+        return accountInfoMapper.getNoAttentionUser(loginUserId);
     }
 
 }

@@ -195,4 +195,8 @@
         WHERE user_id = #{userId}
     </update>
 
+    <select id="getNoAttentionUser" resultMap="QueryAccountAttentionVo" parameterType="java.lang.Integer">
+      SELECT `user`.id,`user`.nickname,`user`.avatar,user_auth.authinfo FROM `user` INNER JOIN user_auth ON `user`.id = user_auth.user_id where `user`.id not in (SELECT to_user_id from user_attention where from_user_id=#{loginUserId})
+    </select>
+
 </mapper>

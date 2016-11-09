@@ -9,6 +9,7 @@ import com.zyx.vo.attention.AttentionVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -52,5 +53,15 @@ public class UserAttentionServiceImpl extends BaseServiceImpl<UserAttention> imp
     @Override
     public int deleteAttention(AttentionParam attentionParam) {
         return userAttentionMapper.deleteAttention(attentionParam);
+    }
+
+    @Override
+    public int addAttention(AttentionParam attentionParam) {
+        UserAttention attention = new UserAttention();
+        attention.setFromUserId(attentionParam.getFromId());
+        attention.setToUserId(attentionParam.getToId());
+        attention.setRelType(attentionParam.getType());
+        attention.setCreateTime(new Date().getTime());
+        return save(attention);
     }
 }
