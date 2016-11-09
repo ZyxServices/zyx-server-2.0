@@ -1,15 +1,11 @@
 package com.zyx.rpc.record;
 
-import com.zyx.entity.record.SportRecord;
 import com.zyx.entity.venue.SportInfo;
 import com.zyx.entity.venue.Venue;
-import com.zyx.param.Pager;
 import com.zyx.param.record.RankParam;
 import com.zyx.param.record.SportRecordParam;
 import com.zyx.param.venue.VenueParam;
-import com.zyx.vo.record.FootprintVenueVo;
-import com.zyx.vo.record.RankVo;
-import com.zyx.vo.record.SportOverviewVo;
+import com.zyx.vo.record.*;
 
 import java.util.List;
 
@@ -24,15 +20,23 @@ public interface SportRecordFacade {
      * @param userId
      * @param venueId
      */
-    public void uploadFootprint(Integer userId, Integer venueId);
+//    public void uploadFootprint(Integer userId, Integer venueId);
 
     /**
-     * 获取用户的足迹信息
+     * 获取用户城市的足迹
      * @param userId
-     * @param pager
      * @return
      */
-    public FootprintVenueVo getFootprints(Integer userId, Pager pager);
+    public List<CityFootprintVo> getCityFootprints(Integer userId);
+
+
+    /**
+     * 获取用户某个城市的足迹
+     * @param userId
+     * @param city
+     * @return
+     */
+    public List<FootprintVo> getVenueFootprints(Integer userId, String city);
 
     /**
      * 上传用户运动记录
@@ -50,7 +54,7 @@ public interface SportRecordFacade {
      * @param param
      * @return
      */
-    public List<SportRecord> getSportRecords(SportRecordParam param);
+    public List<SportRecordVo> getHistoryRecords(SportRecordParam param);
 
 
     /**
@@ -105,6 +109,8 @@ public interface SportRecordFacade {
      * @return
      */
     // TODO: 2016/11/8 后期考虑另建表存储
-    public SportOverviewVo getSelfRecord(Integer userId);
+    public SportOverviewVo getSelfRecordOverview(Integer userId);
+
+
 
 }

@@ -9,7 +9,8 @@
 
     <!--<result></result>-->
     <!--</resultMap>-->
-    <sql id="FULL_COLUMS">id,create_time,type,name,longitude,latituede,city,mark,desc</sql>
+    <sql id="FULL_COLUMS">id,create_time,type,name,longitude,latitude,city,mark,description</sql>
+    <sql id="INFO_COLUMS">type,name,longitude,latituede,city,mark,t_venue.desc</sql>
     <select id="selectVenues" parameterType="com.zyx.param.venue.VenueParam" resultType="com.zyx.entity.venue.Venue">
         SELECT *
         FROM t_venue
@@ -21,21 +22,21 @@
         ABS(ABS(latitude)-ABS(${latitude})) <![CDATA[<]]> ${radius}
     </select>
 
-    <select id="selectUserFpVenus" parameterType="java.lang.Integer" resultType="com.zyx.entity.venue.Venue">
-        SELECT
-        <include refid="FULL_COLUMS"></include>
-        FROM
-        t_footprint LEFT JOIN t_venue ON t_footprint.`venue_id` = t_venue.`id`
-        WHERE
-        t_footprint.`user_id`=${userId}
-    </select>
+    <!--<select id="selectUserFpVenus" parameterType="java.lang.Integer" resultType="com.zyx.entity.venue.Venue">-->
+        <!--SELECT-->
+        <!--t_venue.*-->
+        <!--FROM-->
+        <!--t_footprint LEFT JOIN t_venue ON t_footprint.`venue_id` = t_venue.`id`-->
+        <!--WHERE-->
+        <!--t_footprint.`user_id`=${userId}-->
+    <!--</select>-->
 
-    <select id="countUserFpCity" parameterType="java.lang.Integer" resultType="java.lang.Integer">
-        SELECT
-        COUNT(DISTINCT(t_venue.`city`))
-        FROM
-        t_footprint LEFT JOIN t_venue ON t_footprint.`venue_id` = t_venue.`id`
-        WHERE
-        t_footprint.`user_id`=${userId}
-    </select>
+    <!--<select id="countUserFpCity" parameterType="java.lang.Integer" resultType="java.lang.Integer">-->
+        <!--SELECT-->
+        <!--COUNT(DISTINCT(t_venue.`city`))-->
+        <!--FROM-->
+        <!--t_footprint LEFT JOIN t_venue ON t_footprint.`venue_id` = t_venue.`id`-->
+        <!--WHERE-->
+        <!--t_footprint.`user_id`=${userId}-->
+    <!--</select>-->
 </mapper>
