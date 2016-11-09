@@ -19,7 +19,7 @@ public interface VenueMapper extends BaseMapper<Venue> {
      * @param userId
      * @return
      */
-    public List<Venue> selectUserFpVenus(@Param("userId") Integer userId);
-
-    public Integer countUserFpCity(@Param("userId")Integer userId);
+//    public List<Venue> selectUserFpVenus(@Param("userId") Integer userId);
+//
+//    public Integer countUserFpCity(@Param("userId")Integer userId);
 }

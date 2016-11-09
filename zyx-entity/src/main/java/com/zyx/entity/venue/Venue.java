@@ -14,7 +14,7 @@ public class Venue extends BaseEntity{
     private Double latitude;
     private String city;
     private String mark;
-    private String desc;
+    private String description;
 
     public Integer getType() {
         return type;
@@ -64,11 +64,11 @@ public class Venue extends BaseEntity{
         this.mark = mark;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

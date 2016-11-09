@@ -1,21 +1,16 @@
 package com.zyx.rpc.record.impl;
 
-import com.zyx.entity.record.Footprint;
 import com.zyx.entity.record.SportRecord;
 import com.zyx.entity.venue.SportInfo;
 import com.zyx.entity.venue.Venue;
-import com.zyx.param.Pager;
 import com.zyx.param.record.RankParam;
 import com.zyx.param.record.SportRecordParam;
 import com.zyx.param.venue.VenueParam;
 import com.zyx.rpc.record.SportRecordFacade;
-import com.zyx.service.record.FootprintService;
 import com.zyx.service.record.SportRecordService;
 import com.zyx.service.venue.SportInfoService;
 import com.zyx.service.venue.VenueService;
-import com.zyx.vo.record.FootprintVenueVo;
-import com.zyx.vo.record.RankVo;
-import com.zyx.vo.record.SportOverviewVo;
+import com.zyx.vo.record.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,38 +23,21 @@ import java.util.List;
 public class SportRecordFacdeImpl implements SportRecordFacade {
 
     @Autowired
-    FootprintService footprintService;
-    @Autowired
     SportRecordService sportRecordService;
     @Autowired
     SportInfoService sportInfoService;
     @Autowired
     VenueService venueService;
 
+
     @Override
-    public void uploadFootprint(Integer userId, Integer venueId) {
-        Footprint entity = new Footprint();
-        entity.setUserId(userId);
-        entity.setVenueId(venueId);
-        entity.setCreateTime(System.currentTimeMillis());
-        footprintService.save(entity);
+    public List<CityFootprintVo> getCityFootprints(Integer userId) {
+        return sportRecordService.getCityFootprints(userId);
     }
 
     @Override
-    public FootprintVenueVo getFootprints(Integer userId, Pager pager) {
-        FootprintVenueVo vo = new FootprintVenueVo();
-        Footprint record = new Footprint();
-        record.setUserId(userId);
-        Integer fpCount = footprintService.selectCount(record);
-        if (fpCount != null && fpCount > 0) {
-            vo.setFpCount(fpCount);
-            Integer citiyCont = venueService.countUserFpCity(userId);
-            if (citiyCont != null && citiyCont > 0){
-                vo.setCityCount(citiyCont);
-                vo.setVenues(venueService.getUserFpVenus(userId));
-            }
-        }
-        return vo;
+    public List<FootprintVo> getVenueFootprints(Integer userId, String city) {
+        return sportRecordService.getVenueFootprints(userId,city);
     }
 
     @Override
@@ -67,16 +45,15 @@ public class SportRecordFacdeImpl implements SportRecordFacade {
         SportRecord entity = new SportRecord();
         entity.setUserId(userId);
         entity.setType(type);
-        entity.setSportIfonId(sportInfoId);
+        entity.setSportInfoId(sportInfoId);
         entity.setSpendTime(spendTime);
         entity.setCreateTime(System.currentTimeMillis());
         sportRecordService.save(entity);
     }
 
     @Override
-    public List<SportRecord> getSportRecords(SportRecordParam param) {
-//        sportRecordService.s
-        return null;
+    public List<SportRecordVo> getHistoryRecords(SportRecordParam param) {
+        return sportRecordService.getHistoryRecords(param);
     }
 
     @Override
@@ -113,7 +90,7 @@ public class SportRecordFacdeImpl implements SportRecordFacade {
     }
 
     @Override
-    public SportOverviewVo getSelfRecord(Integer userId) {
-        return sportRecordService.getTimesScore(userId);
+    public SportOverviewVo getSelfRecordOverview(Integer userId) {
+        return sportRecordService.getRecordOverview(userId);
     }
 }

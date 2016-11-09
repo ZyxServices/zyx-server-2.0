@@ -23,12 +23,12 @@ public interface VenueService extends BaseService<Venue> {
      * @param userId
      * @return
      */
-    public List<Venue> getUserFpVenus(Integer userId);
+//    public List<Venue> getUserFpVenus(Integer userId);
 
     /**
      * 统计用户足迹所到场馆数量
      * @param userId
      * @return
      */
-    public Integer countUserFpCity(Integer userId);
+//    public Integer countUserFpCity(Integer userId);
 }

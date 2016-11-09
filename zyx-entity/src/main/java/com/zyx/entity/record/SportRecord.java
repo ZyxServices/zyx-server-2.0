@@ -16,7 +16,7 @@ public class SportRecord extends BaseEntity{
     /**
      * 运动场馆编号
      */
-    private Integer sportIfonId;
+    private Integer sportInfoId;
     /**
      * 运动时间
      */
@@ -52,12 +52,13 @@ public class SportRecord extends BaseEntity{
 //        this.level = level;
 //    }
 
-    public Integer getSportIfonId() {
-        return sportIfonId;
+
+    public Integer getSportInfoId() {
+        return sportInfoId;
     }
 
-    public void setSportIfonId(Integer sportIfonId) {
-        this.sportIfonId = sportIfonId;
+    public void setSportInfoId(Integer sportInfoId) {
+        this.sportInfoId = sportInfoId;
     }
 
     public Long getSpendTime() {
