@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zyx.mapper.activity.ActivityMemberMapper">
+    <resultMap id="memberActivityVo" type="com.zyx.vo.activity.MemberUserVo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="activity_id" property="activityId" jdbcType="INTEGER"/>
+        <result column="join_time" property="joinTime" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <association column="user_id" property="user" select="com.zyx.mapper.account.AccountInfoMapper.queryMyAuthInfo"/>
+    </resultMap>
+
+    <resultMap id="memberUserVo" type="com.zyx.vo.activity.MemberActivityVo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="join_time" property="joinTime" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <association column="activity_id" property="activity" select="com.zyx.mapper.activity.ActivityMapper.activityById"/>
+    </resultMap>
+
+    <select id="findMemberById" parameterType="com.zyx.param.activity.QueryActivityMemberParam" resultMap="memberActivityVo">
+        select * from activity_member where activity_id = #{activityId}
+        AND del != 1 AND mask = 0
+        ORDER BY  create_time desc
+        <if test="pageNumber != null and number != null">
+            limit #{pageNumber}, #{number}
+        </if>
+    </select>
+
+    <select id="findMemberByUserId" parameterType="com.zyx.param.activity.QueryActivityMemberParam" resultMap="memberUserVo">
+        select * from activity_member where user_id = #{userId}
+        AND del != 1 AND mask = 0
+        ORDER BY  create_time desc
+        <if test="pageNumber != null and number != null">
+            limit #{pageNumber}, #{number}
+        </if>
+    </select>
+
+</mapper>

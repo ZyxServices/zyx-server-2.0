@@ -90,6 +90,12 @@ public class Activity extends BaseEntity {
     private String address;
 
     /**
+     * 活动发布城市
+     */
+    @Column
+    @ColumnType(jdbcType = JdbcType.VARCHAR)
+    private String city;
+    /**
      * 活动价格
      */
     @Column
@@ -195,6 +201,14 @@ public class Activity extends BaseEntity {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public double getPrice() {

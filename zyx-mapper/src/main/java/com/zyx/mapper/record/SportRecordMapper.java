@@ -2,11 +2,9 @@ package com.zyx.mapper.record;
 
 import com.zyx.entity.record.SportRecord;
 import com.zyx.mapper.BaseMapper;
+import com.zyx.param.record.RankParam;
 import com.zyx.param.record.SportRecordParam;
-import com.zyx.vo.record.CityFootprintVo;
-import com.zyx.vo.record.FootprintVo;
-import com.zyx.vo.record.SportOverviewVo;
-import com.zyx.vo.record.SportRecordVo;
+import com.zyx.vo.record.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -36,4 +34,18 @@ public interface SportRecordMapper extends BaseMapper<SportRecord> {
      * @return
      */
     List<FootprintVo> selectVenueFootprints(@Param("userId") Integer userId, @Param("city") String city);
+
+    /**
+     * 获取排行信息
+     *
+     * @return
+     */
+    List<RankVo> selectRankList(RankParam param);
+
+    /**
+     * 获取各人排行信息
+     * @param param
+     * @return
+     */
+    RankVo selectSelfRank(RankParam param);
 }

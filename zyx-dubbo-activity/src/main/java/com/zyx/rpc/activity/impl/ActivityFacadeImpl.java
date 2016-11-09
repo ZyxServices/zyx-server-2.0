@@ -60,4 +60,15 @@ public class ActivityFacadeImpl implements ActivityFacade {
             return Constants.MAP_500;
         }
     }
+
+    @Override
+    public Map<String, Object> activityById(Integer activityId) {
+        try {
+            return activityService.activityById(activityId);
+        } catch (Exception e) {
+            logger.error(e);
+            e.printStackTrace();
+            return Constants.MAP_500;
+        }
+    }
 }

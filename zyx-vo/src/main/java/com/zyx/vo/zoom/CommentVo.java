@@ -3,6 +3,7 @@ package com.zyx.vo.zoom;
 
 
 import com.zyx.entity.system.Comment;
+import com.zyx.vo.account.UserIconVo;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
  */
 public class CommentVo extends Comment {
     List<ReplyVo> replyVos;
-    UserVo userVo;
+    UserIconVo userIconVo;
 
     public List<ReplyVo> getReplyVos() {
         return replyVos;
@@ -24,11 +25,11 @@ public class CommentVo extends Comment {
         this.replyVos = replyVos;
     }
 
-    public UserVo getUserVo() {
-        return userVo;
+    public UserIconVo getUserIconVo() {
+        return userIconVo;
     }
 
-    public void setUserVo(UserVo userVo) {
-        this.userVo = userVo;
+    public void setUserIconVo(UserIconVo userIconVo) {
+        this.userIconVo = userIconVo;
     }
 }
