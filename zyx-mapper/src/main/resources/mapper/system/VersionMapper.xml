@@ -2,4 +2,41 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zyx.mapper.system.VersionMapper">
 
+    <resultMap id="Version" type="com.zyx.entity.system.Version">
+        <id column="id" property="id"></id>
+        <result column="create_time" property="createTime"></result>
+        <result column="type" property="type"></result>
+        <result column="publish_time" property="publishTime"></result>
+        <result column="platform" property="platform"></result>
+        <result column="version" property="version"></result>
+        <result column="download_url" property="downloadUrl"></result>
+        <result column="state" property="state"></result>
+    </resultMap>
+
+    <select id="selectNewVersion" resultMap="Version">
+        SELECT
+        *
+        FROM
+        t_version v
+        WHERE
+        state =1
+        AND
+        v.type = ${type}
+        AND
+        v.platform = ${platform}
+        ORDER BY create_time DESC
+        LIMIT 0,1
+    </select>
+
+    <select id="selectHistoryVersion" resultMap="Version">
+        SELECT
+        *
+        FROM
+        t_version v
+        WHERE
+        v.type = ${type}
+        AND
+        v.platform = ${platform}
+        ORDER BY create_time DESC
+    </select>
 </mapper>

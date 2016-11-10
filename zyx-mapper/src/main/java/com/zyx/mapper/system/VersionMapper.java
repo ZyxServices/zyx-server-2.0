@@ -1,7 +1,9 @@
 package com.zyx.mapper.system;
 
+import  java.util.List;
 import com.zyx.entity.system.Version;
 import com.zyx.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -9,4 +11,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository("versionMapper")
 public interface VersionMapper extends BaseMapper<Version> {
+    Version selectNewVersion(@Param("type")Integer type,@Param("platform") Integer platform);
+    List<Version> selectHistoryVersion(@Param("type")Integer type, @Param("platform")Integer platform);
 }

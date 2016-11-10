@@ -21,6 +21,10 @@ public class Venue extends BaseEntity{
     private String phone;
     private String address;
     private String imgUrls;
+    /**
+     * 场馆综合难度 注意和SportInfo 中你难度区别
+     */
+    private String level;
     private int del;
 
     public Integer getType() {
@@ -101,6 +105,14 @@ public class Venue extends BaseEntity{
 
     public void setImgUrls(String imgUrls) {
         this.imgUrls = imgUrls;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
     }
 
     public int getDel() {

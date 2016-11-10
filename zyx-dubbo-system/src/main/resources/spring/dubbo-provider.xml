@@ -19,5 +19,5 @@
     <dubbo:service interface="com.zyx.rpc.system.SystemCityFacade" ref="systemCityFacade"/>
 
 
-
+    <dubbo:service interface="com.zyx.rpc.system.VersionFacade" ref="versionFacade"/>
 </beans>

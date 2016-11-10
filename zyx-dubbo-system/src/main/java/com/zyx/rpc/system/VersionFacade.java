@@ -1,6 +1,6 @@
 package com.zyx.rpc.system;
 
-import com.sun.tools.javac.util.List;
+import  java.util.List;
 import com.zyx.entity.system.Version;
 
 /**
