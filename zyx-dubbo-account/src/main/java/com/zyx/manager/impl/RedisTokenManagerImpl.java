@@ -1,7 +1,7 @@
-package com.zyx.rpc.manager.impl;
+package com.zyx.manager.impl;
 
-import com.zyx.rpc.manager.TokenManager;
-import com.zyx.rpc.token.TokenModel;
+import com.zyx.manager.TokenManager;
+import com.zyx.token.TokenModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -9,14 +9,15 @@ import org.springframework.stereotype.Component;
 import java.util.UUID;
 
 /**
- * Created by wms on 2016/7/6.
+ * Created by wms on 2016/11/9.
  *
  * @author WeiMinSheng
- * @version V1.0
+ * @version V2.0
  *          Copyright (c)2016 tyj-版权所有
+ * @since 2016/11/9
  */
 @Component
-public class RedisTokenManager implements TokenManager {
+public class RedisTokenManagerImpl implements TokenManager {
 
     @Autowired
     protected RedisTemplate<String, String> stringRedisTemplate;

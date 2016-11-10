@@ -18,11 +18,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by wms on 2016/6/17.
+ * Created by wms on 2016/11/8.
  *
  * @author WeiMinSheng
- * @version V1.0
+ * @version V2.0
  *          Copyright (c)2016 tyj-版权所有
+ * @since 2016/11/8
  */
 @Service("accountInfoFacade")
 public class AccountInfoFacadeImpl implements AccountInfoFacade {

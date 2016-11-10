@@ -2,12 +2,14 @@ package com.zyx.vo.record;
 
 import com.zyx.vo.account.UserIconVo;
 
+import java.io.Serializable;
+
 /**
  * Created by MrDeng on 2016/11/4.
  *
  * 用户运动记录排行
  */
-public class RankVo {
+public class RankVo implements Serializable {
     /**
      * 排序
      */

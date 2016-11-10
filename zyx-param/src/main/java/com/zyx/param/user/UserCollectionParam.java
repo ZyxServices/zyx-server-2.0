@@ -1,14 +1,14 @@
-package com.zyx.param.account;
+package com.zyx.param.user;
 
 import com.zyx.param.BaseParam;
 
 /**
- * Created by wms on 2016/9/7.
+ * Created by wms on 2016/11/9.
  *
  * @author WeiMinSheng
- * @version V1.0
+ * @version V2.0
  *          Copyright (c)2016 tyj-版权所有
- * @since 2016/9/7
+ * @since 2016/11/9
  */
 public class UserCollectionParam extends BaseParam {
     private static final long serialVersionUID = -1183523368142576495L;

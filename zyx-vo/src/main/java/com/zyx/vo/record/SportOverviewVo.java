@@ -1,10 +1,12 @@
 package com.zyx.vo.record;
 
+import java.io.Serializable;
+
 /**
  * Created by MrDeng on 2016/11/7.
  * 运动情况概览
  */
-public class SportOverviewVo {
+public class SportOverviewVo implements Serializable{
     /**
      * 运动次数
      */

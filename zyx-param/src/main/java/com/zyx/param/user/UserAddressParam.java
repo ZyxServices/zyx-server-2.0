@@ -1,14 +1,14 @@
-package com.zyx.param.account;
+package com.zyx.param.user;
 
 import java.io.Serializable;
 
 /**
- * Created by WeiMinSheng on 2016/6/21.
+ * Created by wms on 2016/11/9.
  *
  * @author WeiMinSheng
- * @version V1.0
+ * @version V2.0
  *          Copyright (c)2016 tyj-版权所有
- * @title UserAddressParam.java
+ * @since 2016/11/9
  */
 public class UserAddressParam implements Serializable {
     private static final long serialVersionUID = 1L;

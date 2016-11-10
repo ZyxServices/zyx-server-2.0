@@ -1,5 +1,6 @@
 package com.zyx.rpc.coin;
 
+import com.zyx.entity.coin.CoinLog;
 import com.zyx.vo.coin.SportCoinVo;
 
 /**
@@ -29,4 +30,11 @@ public interface SportCoinFacade {
      * @return
      */
     public SportCoinVo search(Integer userId);
+
+    /**
+     * 获取用户的货币变化列表
+     * @param userId
+     * @return
+     */
+    public java.util.List<CoinLog> getCoinLog(Integer userId, Integer operId);
 }

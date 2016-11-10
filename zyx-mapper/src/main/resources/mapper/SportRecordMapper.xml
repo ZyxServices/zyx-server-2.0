@@ -28,9 +28,9 @@
     </resultMap>
 
     <select id="selectRecordOverview" resultMap="SportOverviewVo" parameterType="java.lang.Integer">
-        SELECT COUNT(DISTINCT(t_sport_record.`id`))AS times,COUNT(DISTINCT(t_sport_info.`venue_id`))AS ft_number ,SUM(t_sport_info.`score`)AS total_score
+        SELECT COUNT(DISTINCT(t_sport_record.id))AS times,COUNT(DISTINCT(vsiv.venue_id))AS ft_number ,SUM(vsiv.score)AS total_score,COUNT(DISTINCT(vsiv.city))  AS city_number
         FROM t_sport_record
-        LEFT JOIN t_sport_info ON t_sport_record.`sport_info_id`=t_sport_info.`id`
+        LEFT JOIN view_sport_info_venue vsiv ON t_sport_record.sport_info_id=vsiv.id
         WHERE
         t_sport_record.user_id = ${userId}
     </select>

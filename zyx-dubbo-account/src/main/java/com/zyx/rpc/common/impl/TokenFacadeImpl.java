@@ -2,10 +2,10 @@ package com.zyx.rpc.common.impl;
 
 import com.zyx.constants.Constants;
 import com.zyx.constants.account.AccountConstants;
-import com.zyx.rpc.manager.TokenManager;
+import com.zyx.manager.TokenManager;
 import com.zyx.rpc.common.TokenFacade;
-import com.zyx.rpc.token.TokenModel;
 import com.zyx.service.account.AccountRedisService;
+import com.zyx.token.TokenModel;
 import com.zyx.utils.MapUtils;
 import com.zyx.vo.account.AccountInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +16,12 @@ import org.springframework.util.StringUtils;
 import java.util.Map;
 
 /**
- * Created by wms on 2016/7/6.
+ * Created by wms on 2016/11/9.
  *
  * @author WeiMinSheng
- * @version V1.0
+ * @version V2.0
  *          Copyright (c)2016 tyj-版权所有
+ * @since 2016/11/9
  */
 @Service("tokenFacade")
 public class TokenFacadeImpl implements TokenFacade {

@@ -1,9 +1,11 @@
 package com.zyx.vo.venue;
 
+import java.io.Serializable;
+
 /**
  * Created by MrDeng on 2016/11/8.
  */
-public class VenueVo {
+public class VenueVo implements Serializable {
     private Integer type;
     private String name;
     private Double longitude;
