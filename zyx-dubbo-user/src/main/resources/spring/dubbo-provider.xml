@@ -28,4 +28,7 @@
     <!-- 地址接口 -->
     <dubbo:service interface="com.zyx.rpc.user.UserAddressFacade" ref="userAddressFacade" timeout="10000"/>
 
+    <!-- 地址接口 -->
+    <dubbo:service interface="com.zyx.rpc.user.UserInfoFacade" ref="userInfoFacade" timeout="10000"/>
+
 </beans>
