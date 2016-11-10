@@ -49,7 +49,7 @@
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <!-- 基本属性driverClassName、 url、user、password -->
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <!--211.157.152.200:  192.168.1.200:-->
+        <!--119.61.66.55:  192.168.1.200:-->
         <property name="url"
                   value="jdbc:mysql://119.61.66.55:3306/zyx2.0?characterEncoding=UTF-8&amp;autoReconnect=true&amp;zeroDateTimeBehavior=convertToNull&amp;transformedBitIsBoolean=true&amp;useUnicode=true"/>
         <property name="username" value="tiyujia"/>
@@ -90,6 +90,8 @@
                 <value>classpath*:mapper/attention/*.xml</value>
                 <value>classpath*:mapper/point/*.xml</value>
                 <value>classpath*:mapper/activity/*.xml</value>
+                <value>classpath*:mapper/system/*.xml</value>
+                <value>classpath*:mapper/user/*.xml</value>
             </list>
         </property>
         <property name="typeAliasesPackage"

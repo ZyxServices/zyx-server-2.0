@@ -42,14 +42,24 @@ public interface CoinConstants {
          * 发布动态
          */
         PUBLISH_DYNAMIC(7),
+
+        /**
+         * 老带新
+         */
+        RECOMMEND_NEW_USER(8),
+
+        /**
+         * 装备秀
+         */
+        EQUIP_SHOW(9),
         /**
          * 被举报
          */
-        ACCUSATION(8),
+        ACCUSATION(10),
         /**
          * 充值
          */
-        RECHARGE(9);
+        RECHARGE(11);
         private Integer operType;
 
         OperType(Integer operType) {
@@ -62,20 +72,39 @@ public interface CoinConstants {
     }
 
     /**
-     * 运动币操作上限次数
+     * 运动币总操作上限次数
      */
-    Map<Integer, Integer> COIN_OPER_UPPER_TIMES = new HashMap<Integer, Integer>() {
+    Map<Integer, Integer> COIN_TOTAL_OPER_UPPER_TIMES = new HashMap<Integer, Integer>() {
         {
             put(0, Integer.MAX_VALUE);
             put(1, 1);
             put(2, 1);
-            put(3, 5);
-            put(4, 5);
-            put(5, 5);
+            put(3, Integer.MAX_VALUE);
+            put(4, Integer.MAX_VALUE);
+            put(5, Integer.MAX_VALUE);
             put(6, Integer.MAX_VALUE);
-            put(7, 10);
-            put(8, Integer.MAX_VALUE);
+            put(7, Integer.MAX_VALUE);
+            put(8, 10);
             put(9, Integer.MAX_VALUE);
+            put(10, Integer.MAX_VALUE);
+            put(11, Integer.MAX_VALUE);
+        }
+    };
+
+    Map<Integer, Integer> COIN_DAY_OPER_UPPER_TIMES = new HashMap<Integer, Integer>() {
+        {
+            put(0, Integer.MAX_VALUE);
+            put(1, 1);
+            put(2, 1);
+            put(3, 1);
+            put(4, 1);
+            put(5, 1);
+            put(6, 1);
+            put(7, 1);
+            put(8, 10);
+            put(9, 1);
+            put(10, Integer.MAX_VALUE);
+            put(11, Integer.MAX_VALUE);
         }
     };
     /**
@@ -84,15 +113,17 @@ public interface CoinConstants {
     Map<Integer, Long> COIN_OPER_NUMBER = new HashMap<Integer, Long>() {
         {
             put(0, Long.MAX_VALUE);
-            put(1, 5L);
-            put(2, 2L);
+            put(1, 10L);
+            put(2, 10L);
             put(3, 1L);
             put(4, 1L);
             put(5, 1L);
-            put(6, 5L);
-            put(7, 2L);
-            put(8, -2L);
-            put(9, Long.MAX_VALUE);
+            put(6, 4L);
+            put(7, 3L);
+            put(8, 5L);
+            put(9, 3L);
+            put(10, -15L);
+            put(11, 1L);
         }
     };
 }

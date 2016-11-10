@@ -28,4 +28,7 @@
     <!-- 公共接口 -->
     <dubbo:service interface="com.zyx.rpc.account.AccountCommonFacade" ref="accountCommonFacade" timeout="10000"/>
 
+    <!-- 权限接口 -->
+    <dubbo:service interface="com.zyx.rpc.common.TokenFacade" ref="tokenFacade" timeout="10000"/>
+
 </beans>

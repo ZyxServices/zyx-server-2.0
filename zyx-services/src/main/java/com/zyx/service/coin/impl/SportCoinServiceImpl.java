@@ -34,9 +34,11 @@ public class SportCoinServiceImpl extends BaseServiceImpl<SportCoin> implements 
         clog.setUserId(userId);
         clog.setOperId(operType);
         int count = coinLogMapper.selectCount(clog);
-        if(CoinConstants.COIN_OPER_UPPER_TIMES.get(operType)==null||CoinConstants.COIN_OPER_UPPER_TIMES.get(operType) <= count) {
+        if(CoinConstants.COIN_TOTAL_OPER_UPPER_TIMES.get(operType)==null||CoinConstants.COIN_TOTAL_OPER_UPPER_TIMES.get(operType) <= count) {
             return;
         }
+        //TODO 验证当天是否达到操作上限次数
+//        COIN_DAY_OPER_UPPER_TIMES
         if(coin==null)
             coin = CoinConstants.COIN_OPER_NUMBER.get(operType);
         //实际操作
@@ -45,31 +47,27 @@ public class SportCoinServiceImpl extends BaseServiceImpl<SportCoin> implements 
         List<SportCoin> records = select(record);
         int n = -1;
         if (records == null || records.size() == 0) {
-//            System.out.println("新增运动币");
             record.setUserId(userId);
             record.setState(1);
             record.setCoin(coin);
             record.setCreateTime(System.currentTimeMillis());
-//            System.out.println(JSON.toJSONString(record));
+            record.setModifyTime(record.getCreateTime());
             n = save(record);
         } else {
             record = records.get(0);
-//            System.out.println("修改运动币");
             record.setUserId(userId);
             record.setCoin(record.getCoin() == null ? coin : (record.getCoin() + coin));
-//            System.out.println(JSON.toJSONString(record));
+            record.setModifyTime(System.currentTimeMillis());
             n = updateNotNull(record);
         }
 
         //记录日志
-//        System.out.println("日志记录"+n);
         CoinLog log = new CoinLog();
         log.setCreateTime(System.currentTimeMillis());
         log.setUserId(userId);
         log.setCoinNum(coin);
         log.setState(n > 0 ? 1 : -1);
         log.setOperId(operType);
-//        System.out.println(JSON.toJSONString(record));
         coinLogMapper.insert(log);
     }
 

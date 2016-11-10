@@ -3,6 +3,7 @@ package com.zyx.mapper.coin;
 import com.zyx.entity.coin.SportCoin;
 import com.zyx.mapper.BaseMapper;
 import com.zyx.vo.coin.SportCoinVo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -15,5 +16,5 @@ public interface SportCoinMapper extends BaseMapper<SportCoin>{
      * @param userId
      * @return
      */
-    SportCoinVo selectSportCoin(Integer userId);
+    SportCoinVo selectSportCoin(@Param("userId") Integer userId);
 }

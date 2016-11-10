@@ -1,7 +1,9 @@
 package com.zyx.service.account.impl;
 
 import com.zyx.entity.account.AccountInfo;
+import com.zyx.entity.attention.UserAttention;
 import com.zyx.mapper.account.AccountInfoMapper;
+import com.zyx.mapper.attention.UserAttentionMapper;
 import com.zyx.param.account.AccountInfoParam;
 import com.zyx.param.account.AccountLoginParam;
 import com.zyx.param.account.UserAuthParam;
@@ -11,6 +13,7 @@ import com.zyx.vo.account.AccountAttentionVo;
 import com.zyx.vo.account.AccountAuthVo;
 import com.zyx.vo.account.AccountInfoVo;
 import com.zyx.vo.account.MyCenterInfoVo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -27,12 +30,26 @@ import java.util.List;
 @Service("accountInfoService")
 public class AccountInfoServiceImpl extends BaseServiceImpl<AccountInfo> implements AccountInfoService {
 
+    @Autowired
+    private UserAttentionMapper userAttentionMapper;
+
     public AccountInfoServiceImpl() {
         super(AccountInfo.class);
     }
 
     @Resource
     private AccountInfoMapper accountInfoMapper;
+
+    @Override
+    public int insertAccountInfo(AccountInfo entity, UserAttention userAttention) {
+        int result = save(entity);
+        if (result != 0) {
+            userAttention.setFromUserId(entity.getId());
+            userAttention.setToUserId(entity.getId());
+            result = userAttentionMapper.insert(userAttention);
+        }
+        return result;
+    }
 
     @Override
     public int selectAccountByPhone(String phone) {
@@ -47,7 +64,7 @@ public class AccountInfoServiceImpl extends BaseServiceImpl<AccountInfo> impleme
     }
 
     @Override
-    public int renewpwd(AccountLoginParam userLoginParam) {
+    public int renewSecret(AccountLoginParam userLoginParam) {
         AccountInfoMapper accountInfoMapper = (AccountInfoMapper) mapper;
         return accountInfoMapper.renewpwd(userLoginParam);
     }

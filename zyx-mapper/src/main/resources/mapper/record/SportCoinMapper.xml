@@ -6,11 +6,16 @@
 	 <sql id="sportCoin"> t_sport_coin</sql>
 
 	<resultMap id="SportCoinVo" type="com.zyx.vo.coin.SportCoinVo">
-
+		<id column="id" property="id"></id>
+		<result column="create_time" property="createTime"></result>
+		<result column="modify_time" property="modifyTime"></result>
+		<result column="user_id" property="userId"></result>
+		<result column="coin" property="coin"></result>
+		<result column="state" property="state"></result>
 	</resultMap>
 
-	<select id="selectSportCoin" resultType="com.zyx.vo.coin.SportCoinVo" parameterType="java.lang.Integer">
-		SELECT user_id,coin,state
+	<select id="selectSportCoin" resultMap="SportCoinVo" parameterType="java.lang.Integer">
+		SELECT *
 		FROM t_sport_coin
 		WHERE
 		user_id = #{userId}

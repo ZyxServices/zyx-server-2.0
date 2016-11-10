@@ -1,6 +1,7 @@
 package com.zyx.service.account;
 
 import com.zyx.entity.account.AccountInfo;
+import com.zyx.entity.attention.UserAttention;
 import com.zyx.param.account.AccountInfoParam;
 import com.zyx.param.account.AccountLoginParam;
 import com.zyx.param.account.UserAuthParam;
@@ -22,6 +23,11 @@ import java.util.List;
  */
 public interface AccountInfoService extends BaseService<AccountInfo> {
     /**
+     * 添加用户
+     */
+    int insertAccountInfo(AccountInfo accountInfo, UserAttention userAttention);
+
+    /**
      * 通过手机号码查询用户数量
      */
     int selectAccountByPhone(String phone);
@@ -31,11 +37,10 @@ public interface AccountInfoService extends BaseService<AccountInfo> {
      */
     List<AccountInfoVo> selectAccountByParam(AccountLoginParam userLoginParam);
 
-
     /**
      * 更新密码
      */
-    int renewpwd(AccountLoginParam userLoginParam);
+    int renewSecret(AccountLoginParam userLoginParam);
 
     /**
      * 修改用户信息
