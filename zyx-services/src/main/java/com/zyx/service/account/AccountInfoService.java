@@ -39,7 +39,7 @@ public interface AccountInfoService extends BaseService<AccountInfo> {
     /**
      * 更新密码
      */
-    int renewpwd(AccountLoginParam userLoginParam);
+    int renewSecret(AccountLoginParam userLoginParam);
 
     /**
      * 修改用户信息

@@ -50,11 +50,10 @@ public class AccountSecretFacadeImpl implements AccountSecretFacade {
                 return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_40001, AccountConstants.ACCOUNT_ERROR_CODE_40001_MSG);
             }
             userLoginParam.setPassword2(userLoginParam.getPassword2());
-            int result = accountInfoService.renewpwd(userLoginParam);
-            if (result == 0) {
-                return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_40002, AccountConstants.ACCOUNT_ERROR_CODE_40002_MSG);
+            if (accountInfoService.renewSecret(userLoginParam) >= 1) {
+                return MapUtils.buildSuccessMap("用户密码修改成功");
             }
-            return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "用户密码修改成功", null);
+            return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_40002, AccountConstants.ACCOUNT_ERROR_CODE_40002_MSG);
         } catch (Exception e) {
             e.printStackTrace();
             return AccountConstants.MAP_500;
@@ -82,8 +81,7 @@ public class AccountSecretFacadeImpl implements AccountSecretFacade {
             }
 
             userLoginParam.setPassword2(userLoginParam.getPassword2());
-            int result = accountInfoService.renewpwd(userLoginParam);
-            if (result == 0) {
+            if (accountInfoService.renewSecret(userLoginParam) == 0) {
                 return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_40002, AccountConstants.ACCOUNT_ERROR_CODE_40002_MSG);
             }
             stringRedisTemplate.delete(AccountConstants.REDIS_KEY_TYJ_PHONE_CODE + userLoginParam.getPhone());
@@ -94,7 +92,7 @@ public class AccountSecretFacadeImpl implements AccountSecretFacade {
                 stringRedisTemplate.delete(AccountConstants.REDIS_KEY_TYJ_PHONE + userLoginParam.getPhone());
                 accountRedisService.delete(userLoginParam.getPhone());
             }
-            return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "用户密码修改成功", null);
+            return MapUtils.buildSuccessMap("用户密码修改成功");
         } catch (Exception e) {
             e.printStackTrace();
             return AccountConstants.MAP_500;

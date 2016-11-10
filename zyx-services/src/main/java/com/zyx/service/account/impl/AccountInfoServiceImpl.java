@@ -59,7 +59,7 @@ public class AccountInfoServiceImpl extends BaseServiceImpl<AccountInfo> impleme
     }
 
     @Override
-    public int renewpwd(AccountLoginParam userLoginParam) {
+    public int renewSecret(AccountLoginParam userLoginParam) {
         AccountInfoMapper accountInfoMapper = (AccountInfoMapper) mapper;
         return accountInfoMapper.renewpwd(userLoginParam);
     }
