@@ -196,7 +196,10 @@
     </update>
 
     <select id="getNoAttentionUser" resultMap="QueryAccountAttentionVo" parameterType="java.lang.Integer">
-      SELECT `user`.id,`user`.nickname,`user`.avatar,user_auth.authinfo FROM `user` INNER JOIN user_auth ON `user`.id = user_auth.user_id where `user`.id not in (SELECT to_user_id from user_attention where from_user_id=#{loginUserId})
+      SELECT `user`.id,`user`.nickname,`user`.avatar,user_auth.authinfo FROM `user` INNER JOIN user_auth ON `user`.id = user_auth.user_id
+       <if test="loginUserId !=-1">
+           where `user`.id not in (SELECT to_user_id from user_attention where from_user_id=#{loginUserId})
+       </if>
     </select>
 
 </mapper>

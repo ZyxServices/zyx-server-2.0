@@ -45,9 +45,6 @@ public class ZoomFacadeImpl implements ZoomFacade {
 
     @Override
     public Map<String, Object> getNoAttentionUser(Integer loginUserId) {
-        if (Objects.equals(loginUserId, null)) {
-            return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30014, ZoomConstants.PG_ERROR_CODE_30014_MSG);
-        }
         List<AccountAttentionVo> accountAttentionVos = accountInfoService.getNoAttentionUser(loginUserId);
         return MapUtils.buildSuccessMap(ZoomConstants.SUCCESS, ZoomConstants.SUCCESS_MSG, accountAttentionVos);
     }

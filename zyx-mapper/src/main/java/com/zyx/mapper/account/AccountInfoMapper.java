@@ -6,6 +6,7 @@ import com.zyx.param.account.AccountInfoParam;
 import com.zyx.param.account.AccountLoginParam;
 import com.zyx.param.account.UserAuthParam;
 import com.zyx.vo.account.*;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -45,6 +46,6 @@ public interface AccountInfoMapper extends BaseMapper<AccountInfo> {
 
     AccountAuthVo queryMyAuthInfo(int user_id);
 
-    List<AccountAttentionVo> getNoAttentionUser(Integer loginUserId);
+    List<AccountAttentionVo> getNoAttentionUser(@Param("loginUserId") Integer loginUserId);
 
 }
