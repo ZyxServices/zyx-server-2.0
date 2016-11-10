@@ -99,7 +99,7 @@ public interface SportRecordFacade {
      * @param param
      * @return
      */
-    public List<Venue> getVenues(VenueParam param);
+//    public List<Venue> getVenues(VenueParam param);
 
     /**
      * 获取用户各人运动概况

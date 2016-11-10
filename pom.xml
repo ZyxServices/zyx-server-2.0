@@ -33,6 +33,7 @@
         <module>zyx-dubbo-record</module>
         <module>zyx-dubbo-account</module>
         <module>zyx-dubbo-system</module>
+        <module>zyx-dubbo-venue</module>
     </modules>
 
     <properties>

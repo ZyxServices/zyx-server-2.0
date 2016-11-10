@@ -84,10 +84,10 @@ public class SportRecordFacdeImpl implements SportRecordFacade {
         sportInfoService.save(entity);
     }
 
-    @Override
-    public List<Venue> getVenues(VenueParam param) {
-        return venueService.getVenues(param);
-    }
+//    @Override
+//    public List<Venue> getVenues(VenueParam param) {
+//        return venueService.getVenues(param);
+//    }
 
     @Override
     public SportOverviewVo getSelfRecordOverview(Integer userId) {
