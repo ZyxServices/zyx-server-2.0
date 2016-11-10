@@ -32,6 +32,7 @@
         <module>zyx-dubbo-coin</module>
         <module>zyx-dubbo-record</module>
         <module>zyx-dubbo-account</module>
+        <module>zyx-dubbo-system</module>
     </modules>
 
     <properties>
