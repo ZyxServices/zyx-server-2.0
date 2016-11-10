@@ -19,6 +19,10 @@ public final class MapUtils {
         return buildSuccessMap(null);
     }
 
+    public static Map<String, Object> buildSuccessMap(String msg) {
+        return buildSuccessMap(Constants.SUCCESS, msg, null);
+    }
+
     public static Map<String, Object> buildSuccessMap(Object data) {
         return buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, data);
     }

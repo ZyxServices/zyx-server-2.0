@@ -4,8 +4,8 @@ import com.zyx.constants.account.AccountConstants;
 import com.zyx.param.account.AccountInfoParam;
 import com.zyx.param.account.AccountLoginParam;
 import com.zyx.param.account.UserAuthParam;
-import com.zyx.rpc.user.AccountInfoFacade;
 import com.zyx.rpc.common.TokenFacade;
+import com.zyx.rpc.user.UserInfoFacade;
 import com.zyx.service.account.AccountInfoService;
 import com.zyx.utils.MapUtils;
 import com.zyx.vo.account.AccountAuthVo;
@@ -25,8 +25,8 @@ import java.util.Map;
  *          Copyright (c)2016 tyj-版权所有
  * @since 2016/11/8
  */
-@Service("accountInfoFacade")
-public class AccountInfoFacadeImpl implements AccountInfoFacade {
+@Service("userInfoFacade")
+public class UserInfoFacadeImpl implements UserInfoFacade {
 
     @Autowired
     private AccountInfoService accountInfoService;
@@ -42,16 +42,16 @@ public class AccountInfoFacadeImpl implements AccountInfoFacade {
             if (map != null) {
                 return map;
             }
-            AccountLoginParam userLoginParam = new AccountLoginParam();
-            userLoginParam.setToken(token);
-            userLoginParam.setId(userId);
-            List<AccountInfoVo> list = accountInfoService.selectAccountByParam(userLoginParam);
+            AccountLoginParam accountLoginParam = new AccountLoginParam();
+            accountLoginParam.setToken(token);
+            accountLoginParam.setId(userId);
+            List<AccountInfoVo> list = accountInfoService.selectAccountByParam(accountLoginParam);
             if (list == null || list.size() == 0) {
                 return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_40300, AccountConstants.ACCOUNT_ERROR_CODE_40300_MSG);
-            } else {
-                return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "用户信息查询成功", list.get(0));
             }
+            return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "用户信息查询成功", list.get(0));
         } catch (Exception e) {
+            e.printStackTrace();
             return AccountConstants.MAP_500;
         }
     }
@@ -66,13 +66,12 @@ public class AccountInfoFacadeImpl implements AccountInfoFacade {
             }
             param.setId(userId);
             param.setToken(token);
-            int result = accountInfoService.updateAccountByParam(param);
-            if (result >= 1) {
-                return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "用户信息修改成功", null);
-            } else {
-                return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_40002, AccountConstants.ACCOUNT_ERROR_CODE_40002_MSG);
+            if (accountInfoService.updateAccountByParam(param) >= 1) {
+                return MapUtils.buildSuccessMap("用户信息修改成功");
             }
+            return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_40002, AccountConstants.ACCOUNT_ERROR_CODE_40002_MSG);
         } catch (Exception e) {
+            e.printStackTrace();
             return AccountConstants.MAP_500;
         }
     }
@@ -91,11 +90,11 @@ public class AccountInfoFacadeImpl implements AccountInfoFacade {
             param.setAuthenticate(1);
             int result = accountInfoService.submitAccountAuthByParam(param);
             if (result >= 1) {
-                return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "提交认证信息成功", null);
-            } else {
-                return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_40015, AccountConstants.ACCOUNT_ERROR_CODE_40015_MSG);
+                return MapUtils.buildSuccessMap("提交认证信息成功");
             }
+            return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_40015, AccountConstants.ACCOUNT_ERROR_CODE_40015_MSG);
         } catch (Exception e) {
+            e.printStackTrace();
             return AccountConstants.MAP_500;
         }
     }
@@ -111,12 +110,12 @@ public class AccountInfoFacadeImpl implements AccountInfoFacade {
             AccountLoginParam userLoginParam = new AccountLoginParam();
             userLoginParam.setId(userId);
             MyCenterInfoVo _info = accountInfoService.queryMyCenterInfo(userLoginParam);
-            if (_info == null) {
-                return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_40300, AccountConstants.ACCOUNT_ERROR_CODE_40300_MSG);
-            } else {
+            if (_info != null) {
                 return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "用户信息查询成功", _info);
             }
+            return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_40300, AccountConstants.ACCOUNT_ERROR_CODE_40300_MSG);
         } catch (Exception e) {
+            e.printStackTrace();
             return AccountConstants.MAP_500;
         }
     }
@@ -130,14 +129,13 @@ public class AccountInfoFacadeImpl implements AccountInfoFacade {
                 return map;
             }
             AccountAuthVo _info = accountInfoService.queryMyAuthInfo(userId);
-            if (_info == null) {
-                return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_40300, AccountConstants.ACCOUNT_ERROR_CODE_40300_MSG);
-            } else {
+            if (_info != null) {
                 return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "用户信息查询成功", _info);
             }
+            return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_40300, AccountConstants.ACCOUNT_ERROR_CODE_40300_MSG);
         } catch (Exception e) {
+            e.printStackTrace();
             return AccountConstants.MAP_500;
         }
     }
-
 }

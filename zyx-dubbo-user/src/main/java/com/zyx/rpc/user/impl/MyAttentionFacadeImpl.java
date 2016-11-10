@@ -45,6 +45,7 @@ public class MyAttentionFacadeImpl implements MyAttentionFacade {
             List<AttentionVo> _list = userAttentionService.myFSList(attentionParam);
             return getStringObjectMap(_list);
         } catch (Exception e) {
+            e.printStackTrace();
             return UserAttentionConstants.MAP_500;
         }
     }
@@ -59,6 +60,7 @@ public class MyAttentionFacadeImpl implements MyAttentionFacade {
             List<AttentionVo> _list = userAttentionService.myGZList(attentionParam);
             return getStringObjectMap(_list);
         } catch (Exception e) {
+            e.printStackTrace();
             return UserAttentionConstants.MAP_500;
         }
     }
@@ -73,6 +75,7 @@ public class MyAttentionFacadeImpl implements MyAttentionFacade {
             List<AttentionVo> _list = userAttentionService.myDKGZList(attentionParam);
             return getStringObjectMap(_list);
         } catch (Exception e) {
+            e.printStackTrace();
             return UserAttentionConstants.MAP_500;
         }
     }

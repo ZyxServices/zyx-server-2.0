@@ -13,7 +13,7 @@ import java.util.Map;
  *          Copyright (c)2016 tyj-版权所有
  * @since 2016/11/8
  */
-public interface AccountInfoFacade {
+public interface UserInfoFacade {
     Map<String, Object> queryAccountInfo(String token, int userId);
 
     Map<String, Object> editAccountInfo(String token, int userId, AccountInfoParam param);
