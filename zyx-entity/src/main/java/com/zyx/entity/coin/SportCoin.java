@@ -9,9 +9,18 @@ import javax.persistence.Table;
  */
 @Table(name = "t_sport_coin")
 public class SportCoin extends BaseEntity {
+    private Long modifyTime;
     private Integer userId;
     private Long coin;
     private Integer state;
+
+    public Long getModifyTime() {
+        return modifyTime;
+    }
+
+    public void setModifyTime(Long modifyTime) {
+        this.modifyTime = modifyTime;
+    }
 
     public Integer getUserId() {
         return userId;
