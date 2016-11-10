@@ -17,6 +17,7 @@ public class Reply extends BaseEntity {
     private Integer replyToUser;//被回复人
     private String replyContent;
     private Integer replyState;//回复状态，0：公开回复
+    private String replyImgPath;//回复
 
     public Integer getReplyParentId() {
         return replyParentId;
@@ -57,5 +58,13 @@ public class Reply extends BaseEntity {
 
     public void setReplyState(Integer replyState) {
         this.replyState = replyState;
+    }
+
+    public String getReplyImgPath() {
+        return replyImgPath;
+    }
+
+    public void setReplyImgPath(String replyImgPath) {
+        this.replyImgPath = replyImgPath;
     }
 }

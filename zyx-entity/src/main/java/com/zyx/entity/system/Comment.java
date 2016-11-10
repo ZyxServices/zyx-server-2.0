@@ -30,6 +30,9 @@ public class Comment extends BaseEntity {
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer commentState;//回复方式，0：公开评论
+    @Column
+    @ColumnType(jdbcType = JdbcType.VARCHAR)
+    private String commentImgPath;
 
     public Integer getCommentType() {
         return commentType;
@@ -71,5 +74,11 @@ public class Comment extends BaseEntity {
         this.commentState = commentState;
     }
 
+    public String getCommentImgPath() {
+        return commentImgPath;
+    }
 
+    public void setCommentImgPath(String commentImgPath) {
+        this.commentImgPath = commentImgPath;
+    }
 }
