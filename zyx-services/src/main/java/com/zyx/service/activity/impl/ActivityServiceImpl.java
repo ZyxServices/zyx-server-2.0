@@ -10,12 +10,10 @@ import com.zyx.param.activity.QueryActivityParam;
 import com.zyx.service.activity.ActivityService;
 import com.zyx.utils.MapUtils;
 import com.zyx.vo.activity.ActivityVo;
-import org.apache.ibatis.javassist.expr.NewArray;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -44,13 +42,14 @@ public class ActivityServiceImpl implements ActivityService {
             activity.setEndTime(param.getEndTime());
             activity.setLastTime(param.getLastTime());
             activity.setAddress(param.getAddress());
-            activity.setMaxPeople(param.getMaxPepople());
+            activity.setMaxPeople(param.getMaxPepople() == 0 ? 9999999 : param.getMaxPepople());
             activity.setPrice(param.getPrice());
             activity.setCreateTime(System.currentTimeMillis());
             activity.setDel(0);
             activity.setActivityModule(1);
             activity.setTargetUrl("");
             activity.setMask(0);
+            activity.setType(1);
 
             Integer integer = activityMapper.insert(activity);
             if (integer > 0) {
@@ -119,9 +118,7 @@ public class ActivityServiceImpl implements ActivityService {
     public Map<String, Object> activityById(Integer activityId) {
         if (activityId != null && activityId > 0) {
             ActivityVo activityVo = activityMapper.activityById(activityId);
-            List<ActivityVo> activities = new ArrayList<>();
-            activities.add(activityVo);
-            return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", activities);
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", activityVo);
         } else {
             return Constants.MAP_PARAM_MISS;
         }

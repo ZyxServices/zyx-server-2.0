@@ -123,6 +123,13 @@ public class Activity extends BaseEntity {
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer mask;
 
+    /**
+     * 是否是官方活动（0 官方  1非官方）
+     */
+    @Column
+    @ColumnType(jdbcType = JdbcType.INTEGER)
+    private Integer type;
+
     public Integer getUserId() {
         return userId;
     }
@@ -249,5 +256,13 @@ public class Activity extends BaseEntity {
 
     public void setDel(Integer del) {
         this.del = del;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 }
