@@ -48,4 +48,15 @@
         values(#{userId}, #{createTime}, #{pointCount}, #{pointType}, #{detailType}, #{detailMsg})
     </insert>
 
+    <select id="checkUserPointA" parameterType="com.zyx.param.point.UserPointDetailParam" resultType="int">
+        SELECT COUNT(*) FROM  ${detailTable} WHERE user_id = #{userId} AND point_type = #{pointType} AND detail_type = #{detailType} and create_time between #{createTimeMin} and #{createTimeMax}
+    </select>
+
+    <select id="checkUserPointB" parameterType="com.zyx.param.point.UserPointDetailParam" resultType="int">
+        SELECT COUNT(*) FROM  ${detailTable} WHERE user_id = #{userId} AND point_type = #{pointType} AND detail_type = #{detailType}
+    </select>
+
+    <select id="checkUserPointC" parameterType="com.zyx.param.point.UserPointDetailParam" resultType="int">
+        SELECT COUNT(*) FROM  ${detailTable} WHERE user_id = #{userId} AND point_type = #{pointType} AND detail_type = #{detailType}
+    </select>
 </mapper>
