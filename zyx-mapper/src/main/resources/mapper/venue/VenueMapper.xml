@@ -5,10 +5,24 @@
     <!-- 用户信息表 -->
     <sql id="venue"> t_venue </sql>
 
-    <!--<resultMap id="VenueVo" type="com.zyx.vo.venue.VenueVo">-->
+    <resultMap id="findVenueAll" type="com.zyx.vo.venue.FindVenueVo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="longitude" property="longitude" jdbcType="DOUBLE"/>
+        <result column="latitude" property="latitude" jdbcType="DOUBLE"/>
+        <result column="city" property="city" jdbcType="VARCHAR"/>
+        <result column="mark" property="mark" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="imgUrls" property="imgUrls" jdbcType="VARCHAR"/>
+        <result column="level" property="level" jdbcType="VARCHAR"/>
+        <result column="create_time" property="create_time" jdbcType="BIGINT"/>
+        <result column="distance" property="distance" jdbcType="BIGINT"/>
+        <result column="pnumber" property="pnumber" jdbcType="BIGINT"/>
+    </resultMap>
 
-    <!--<result></result>-->
-    <!--</resultMap>-->
     <sql id="FULL_COLUMS">id,create_time,type,name,longitude,latitude,city,mark,description</sql>
     <sql id="INFO_COLUMS">type,name,longitude,latituede,city,mark,t_venue.desc</sql>
     <select id="selectVenues" parameterType="com.zyx.param.venue.VenueParam" resultType="com.zyx.entity.venue.Venue">
@@ -22,21 +36,50 @@
         ABS(ABS(latitude)-ABS(${latitude})) <![CDATA[<]]> ${radius}
     </select>
 
+    <select id="findVenueById" parameterType="com.zyx.param.venue.FindVenueParam" resultMap="findVenueAll">
+        SELECT * FROM t_venue WHERE del != 1 AND id = #{id}
+    </select>
+
+    <select id="findVenues" parameterType="com.zyx.param.venue.FindVenueParam" resultMap="findVenueAll">
+        SELECT a.*,
+        ROUND(6378.137 * 2 *
+        ASIN(SQRT(POW(
+        SIN((#{lng}*PI()/180-a.latitude*PI()/180)/2),2)+
+        COS(#{lng}*PI()/180)*
+        COS(a.latitude*PI()/180)*
+        POW(SIN((#{lat}*PI()/180-a.longitude*PI()/180)/2)
+        ,2)))*1000) AS distance,
+        (SELECT COUNT(id) FROM t_sport_record b WHERE a.id = b.venue_id) AS pnumber
+        FROM t_venue a WHERE del != 1
+        <if test="type == 1">
+            ORDER BY a.create_time desc
+        </if>
+        <if test="type == 2">
+            ORDER BY distance ASC
+        </if>
+        <if test="type == 3">
+            ORDER BY pnumber desc
+        </if>
+        <if test="type == 4">
+            ORDER BY a.level desc
+        </if>
+    </select>
+
     <!--<select id="selectUserFpVenus" parameterType="java.lang.Integer" resultType="com.zyx.entity.venue.Venue">-->
-        <!--SELECT-->
-        <!--t_venue.*-->
-        <!--FROM-->
-        <!--t_footprint LEFT JOIN t_venue ON t_footprint.`venue_id` = t_venue.`id`-->
-        <!--WHERE-->
-        <!--t_footprint.`user_id`=${userId}-->
+    <!--SELECT-->
+    <!--t_venue.*-->
+    <!--FROM-->
+    <!--t_footprint LEFT JOIN t_venue ON t_footprint.`venue_id` = t_venue.`id`-->
+    <!--WHERE-->
+    <!--t_footprint.`user_id`=${userId}-->
     <!--</select>-->
 
     <!--<select id="countUserFpCity" parameterType="java.lang.Integer" resultType="java.lang.Integer">-->
-        <!--SELECT-->
-        <!--COUNT(DISTINCT(t_venue.`city`))-->
-        <!--FROM-->
-        <!--t_footprint LEFT JOIN t_venue ON t_footprint.`venue_id` = t_venue.`id`-->
-        <!--WHERE-->
-        <!--t_footprint.`user_id`=${userId}-->
+    <!--SELECT-->
+    <!--COUNT(DISTINCT(t_venue.`city`))-->
+    <!--FROM-->
+    <!--t_footprint LEFT JOIN t_venue ON t_footprint.`venue_id` = t_venue.`id`-->
+    <!--WHERE-->
+    <!--t_footprint.`user_id`=${userId}-->
     <!--</select>-->
 </mapper>

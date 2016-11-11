@@ -33,7 +33,7 @@
         <if test="activityType == 2">
             AND activity_type = 2
         </if>
-        AND del != 1 AND mask = 0
+        AND del != 1 AND mask = 0 AND type = 1
         ORDER BY  create_time desc
         <if test="pageNumber != null and number != null">
             limit #{pageNumber}, #{number}

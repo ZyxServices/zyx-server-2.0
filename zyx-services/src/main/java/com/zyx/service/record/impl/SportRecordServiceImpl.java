@@ -11,6 +11,7 @@ import com.zyx.vo.record.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,6 +33,8 @@ public class SportRecordServiceImpl extends BaseServiceImpl<SportRecord> impleme
 
     @Override
     public List<SportRecordVo> getHistoryRecords(SportRecordParam param) {
+        if(param.getPageSize()<1||param.getPageNum()<1)
+            return new ArrayList<>();
         return sportRecordMapper.selectHistoryRecords(param);
     }
 
@@ -47,6 +50,8 @@ public class SportRecordServiceImpl extends BaseServiceImpl<SportRecord> impleme
 
     @Override
     public List<RankVo> getRankList(RankParam param) {
+        if(param.getPageSize()<1||param.getPageNum()<1)
+            return new ArrayList<>();
         return sportRecordMapper.selectRankList(param);
     }
 

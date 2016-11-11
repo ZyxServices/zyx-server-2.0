@@ -10,7 +10,7 @@ public class Pager implements Serializable {
     private static final long serialVersionUID = -7214542879825312475L;
 
     private Integer pageSize = 10;
-    private Integer pageNum;
+    private Integer pageNum=1;
     private Long count;
     private Integer offset;
 

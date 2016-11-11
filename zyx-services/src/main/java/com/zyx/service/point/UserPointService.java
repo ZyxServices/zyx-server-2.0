@@ -20,4 +20,5 @@ public interface UserPointService extends BaseService<UserPointInfo> {
 
     int insertUserPoint(UserPointInfo userPointInfo, UserPointParam userPointParam) throws Exception;
 
+    boolean checkUserPoint(UserPointParam userPointParam);
 }

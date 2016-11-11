@@ -63,6 +63,7 @@ public class UserPointFacadeImpl implements UserPointFacade {
         userPointParam.setId(userPointVo.getId());
 
         try {
+            // 检查规则
             if (userPointService.modifyUserPoint(userPointParam) >= 1) {
                 return MapUtils.buildSuccessMap(PointConstants.SUCCESS, "积分" + userPointParam.getPointCount(), null);
             }

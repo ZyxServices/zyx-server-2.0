@@ -29,6 +29,10 @@ public class UserPointDetailParam extends BaseParam {
 
     private String detailTable;
 
+    private Long createTimeMin;
+
+    private Long createTimeMax;
+
     public Integer getId() {
         return id;
     }
@@ -91,5 +95,21 @@ public class UserPointDetailParam extends BaseParam {
 
     public void setDetailTable(String detailTable) {
         this.detailTable = detailTable;
+    }
+
+    public Long getCreateTimeMin() {
+        return createTimeMin;
+    }
+
+    public void setCreateTimeMin(Long createTimeMin) {
+        this.createTimeMin = createTimeMin;
+    }
+
+    public Long getCreateTimeMax() {
+        return createTimeMax;
+    }
+
+    public void setCreateTimeMax(Long createTimeMax) {
+        this.createTimeMax = createTimeMax;
     }
 }

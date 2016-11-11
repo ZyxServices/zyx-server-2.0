@@ -13,6 +13,7 @@ public class SportRecord extends BaseEntity{
     private Integer userId;
     private Integer type;
 //    private String level;
+    private Integer venueId;
     /**
      * 运动场馆编号
      */
@@ -52,6 +53,14 @@ public class SportRecord extends BaseEntity{
 //        this.level = level;
 //    }
 
+
+    public Integer getVenueId() {
+        return venueId;
+    }
+
+    public void setVenueId(Integer venueId) {
+        this.venueId = venueId;
+    }
 
     public Integer getSportInfoId() {
         return sportInfoId;
