@@ -7,7 +7,7 @@ import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.zoom.ZanService;
 import com.zyx.utils.MapUtils;
 import com.zyx.vo.zoom.ZanCountVo;
-import com.zyx.vo.zoom.ZanVo;
+import com.zyx.vo.system.ZanVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

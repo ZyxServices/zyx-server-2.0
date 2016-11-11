@@ -3,7 +3,7 @@ package com.zyx.mapper.zoom;
 import com.zyx.entity.zoom.Zan;
 import com.zyx.mapper.BaseMapper;
 import com.zyx.vo.zoom.ZanCountVo;
-import com.zyx.vo.zoom.ZanVo;
+import com.zyx.vo.system.ZanVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

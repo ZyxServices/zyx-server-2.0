@@ -17,13 +17,15 @@ public class UserPointVo implements Serializable {
 
     private Integer userId;
 
-    private Long modifyTime;
-
-    private Long createTime;
-
-    private Integer pointType;
+//    private Long modifyTime;
+//
+//    private Long createTime;
+//
+//    private Integer pointType;
 
     private Long pointCount;
+
+    private String pointDesc;
 
     public Integer getId() {
         return id;
@@ -41,35 +43,19 @@ public class UserPointVo implements Serializable {
         this.userId = userId;
     }
 
-    public Long getModifyTime() {
-        return modifyTime;
-    }
-
-    public void setModifyTime(Long modifyTime) {
-        this.modifyTime = modifyTime;
-    }
-
-    public Long getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Long createTime) {
-        this.createTime = createTime;
-    }
-
-    public Integer getPointType() {
-        return pointType;
-    }
-
-    public void setPointType(Integer pointType) {
-        this.pointType = pointType;
-    }
-
     public Long getPointCount() {
         return pointCount;
     }
 
     public void setPointCount(Long pointCount) {
         this.pointCount = pointCount;
+    }
+
+    public String getPointDesc() {
+        return pointDesc;
+    }
+
+    public void setPointDesc(String pointDesc) {
+        this.pointDesc = pointDesc;
     }
 }

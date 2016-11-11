@@ -43,6 +43,8 @@
         ON t_sport_record.`sport_info_id` = vsiv.id
         WHERE
         t_sport_record.`user_id`=#{userId}
+        ORDER BY t_sport_record.`create_time` DESC
+        LIMIT ${offset},${pageSize}
     </select>
 
 
@@ -95,6 +97,7 @@
         t_sport_record sr LEFT JOIN t_sport_info si ON sr.sport_info_id=si.id,(SELECT @row := 0) r
         GROUP BY sr.user_id
         ORDER BY total_score DESC
+        LIMIT ${offset},${pageSize}
     </select>
     <select id="selectUserIcon" parameterType="java.lang.Integer" resultType="com.zyx.vo.account.UserIconVo">
           SELECT

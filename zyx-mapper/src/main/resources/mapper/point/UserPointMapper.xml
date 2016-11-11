@@ -28,14 +28,15 @@
     <resultMap id="UserPointMap" type="com.zyx.vo.point.UserPointVo">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
-        <result column="modify_time" property="modifyTime" jdbcType="BIGINT"/>
-        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
-        <result column="point_type" property="pointType" jdbcType="INTEGER"/>
+        <!--<result column="modify_time" property="modifyTime" jdbcType="BIGINT"/>-->
+        <!--<result column="create_time" property="createTime" jdbcType="BIGINT"/>-->
+        <!--<result column="point_type" property="pointType" jdbcType="INTEGER"/>-->
         <result column="point_count" property="pointCount" jdbcType="BIGINT"/>
+        <result column="point_desc" property="pointDesc" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="queryUserPoint" parameterType="com.zyx.param.point.UserPointParam" resultMap="UserPointMap">
-        select * from user_point where user_id = #{userId} and point_type = #{pointType}
+        SELECT up.*,uppr.point_desc FROM user_point as up,user_point_panyan_rule as uppr where up.user_id = #{userId} and up.point_type = #{pointType} and up.point_count &gt;= uppr.point_count_min and up.point_count &lt;= uppr.point_count_max
     </select>
 
     <insert id="modifyUserPoint" parameterType="com.zyx.param.point.UserPointParam">

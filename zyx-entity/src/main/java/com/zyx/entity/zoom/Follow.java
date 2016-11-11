@@ -1,8 +1,10 @@
 package com.zyx.entity.zoom;
 
 import com.zyx.entity.BaseEntity;
+import org.apache.ibatis.type.JdbcType;
+import tk.mybatis.mapper.annotation.ColumnType;
 
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author XiaoWei
@@ -12,15 +14,19 @@ import javax.persistence.Table;
  */
 @Table(name = "follow")
 public class Follow extends BaseEntity {
-    private int formUserId;
+    @Column
+    @ColumnType(jdbcType = JdbcType.INTEGER)
+    private int fromUserId;
+    @Column
+    @ColumnType(jdbcType = JdbcType.INTEGER)
     private int toUserId;
 
-    public int getFormUserId() {
-        return formUserId;
+    public int getFromUserId() {
+        return fromUserId;
     }
 
-    public void setFormUserId(int formUserId) {
-        this.formUserId = formUserId;
+    public void setFromUserId(int fromUserId) {
+        this.fromUserId = fromUserId;
     }
 
     public int getToUserId() {
