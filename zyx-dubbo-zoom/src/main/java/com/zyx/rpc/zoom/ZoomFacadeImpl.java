@@ -1,11 +1,12 @@
 package com.zyx.rpc.zoom;
 
 import com.zyx.constants.Constants;
-import com.zyx.constants.coin.CoinConstants;
 import com.zyx.constants.zoom.ZoomConstants;
 import com.zyx.param.attention.AttentionParam;
 import com.zyx.service.account.AccountInfoService;
 import com.zyx.service.attention.UserAttentionService;
+import com.zyx.service.zoom.ConcernService;
+import com.zyx.service.zoom.ZanService;
 import com.zyx.utils.MapUtils;
 import com.zyx.vo.account.AccountAttentionVo;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,12 @@ public class ZoomFacadeImpl implements ZoomFacade {
     @Resource
     private AccountInfoService accountInfoService;
 
+    @Resource
+    private ConcernService concernService;
+
+    @Resource
+    private ZanService zanService;
+
     @Override
     public Map<String, Object> addFollow(Integer fromUserId, Integer toUserId) {
         if (Objects.equals(fromUserId, null) || Objects.equals(toUserId, null)) {
@@ -47,5 +54,25 @@ public class ZoomFacadeImpl implements ZoomFacade {
     public Map<String, Object> getNoAttentionUser(Integer loginUserId) {
         List<AccountAttentionVo> accountAttentionVos = accountInfoService.getNoAttentionUser(loginUserId);
         return MapUtils.buildSuccessMap(ZoomConstants.SUCCESS, ZoomConstants.SUCCESS_MSG, accountAttentionVos);
+    }
+
+    @Override
+    public Map<String, Object> getOneConcern(Integer concernId, Integer accountId) {
+        return concernService.getOne(concernId, accountId);
+    }
+
+    @Override
+    public Map<String, Object> getMyFollowList(Integer loginUserId, Integer start, Integer pageSize) {
+        return concernService.getMyFollowList(loginUserId, start, pageSize);
+    }
+
+    @Override
+    public Map<String, Object> addCern(Integer userId, Integer type, String cernTitle, String content, String cernImgurl, String videoUrl, Integer visible) {
+        return concernService.addCern(userId, type, cernTitle, content, cernImgurl, videoUrl, visible);
+    }
+
+    @Override
+    public Map<String, Object> addZan(Integer body_id, Integer body_type, Integer account_id) {
+        return zanService.addZan(body_id, body_type, account_id);
     }
 }

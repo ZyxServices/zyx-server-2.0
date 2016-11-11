@@ -162,6 +162,21 @@ public interface Constants {
     /////////////////静态标识符///////////////////
 
     /**
+     * 文章/教程模块标识
+     */
+    public static final int MODULE_ARTICLE = 0;
+
+    /**
+     * 动态模块标识
+     */
+    public static final int MODULE_CONCERN = 1;
+
+    /**
+     * 装备控模块标识
+     */
+    public static final int MODULE_EQUIP = 2;
+
+    /**
      * 线程队列标识符
      */
     String REDIS_THREADH_QUEUE = "tq";

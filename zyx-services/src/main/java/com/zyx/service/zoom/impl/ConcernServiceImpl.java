@@ -3,9 +3,13 @@ package com.zyx.service.zoom.impl;
 
 import com.zyx.constants.Constants;
 import com.zyx.constants.zoom.ZoomConstants;
+import com.zyx.entity.activity.Activity;
+import com.zyx.entity.attention.UserAttention;
+import com.zyx.entity.zoom.CircleItem;
 import com.zyx.entity.zoom.Concern;
 import com.zyx.mapper.zoom.ConcernMapper;
 import com.zyx.mapper.zoom.ZanMapper;
+import com.zyx.param.attention.AttentionParam;
 import com.zyx.param.user.UserConcernParam;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.zoom.ConcernService;
@@ -15,6 +19,10 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.*;
+import java.util.stream.Collectors;
+
+import static com.zyx.constants.Constants.MODULE_ARTICLE;
+import static com.zyx.constants.Constants.MODULE_EQUIP;
 
 /**
  * Created by XiaoWei on 2016/6/7.
@@ -78,49 +86,49 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
     }
 
 
-//    @Override
-//    public Map<String, Object> starRandom(Integer type, Integer n) {
-//        Map<String, Object> map = new HashMap<>();
-//        try {
-//            Optional.ofNullable(n).orElse(10);
-//            List<Concern> randomList = concernMapper.starRandom(type, n);
-////            map.put(Constants.STATE, Constants.MSG_SUCCESS);
-////            map.put(ZoomConstants.PG_RESULT, Optional.ofNullable(randomList).orElse(null));
-////            return map;
-//            return MapUtils.buildSuccessMap(Constants.SUCCESS, ZoomConstants.PG_ERROR_CODE_34000_MSG, Optional.ofNullable(randomList).orElse(null));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return ZoomConstants.MAP_500;
-//        }
-//    }
+    @Override
+    public Map<String, Object> starRandom(Integer type, Integer n) {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            Optional.ofNullable(n).orElse(10);
+            List<Concern> randomList = concernMapper.starRandom(type, n);
+//            map.put(Constants.STATE, Constants.MSG_SUCCESS);
+//            map.put(ZoomConstants.PG_RESULT, Optional.ofNullable(randomList).orElse(null));
+//            return map;
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, ZoomConstants.PG_ERROR_CODE_34000_MSG, Optional.ofNullable(randomList).orElse(null));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ZoomConstants.MAP_500;
+        }
+    }
 
-//    @Override
-//    public Map<String, Object> getMyFollowList(Integer loginUserId, Integer start, Integer pageSize) {
-//        try {
-//            start = Optional.ofNullable(start).orElse(0);
-//            pageSize = Optional.ofNullable(pageSize).orElse(0);
-//            if (Objects.equals(loginUserId, null)) {
-//                return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30000, ZoomConstants.PG_ERROR_CODE_30000_MSG);
-//            }
-//            AttentionParam attentionParam = new AttentionParam();
-//            attentionParam.setFromId(loginUserId);
-//            List<UserAttention> attentionIds = concernMapper.getAttentionIds(loginUserId);
-//            List<Integer> ids = new ArrayList<>();
-//            if (attentionIds.size() > 0) {
-//                ids.addAll(attentionIds.stream().map(UserAttention::getToUserId).collect(Collectors.toList()));
-//            }
-//            if (!Objects.equals(loginUserId, null)) {
-//                ids.add(loginUserId);
-//            }
-//            List<MyFollowVo> myFollowVos = concernMapper.myFollowList(ids, start * pageSize, pageSize);
+    @Override
+    public Map<String, Object> getMyFollowList(Integer loginUserId, Integer start, Integer pageSize) {
+        try {
+            start = Optional.ofNullable(start).orElse(0);
+            pageSize = Optional.ofNullable(pageSize).orElse(0);
+            if (Objects.equals(loginUserId, null)) {
+                return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30000, ZoomConstants.PG_ERROR_CODE_30000_MSG);
+            }
+            AttentionParam attentionParam = new AttentionParam();
+            attentionParam.setFromId(loginUserId);
+            List<UserAttention> attentionIds = concernMapper.getAttentionIds(loginUserId);
+            List<Integer> ids = new ArrayList<>();
+            if (attentionIds.size() > 0) {
+                ids.addAll(attentionIds.stream().map(UserAttention::getToUserId).collect(Collectors.toList()));
+            }
+            if (!Objects.equals(loginUserId, null)) {
+                ids.add(loginUserId);
+            }
+            List<MyFollowVo> myFollowVos = concernMapper.myFollowList(ids, start * pageSize, pageSize);
 //            setPageViews(myFollowVos);
-//            return MapUtils.buildSuccessMap(ZoomConstants.SUCCESS, ZoomConstants.PG_ERROR_CODE_34000_MSG, myFollowVos);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return ZoomConstants.MAP_500;
-//        }
-//
-//    }
+            return MapUtils.buildSuccessMap(ZoomConstants.SUCCESS, ZoomConstants.PG_ERROR_CODE_34000_MSG, myFollowVos);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ZoomConstants.MAP_500;
+        }
+
+    }
 
     @Override
     public List<MyFollowVo> queryMyConcernList(UserConcernParam userConcernParam) {
@@ -166,96 +174,51 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
 //        });
 //    }
 
-//    @Override
-//    public Integer fromConcern(Integer fromId, Integer fromType, Object fromObj) {
-//        if (Objects.equals(fromId, null)) {
-//            return 0;
-//        }
-//        if (Objects.equals(fromType, null)) {
-//            return 0;
-//        }
-//        if (Objects.equals(fromObj, null)) {
-//            return 0;
-//        }
-//        switch (fromType) {
-//            case Constants.DYNAMIC_LIVE:
-//                //直播
-//                LiveInfo liveInfo = (LiveInfo) fromObj;
-//                Concern concern = new Concern();
-//                concern.setFromId(fromId);
-//                concern.setFromType(1);
-//                concern.setType(5);
-//                concern.setCreateTime(new Date().getTime());
-//                if (!Objects.equals(liveInfo.getBgmUrl(), null)) {
-//                    concern.setImgUrl(liveInfo.getBgmUrl());//设置动态图片为直播的背景图片
-//                }
-//                concern.setTopicTitle(liveInfo.getTitle());
-//                concern.setTopicVisible(1);
-//                concern.setUserId(liveInfo.getUserId());
-//                concern.setState(0);
-//                return concernMapper.insert(concern);
-//            case Constants.DYNAMIC_ACTIVITY:
-//                //活动
-//                Activity activity = (Activity) fromObj;
-//                Concern concernActivity = new Concern();
-//                concernActivity.setFromId(fromId);
-//                concernActivity.setFromType(fromType);
-//                concernActivity.setType(2);
-//                concernActivity.setCreateTime(new Date().getTime());
-//                if (!Objects.equals(activity.getImgUrls(), null)) {
-//                    concernActivity.setImgUrl(activity.getImgUrls());
-//                }
-//                concernActivity.setTopicTitle(activity.getTitle());
-//                concernActivity.setTopicContent(activity.getDescContent());
-//                concernActivity.setTopicVisible(1);
-//                concernActivity.setUserId(activity.getUserId());
-//                concernActivity.setState(0);
-//                return concernMapper.insert(concernActivity);
-//            case Constants.DYNAMIC_CIRCLE_ITEM:
-//                //帖子
-//                CircleItem circleItem = (CircleItem) fromObj;
-//                Concern concernItem = new Concern();
-//                concernItem.setFromId(fromId);
-//                concernItem.setFromType(fromType);
-//                concernItem.setType(6);
-//                concernItem.setCreateTime(new Date().getTime());
-//                if (!Objects.equals(circleItem.getImgUrl(), null)) {
-//                    concernItem.setImgUrl(circleItem.getImgUrl());
-//                }
-//                concernItem.setTopicTitle(circleItem.getTitle());
-//                concernItem.setTopicContent(circleItem.getBaseContent());
-//                concernItem.setTopicVisible(1);
-//                concernItem.setUserId(circleItem.getCreateId());
-//                concernItem.setState(0);
-//                return concernMapper.insert(concernItem);
-//        }
-//        return 0;
-//    }
+    @Override
+    public Integer fromConcern(Integer fromId, Integer fromType, Object fromObj) {
+        if (Objects.equals(fromId, null)) {
+            return 0;
+        }
+        if (Objects.equals(fromType, null)) {
+            return 0;
+        }
+        if (Objects.equals(fromObj, null)) {
+            return 0;
+        }
+        switch (fromType) {
+            case Constants.MODULE_ARTICLE:
+                //直播
+                return null;
+            case Constants.MODULE_EQUIP:
+                return null;
+        }
+        return 0;
+    }
 
-//    @Override
-//    public Map<String, Object> getOne(Integer concernId, Integer accountId) {
-//        try {
-//            if (Objects.equals(concernId, null)) {
-//                return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30021, ZoomConstants.PG_ERROR_CODE_30021_MSG);
+    @Override
+    public Map<String, Object> getOne(Integer concernId, Integer accountId) {
+        try {
+            if (Objects.equals(concernId, null)) {
+                return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30021, ZoomConstants.PG_ERROR_CODE_30021_MSG);
+            }
+            MyFollowVo myFollowVo = concernMapper.getOne(concernId);
+//            if (!Objects.equals(myFollowVo, null)) {
+//                myFollowVo.setTopicContent("<p>" + myFollowVo.getTopicContent() + "</p>");
+//                if (myFollowVo.getImgUrl() != null) {
+//                    if (myFollowVo.getImgUrl().contains(",")) {
+//                        StringBuilder sb = new StringBuilder();
+//                        String[] imgOne = myFollowVo.getImgUrl().split(",");
+//                        for (int i = 0; i < imgOne.length; i++) {
+//                            sb.append("<img src='http://image.tiyujia.com/" + imgOne[i] + "'></img>");
+//                        }
+//                        myFollowVo.setTopicContent(myFollowVo.getTopicContent() + "</br>" + sb.toString());
+//                    }
+//                }
 //            }
-//            MyFollowVo myFollowVo = concernMapper.getOne(concernId);
-////            if (!Objects.equals(myFollowVo, null)) {
-////                myFollowVo.setTopicContent("<p>" + myFollowVo.getTopicContent() + "</p>");
-////                if (myFollowVo.getImgUrl() != null) {
-////                    if (myFollowVo.getImgUrl().contains(",")) {
-////                        StringBuilder sb = new StringBuilder();
-////                        String[] imgOne = myFollowVo.getImgUrl().split(",");
-////                        for (int i = 0; i < imgOne.length; i++) {
-////                            sb.append("<img src='http://image.tiyujia.com/" + imgOne[i] + "'></img>");
-////                        }
-////                        myFollowVo.setTopicContent(myFollowVo.getTopicContent() + "</br>" + sb.toString());
-////                    }
-////                }
-////            }
-//            Map resultMap = new HashMap<>();
+            Map resultMap = new HashMap<>();
 //            CollectionParam param = new CollectionParam();
 //            Boolean isCollection = false;
-//            Boolean isZan = false;
+            Boolean isZan = false;
 //            if (!Objects.equals(accountId, null)) {
 //                param.setUserId(accountId);
 //                param.setModel(Constants.MODEL_CONCERN);
@@ -264,16 +227,16 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
 //                if (!Objects.equals(collectionFind, null)) {
 //                    isCollection = true;
 //                }
-//                isZan = zanMapper.exist(concernId, 2, accountId)>0?true:false;
+                isZan = zanMapper.exist(concernId, 2, accountId)>0?true:false;
 //            }
-//            resultMap.put("concern", myFollowVo);
+            resultMap.put("concern", myFollowVo);
 //            resultMap.put("isCollection", isCollection);
-//            resultMap.put("isZan", isZan);
-//            return MapUtils.buildSuccessMap(ZoomConstants.SUCCESS, ZoomConstants.PG_ERROR_CODE_34000_MSG, resultMap);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return ZoomConstants.MAP_500;
-//        }
-//    }
+            resultMap.put("isZan", isZan);
+            return MapUtils.buildSuccessMap(ZoomConstants.SUCCESS, ZoomConstants.PG_ERROR_CODE_34000_MSG, resultMap);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ZoomConstants.MAP_500;
+        }
+    }
 
 }

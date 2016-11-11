@@ -20,4 +20,9 @@
 
 
     <dubbo:service interface="com.zyx.rpc.system.VersionFacade" ref="versionFacade"/>
+
+    <!--评论-->
+    <dubbo:service interface="com.zyx.rpc.system.CommentFacade" ref="commentFacade"/>
+    <!--回复-->
+    <dubbo:service interface="com.zyx.rpc.system.ReplyFacade" ref="replyFacade"/>
 </beans>
