@@ -18,6 +18,7 @@
     <!-- 主要暴露接口 -->
     <dubbo:service interface="com.zyx.rpc.system.SystemCityFacade" ref="systemCityFacade"/>
 
+    <dubbo:service interface="com.zyx.rpc.system.SystemCourseFacade" ref="systemCourseFacade"/>
 
     <dubbo:service interface="com.zyx.rpc.system.VersionFacade" ref="versionFacade"/>
 </beans>
