@@ -28,6 +28,7 @@
     <resultMap id="AccountInfoMap" type="com.zyx.vo.account.AccountInfoVo">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="phone" property="phone" jdbcType="INTEGER"/>
+        <association property="level" column="{userId=id}" select="com.zyx.mapper.point.UserPointMapper.queryUserPointWithMap"/>
     </resultMap>
 
     <resultMap id="queryAccountInfo" type="com.zyx.vo.account.QueryUserInfoVo">
@@ -41,6 +42,7 @@
         <result column="idcard" property="idcard" jdbcType="VARCHAR"/>
         <result column="mask" property="mask" jdbcType="INTEGER"/>
         <result column="offcial" property="offcial" jdbcType="INTEGER"/>
+        <association property="level" column="{userId=id}" select="com.zyx.mapper.point.UserPointMapper.queryUserPointWithMap"/>
     </resultMap>
 
     <resultMap id="QueryAccountAttentionVo" type="com.zyx.vo.account.AccountAttentionVo">
@@ -48,6 +50,7 @@
         <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
         <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
         <result column="authInfo" property="authInfo" jdbcType="VARCHAR"/>
+        <association property="level" column="{userId=id}" select="com.zyx.mapper.point.UserPointMapper.queryUserPointWithMap"/>
     </resultMap>
 
     <resultMap id="MyCenterInfoVoResultMap" type="com.zyx.vo.account.MyCenterInfoVo">
@@ -56,6 +59,7 @@
         <association property="fs" column="id" select="selectFSCount"></association>
         <association property="dt" column="id" select="selectDTCount"></association>
         <association property="accountAuth" column="id" select="selectAuthByUserId"></association>
+        <association property="level" column="{userId=id}" select="com.zyx.mapper.point.UserPointMapper.queryUserPointWithMap"/>
     </resultMap>
 
     <select id="selectAccountByPhone" parameterType="String" resultType="int">
@@ -87,7 +91,7 @@
     </select>
 
     <select id="selectAccountById" parameterType="java.lang.Integer" resultMap="queryAccountInfo">
-        SELECT * FROM user WHERE id = #{id} AND del != 1
+        SELECT * FROM user WHERE id = #{id} AND del != 1 AND
     </select>
 
     <select id="selectAttentionAccountById" parameterType="java.lang.Integer" resultMap="QueryAccountAttentionVo">

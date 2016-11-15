@@ -28,6 +28,7 @@
     <resultMap id="AccountLoginMap" type="com.zyx.vo.account.AccountInfoVo">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="phone" property="phone" jdbcType="INTEGER"/>
+        <association property="level" column="{userId=id}" select="com.zyx.mapper.point.UserPointMapper.queryUserPointWithMap"/>
     </resultMap>
 
     <select id="loginByPhoneAndPassword" parameterType="com.zyx.param.account.AccountLoginParam" resultMap="AccountLoginMap">

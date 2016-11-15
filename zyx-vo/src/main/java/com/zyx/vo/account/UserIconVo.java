@@ -16,6 +16,8 @@ public class UserIconVo implements Serializable {
     private String avatar;
     private Integer authenticate;
 
+    private String level;
+
     public Integer getId() {
         return id;
     }
@@ -46,5 +48,13 @@ public class UserIconVo implements Serializable {
 
     public void setAuthenticate(Integer authenticate) {
         this.authenticate = authenticate;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
     }
 }
