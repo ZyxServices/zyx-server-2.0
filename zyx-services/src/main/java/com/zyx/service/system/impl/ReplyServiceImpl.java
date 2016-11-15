@@ -24,7 +24,7 @@ public class ReplyServiceImpl extends BaseServiceImpl<Reply> implements ReplySer
     }
 
     @Override
-    public Map<String, Object> addReply( Integer replyParentId, Integer replyFromUser, Integer replyToUser, String replyContent) {
+    public Map<String, Object> addReply( Integer replyParentId, Integer replyFromUser, Integer replyToUser, String replyContent,String replyImgPath) {
         Map<String, Object> resultMap = new HashMap<>();
         Reply reply = new Reply();
         try {
@@ -46,6 +46,7 @@ public class ReplyServiceImpl extends BaseServiceImpl<Reply> implements ReplySer
             reply.setReplyContent(replyContent);
             reply.setCreateTime(new Date().getTime());
             reply.setReplyState(0);
+            reply.setReplyImgPath(replyImgPath);
             mapper.insert(reply);
 //            resultMap.put(ZoomConstants.STATE, ZoomConstants.SUCCESS);
 //            resultMap.put(ZoomConstants.SUCCESS_MSG, ZoomConstants.MSG_SUCCESS);

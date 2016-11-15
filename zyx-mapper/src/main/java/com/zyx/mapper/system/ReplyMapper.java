@@ -1,4 +1,4 @@
-package com.zyx.mapper.zoom;
+package com.zyx.mapper.system;
 
 import com.zyx.entity.system.Reply;
 import com.zyx.mapper.BaseMapper;

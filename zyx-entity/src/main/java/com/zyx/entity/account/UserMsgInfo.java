@@ -1,7 +1,8 @@
-package com.zyx.param.account;
+package com.zyx.entity.account;
 
-import com.zyx.param.BaseParam;
-import com.zyx.param.Pager;
+import com.zyx.entity.BaseEntity;
+
+import javax.persistence.Table;
 
 /**
  * Created by wms on 2016/11/15.
@@ -11,31 +12,19 @@ import com.zyx.param.Pager;
  *          Copyright (c)2016 tyj-版权所有
  * @since 2016/11/15.
  */
-public class UserMsgParam extends BaseParam {
-    private static final long serialVersionUID = -398290103454317282L;
+@Table(name = "t_user_msg")
+public class UserMsgInfo extends BaseEntity {
 
-    private Integer id;
+    private static final long serialVersionUID = -9114980849506219550L;
 
     private Integer fromUserId;
     private Integer toUserId;
     private Integer bodyId;
     private Integer bodyType;
 
-    private Long createTime;
-
     private String fromContent;
 
     private String toContent;
-
-    private Pager pager;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public Integer getFromUserId() {
         return fromUserId;
@@ -69,14 +58,6 @@ public class UserMsgParam extends BaseParam {
         this.bodyType = bodyType;
     }
 
-    public Long getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Long createTime) {
-        this.createTime = createTime;
-    }
-
     public String getFromContent() {
         return fromContent;
     }
@@ -91,13 +72,5 @@ public class UserMsgParam extends BaseParam {
 
     public void setToContent(String toContent) {
         this.toContent = toContent;
-    }
-
-    public Pager getPager() {
-        return pager;
-    }
-
-    public void setPager(Pager pager) {
-        this.pager = pager;
     }
 }

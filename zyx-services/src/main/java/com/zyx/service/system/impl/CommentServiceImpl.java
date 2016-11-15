@@ -2,7 +2,7 @@ package com.zyx.service.system.impl;
 
 import com.zyx.constants.zoom.ZoomConstants;
 import com.zyx.entity.system.Comment;
-import com.zyx.mapper.zoom.CommentMapper;
+import com.zyx.mapper.system.CommentMapper;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.system.CommentService;
 import com.zyx.utils.MapUtils;
@@ -28,7 +28,7 @@ public class CommentServiceImpl extends BaseServiceImpl<Comment> implements Comm
     private CommentMapper commentMapper;
 
     @Override
-    public Map<String, Object> addComment(Integer commentType, Integer commentId, String commentContent, Integer commentAccount, Integer commentState) {
+    public Map<String, Object> addComment(Integer commentType, Integer commentId, String commentContent, Integer commentAccount, Integer commentState,String commentImgPath) {
         try {
             if (Objects.equals(commentType, null)) {
                 return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30034, ZoomConstants.PG_ERROR_CODE_30034_MSG);
@@ -49,6 +49,7 @@ public class CommentServiceImpl extends BaseServiceImpl<Comment> implements Comm
             comment.setCommentContent(commentContent);
             comment.setCreateTime(new Date().getTime());
             comment.setCommentState(Optional.ofNullable(commentState).orElse(0));
+            comment.setCommentImgPath(commentImgPath);
             Integer result = mapper.insert(comment);
             if (result > 0)
                 return MapUtils.buildSuccessMap(ZoomConstants.SUCCESS, ZoomConstants.PG_ERROR_CODE_33000_MSG, null);

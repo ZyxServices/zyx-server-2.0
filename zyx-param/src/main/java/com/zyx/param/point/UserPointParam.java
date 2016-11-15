@@ -40,6 +40,8 @@ public class UserPointParam extends BaseParam {
      */
     private String detailMsg;
 
+    private UserPointRuleParam ruleParam;
+
     public Integer getId() {
         return id;
     }
@@ -110,5 +112,13 @@ public class UserPointParam extends BaseParam {
 
     public void setDetailMsg(String detailMsg) {
         this.detailMsg = detailMsg;
+    }
+
+    public UserPointRuleParam getRuleParam() {
+        return ruleParam;
+    }
+
+    public void setRuleParam(UserPointRuleParam ruleParam) {
+        this.ruleParam = ruleParam;
     }
 }

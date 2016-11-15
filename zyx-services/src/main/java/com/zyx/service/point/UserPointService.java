@@ -19,4 +19,6 @@ public interface UserPointService extends BaseService<UserPointInfo> {
     int modifyUserPoint(UserPointParam userPointParam) throws Exception;
 
     int insertUserPoint(UserPointInfo userPointInfo, UserPointParam userPointParam) throws Exception;
+
+    boolean checkUserPoint(UserPointParam userPointParam);
 }

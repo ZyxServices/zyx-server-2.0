@@ -1,5 +1,6 @@
 package com.zyx.mapper.zoom;
 
+import com.zyx.entity.attention.UserAttention;
 import com.zyx.entity.zoom.Concern;
 import com.zyx.mapper.BaseMapper;
 import com.zyx.param.user.UserConcernParam;
@@ -16,7 +17,7 @@ import java.util.List;
 public interface ConcernMapper extends BaseMapper<Concern> {
     List<Concern> starRandom(@Param("type") Integer type, @Param("n") Integer n);
 
-//    List<UserAttention> getAttentionIds(@Param("loginUserId") Integer logInUserId);
+    List<UserAttention> getAttentionIds(@Param("loginUserId") Integer logInUserId);
 
     List<MyFollowVo> myFollowList(@Param("ids") List<Integer> ids, @Param("start") Integer start, @Param("end") Integer end);
 

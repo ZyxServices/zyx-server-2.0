@@ -23,4 +23,10 @@ public interface UserPointMapper extends BaseMapper<UserPointInfo> {
     int insertPointDetail(UserPointDetailParam userPointDetailParam);
 
     int modifyUserPoint(UserPointParam userPointParam);
+
+    int checkUserPointA(UserPointDetailParam userPointParam);
+
+    int checkUserPointB(UserPointDetailParam userPointParam);
+
+    int checkUserPointC(UserPointDetailParam userPointParam);
 }

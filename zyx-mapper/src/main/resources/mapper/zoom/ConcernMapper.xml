@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ The MIT License (MIT)
+  ~
+  ~ Copyright (c) 2014 abel533@gmail.com
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in
+  ~ all copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  ~ THE SOFTWARE.
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zyx.mapper.zoom.ConcernMapper">
+    <resultMap id="ConcernResultMap" type="com.zyx.entity.zoom.Concern">
+        <id column="Id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="topic_title" property="topicTitle" jdbcType="VARCHAR"/>
+        <result column="topic_content" property="topicContent" jdbcType="VARCHAR"/>
+        <result column="img_url" property="imgUrl" jdbcType="INTEGER"/>
+        <result column="video_url" property="videoUrl" jdbcType="INTEGER"/>
+        <result column="topic_visible" property="videoUrl" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <result column="from_id" property="fromId" jdbcType="INTEGER"/>
+        <result column="from_type" property="fromType" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <resultMap id="ConcernMyMap" type="com.zyx.vo.zoom.MyFollowVo" extends="ConcernResultMap">
+        <!--<result column="zan_counts" property="zanCounts" jdbcType="VARCHAR"/>-->
+        <!--<result column="comment_counts" property="commentCounts" jdbcType="VARCHAR"/>-->
+        <association property="zanCounts" column="id" select="zanSelect"/>
+        <association property="commentCounts" column="id" select="commentSelect"/>
+        <association property="userVo" column="user_id" select="userSelect"/>
+        <association property="userAuthVo" column="user_id" select="userAuthSelect"/>
+    </resultMap>
+
+    <resultMap id="ConcernMyMapSwitch" type="com.zyx.vo.zoom.MyFollowVo" extends="ConcernResultMap">
+        <!--<result column="zan_counts" property="zanCounts" jdbcType="VARCHAR"/>-->
+        <!--<result column="comment_counts" property="commentCounts" jdbcType="VARCHAR"/>-->
+        <association property="zanCounts" column="id" select="zanSelect"/>
+        <association property="commentCounts" column="id" select="commentSelect"/>
+        <association property="userVo" column="user_id" select="userSelect"/>
+        <association property="userAuthVo" column="user_id" select="userAuthSelect"/>
+        <discriminator javaType="java.lang.Integer" column="from_type">
+            <case value="1" resultMap="ActivityMap"/>
+        </discriminator>
+    </resultMap>
+
+
+    <!--<resultMap id="LiveInfoMap" type="com.zyx.vo.zoom.MyFollowVo" extends="ConcernMyMapSwitch">-->
+        <!--<association property="zanCounts" column="from_id" select="LiveZanSelect"/>-->
+        <!--<association property="commentCounts" column="from_id" select="LiveCommentSelect"/>-->
+    <!--</resultMap>-->
+
+    <resultMap id="ActivityMap" type="com.zyx.vo.zoom.MyFollowVo" extends="ConcernMyMapSwitch">
+        <association property="zanCounts" column="from_id" select="ActivityZanSelect"/>
+        <association property="commentCounts" column="from_id" select="ActivityCommentSelect"/>
+    </resultMap>
+
+    <!--<resultMap id="CircleItemMap" type="com.zyx.vo.zoom.MyFollowVo" extends="ConcernMyMapSwitch">-->
+        <!--<association property="zanCounts" column="from_id" select="CircleItemZanSelect"/>-->
+        <!--<association property="commentCounts" column="from_id" select="CircleItemCommentSelect"/>-->
+    <!--</resultMap>-->
+
+    <resultMap id="userAttentionResultMap" type="com.zyx.entity.attention.UserAttention">
+        <id column="Id" property="id" jdbcType="INTEGER"/>
+        <result column="from_user_id" property="fromUserId" jdbcType="INTEGER"/>
+        <result column="to_user_id" property="toUserId" jdbcType="INTEGER"/>
+        <result column="create_time" property="fromUserId" jdbcType="BIGINT"/>
+        <result column="rel_type" property="relType" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="userSelect" parameterType="int" resultType="com.zyx.vo.system.UserVo">
+        SELECT nickname,avatar,id,authenticate FROM `user` WHERE id=#{user_id}
+    </select>
+
+    <select id="userAuthSelect" parameterType="int" resultType="com.zyx.vo.zoom.UserAuthVo">
+        SELECT authInfo FROM `user_auth` WHERE user_id=#{user_id}
+    </select>
+
+    <select id="zanSelect" parameterType="int" resultType="int">
+        SELECT COUNT(id) FROM zan WHERE zan.body_type=2 AND zan.body_id=#{concernId}
+    </select>
+    <!--<select id="LiveZanSelect" parameterType="int" resultType="int">-->
+        <!--SELECT COUNT(id) FROM zan WHERE zan.body_type=4 AND zan.body_id=#{concernId}-->
+    <!--</select>-->
+    <select id="ActivityZanSelect" parameterType="int" resultType="int">
+        SELECT COUNT(id) FROM zan WHERE zan.body_type=1 AND zan.body_id=#{concernId}
+    </select>
+    <!--<select id="CircleItemZanSelect" parameterType="int" resultType="int">-->
+        <!--SELECT COUNT(id) FROM zan WHERE zan.body_type=5 AND zan.body_id=#{concernId}-->
+    <!--</select>-->
+
+    <select id="commentSelect" parameterType="int" resultType="int">
+     SELECT COUNT(id) FROM comment WHERE comment.comment_type=3 AND comment_id=#{concernId}
+    </select>
+
+    <!--<select id="LiveCommentSelect" parameterType="int" resultType="int">-->
+        <!--SELECT COUNT(id) FROM comment WHERE comment.comment_type=4 AND comment_id=#{concernId}-->
+    <!--</select>-->
+
+    <select id="ActivityCommentSelect" parameterType="int" resultType="int">
+        SELECT COUNT(id) FROM comment WHERE comment.comment_type=2 AND comment_id=#{concernId}
+    </select>
+
+    <select id="CircleItemCommentSelect" parameterType="int" resultType="int">
+        SELECT COUNT(id) FROM comment WHERE comment.comment_type=1 AND comment_id=#{concernId}
+    </select>
+
+    <select id="getAttentionIds" parameterType="int" resultMap="userAttentionResultMap">
+        SELECT to_user_id FROM USER_ATTENTION WHERE from_user_id=#{loginUserId}
+    </select>
+
+    <select id="starRandom" resultMap="ConcernResultMap">
+        SELECT * FROM concern where type=#{type}
+        GROUP BY create_time
+        <if test="n !=null">
+            limit 0, #{n}
+        </if>
+    </select>
+
+    <select id="queryConcernDeva" resultMap="ConcernResultMap">
+        SELECT * FROM concern WHERE id IN
+        <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="myListCount" parameterType="int" resultType="int">
+        SELECT count(id) FROM concern WHERE user_id = #{accountId} AND  state = 0
+    </select>
+
+    <select id="myConcernList" parameterType="com.zyx.param.account.UserConcernParam" resultMap="ConcernMyMapSwitch">
+        SELECT * FROM concern WHERE concern.user_id=#{userId} AND state = 0 ORDER BY concern.create_time DESC
+        <if test="page != null">
+            limit #{page}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="myFollowList" resultType="java.util.List" resultMap="ConcernMyMapSwitch">
+        SELECT * FROM concern WHERE user_id IN
+        <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        AND state = 0
+        ORDER BY create_time DESC
+        LIMIT #{start},#{end}
+    </select>
+
+    <select id="starConcern" resultMap="ConcernMyMapSwitch">
+        SELECT
+        concern.id,
+        concern.user_id,
+        concern.type,
+        concern.topic_content,
+        concern.topic_title,
+        concern.topic_visible,
+        concern.img_url,
+        concern.video_url,
+        concern.create_time,
+        concern.state,
+        concern.from_id,
+        concern.from_type
+        FROM
+        concern
+        INNER JOIN `user` ON concern.user_id = `user`.id
+        WHERE   state = 0 AND `user`.authenticate=2
+        ORDER BY concern.create_time DESC
+        LIMIT  #{start},#{end}
+    </select>
+
+    <select id="exitConcernSelect" parameterType="java.util.Map" resultType="int">
+                SELECT id FROM USER_ATTENTION where from_user_id = #{loginUserId} AND  to_user_id=#{cocernCreateId}
+    </select>
+
+    <select id="getOne" resultMap="ConcernMyMap">
+        SELECT * FROM concern WHERE id=#{id} AND state = 0
+    </select>
+
+    <update id="delConcern">
+        UPDATE concern SET state=-1 WHERE id=#{id}
+    </update>
+
+</mapper>
