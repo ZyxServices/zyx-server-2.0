@@ -24,31 +24,39 @@
   -->
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zyx.mapper.system.ReplyMapper">
-    <resultMap id="replyResultMap" type="com.zyx.entity.system.Reply">
+<mapper namespace="com.zyx.mapper.system.ZanMapper">
+    <resultMap id="ZanResultMap" type="com.zyx.entity.system.Zan">
         <id column="Id" property="id" jdbcType="INTEGER"/>
-        <result column="reply_parent_id" property="replyParentId" jdbcType="INTEGER"/>
-        <result column="reply_from_user" property="replyParentId" jdbcType="INTEGER"/>
-        <result column="reply_to_user" property="replyParentId" jdbcType="INTEGER"/>
-        <result column="reply_content" property="replyContent" jdbcType="VARCHAR"/>
-        <result column="reply_state" property="replyState" jdbcType="INTEGER"/>
-        <result column="reply_img_path" property="replyImgPath" jdbcType="VARCHAR"/>
+        <result column="body_id" property="bodyId" jdbcType="INTEGER"/>
+        <result column="body_type" property="bodyType" jdbcType="INTEGER"/>
+        <result column="account_id" property="accountId" jdbcType="INTEGER"/>
     </resultMap>
 
-    <resultMap id="replyVoMap" type="com.zyx.vo.system.ReplyVo" extends="replyResultMap">
-        <association property="fromUserVo" column="reply_from_user" select="userVoSelect"/>
-        <association property="toUserVo" column="reply_to_user" select="userVoSelect"/>
-    </resultMap>
-
-    <select id="userVoSelect" parameterType="int" resultType="com.zyx.vo.system.UserVo">
-        SELECT nickName,avatar,authenticate  FROM `user` WHERE id=#{userId}
+    <select id="countZanByBodyId" parameterType="com.zyx.vo.system.ZanVo" resultType="com.zyx.vo.system.ZanCountVo">
+        SELECT body_type as bodyType,body_id AS bodyId,COUNT(body_id) AS zanCount
+        FROM zan
+        WHERE
+        1=1
+        <if test="type!=null ">
+            AND
+            body_type=#{type}
+        </if>
+        <if test="bodyIds!=null">
+            AND
+            body_id in
+            <foreach collection="bodyIds" index="index" item="tag" open="("
+                     separator="," close=")">
+                #{tag}
+            </foreach>
+        </if>
+        GROUP BY body_id
     </select>
 
-    <!--<select id="findByParams">-->
-    <!--SELECT * FROM reply WHERE reply_type=#{type} AND reply_parent_id=#{parentId}-->
-    <!--</select>-->
+    <select id="exist" resultType="java.lang.Integer">
+    SELECT count(id) FROM zan WHERE body_id=#{bodyId} AND body_type=#{bodyType} AND account_id=#{accountId}
+  </select>
 
-    <delete id="delReply" parameterType="int">
-        DELETE FROM reply WHERE id=#{id} AND reply_from_user=#{reply_account_id}
+    <delete id="cancelZan">
+        DELETE FROM zan WHERE body_id=#{bodyId} AND body_type=#{bodyType} AND account_id=#{accountId}
     </delete>
 </mapper>

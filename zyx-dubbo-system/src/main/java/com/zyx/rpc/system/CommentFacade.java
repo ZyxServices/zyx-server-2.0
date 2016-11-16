@@ -9,8 +9,11 @@ import java.util.Map;
  * Create by XiaoWei on 2016/8/29
  */
 public interface CommentFacade {
-    Map<String, Object> addComment(Integer commentType, Integer commentId, String commentContent, Integer commentAccount, Integer commentState,String commentImgPath);
+    Map<String, Object> addComment(Integer commentType, Integer commentId, String commentContent, Integer commentAccount, Integer commentState, String commentImgPath);
 
 
-    Map<String,Object> queryComment(Integer commentType, Integer commentId);
+    Map<String, Object> queryComment(Integer commentType, Integer commentId);
+
+
+    Map<String, Object> delComment(Integer id, Integer comment_accountId);
 }

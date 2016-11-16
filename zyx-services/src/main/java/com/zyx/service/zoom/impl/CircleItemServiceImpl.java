@@ -1,10 +1,9 @@
 package com.zyx.service.zoom.impl;
 
-import com.zyx.constants.Constants;
 import com.zyx.constants.zoom.ZoomConstants;
 import com.zyx.entity.zoom.CircleItem;
 import com.zyx.mapper.zoom.CircleItemMapper;
-import com.zyx.mapper.zoom.ZanMapper;
+import com.zyx.mapper.system.ZanMapper;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.zoom.CircleItemService;
 import com.zyx.service.zoom.ConcernService;

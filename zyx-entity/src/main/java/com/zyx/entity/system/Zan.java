@@ -1,4 +1,4 @@
-package com.zyx.entity.zoom;
+package com.zyx.entity.system;
 
 import org.apache.ibatis.type.JdbcType;
 import tk.mybatis.mapper.annotation.ColumnType;

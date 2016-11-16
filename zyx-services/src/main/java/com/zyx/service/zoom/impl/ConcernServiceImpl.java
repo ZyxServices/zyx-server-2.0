@@ -3,12 +3,10 @@ package com.zyx.service.zoom.impl;
 
 import com.zyx.constants.Constants;
 import com.zyx.constants.zoom.ZoomConstants;
-import com.zyx.entity.activity.Activity;
 import com.zyx.entity.attention.UserAttention;
-import com.zyx.entity.zoom.CircleItem;
 import com.zyx.entity.zoom.Concern;
 import com.zyx.mapper.zoom.ConcernMapper;
-import com.zyx.mapper.zoom.ZanMapper;
+import com.zyx.mapper.system.ZanMapper;
 import com.zyx.param.attention.AttentionParam;
 import com.zyx.param.user.UserConcernParam;
 import com.zyx.service.BaseServiceImpl;
@@ -21,8 +19,7 @@ import javax.annotation.Resource;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.zyx.constants.Constants.MODULE_ARTICLE;
-import static com.zyx.constants.Constants.MODULE_EQUIP;
+import static com.zyx.constants.Constants.*;
 
 /**
  * Created by XiaoWei on 2016/6/7.
@@ -103,7 +100,7 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
     }
 
     @Override
-    public Map<String, Object> getMyFollowList(Integer loginUserId, Integer start, Integer pageSize) {
+    public Map<String, Object> myFollowCon(Integer loginUserId, Integer start, Integer pageSize) {
         try {
             start = Optional.ofNullable(start).orElse(0);
             pageSize = Optional.ofNullable(pageSize).orElse(0);
@@ -186,10 +183,14 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
             return 0;
         }
         switch (fromType) {
-            case Constants.MODULE_ARTICLE:
-                //直播
+            case MODULE_ACTIVITY://活动（求约）
+                
                 return null;
-            case Constants.MODULE_EQUIP:
+            case MODULE_EQUIP://装备控
+                return null;
+            case MODULE_SPORT://（记录）
+                return null;
+            case MODULE_ARTICLE://文章/教程（记录）
                 return null;
         }
         return 0;
@@ -201,7 +202,7 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
             if (Objects.equals(concernId, null)) {
                 return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30021, ZoomConstants.PG_ERROR_CODE_30021_MSG);
             }
-            Concern myFollowVo = concernMapper.findById(concernId);
+            MyFollowVo myFollowVo = concernMapper.getOne(concernId);
 //            if (!Objects.equals(myFollowVo, null)) {
 //                myFollowVo.setTopicContent("<p>" + myFollowVo.getTopicContent() + "</p>");
 //                if (myFollowVo.getImgUrl() != null) {
@@ -227,7 +228,7 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
 //                if (!Objects.equals(collectionFind, null)) {
 //                    isCollection = true;
 //                }
-                isZan = zanMapper.exist(concernId, 2, accountId)>0?true:false;
+            isZan = zanMapper.exist(concernId, 2, accountId) > 0 ? true : false;
 //            }
             resultMap.put("concern", myFollowVo);
 //            resultMap.put("isCollection", isCollection);

@@ -70,5 +70,9 @@
         SELECT * FROM  comment WHERE comment_type=#{type} AND comment_id=#{commentId} ORDER BY create_time DESC
     </select>
 
+    <delete id="delComment" parameterType="int">
+        DELETE FROM  comment WHERE id=#{id} AND  comment_account=#{comment_account_id}
+    </delete>
+
 
 </mapper>

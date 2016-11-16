@@ -2,6 +2,7 @@ package com.zyx.mapper.system;
 
 import com.zyx.entity.system.Reply;
 import com.zyx.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -12,5 +13,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository("replyMapper")
 public interface ReplyMapper extends BaseMapper<Reply> {
+
+    int delReply(@Param("id") Integer id, @Param("reply_account_id") Integer replyAccountId);
 
 }

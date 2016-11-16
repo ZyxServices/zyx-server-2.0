@@ -1,8 +1,8 @@
 package com.zyx.service.zoom;
 
-import com.zyx.entity.zoom.Zan;
+import com.zyx.entity.system.Zan;
 import com.zyx.service.BaseService;
-import com.zyx.vo.zoom.ZanCountVo;
+import com.zyx.vo.system.ZanCountVo;
 
 import java.util.List;
 import java.util.Map;

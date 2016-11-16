@@ -42,10 +42,10 @@
     <resultMap id="ConcernMyMap" type="com.zyx.vo.zoom.MyFollowVo" extends="ConcernResultMap">
         <!--<result column="zan_counts" property="zanCounts" jdbcType="VARCHAR"/>-->
         <!--<result column="comment_counts" property="commentCounts" jdbcType="VARCHAR"/>-->
-        <association property="zanCounts" column="id" select="zanSelect"/>
-        <association property="commentCounts" column="id" select="commentSelect"/>
-        <association property="userVo" column="user_id" select="userSelect"/>
-        <association property="userAuthVo" column="user_id" select="userAuthSelect"/>
+        <!--<association property="zanCounts" column="id" select="zanSelect"/>-->
+        <!--<association property="commentCounts" column="id" select="commentSelect"/>-->
+        <!--<association property="userVo" column="user_id" select="userSelect"/>-->
+        <!--<association property="userAuthVo" column="user_id" select="userAuthSelect"/>-->
     </resultMap>
 
     <resultMap id="ConcernMyMapSwitch" type="com.zyx.vo.zoom.MyFollowVo" extends="ConcernResultMap">
@@ -191,9 +191,6 @@
         SELECT * FROM concern WHERE id=#{id} AND state = 0
     </select>
 
-    <select id="findById"  resultMap="ConcernResultMap">
-        SELECT * FROM concern WHERE id=#{id} AND state = 0
-    </select>
 
     <update id="delConcern">
         UPDATE concern SET state=-1 WHERE id=#{id}

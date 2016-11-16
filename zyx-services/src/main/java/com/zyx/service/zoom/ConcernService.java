@@ -18,7 +18,7 @@ public interface ConcernService extends BaseService<Concern> {
 
     Map<String, Object> starRandom(Integer type, Integer n);
 
-    Map<String, Object> getMyFollowList(Integer loginUserId, Integer start, Integer end);
+    Map<String, Object> myFollowCon(Integer loginUserId, Integer start, Integer end);
 
     List<MyFollowVo> queryMyConcernList(UserConcernParam userConcernParam);
 
