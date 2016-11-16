@@ -35,6 +35,10 @@
         <association property="pointDesc" column="{point_type=point_type,point_count=point_count}" select="queryUserPointDesc"/>
     </resultMap>
 
+    <select id="queryUserPointNameWithMap" parameterType="java.util.Map" resultType="String">
+        select asss.name as level from (select u.id, u.nickname, up.point_count, up.point_type, up.`name` from `user` as u LEFT JOIN (select user_point.*,`level`.`name` from user_point LEFT JOIN `level` ON user_point.point_type = `level`.app_type where user_id = #{userId} and point_type = 1 and user_point.point_count &gt;= `level`.min_score and user_point.point_count &lt;= `level`.max_score and `level`.del = 0 LIMIT 1) as up ON u.id = up.user_id) as asss where asss.id = #{userId}
+    </select>
+
     <select id="queryUserPointWithMap" parameterType="java.util.Map" resultMap="UserPointMap">
         SELECT up.* FROM user_point as up where up.user_id = #{userId} and up.point_type = 1 limit 1
     </select>
