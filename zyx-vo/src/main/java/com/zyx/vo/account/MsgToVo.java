@@ -15,6 +15,8 @@ public class MsgToVo implements Serializable {
 
     private String toUri;
 
+    private String toTitle;
+
     private String toContent;
 
     public String getToUri() {
@@ -23,6 +25,14 @@ public class MsgToVo implements Serializable {
 
     public void setToUri(String toUri) {
         this.toUri = toUri;
+    }
+
+    public String getToTitle() {
+        return toTitle;
+    }
+
+    public void setToTitle(String toTitle) {
+        this.toTitle = toTitle;
     }
 
     public String getToContent() {
