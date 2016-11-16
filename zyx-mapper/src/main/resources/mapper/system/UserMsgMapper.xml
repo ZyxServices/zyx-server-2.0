@@ -35,38 +35,29 @@
         <result column="body_type" property="bodyType" jdbcType="INTEGER"/>
         <association property="userVo" column="from_user_id" select="UserVoSelect"/>
         <discriminator javaType="java.lang.Integer" column="body_type">
-            <case value="0" resultMap="CircleMap"/>
-            <case value="1" resultMap="CircleItemMap"/>
-            <case value="2" resultMap="ActivityMap"/>
-            <case value="3" resultMap="ConcernMap"/>
-            <case value="4" resultMap="LiveMap"/>
-            <case value="5" resultMap="UserMap"/>
+            <case value="0" resultMap="CourseMap"/>
+            <case value="1" resultMap="EquipMap"/>
+            <case value="2" resultMap="ConcernMap"/>
+            <case value="3" resultMap="UserMap"/>
         </discriminator>
     </resultMap>
 
     <resultMap id="MsgToResultMap" type="com.zyx.vo.account.MsgToVo">
         <result column="to_uri" property="toUri" jdbcType="VARCHAR"/>
+        <result column="to_title" property="toTitle" jdbcType="VARCHAR"/>
         <result column="to_content" property="toContent" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <resultMap id="CircleMap" type="com.zyx.vo.account.MsgVo" extends="MsgResultMap">
-        <association property="toObject" column="body_id" select="CircleMapSelect"/>
+    <resultMap id="CourseMap" type="com.zyx.vo.account.MsgVo" extends="MsgResultMap">
+        <association property="toObject" column="body_id" select="CourseMapSelect"/>
     </resultMap>
 
-    <resultMap id="CircleItemMap" type="com.zyx.vo.account.MsgVo" extends="MsgResultMap">
-        <association property="toObject" column="body_id" select="CircleItemMapSelect"/>
-    </resultMap>
-
-    <resultMap id="ActivityMap" type="com.zyx.vo.account.MsgVo" extends="MsgResultMap">
-        <association property="toObject" column="body_id" select="ActivityMapSelect"/>
+    <resultMap id="EquipMap" type="com.zyx.vo.account.MsgVo" extends="MsgResultMap">
+        <association property="toObject" column="body_id" select="EquipMapSelect"/>
     </resultMap>
 
     <resultMap id="ConcernMap" type="com.zyx.vo.account.MsgVo" extends="MsgResultMap">
         <association property="toObject" column="body_id" select="ConcernMapSelect"/>
-    </resultMap>
-
-    <resultMap id="LiveMap" type="com.zyx.vo.account.MsgVo" extends="MsgResultMap">
-        <association property="toObject" column="body_id" select="LiveMapSelect"/>
     </resultMap>
 
     <resultMap id="UserMap" type="com.zyx.vo.account.MsgVo" extends="MsgResultMap">
@@ -77,6 +68,7 @@
         <result column="id" property="id" jdbcType="VARCHAR"/>
         <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
         <result column="nickname" property="nickName" jdbcType="VARCHAR"/>
+        <association property="level" column="{userId=id}" select="com.zyx.mapper.point.UserPointMapper.queryUserPointWithMap"/>
     </resultMap>
 
     <select id="queryMsgCount" parameterType="com.zyx.param.account.UserMsgParam" resultType="long">
@@ -90,32 +82,24 @@
         </if>
     </select>
 
-    <select id="CircleMapSelect" parameterType="int" resultMap="MsgToResultMap">
-        select c.head_img_url as to_uri,c.title as to_content from circle c where c.id = #{bodyId}
+    <select id="CourseMapSelect" parameterType="int" resultMap="MsgToResultMap">
+        select c.img_urls as to_uri,c.title as to_content from t_course as c where c.id = #{bodyId}
     </select>
 
-    <select id="CircleItemMapSelect" parameterType="int" resultMap="MsgToResultMap">
-        select c.img_url as to_uri,c.title as to_content from circle_item c where c.id = #{bodyId}
-    </select>
-
-    <select id="ActivityMapSelect" parameterType="int" resultMap="MsgToResultMap">
-        select c.img_urls as to_uri,c.title as to_content from activity c where c.id = #{bodyId}
+    <select id="EquipMapSelect" parameterType="int" resultMap="MsgToResultMap">
+        select c.title as to_title, c.content as to_content from equip as c where c.id = #{bodyId}
     </select>
 
     <select id="ConcernMapSelect" parameterType="int" resultMap="MsgToResultMap">
-        select c.img_url as to_uri,c.topic_content as to_content from concern c where c.id = #{bodyId}
-    </select>
-
-    <select id="LiveMapSelect" parameterType="int" resultMap="MsgToResultMap">
-        select c.bgm_url as to_uri,c.title as to_content from t_live c where c.id = #{bodyId}
+        select c.img_url as to_uri,c.topic_content as to_content from concern as c where c.id = #{bodyId}
     </select>
 
     <select id="UserMapSelect" parameterType="int" resultMap="MsgToResultMap">
-        select c.avatar as to_uri,c.nickname as to_content from user c where c.id = #{bodyId}
+        select c.avatar as to_uri,c.nickname as to_content from user as c where c.id = #{bodyId}
     </select>
 
     <select id="UserVoSelect" parameterType="int" resultMap="UserVoResultMap">
-        select c.id, c.avatar, c.nickname from user c where c.id = #{formUserId}
+        select c.id, c.avatar, c.nickname, c.authenticate from user as c where c.id = #{formUserId}
     </select>
 
     <delete id="deleteMsg" parameterType="com.zyx.param.account.UserMsgParam">
