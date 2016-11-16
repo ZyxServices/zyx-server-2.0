@@ -177,6 +177,16 @@ public interface Constants {
     public static final int MODULE_EQUIP = 2;
 
     /**
+     * 记录模块标识
+     */
+    public static final int MODULE_SPORT_RECORD= 3;
+
+    /**
+     * 活动模块标识
+     */
+    public static final int MODULE_ACTIVITY= 4;
+
+    /**
      * 线程队列标识符
      */
     String REDIS_THREADH_QUEUE = "tq";

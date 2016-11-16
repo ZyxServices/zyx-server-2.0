@@ -1,12 +1,12 @@
 package com.zyx.service.zoom.impl;
 
 import com.zyx.constants.zoom.ZoomConstants;
-import com.zyx.entity.zoom.Zan;
-import com.zyx.mapper.zoom.ZanMapper;
+import com.zyx.entity.system.Zan;
+import com.zyx.mapper.system.ZanMapper;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.zoom.ZanService;
 import com.zyx.utils.MapUtils;
-import com.zyx.vo.zoom.ZanCountVo;
+import com.zyx.vo.system.ZanCountVo;
 import com.zyx.vo.system.ZanVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

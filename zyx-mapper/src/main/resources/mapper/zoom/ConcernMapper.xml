@@ -42,10 +42,10 @@
     <resultMap id="ConcernMyMap" type="com.zyx.vo.zoom.MyFollowVo" extends="ConcernResultMap">
         <!--<result column="zan_counts" property="zanCounts" jdbcType="VARCHAR"/>-->
         <!--<result column="comment_counts" property="commentCounts" jdbcType="VARCHAR"/>-->
-        <association property="zanCounts" column="id" select="zanSelect"/>
-        <association property="commentCounts" column="id" select="commentSelect"/>
-        <association property="userVo" column="user_id" select="userSelect"/>
-        <association property="userAuthVo" column="user_id" select="userAuthSelect"/>
+        <!--<association property="zanCounts" column="id" select="zanSelect"/>-->
+        <!--<association property="commentCounts" column="id" select="commentSelect"/>-->
+        <!--<association property="userVo" column="user_id" select="userSelect"/>-->
+        <!--<association property="userAuthVo" column="user_id" select="userAuthSelect"/>-->
     </resultMap>
 
     <resultMap id="ConcernMyMapSwitch" type="com.zyx.vo.zoom.MyFollowVo" extends="ConcernResultMap">
@@ -93,7 +93,7 @@
     </select>
 
     <select id="zanSelect" parameterType="int" resultType="int">
-        SELECT COUNT(id) FROM zan WHERE zan.body_type=2 AND zan.body_id=#{concernId}
+        SELECT COUNT(id) FROM zan WHERE zan.body_type=1 AND zan.body_id=#{concernId}
     </select>
     <!--<select id="LiveZanSelect" parameterType="int" resultType="int">-->
         <!--SELECT COUNT(id) FROM zan WHERE zan.body_type=4 AND zan.body_id=#{concernId}-->
@@ -106,7 +106,7 @@
     <!--</select>-->
 
     <select id="commentSelect" parameterType="int" resultType="int">
-     SELECT COUNT(id) FROM comment WHERE comment.comment_type=3 AND comment_id=#{concernId}
+     SELECT COUNT(id) FROM comment WHERE comment.comment_type=1 AND comment_id=#{concernId}
     </select>
 
     <!--<select id="LiveCommentSelect" parameterType="int" resultType="int">-->
@@ -187,9 +187,10 @@
                 SELECT id FROM USER_ATTENTION where from_user_id = #{loginUserId} AND  to_user_id=#{cocernCreateId}
     </select>
 
-    <select id="getOne" resultMap="ConcernMyMap">
+    <select id="getOne"  resultMap="ConcernMyMap">
         SELECT * FROM concern WHERE id=#{id} AND state = 0
     </select>
+
 
     <update id="delConcern">
         UPDATE concern SET state=-1 WHERE id=#{id}

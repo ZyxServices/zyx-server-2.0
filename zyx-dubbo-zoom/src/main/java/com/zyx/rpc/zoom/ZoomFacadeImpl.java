@@ -62,8 +62,8 @@ public class ZoomFacadeImpl implements ZoomFacade {
     }
 
     @Override
-    public Map<String, Object> getMyFollowList(Integer loginUserId, Integer start, Integer pageSize) {
-        return concernService.getMyFollowList(loginUserId, start, pageSize);
+    public Map<String, Object> myFollowCon(Integer loginUserId, Integer start, Integer pageSize) {
+        return concernService.myFollowCon(loginUserId, start, pageSize);
     }
 
     @Override

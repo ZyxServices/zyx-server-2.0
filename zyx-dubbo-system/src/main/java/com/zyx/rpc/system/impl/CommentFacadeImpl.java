@@ -27,4 +27,9 @@ public class CommentFacadeImpl implements CommentFacade {
     public Map<String, Object> queryComment(Integer commentType, Integer commentId) {
         return commentService.queryComment(commentType, commentId);
     }
+
+    @Override
+    public Map<String, Object> delComment(Integer id, Integer comment_accountId) {
+        return commentService.delComment(id, comment_accountId);
+    }
 }

@@ -32,4 +32,5 @@ public interface ConcernMapper extends BaseMapper<Concern> {
 
     Integer delConcern(@Param("id") Integer id);
 
+
 }

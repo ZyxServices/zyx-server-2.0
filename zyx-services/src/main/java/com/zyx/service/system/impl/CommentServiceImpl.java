@@ -28,7 +28,7 @@ public class CommentServiceImpl extends BaseServiceImpl<Comment> implements Comm
     private CommentMapper commentMapper;
 
     @Override
-    public Map<String, Object> addComment(Integer commentType, Integer commentId, String commentContent, Integer commentAccount, Integer commentState,String commentImgPath) {
+    public Map<String, Object> addComment(Integer commentType, Integer commentId, String commentContent, Integer commentAccount, Integer commentState, String commentImgPath) {
         try {
             if (Objects.equals(commentType, null)) {
                 return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30034, ZoomConstants.PG_ERROR_CODE_30034_MSG);
@@ -76,5 +76,20 @@ public class CommentServiceImpl extends BaseServiceImpl<Comment> implements Comm
             e.printStackTrace();
             return ZoomConstants.MAP_500;
         }
+    }
+
+    @Override
+    public Map<String, Object> delComment(Integer id, Integer comment_accountId) {
+        if (Objects.equals(id, null)) {
+            return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30019, ZoomConstants.PG_ERROR_CODE_30019_MSG);
+        }
+        if (Objects.equals(comment_accountId, null)) {
+            return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30036, ZoomConstants.PG_ERROR_CODE_30036_MSG);
+        }
+        Integer result = commentMapper.delComment(id, comment_accountId);
+        if (result > 0) {
+            return MapUtils.buildSuccessMap(ZoomConstants.SUCCESS, ZoomConstants.SUCCESS_MSG, null);
+        }
+        return ZoomConstants.MAP_500;
     }
 }

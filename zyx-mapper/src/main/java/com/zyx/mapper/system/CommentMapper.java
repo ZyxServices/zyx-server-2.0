@@ -19,4 +19,6 @@ public interface CommentMapper extends BaseMapper<Comment> {
 
     List<CommentVo> commentQuery(@Param("type") Integer type, @Param("commentId") Integer commentId);
 
+    int delComment(@Param("id") Integer id, @Param("comment_account_id") Integer comment_accountId);
+
 }

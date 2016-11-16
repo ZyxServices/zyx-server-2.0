@@ -2,14 +2,18 @@ package com.zyx.service.system.impl;
 
 import com.zyx.constants.zoom.ZoomConstants;
 import com.zyx.entity.system.Reply;
+import com.zyx.mapper.system.ReplyMapper;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.system.ReplyService;
 import com.zyx.utils.MapUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.ObjectError;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author XiaoWei
@@ -23,8 +27,11 @@ public class ReplyServiceImpl extends BaseServiceImpl<Reply> implements ReplySer
         super(Reply.class);
     }
 
+    @Resource
+    private ReplyMapper replyMapper;
+
     @Override
-    public Map<String, Object> addReply( Integer replyParentId, Integer replyFromUser, Integer replyToUser, String replyContent,String replyImgPath) {
+    public Map<String, Object> addReply(Integer replyParentId, Integer replyFromUser, Integer replyToUser, String replyContent, String replyImgPath) {
         Map<String, Object> resultMap = new HashMap<>();
         Reply reply = new Reply();
         try {
@@ -57,5 +64,20 @@ public class ReplyServiceImpl extends BaseServiceImpl<Reply> implements ReplySer
             e.printStackTrace();
             return ZoomConstants.MAP_500;
         }
+    }
+
+    @Override
+    public Map<String, Object> delReply(Integer id, Integer replyAccountId) {
+        if (Objects.equals(id, null)) {
+            return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30019, ZoomConstants.PG_ERROR_CODE_30019_MSG);
+        }
+        if (Objects.equals(replyAccountId, null)) {
+            return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30036, ZoomConstants.PG_ERROR_CODE_30036_MSG);
+        }
+        Integer result = replyMapper.delReply(id, replyAccountId);
+        if (result > 0) {
+            return MapUtils.buildSuccessMap(ZoomConstants.SUCCESS, ZoomConstants.SUCCESS_MSG, null);
+        }
+        return ZoomConstants.MAP_500;
     }
 }

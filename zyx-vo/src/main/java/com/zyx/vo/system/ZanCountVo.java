@@ -1,4 +1,4 @@
-package com.zyx.vo.zoom;
+package com.zyx.vo.system;
 
 import java.io.Serializable;
 
