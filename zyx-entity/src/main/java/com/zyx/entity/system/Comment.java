@@ -17,7 +17,7 @@ import javax.persistence.Table;
 public class Comment extends BaseEntity {
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer commentType;//评论类型：0圈子,1:帖子，2：活动，3：动态,4：直播
+    private Integer commentType;//评论类型：0文章，1：动态，2：装备控
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer commentId;//被评论主题id

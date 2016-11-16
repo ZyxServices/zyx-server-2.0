@@ -201,7 +201,7 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
             if (Objects.equals(concernId, null)) {
                 return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30021, ZoomConstants.PG_ERROR_CODE_30021_MSG);
             }
-            MyFollowVo myFollowVo = concernMapper.getOne(concernId);
+            Concern myFollowVo = concernMapper.findById(concernId);
 //            if (!Objects.equals(myFollowVo, null)) {
 //                myFollowVo.setTopicContent("<p>" + myFollowVo.getTopicContent() + "</p>");
 //                if (myFollowVo.getImgUrl() != null) {

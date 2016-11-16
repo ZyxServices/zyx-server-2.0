@@ -26,7 +26,7 @@ public class Zan   {
     private Integer bodyId;//主题id,可以是圈子，动态，活动,直播
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
-    private Integer bodyType;//定位点赞类型,1:圈子，2：动态，3：活动，4：直播，5：帖子
+    private Integer bodyType;//点赞类型：0文章，1：动态，2：装备控
     @Column
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer accountId;//点赞的人
