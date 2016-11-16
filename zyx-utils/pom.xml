@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>tiyujia-parent-2</groupId>
+    <groupId>tiyujia-parent</groupId>
     <artifactId>zyx-parent</artifactId>
     <version>2.0</version>
   </parent>
@@ -25,7 +25,7 @@
           <artifactId>slf4j-api</artifactId>
       </dependency>
       <dependency>
-          <groupId>tiyujia-parent-2</groupId>
+          <groupId>tiyujia-parent</groupId>
           <artifactId>zyx-constants</artifactId>
           <version>${zyx.constants.version}</version>
       </dependency>

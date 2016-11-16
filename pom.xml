@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>tiyujia-parent-2</groupId>
+    <groupId>tiyujia-parent</groupId>
     <artifactId>zyx-parent</artifactId>
     <version>2.0</version>
     <packaging>pom</packaging>
@@ -15,19 +15,13 @@
         <module>zyx-entity</module>
         <module>zyx-core</module>
         <module>zyx-utils</module>
-        <module>zyx-dubbo-user</module>
-        <module>zyx-dubbo-activity</module>
-        <!--<module>zyx-rpc-shop</module>-->
-        <module>zyx-dubbo-zoom</module>
-        <!--<module>zyx-dubbo-live</module>-->
         <module>zyx-constants</module>
         <module>zyx-vo</module>
-        <!--<module>zyx-dubbo-system</module>-->
-        <!--<module>zyx-dubbo-task-scheduler</module>-->
-        <!--<module>zyx-dubbo-attention</module>-->
+        <module>zyx-dubbo-attention</module>
+        <module>zyx-dubbo-user</module>
+        <module>zyx-dubbo-activity</module>
+        <module>zyx-dubbo-zoom</module>
         <module>zyx-param</module>
-        <!--<module>zyx-dubbo-collection</module>-->
-        <!--<module>zyx-exception</module>-->
         <module>zyx-dubbo-point</module>
         <module>zyx-dubbo-coin</module>
         <module>zyx-dubbo-record</module>
