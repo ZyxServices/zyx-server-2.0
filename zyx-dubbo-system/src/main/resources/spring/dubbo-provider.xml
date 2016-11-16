@@ -20,6 +20,8 @@
 
     <dubbo:service interface="com.zyx.rpc.system.SystemCourseFacade" ref="systemCourseFacade"/>
 
+    <dubbo:service interface="com.zyx.rpc.system.SearchFacade" ref="searchFacade"/>
+
     <dubbo:service interface="com.zyx.rpc.system.VersionFacade" ref="versionFacade"/>
 
     <!--评论-->

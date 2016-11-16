@@ -32,6 +32,7 @@
         <if test="labelId != null">
             AND a.label_id = #{labelId}
         </if>
+        ORDER BY a.create_time DESC
         <if test="number != null and pageNumber != null">
             limit #{pageNumber}, #{number}
         </if>

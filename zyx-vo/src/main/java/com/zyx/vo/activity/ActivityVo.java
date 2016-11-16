@@ -78,6 +78,11 @@ public class ActivityVo implements Serializable {
     private String city;
 
     /**
+     * 付费类型（0奖励 1免费 2AA）
+     */
+    private Integer paymentType;
+
+    /**
      * 活动价格
      */
     private double price;
@@ -231,5 +236,13 @@ public class ActivityVo implements Serializable {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public Integer getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(Integer paymentType) {
+        this.paymentType = paymentType;
     }
 }

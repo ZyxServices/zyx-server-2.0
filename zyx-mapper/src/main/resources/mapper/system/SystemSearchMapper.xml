@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyx.mapper.system.SearchMapper">
+
+    <resultMap id="searchActivityVo" type="com.zyx.vo.system.SearchActivityVo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="img_urls" property="imgUrl" jdbcType="VARCHAR"/>
+        <result column="activity_type" property="activityType" jdbcType="INTEGER"/>
+        <result column="max_people" property="maxPeople" jdbcType="INTEGER"/>
+        <result column="payment_type" property="paymentType" jdbcType="INTEGER"/>
+        <result column="alreadyPeople" property="alreadyPeople" jdbcType="INTEGER"/>
+        <result column="price" property="price" jdbcType="DECIMAL"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <resultMap id="searchVenuesVo" type="com.zyx.vo.system.SearchVenuesVo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="mark" property="mark" jdbcType="VARCHAR"/>
+        <result column="img_urls" property="imgUrl" jdbcType="VARCHAR"/>
+        <result column="level" property="level" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <resultMap id="searchCourseVo" type="com.zyx.vo.system.SearchCourseVo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="img_urls" property="imgUrl" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <resultMap id="searchConcernVo" type="com.zyx.vo.system.SearchConcernVo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="img_url" property="imgUrl" jdbcType="VARCHAR"/>
+        <result column="topic_content" property="topicContent" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <select id="searchActivity" parameterType="com.zyx.param.system.SearchParam" resultMap="searchActivityVo">
+        select *, (SELECT COUNT(id) FROM activity_member b WHERE b.activity_id = a.id ) as alreadyPeople from activity a where 1=1
+        <if test="character != null">
+            AND (a.title LIKE CONCAT('%',#{character},'%')
+            OR a.desc_content LIKE CONCAT('%',#{character},'%'))
+        </if>
+        AND a.del != 1 AND a.mask = 0 AND a.type = 1
+        ORDER BY a.create_time desc
+        <if test="pageNumber != null and number != null">
+            limit #{pageNumber}, #{number}
+        </if>
+    </select>
+
+    <select id="searchVenues" parameterType="com.zyx.param.system.SearchParam" resultMap="searchVenuesVo">
+        SELECT * FROM t_venue WHERE 1=1
+        <if test="character != null">
+            AND (name LIKE CONCAT('%',#{character},'%')
+            OR description LIKE CONCAT('%',#{character},'%'))
+        </if>
+        AND del != 1 ORDER BY create_time desc
+        <if test="pageNumber != null and number != null">
+            limit #{pageNumber}, #{number}
+        </if>
+    </select>
+
+    <select id="searchCourse" parameterType="com.zyx.param.system.SearchParam" resultMap="searchCourseVo">
+        SELECT * FROM t_course WHERE 1=1
+        <if test="character != null">
+            AND (title LIKE CONCAT('%',#{character},'%')
+            OR content LIKE CONCAT('%',#{character},'%'))
+        </if>
+        AND del != 1 ORDER BY create_time desc
+        <if test="pageNumber != null and number != null">
+            limit #{pageNumber}, #{number}
+        </if>
+    </select>
+
+    <select id="searchConcern" parameterType="com.zyx.param.system.SearchParam" resultMap="searchConcernVo">
+        SELECT * FROM concern WHERE 1=1
+        <if test="character != null">
+            AND (topic_content LIKE CONCAT('%',#{character},'%'))
+        </if>
+        AND state != 1 AND concern_type = 0 ORDER BY create_time desc
+        <if test="pageNumber != null and number != null">
+            limit #{pageNumber}, #{number}
+        </if>
+    </select>
+
+
+
+</mapper>

@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>zyx-parent</artifactId>
-        <groupId>tiyujia-parent-2</groupId>
+        <groupId>tiyujia-parent</groupId>
         <version>2.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -18,47 +18,47 @@
 
     <dependencies>
         <dependency>
-            <groupId>tiyujia-parent-2</groupId>
+            <groupId>tiyujia-parent</groupId>
             <artifactId>zyx-common</artifactId>
             <version>${zyx.common.version}</version>
         </dependency>
         <dependency>
-            <groupId>tiyujia-parent-2</groupId>
+            <groupId>tiyujia-parent</groupId>
             <artifactId>zyx-entity</artifactId>
             <version>${zyx.entity.version}</version>
         </dependency>
         <dependency>
-            <groupId>tiyujia-parent-2</groupId>
+            <groupId>tiyujia-parent</groupId>
             <artifactId>zyx-config</artifactId>
             <version>${zyx.config.version}</version>
         </dependency>
         <dependency>
-            <groupId>tiyujia-parent-2</groupId>
+            <groupId>tiyujia-parent</groupId>
             <artifactId>zyx-entity</artifactId>
             <version>${zyx.entity.version}</version>
         </dependency>
         <dependency>
-            <groupId>tiyujia-parent-2</groupId>
+            <groupId>tiyujia-parent</groupId>
             <artifactId>zyx-core</artifactId>
             <version>${zyx.core.version}</version>
         </dependency>
         <dependency>
-            <groupId>tiyujia-parent-2</groupId>
+            <groupId>tiyujia-parent</groupId>
             <artifactId>zyx-utils</artifactId>
             <version>${zyx.utils.version}</version>
         </dependency>
         <dependency>
-            <groupId>tiyujia-parent-2</groupId>
+            <groupId>tiyujia-parent</groupId>
             <artifactId>zyx-services</artifactId>
             <version>${zyx.services.version}</version>
         </dependency>
         <dependency>
-            <groupId>tiyujia-parent-2</groupId>
+            <groupId>tiyujia-parent</groupId>
             <artifactId>zyx-file</artifactId>
             <version>${zyx.file.version}</version>
         </dependency>
         <dependency>
-            <groupId>tiyujia-parent-2</groupId>
+            <groupId>tiyujia-parent</groupId>
             <artifactId>zyx-mapper</artifactId>
             <version>${zyx.mapper.version}</version>
         </dependency>

@@ -3,7 +3,12 @@ package com.zyx.param.activity;
 import java.io.Serializable;
 
 /**
- * Created by Rainbow on 2016/11/3.
+ * Created by Rainbow
+ *
+ * @author SubDong
+ * @version V2.0
+ *          Copyright (c)2016 zyx-版权所有
+ * @since 2016/11/3
  */
 public class ActivityParam implements Serializable {
 
@@ -51,6 +56,17 @@ public class ActivityParam implements Serializable {
      * 活动地址
      */
     private String address;
+
+    /**
+     * 活动分类模块
+     * （活动模块（1攀岩 2跑步 3羽毛球 4网球 4单车 5滑雪 6见面会））
+     */
+    private Integer activityModule;
+
+    /**
+     * 付费类型（0奖励 1免费 2AA）
+     */
+    private Integer paymentType;
 
     /**
      * 报名人数
@@ -148,5 +164,21 @@ public class ActivityParam implements Serializable {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Integer getActivityModule() {
+        return activityModule;
+    }
+
+    public void setActivityModule(Integer activityModule) {
+        this.activityModule = activityModule;
+    }
+
+    public Integer getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(Integer paymentType) {
+        this.paymentType = paymentType;
     }
 }

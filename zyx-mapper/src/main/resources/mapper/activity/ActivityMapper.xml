@@ -14,6 +14,7 @@
         <result column="lastTime" property="lastTime" jdbcType="BIGINT"/>
         <result column="maxPeople" property="maxPeople" jdbcType="INTEGER"/>
         <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="payment_type" property="paymentType" jdbcType="INTEGER"/>
         <result column="price" property="price" jdbcType="DECIMAL"/>
         <result column="targetUrl" property="targetUrl" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
