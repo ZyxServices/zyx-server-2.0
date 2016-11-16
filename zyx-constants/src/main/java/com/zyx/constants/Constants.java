@@ -179,7 +179,7 @@ public interface Constants {
     /**
      * 记录模块标识
      */
-    public static final int MODULE_SPORT= 3;
+    public static final int MODULE_SPORT_RECORD= 3;
 
     /**
      * 活动模块标识

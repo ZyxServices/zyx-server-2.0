@@ -28,7 +28,7 @@ public interface ConcernService extends BaseService<Concern> {
      * 自动生成动态
      *
      * @param fromId
-     * @param fromType 目前3个模块用到，1：直播，2活动，3帖子（调用Constants key）
+     * @param fromType {@link com.zyx.constants.Constants}
      * @param formObj
      * @return
      */

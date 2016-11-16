@@ -3,7 +3,9 @@ package com.zyx.service.zoom.impl;
 
 import com.zyx.constants.Constants;
 import com.zyx.constants.zoom.ZoomConstants;
+import com.zyx.entity.activity.Activity;
 import com.zyx.entity.attention.UserAttention;
+import com.zyx.entity.record.SportRecord;
 import com.zyx.entity.zoom.Concern;
 import com.zyx.mapper.zoom.ConcernMapper;
 import com.zyx.mapper.system.ZanMapper;
@@ -184,12 +186,35 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
         }
         switch (fromType) {
             case MODULE_ACTIVITY://活动（求约）
-                
-                return null;
+                //活动
+                Activity activity = (Activity) fromObj;
+                Concern concernActivity = new Concern();
+                concernActivity.setFromId(fromId);
+                concernActivity.setFromType(fromType);
+                concernActivity.setCreateTime(new Date().getTime());
+                if (!Objects.equals(activity.getImgUrls(), null)) {
+                    concernActivity.setImgUrl(activity.getImgUrls());
+                }
+                concernActivity.setTopicTitle(activity.getTitle());
+                concernActivity.setTopicContent(activity.getDescContent());
+                concernActivity.setTopicVisible(1);
+                concernActivity.setUserId(activity.getUserId());
+                concernActivity.setState(0);
+                return concernMapper.insert(concernActivity);
             case MODULE_EQUIP://装备控
                 return null;
-            case MODULE_SPORT://（记录）
-                return null;
+            case MODULE_SPORT_RECORD://（记录）
+                SportRecord sportRecord= (SportRecord) fromObj;
+                Concern concernSport=new Concern();
+                concernSport.setFromId(fromId);
+                concernSport.setFromType(fromType);
+                concernSport.setCreateTime(sportRecord.getCreateTime());
+                concernSport.setTopicTitle("攀岩记录");
+                concernSport.setTopicContent(sportRecord.getSpendTime().toString());
+                concernSport.setTopicVisible(1);
+                concernSport.setUserId(sportRecord.getUserId());
+                concernSport.setState(0);
+                return concernMapper.insert(concernSport);
             case MODULE_ARTICLE://文章/教程（记录）
                 return null;
         }
