@@ -85,14 +85,14 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations">
             <list>
-                <!--<value>classpath*:mapper/*.xml</value>-->
-                <value>classpath*:mapper/account/*.xml</value>
-                <value>classpath*:mapper/attention/*.xml</value>
-                <value>classpath*:mapper/point/*.xml</value>
-                <value>classpath*:mapper/activity/*.xml</value>
-                <value>classpath*:mapper/system/*.xml</value>
-                <value>classpath*:mapper/user/*.xml</value>
-                <value>classpath*:mapper/venue/*.xml</value>
+                <value>classpath*:mapper/*/*.xml</value>
+                <!--<value>classpath*:mapper/account/*.xml</value>-->
+                <!--<value>classpath*:mapper/attention/*.xml</value>-->
+                <!--<value>classpath*:mapper/point/*.xml</value>-->
+                <!--<value>classpath*:mapper/activity/*.xml</value>-->
+                <!--<value>classpath*:mapper/system/*.xml</value>-->
+                <!--<value>classpath*:mapper/user/*.xml</value>-->
+                <!--<value>classpath*:mapper/venue/*.xml</value>-->
             </list>
         </property>
         <property name="typeAliasesPackage"
