@@ -301,7 +301,7 @@
 
 	</dependencies>
     <build>
-		<finalName>zyx-dubbo-pg</finalName>
+		<finalName>zyx-dubbo-zoom</finalName>
 		<resources>
 			<resource>
 				<targetPath>${project.build.directory}/classes</targetPath>
