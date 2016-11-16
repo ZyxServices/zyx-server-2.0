@@ -83,6 +83,13 @@ public class Activity extends BaseEntity {
     private Integer maxPeople;
 
     /**
+     * 付费类型（0、奖励 1、免费 2、AA）
+     */
+    @Column
+    @ColumnType(jdbcType = JdbcType.INTEGER)
+    private Integer paymentType;
+
+    /**
      * 活动地址
      */
     @Column
@@ -264,5 +271,13 @@ public class Activity extends BaseEntity {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public Integer getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(Integer paymentType) {
+        this.paymentType = paymentType;
     }
 }

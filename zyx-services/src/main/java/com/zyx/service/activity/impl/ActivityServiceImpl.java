@@ -18,7 +18,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Rainbow on 2016/11/3.
+ * Created by Rainbow
+ *
+ * @author SubDong
+ * @version V2.0
+ *          Copyright (c)2016 zyx-版权所有
+ * @since 2016/11/9
  */
 @Service
 public class ActivityServiceImpl implements ActivityService {
@@ -28,7 +33,7 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public Map<String, Object> insterActivity(ActivityParam param) {
-        if (param.getUserId() != null && param.getTitle() != null && param.getDesc() != null && param.getImgUrls() != null
+        if (param.getUserId() != null && param.getTitle() != null && param.getDesc() != null && param.getImgUrls() != null && param.getPaymentType() != null
                 && param.getStartTime() != null && param.getStartTime() != 0 && param.getEndTime() != null && param.getEndTime() != 0
                 && param.getLastTime() != null && param.getLastTime() != 0 && param.getType() != null && param.getPrice() != null && param.getAddress() != null) {
             Activity activity = new Activity();
@@ -42,8 +47,9 @@ public class ActivityServiceImpl implements ActivityService {
             activity.setEndTime(param.getEndTime());
             activity.setLastTime(param.getLastTime());
             activity.setAddress(param.getAddress());
-            activity.setMaxPeople(param.getMaxPepople() == 0 ? 9999999 : param.getMaxPepople());
+            activity.setMaxPeople(param.getMaxPepople() == null ? 0 : param.getMaxPepople());
             activity.setPrice(param.getPrice());
+            activity.setPaymentType(param.getPaymentType());
             activity.setCreateTime(System.currentTimeMillis());
             activity.setDel(0);
             activity.setActivityModule(1);
