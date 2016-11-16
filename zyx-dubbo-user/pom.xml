@@ -34,11 +34,6 @@
         </dependency>
         <dependency>
             <groupId>tiyujia-parent</groupId>
-            <artifactId>zyx-entity</artifactId>
-            <version>${zyx.entity.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>tiyujia-parent</groupId>
             <artifactId>zyx-core</artifactId>
             <version>${zyx.core.version}</version>
         </dependency>
