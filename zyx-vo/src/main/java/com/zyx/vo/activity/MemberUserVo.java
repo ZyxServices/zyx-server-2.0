@@ -1,5 +1,6 @@
 package com.zyx.vo.activity;
 
+import com.zyx.vo.account.AccountAttentionVo;
 import com.zyx.vo.account.AccountAuthVo;
 
 import java.io.Serializable;
@@ -23,7 +24,7 @@ public class MemberUserVo implements Serializable{
     /**
      * 用户ID
      */
-    private AccountAuthVo user;
+    private AccountAttentionVo user;
 
     /**
      * 报名时间
@@ -51,11 +52,11 @@ public class MemberUserVo implements Serializable{
         this.activityId = activityId;
     }
 
-    public AccountAuthVo getUser() {
+    public AccountAttentionVo getUser() {
         return user;
     }
 
-    public void setUser(AccountAuthVo user) {
+    public void setUser(AccountAttentionVo user) {
         this.user = user;
     }
 

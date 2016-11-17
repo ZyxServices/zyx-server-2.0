@@ -50,6 +50,9 @@ public class ActivityMemberServiceImpl implements ActivityMemberService {
     @Override
     public Map<String, Object> findMemberById(QueryActivityMemberParam memberParam) {
         if (memberParam.getActivityId() > 0 && memberParam.getPageNumber() != null && memberParam.getNumber() != null) {
+            if (memberParam.getPageNumber() == 0) {
+                return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10003, "分页参数无效");
+            }
             memberParam.setPageNumber((memberParam.getPageNumber() - 1) * memberParam.getNumber());
 
             List<ActivityVo> activityVos = activityMemberMapper.findMemberById(memberParam);
@@ -62,6 +65,9 @@ public class ActivityMemberServiceImpl implements ActivityMemberService {
     @Override
     public Map<String, Object> findMemberByUserId(QueryActivityMemberParam memberParam) {
         if (memberParam.getUserId() != null && memberParam.getPageNumber() != null && memberParam.getNumber() != null) {
+            if (memberParam.getPageNumber() == 0) {
+                return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10003, "分页参数无效");
+            }
             memberParam.setPageNumber((memberParam.getPageNumber() - 1) * memberParam.getNumber());
 
             List<ActivityVo> activityVos = activityMemberMapper.findMemberByUserId(memberParam);

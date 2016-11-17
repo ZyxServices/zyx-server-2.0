@@ -1,7 +1,9 @@
 package com.zyx.service.system.impl;
 
 import com.zyx.constants.Constants;
+import com.zyx.constants.activity.ActivityConstants;
 import com.zyx.mapper.system.SearchMapper;
+import com.zyx.param.system.SearchDevaParam;
 import com.zyx.param.system.SearchParam;
 import com.zyx.service.system.SearchService;
 import com.zyx.utils.MapUtils;
@@ -30,6 +32,9 @@ public class SearchServiceImpl implements SearchService {
     public Map<String, Object> modularSearch(SearchParam searchParam) {
         if (searchParam != null && searchParam.getModel() != null && searchParam.getPageNumber() != null && searchParam.getNumber() != null) {
             if (searchParam.getCharacter() == null) searchParam.setCharacter("");
+            if (searchParam.getPageNumber() == 0) {
+                return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10003, "分页参数无效");
+            }
             searchParam.setPageNumber((searchParam.getPageNumber() - 1) * searchParam.getNumber());
             switch (searchParam.getModel()) {
                 case 1: // 活动
@@ -54,5 +59,19 @@ public class SearchServiceImpl implements SearchService {
             return Constants.MAP_PARAM_MISS;
         }
         return MapUtils.buildErrorMap(Constants.NO_DATA, "查无数据");
+    }
+
+    @Override
+    public Map<String, Object> devaSearch(SearchDevaParam searchDevaParam) {
+        if(searchDevaParam.getModel() != null && searchDevaParam.getModel() > 0 && searchDevaParam.getNumber() != null && searchDevaParam.getPageNumber() != null){
+            if (searchDevaParam.getPageNumber() == 0) {
+                return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10003, "分页参数无效");
+            }
+            searchDevaParam.setPageNumber((searchDevaParam.getPageNumber() - 1) * searchDevaParam.getNumber());
+            List<SearchDevaVo> searchDevaVos = searchMapper.devaSearch(searchDevaParam);
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", searchDevaVos);
+        }else{
+            return Constants.MAP_PARAM_MISS;
+        }
     }
 }

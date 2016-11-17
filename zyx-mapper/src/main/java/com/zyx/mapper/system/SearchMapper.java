@@ -2,11 +2,13 @@ package com.zyx.mapper.system;
 
 import com.zyx.entity.system.Course;
 import com.zyx.mapper.BaseMapper;
+import com.zyx.param.system.SearchDevaParam;
 import com.zyx.param.system.SearchParam;
 import com.zyx.vo.system.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Rainbow
@@ -53,4 +55,11 @@ public interface SearchMapper extends BaseMapper<Course> {
      * @return
      */
     List<SearchUserVo> searchUser(SearchParam searchParam);
+
+    /**
+     * 官方推荐查询
+     *
+     * @return
+     */
+    List<SearchDevaVo> devaSearch(SearchDevaParam searchDevaParam);
 }

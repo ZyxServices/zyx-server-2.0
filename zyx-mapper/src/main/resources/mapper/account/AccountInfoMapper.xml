@@ -91,7 +91,7 @@
     </select>
 
     <select id="selectAccountById" parameterType="java.lang.Integer" resultMap="queryAccountInfo">
-        SELECT * FROM user WHERE id = #{id} AND del != 1 AND
+        SELECT * FROM user WHERE id = #{id} AND del != 1
     </select>
 
     <select id="selectAttentionAccountById" parameterType="java.lang.Integer" resultMap="QueryAccountAttentionVo">

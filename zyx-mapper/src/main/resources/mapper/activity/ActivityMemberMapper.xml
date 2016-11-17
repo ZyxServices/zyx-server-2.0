@@ -6,7 +6,7 @@
         <result column="activity_id" property="activityId" jdbcType="INTEGER"/>
         <result column="join_time" property="joinTime" jdbcType="BIGINT"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
-        <association column="user_id" property="user" select="com.zyx.mapper.account.AccountInfoMapper.queryMyAuthInfo"/>
+        <association property="user" column="user_id" select="com.zyx.mapper.account.AccountInfoMapper.selectAttentionAccountById"/>
     </resultMap>
 
     <resultMap id="memberUserVo" type="com.zyx.vo.activity.MemberActivityVo">

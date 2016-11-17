@@ -3,21 +3,22 @@
 <mapper namespace="com.zyx.mapper.activity.ActivityMapper">
     <resultMap id="activityVo" type="com.zyx.vo.activity.ActivityVo">
         <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="desc_content" property="descContent" jdbcType="VARCHAR"/>
         <result column="img_urls" property="imgUrls" jdbcType="VARCHAR"/>
         <result column="activity_type" property="activityType" jdbcType="INTEGER"/>
         <result column="activity_module" property="activityModule" jdbcType="INTEGER"/>
         <result column="start_time" property="startTime" jdbcType="BIGINT"/>
-        <result column="endTime" property="endTime" jdbcType="BIGINT"/>
-        <result column="lastTime" property="lastTime" jdbcType="BIGINT"/>
-        <result column="maxPeople" property="maxPeople" jdbcType="INTEGER"/>
+        <result column="end_time" property="endTime" jdbcType="BIGINT"/>
+        <result column="last_time" property="lastTime" jdbcType="BIGINT"/>
+        <result column="max_people" property="maxPeople" jdbcType="INTEGER"/>
         <result column="address" property="address" jdbcType="VARCHAR"/>
         <result column="payment_type" property="paymentType" jdbcType="INTEGER"/>
         <result column="price" property="price" jdbcType="DECIMAL"/>
-        <result column="targetUrl" property="targetUrl" jdbcType="VARCHAR"/>
+        <result column="city" property="city" jdbcType="VARCHAR"/>
+        <result column="target_url" property="targetUrl" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <association property="user" column="user_id" select="com.zyx.mapper.account.AccountInfoMapper.selectAttentionAccountById"/>
     </resultMap>
 
     <select id="queryActivity" parameterType="com.zyx.param.activity.QueryActivityParam" resultMap="activityVo">
