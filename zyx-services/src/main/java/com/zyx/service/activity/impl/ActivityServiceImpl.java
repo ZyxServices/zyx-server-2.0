@@ -117,7 +117,7 @@ public class ActivityServiceImpl implements ActivityService {
                     s.setDescContent(editText);
                 });
             }
-            return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", activityVo);
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, activityVo);
         } else {
             return Constants.MAP_PARAM_MISS;
         }
@@ -131,7 +131,7 @@ public class ActivityServiceImpl implements ActivityService {
             }
             listParam.setPageNumber((listParam.getPageNumber() - 1) * listParam.getNumber());
             List<ActivityVo> myActivityList = activityMapper.myActivityList(listParam);
-            return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", myActivityList);
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, myActivityList);
         } else {
             return Constants.MAP_PARAM_MISS;
         }
@@ -141,7 +141,7 @@ public class ActivityServiceImpl implements ActivityService {
     public Map<String, Object> activityById(Integer activityId) {
         if (activityId != null && activityId > 0) {
             ActivityVo activityVo = activityMapper.activityById(activityId);
-            return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", activityVo);
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, activityVo);
         } else {
             return Constants.MAP_PARAM_MISS;
         }

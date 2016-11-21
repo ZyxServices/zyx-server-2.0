@@ -82,7 +82,7 @@ public class AccountCommonFacadeImpl implements AccountCommonFacade {
             content = message;
         } else {
 //                content = java.net.URLEncoder.encode("验证码" + random + "，你正在使用体育家，感谢你的支持，体育家将持续为你服务！！！", "UTF-8");
-            content = "验证码" + random + "，你正在使用体育家，感谢你的支持，体育家将持续为你服务！！！";
+            content = "验证码" + random + "验证有效期为5分钟，为了你的信息安全，请勿转发给他人，你正在使用体育家，感谢你的支持，体育家将持续为你服务！！！";
         }
         Properties props = new Properties();
 //            props.load(new InputStreamReader(RegisterFacadeImpl.class.getClassLoader().getResourceAsStream("SMS.properties"), CHARSET_UTF_8));
@@ -117,7 +117,7 @@ public class AccountCommonFacadeImpl implements AccountCommonFacade {
 
 
         if (returnString.contains(",0")) {
-            stringRedisTemplate.opsForValue().set(AccountConstants.REDIS_KEY_TYJ_PHONE_CODE + phone, random, 30 * 60, TimeUnit.SECONDS);
+            stringRedisTemplate.opsForValue().set(AccountConstants.REDIS_KEY_TYJ_PHONE_CODE + phone, random, 5 * 60, TimeUnit.SECONDS);
             stringRedisTemplate.opsForValue().set(phone, "", 60, TimeUnit.SECONDS);
             return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, "验证码发送成功！！！", random);
         } else {

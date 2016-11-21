@@ -44,11 +44,17 @@
         <association property="pointDesc" column="{point_type=temp_type,point_count=temp_count}" select="com.zyx.mapper.point.UserPointMapper.queryUserPointDesc"/>
     </resultMap>
 
+    <resultMap id="searchEquipVo" type="com.zyx.vo.system.SearchEquipVo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="img_url" property="imgUrl" jdbcType="VARCHAR"/>
+        <result column="topic_content" property="topicContent" jdbcType="VARCHAR"/>
+    </resultMap>
+
     <resultMap id="searchDevaVo" type="com.zyx.vo.system.SearchDevaVo">
         <id column="id" property="id" jdbcType="INTEGER"/>
-        <id column="model" property="model" jdbcType="INTEGER"/>
-        <id column="model_id" property="modelId" jdbcType="INTEGER"/>
-        <id column="image_url" property="imageUrl" jdbcType="VARCHAR"/>
+        <id column="title" property="title" jdbcType="VARCHAR"/>
+        <id column="content" property="content" jdbcType="VARCHAR"/>
+        <id column="create_time" property="createTime" jdbcType="BIGINT"/>
     </resultMap>
 
 
@@ -112,6 +118,17 @@
         </if>
     </select>
 
+    <select id="equipSearch" parameterType="com.zyx.param.system.SearchParam" resultMap="searchEquipVo">
+        SELECT * FROM equip WHERE 1=1
+        <if test="character != null">
+            AND (content LIKE CONCAT('%',#{character},'%')
+            OR title LIKE CONCAT('%',#{character},'%'))
+        </if>
+        AND del != 1 AND mask != 1 ORDER BY create_time desc
+        <if test="pageNumber != null and number != null">
+            limit #{pageNumber}, #{number}
+        </if>
+    </select>
 
     <select id="devaSearch" parameterType="com.zyx.param.system.SearchDevaParam" resultMap="searchDevaVo">
         SELECT * FROM devaluation WHERE del = 0 AND state != 0 AND area = #{model} ORDER BY sequence
@@ -119,6 +136,7 @@
             limit #{pageNumber}, #{number}
         </if>
     </select>
+
 
 
 </mapper>
