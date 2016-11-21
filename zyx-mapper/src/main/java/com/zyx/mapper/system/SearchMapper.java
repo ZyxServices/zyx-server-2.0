@@ -8,7 +8,6 @@ import com.zyx.vo.system.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Rainbow
@@ -23,6 +22,7 @@ public interface SearchMapper extends BaseMapper<Course> {
 
     /**
      * 查询活动模块
+     *
      * @param searchParam
      * @return
      */
@@ -30,6 +30,7 @@ public interface SearchMapper extends BaseMapper<Course> {
 
     /**
      * 查询场馆模块
+     *
      * @param searchParam
      * @return
      */
@@ -37,6 +38,7 @@ public interface SearchMapper extends BaseMapper<Course> {
 
     /**
      * 查询教程模块
+     *
      * @param searchParam
      * @return
      */
@@ -44,6 +46,7 @@ public interface SearchMapper extends BaseMapper<Course> {
 
     /**
      * 查询动态模块
+     *
      * @param searchParam
      * @return
      */
@@ -51,10 +54,19 @@ public interface SearchMapper extends BaseMapper<Course> {
 
     /**
      * 查询用户模块
+     *
      * @param searchParam
      * @return
      */
     List<SearchUserVo> searchUser(SearchParam searchParam);
+
+    /**
+     * 查询装备模块
+     *
+     * @param searchParam
+     * @return
+     */
+    List<SearchEquipVo> equipSearch(SearchParam searchParam);
 
     /**
      * 官方推荐查询
@@ -62,4 +74,6 @@ public interface SearchMapper extends BaseMapper<Course> {
      * @return
      */
     List<SearchDevaVo> devaSearch(SearchDevaParam searchDevaParam);
+
+
 }

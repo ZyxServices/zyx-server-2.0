@@ -27,6 +27,6 @@ public class SystemCityServiceImpl implements SystemCityService {
     @Override
     public Map<String, Object> findHotCity() {
         List<CityVo> cityVos = systemCityMapper.findHotCity();
-        return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", cityVos);
+        return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, cityVos);
     }
 }

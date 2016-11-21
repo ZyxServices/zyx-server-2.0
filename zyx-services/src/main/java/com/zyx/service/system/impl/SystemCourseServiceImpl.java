@@ -31,7 +31,7 @@ public class SystemCourseServiceImpl implements SystemCourseService {
     @Override
     public Map<String, Object> findCourseLabel() {
         List<CourseLabelVo> labelVos = systemCourseMapper.findCourseLabel();
-        return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", labelVos);
+        return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, labelVos);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class SystemCourseServiceImpl implements SystemCourseService {
             }
             param.setPageNumber((param.getPageNumber() - 1) * param.getNumber());
             List<CourseVo> courseList = systemCourseMapper.findCourseList(param);
-            return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", courseList);
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, courseList);
         } else {
             return Constants.MAP_PARAM_MISS;
         }
@@ -52,7 +52,7 @@ public class SystemCourseServiceImpl implements SystemCourseService {
     public Map<String, Object> findCourseById(Integer courseId) {
         if (courseId != null && courseId > 0) {
             CourseVo courseVo = systemCourseMapper.findCourseById(courseId);
-            return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", courseVo);
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, courseVo);
         }else{
             return Constants.MAP_PARAM_MISS;
         }

@@ -203,4 +203,6 @@ public interface Constants {
 
     String OTHER_TOKEN = "tiyujia2016";
 
+    String VENUE_REDIS_List_KEY = "venue_redis_list_key";
+
 }

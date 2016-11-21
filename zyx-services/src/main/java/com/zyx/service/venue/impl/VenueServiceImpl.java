@@ -41,7 +41,7 @@ public class VenueServiceImpl extends BaseServiceImpl<Venue> implements VenueSer
             }
             param.setPageNumber((param.getPageNumber() - 1) * param.getNumber());
             List<FindVenueVo> findVenueVos = venueMapper.findVenues(param);
-            return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", findVenueVos);
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, findVenueVos);
         } else {
             return Constants.MAP_PARAM_MISS;
         }
@@ -51,7 +51,7 @@ public class VenueServiceImpl extends BaseServiceImpl<Venue> implements VenueSer
     public Map<String, Object> findVenueById(Integer id) {
         if (id != null && id > 0) {
             FindVenueVo byId = venueMapper.findVenueById(id);
-            return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", byId);
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, byId);
         } else {
             return Constants.MAP_PARAM_MISS;
         }

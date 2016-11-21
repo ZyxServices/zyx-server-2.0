@@ -11,6 +11,7 @@ import com.zyx.vo.system.*;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -39,21 +40,32 @@ public class SearchServiceImpl implements SearchService {
             switch (searchParam.getModel()) {
                 case 1: // 活动
                     List<SearchActivityVo> searchActivityVos = searchMapper.searchActivity(searchParam);
-                    return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", searchActivityVos);
+                    return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, searchActivityVos);
                 case 2: //装备
-                    return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", "暂未开放次模块");
+                    List<SearchEquipVo> equipVos = searchMapper.equipSearch(searchParam);
+                    /*equipVos.stream().filter(e -> e.getContent() != null).forEach(s ->{
+                        String[] strings = s.getContent().split("<img");
+                        List<String> listImage = new ArrayList<>();
+                        for (String string : strings) {
+                            if (string.contains("src=")) {
+                                listImage.add(string.substring(string.indexOf("src=\"") + 5, string.indexOf("\"/")));
+                            }
+                        }
+                        s.setContentImages(listImage);
+                    });*/
+                    return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, equipVos);
                 case 3: //动态
                     List<SearchConcernVo> searchConcernVos = searchMapper.searchConcern(searchParam);
-                    return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", searchConcernVos);
+                    return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, searchConcernVos);
                 case 4: //场馆
                     List<SearchVenuesVo> searchVenuesVos = searchMapper.searchVenues(searchParam);
-                    return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", searchVenuesVos);
+                    return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, searchVenuesVos);
                 case 5: //教程
                     List<SearchCourseVo> searchCourseVos = searchMapper.searchCourse(searchParam);
-                    return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", searchCourseVos);
+                    return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, searchCourseVos);
                 case 6: //用户
                     List<SearchUserVo> searchUserVos = searchMapper.searchUser(searchParam);
-                    return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", searchUserVos);
+                    return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, searchUserVos);
             }
         } else {
             return Constants.MAP_PARAM_MISS;
@@ -69,7 +81,7 @@ public class SearchServiceImpl implements SearchService {
             }
             searchDevaParam.setPageNumber((searchDevaParam.getPageNumber() - 1) * searchDevaParam.getNumber());
             List<SearchDevaVo> searchDevaVos = searchMapper.devaSearch(searchDevaParam);
-            return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", searchDevaVos);
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, searchDevaVos);
         }else{
             return Constants.MAP_PARAM_MISS;
         }
