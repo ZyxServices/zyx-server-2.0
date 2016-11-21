@@ -1,6 +1,7 @@
 package com.zyx.service.system.impl;
 
 import com.zyx.constants.Constants;
+import com.zyx.constants.activity.ActivityConstants;
 import com.zyx.mapper.system.SystemCourseMapper;
 import com.zyx.param.system.CourseParam;
 import com.zyx.service.system.SystemCourseService;
@@ -36,6 +37,9 @@ public class SystemCourseServiceImpl implements SystemCourseService {
     @Override
     public Map<String, Object> findCourseList(CourseParam param) {
         if (param.getPageNumber() != null && param.getNumber() != null) {
+            if (param.getPageNumber() == 0) {
+                return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10003, "分页参数无效");
+            }
             param.setPageNumber((param.getPageNumber() - 1) * param.getNumber());
             List<CourseVo> courseList = systemCourseMapper.findCourseList(param);
             return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", courseList);

@@ -1,6 +1,7 @@
 package com.zyx.rpc.system.impl;
 
 import com.zyx.constants.Constants;
+import com.zyx.param.system.SearchDevaParam;
 import com.zyx.param.system.SearchParam;
 import com.zyx.rpc.system.SearchFacade;
 import com.zyx.service.system.SearchService;
@@ -31,6 +32,17 @@ public class SearchFacadeImpl implements SearchFacade {
     public Map<String, Object> modularSearch(SearchParam searchParam) {
         try {
             return searchService.modularSearch(searchParam);
+        } catch (Exception e) {
+            logger.error(e);
+            e.printStackTrace();
+            return Constants.MAP_500;
+        }
+    }
+
+    @Override
+    public Map<String, Object> devaSearch(SearchDevaParam searchDevaParam) {
+        try {
+            return searchService.devaSearch(searchDevaParam);
         } catch (Exception e) {
             logger.error(e);
             e.printStackTrace();

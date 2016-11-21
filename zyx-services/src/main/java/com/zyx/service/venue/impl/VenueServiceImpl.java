@@ -1,6 +1,7 @@
 package com.zyx.service.venue.impl;
 
 import com.zyx.constants.Constants;
+import com.zyx.constants.activity.ActivityConstants;
 import com.zyx.entity.venue.Venue;
 import com.zyx.mapper.venue.VenueMapper;
 import com.zyx.param.venue.FindVenueParam;
@@ -35,7 +36,9 @@ public class VenueServiceImpl extends BaseServiceImpl<Venue> implements VenueSer
     @Override
     public Map<String, Object> findVenue(FindVenueParam param) {
         if (param.getType() != null && param.getNumber() != null && param.getPageNumber() != null) {
-
+            if (param.getPageNumber() == 0) {
+                return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10003, "分页参数无效");
+            }
             param.setPageNumber((param.getPageNumber() - 1) * param.getNumber());
             List<FindVenueVo> findVenueVos = venueMapper.findVenues(param);
             return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", findVenueVos);

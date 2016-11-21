@@ -3,7 +3,9 @@ package com.zyx.service.activity.impl;
 import com.zyx.constants.Constants;
 import com.zyx.constants.activity.ActivityConstants;
 import com.zyx.entity.activity.Activity;
+import com.zyx.entity.zoom.Concern;
 import com.zyx.mapper.activity.ActivityMapper;
+import com.zyx.mapper.zoom.ConcernMapper;
 import com.zyx.param.activity.ActivityParam;
 import com.zyx.param.activity.MyActivityListParam;
 import com.zyx.param.activity.QueryActivityParam;
@@ -31,6 +33,9 @@ public class ActivityServiceImpl implements ActivityService {
     @Resource
     private ActivityMapper activityMapper;
 
+    @Resource
+    private ConcernMapper concernMapper;
+
     @Override
     public Map<String, Object> insterActivity(ActivityParam param) {
         if (param.getUserId() != null && param.getTitle() != null && param.getDesc() != null && param.getImgUrls() != null && param.getPaymentType() != null
@@ -51,6 +56,7 @@ public class ActivityServiceImpl implements ActivityService {
             activity.setPrice(param.getPrice());
             activity.setPaymentType(param.getPaymentType());
             activity.setCreateTime(System.currentTimeMillis());
+            activity.setCity(param.getCity());
             activity.setDel(0);
             activity.setActivityModule(1);
             activity.setTargetUrl("");
@@ -59,6 +65,17 @@ public class ActivityServiceImpl implements ActivityService {
 
             Integer integer = activityMapper.insert(activity);
             if (integer > 0) {
+                Concern concern = new Concern();
+                concern.setFromId(activity.getId());
+                concern.setFromType(1);
+                concern.setCreateTime(System.currentTimeMillis());
+                concern.setImgUrl(param.getImgUrls());
+                concern.setTopicTitle(param.getTitle());
+                concern.setTopicContent(param.getDesc());
+                concern.setTopicVisible(1);
+                concern.setUserId(param.getUserId());
+                concern.setState(0);
+                concernMapper.insert(concern);
                 return MapUtils.buildSuccessMap(Constants.SUCCESS, "发布成功", null);
             } else {
                 return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10000, "活动发布失败");
@@ -79,7 +96,7 @@ public class ActivityServiceImpl implements ActivityService {
             queryParam.setPageNumber((queryParam.getPageNumber() - 1) * queryParam.getNumber());
             queryParam.setNowTime(System.currentTimeMillis());
             List<ActivityVo> activityVo = activityMapper.queryActivity(queryParam);
-            if (queryParam.getEditState() != 0) {
+            if (queryParam.getEditState() != null && queryParam.getEditState() != 0) {
                 activityVo.stream().filter(e -> e.getDescContent() != null && !e.getDescContent().equals("")).forEach(s -> {
                     String[] strings = s.getDescContent().split("<img");
                     List<String> editImage = new ArrayList<>();

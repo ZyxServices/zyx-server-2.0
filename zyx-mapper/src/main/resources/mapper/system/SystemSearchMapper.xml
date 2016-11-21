@@ -37,6 +37,20 @@
         <result column="topic_content" property="topicContent" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <resultMap id="searchUserVo" type="com.zyx.vo.system.SearchUserVo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
+        <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
+        <association property="pointDesc" column="{point_type=temp_type,point_count=temp_count}" select="com.zyx.mapper.point.UserPointMapper.queryUserPointDesc"/>
+    </resultMap>
+
+    <resultMap id="searchDevaVo" type="com.zyx.vo.system.SearchDevaVo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <id column="model" property="model" jdbcType="INTEGER"/>
+        <id column="model_id" property="modelId" jdbcType="INTEGER"/>
+        <id column="image_url" property="imageUrl" jdbcType="VARCHAR"/>
+    </resultMap>
+
 
     <select id="searchActivity" parameterType="com.zyx.param.system.SearchParam" resultMap="searchActivityVo">
         select *, (SELECT COUNT(id) FROM activity_member b WHERE b.activity_id = a.id ) as alreadyPeople from activity a where 1=1
@@ -86,6 +100,25 @@
         </if>
     </select>
 
+    <select id="searchUser" parameterType="com.zyx.param.system.SearchParam" resultMap="searchUserVo">
+        SELECT a.id,a.nickname,a.avatar,b.point_type as temp_type,b.point_count as temp_count
+        FROM user a LEFT JOIN user_point b ON a.id = b.user_id AND b.point_type = 1
+        <if test="character != null">
+            AND (a.nickname LIKE CONCAT('%',#{character},'%'))
+        </if>
+        AND a.del != 1 AND a.mask != 1 ORDER BY a.create_time desc
+        <if test="pageNumber != null and number != null">
+            limit #{pageNumber}, #{number}
+        </if>
+    </select>
+
+
+    <select id="devaSearch" parameterType="com.zyx.param.system.SearchDevaParam" resultMap="searchDevaVo">
+        SELECT * FROM devaluation WHERE del = 0 AND state != 0 AND area = #{model} ORDER BY sequence
+        <if test="pageNumber != null and number != null">
+            limit #{pageNumber}, #{number}
+        </if>
+    </select>
 
 
 </mapper>

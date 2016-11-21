@@ -1,5 +1,7 @@
 package com.zyx.vo.activity;
 
+import com.zyx.vo.account.AccountAttentionVo;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -18,7 +20,7 @@ public class ActivityVo implements Serializable {
     /**
      * 创建者(用户ID)
      */
-    private Integer userId;
+    private AccountAttentionVo user;
 
     /**
      * 活动标题
@@ -110,12 +112,12 @@ public class ActivityVo implements Serializable {
         this.id = id;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public AccountAttentionVo getUser() {
+        return user;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUser(AccountAttentionVo user) {
+        this.user = user;
     }
 
     public String getTitle() {

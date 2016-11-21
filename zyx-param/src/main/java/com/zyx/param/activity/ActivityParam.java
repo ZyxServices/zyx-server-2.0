@@ -58,6 +58,11 @@ public class ActivityParam implements Serializable {
     private String address;
 
     /**
+     * 活动地址
+     */
+    private String city;
+
+    /**
      * 活动分类模块
      * （活动模块（1攀岩 2跑步 3羽毛球 4网球 4单车 5滑雪 6见面会））
      */
@@ -180,5 +185,13 @@ public class ActivityParam implements Serializable {
 
     public void setPaymentType(Integer paymentType) {
         this.paymentType = paymentType;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }
