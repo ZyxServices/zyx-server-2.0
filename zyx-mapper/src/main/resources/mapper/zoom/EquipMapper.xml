@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ The MIT License (MIT)
+  ~
+  ~ Copyright (c) 2014 abel533@gmail.com
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in
+  ~ all copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  ~ THE SOFTWARE.
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zyx.mapper.zoom.EquipMapper">
+    <resultMap id="EquipResultMap" type="com.zyx.entity.zoom.Equip">
+        <id column="Id" property="id" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <result column="account_id" property="accountId" jdbcType="INTEGER"/>
+        <result column="label_id" property="labelId" jdbcType="INTEGER"/>
+        <result column="del" property="del" jdbcType="INTEGER"/>
+        <result column="mask" property="mask" jdbcType="INTEGER"/>
+        <result column="equip_type" property="equipType" jdbcType="INTEGER"/>
+
+    </resultMap>
+
+    <select id="userSelect" parameterType="int" resultType="com.zyx.vo.account.UserIconVo">
+        SELECT nickname,avatar,id,authenticate FROM `user` WHERE id=#{user_id}
+    </select>
+
+    <select id="userAuthSelect" parameterType="int" resultType="com.zyx.vo.zoom.UserAuthVo">
+        SELECT authInfo FROM `user_auth` WHERE user_id=#{user_id}
+    </select>
+
+
+    <select id="zanSelect" parameterType="int" resultType="int">
+        SELECT COUNT(id) FROM zan WHERE zan.body_type=2 AND zan.body_id=#{concernId}
+    </select>
+
+    <select id="commentSelect" parameterType="int" resultType="int">
+        SELECT COUNT(id) FROM comment WHERE comment.comment_type=2 AND comment_id=#{concernId}
+    </select>
+
+    <select id="labelSelect" parameterType="int" resultType="java.lang.String">
+        SELECT label_name FROM t_equip_label WHERE id=#{id}
+    </select>
+
+    <resultMap id="EquipCustomResultMap" type="com.zyx.vo.zoom.EquipListVo" extends="EquipResultMap">
+        <association property="zanCounts" column="id" select="zanSelect"/>
+        <association property="commentCounts" column="id" select="commentSelect"/>
+        <association property="userIconVo" column="account_id" select="userSelect"/>
+        <association property="userAuthVo" column="account_id   " select="userAuthSelect"/>
+        <association property="labelName" column="label_id" select="labelSelect"/>
+    </resultMap>
+
+    <select id="queryEquip" parameterType="java.lang.Integer" resultMap="EquipCustomResultMap">
+        SELECT * FROM equip WHERE del=0 AND mask=0
+        <if test="id!=null">
+            AND id=#{id}
+        </if>
+    </select>
+
+</mapper>

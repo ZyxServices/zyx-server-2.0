@@ -71,4 +71,12 @@ public interface ZoomFacade {
      */
     Map<String, Object> addEquip(String title, String content, Integer accountId,Integer labelId);
 
+
+    /**
+     * 装备控列表
+     * @param eId
+     * @return
+     */
+    Map<String,Object> queryEquip(Integer eId);
+
 }

@@ -1,12 +1,15 @@
 package com.zyx.service.zoom.impl;
 
+import com.zyx.constants.Constants;
 import com.zyx.constants.zoom.ZoomConstants;
 import com.zyx.entity.zoom.Equip;
+import com.zyx.mapper.zoom.EquipMapper;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.zoom.EquipService;
 import com.zyx.utils.MapUtils;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.Map;
 import java.util.Objects;
@@ -23,9 +26,12 @@ public class EquipServiceImpl extends BaseServiceImpl<Equip> implements EquipSer
         super(Equip.class);
     }
 
+    @Resource
+    private EquipMapper equipMapper;
+
 
     @Override
-    public Map<String, Object> addEquip(String title, String content, Integer accountId,Integer labelId) {
+    public Map<String, Object> addEquip(String title, String content, Integer accountId, Integer labelId) {
         if (Objects.equals(title, null) || Objects.equals(title, "")) {
             return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30006, ZoomConstants.PG_ERROR_CODE_30006_MSG);
         }
@@ -39,17 +45,25 @@ public class EquipServiceImpl extends BaseServiceImpl<Equip> implements EquipSer
             return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30027, ZoomConstants.PG_ERROR_CODE_30027_MSG);
         }
 
-        Equip e=new Equip();
+        Equip e = new Equip();
         e.setCreateTime(new Date().getTime());
         e.setTitle(title);
         e.setAccountId(accountId);
         e.setContent(content);
         e.setEquipType(0);
         e.setLabelId(labelId);
-        Integer result=save(e);
-        if(result>0){
-            return MapUtils.buildSuccessMap(ZoomConstants.SUCCESS,ZoomConstants.SUCCESS_MSG,null);
+        e.setMask(0);
+        e.setDel(0);
+        Integer result = save(e);
+        if (result > 0) {
+            return MapUtils.buildSuccessMap(ZoomConstants.SUCCESS, ZoomConstants.SUCCESS_MSG, null);
         }
         return ZoomConstants.MAP_500;
+    }
+
+    @Override
+    public Map<String, Object> queryEquip(Integer eId) {
+
+        return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.SUCCESS_MSG, equipMapper.queryEquip(eId));
     }
 }

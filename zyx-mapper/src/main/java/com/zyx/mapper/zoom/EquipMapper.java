@@ -2,7 +2,10 @@ package com.zyx.mapper.zoom;
 
 import com.zyx.entity.zoom.Equip;
 import com.zyx.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @author XiaoWei
@@ -12,4 +15,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository("equipMapper")
 public interface EquipMapper extends BaseMapper<Equip> {
+
+    List<Equip> queryEquip(@Param("id") Integer id);
 }

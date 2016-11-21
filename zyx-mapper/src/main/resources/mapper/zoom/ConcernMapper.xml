@@ -53,7 +53,7 @@
         <!--<result column="comment_counts" property="commentCounts" jdbcType="VARCHAR"/>-->
         <association property="zanCounts" column="id" select="zanSelect"/>
         <association property="commentCounts" column="id" select="commentSelect"/>
-        <association property="userVo" column="user_id" select="userSelect"/>
+        <association property="userIconVo" column="user_id" select="userSelect"/>
         <association property="userAuthVo" column="user_id" select="userAuthSelect"/>
         <discriminator javaType="java.lang.Integer" column="from_type">
             <case value="1" resultMap="ActivityMap"/>
@@ -84,7 +84,7 @@
         <result column="rel_type" property="relType" jdbcType="INTEGER"/>
     </resultMap>
 
-    <select id="userSelect" parameterType="int" resultType="com.zyx.vo.system.UserVo">
+    <select id="userSelect" parameterType="int" resultType="com.zyx.vo.account.UserIconVo">
         SELECT nickname,avatar,id,authenticate FROM `user` WHERE id=#{user_id}
     </select>
 
@@ -122,7 +122,7 @@
     </select>
 
     <select id="getAttentionIds" parameterType="int" resultMap="userAttentionResultMap">
-        SELECT to_user_id FROM USER_ATTENTION WHERE from_user_id=#{loginUserId}
+        SELECT to_user_id FROM user_attention WHERE from_user_id=#{loginUserId}
     </select>
 
     <select id="starRandom" resultMap="ConcernResultMap">

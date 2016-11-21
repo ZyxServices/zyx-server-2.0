@@ -6,6 +6,7 @@ import com.zyx.param.attention.AttentionParam;
 import com.zyx.service.account.AccountInfoService;
 import com.zyx.service.attention.UserAttentionService;
 import com.zyx.service.zoom.ConcernService;
+import com.zyx.service.zoom.EquipService;
 import com.zyx.service.zoom.ZanService;
 import com.zyx.utils.MapUtils;
 import com.zyx.vo.account.AccountAttentionVo;
@@ -37,6 +38,8 @@ public class ZoomFacadeImpl implements ZoomFacade {
     @Resource
     private ZanService zanService;
 
+    @Resource
+    private EquipService equipService;
 
 
     @Override
@@ -80,6 +83,11 @@ public class ZoomFacadeImpl implements ZoomFacade {
 
     @Override
     public Map<String, Object> addEquip(String title, String content, Integer accountId, Integer labelId) {
-        return null;
+        return equipService.addEquip(title, content, accountId, labelId);
+    }
+
+    @Override
+    public Map<String, Object> queryEquip(Integer eId) {
+        return equipService.queryEquip(eId);
     }
 }

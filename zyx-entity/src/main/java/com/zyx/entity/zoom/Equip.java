@@ -1,7 +1,10 @@
 package com.zyx.entity.zoom;
 
 import com.zyx.entity.BaseEntity;
+import org.apache.ibatis.type.JdbcType;
+import tk.mybatis.mapper.annotation.ColumnType;
 
+import javax.persistence.Column;
 import javax.persistence.Table;
 
 /**
@@ -10,14 +13,28 @@ import javax.persistence.Table;
  * @package com.zyx.entity.zoom
  * Create by XiaoWei on 2016/11/17
  */
-@Table(name = "")
+@Table(name = "equip")
 public class Equip extends BaseEntity {
+    @Column
+    @ColumnType(jdbcType = JdbcType.VARCHAR)
     private String title;
+    @Column
+    @ColumnType(jdbcType = JdbcType.LONGVARCHAR)
     private String content;
+    @Column
+    @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer accountId;
+    @Column
+    @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer labelId;
+    @Column
+    @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer del;
+    @Column
+    @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer mask;
+    @Column
+    @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer equipType;
 
     public String getTitle() {
