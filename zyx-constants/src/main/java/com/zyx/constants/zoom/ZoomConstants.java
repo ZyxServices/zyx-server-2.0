@@ -54,7 +54,7 @@ public interface ZoomConstants extends Constants {
     String PG_ERROR_CODE_30006_MSG = "标题不能为空";
 
     int PG_ERROR_CODE_30007 = 30007;
-    String PG_ERROR_CODE_30007_MSG = "帖子内容不能为空";
+    String PG_ERROR_CODE_30007_MSG = "内容不能为空";
 
     int PG_ERROR_CODE_30008 = 30008;
     String PG_ERROR_CODE_30008_MSG = "回复类型不能为空";

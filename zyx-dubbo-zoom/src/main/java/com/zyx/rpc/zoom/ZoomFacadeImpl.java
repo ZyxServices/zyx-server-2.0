@@ -37,6 +37,8 @@ public class ZoomFacadeImpl implements ZoomFacade {
     @Resource
     private ZanService zanService;
 
+
+
     @Override
     public Map<String, Object> addFollow(Integer fromUserId, Integer toUserId) {
         if (Objects.equals(fromUserId, null) || Objects.equals(toUserId, null)) {
@@ -74,5 +76,10 @@ public class ZoomFacadeImpl implements ZoomFacade {
     @Override
     public Map<String, Object> addZan(Integer body_id, Integer body_type, Integer account_id) {
         return zanService.addZan(body_id, body_type, account_id);
+    }
+
+    @Override
+    public Map<String, Object> addEquip(String title, String content, Integer accountId, Integer labelId) {
+        return null;
     }
 }
