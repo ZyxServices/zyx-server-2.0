@@ -79,4 +79,11 @@ public interface ZoomFacade {
      */
     Map<String,Object> queryEquip(Integer eId);
 
+    /**
+     * 装备秀详情
+     * @param eId
+     * @return
+     */
+    Map<String,Object> queryOne(Integer eId);
+
 }

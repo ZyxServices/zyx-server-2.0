@@ -1,6 +1,7 @@
 package com.zyx.vo.system;
 
 import com.zyx.entity.system.Comment;
+import com.zyx.vo.account.UserIconVo;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  */
 public class CommentVo extends Comment {
     List<ReplyVo> replyVos;
-    UserVo userVo;
+    UserIconVo userVo;
 
     public List<ReplyVo> getReplyVos() {
         return replyVos;
@@ -22,11 +23,11 @@ public class CommentVo extends Comment {
         this.replyVos = replyVos;
     }
 
-    public UserVo getUserVo() {
+    public UserIconVo getUserVo() {
         return userVo;
     }
 
-    public void setUserVo(UserVo userVo) {
+    public void setUserVo(UserIconVo userVo) {
         this.userVo = userVo;
     }
 }

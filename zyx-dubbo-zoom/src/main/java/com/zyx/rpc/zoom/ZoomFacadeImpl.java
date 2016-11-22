@@ -90,4 +90,9 @@ public class ZoomFacadeImpl implements ZoomFacade {
     public Map<String, Object> queryEquip(Integer eId) {
         return equipService.queryEquip(eId);
     }
+
+    @Override
+    public Map<String, Object> queryOne(Integer eId) {
+        return equipService.queryOne(eId);
+    }
 }
