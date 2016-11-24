@@ -37,6 +37,7 @@
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
         <result column="from_id" property="fromId" jdbcType="INTEGER"/>
         <result column="from_type" property="fromType" jdbcType="INTEGER"/>
+        <result column="local" property="local" jdbcType="VARCHAR"/>
     </resultMap>
 
     <resultMap id="ConcernMyMap" type="com.zyx.vo.zoom.MyFollowVo" extends="ConcernResultMap">

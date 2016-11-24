@@ -44,6 +44,10 @@ public class Concern extends BaseEntity {
     @Column(name = "from_type")
     private Integer fromType;//1:求约(活动)，2装备控，3记录。该字段只用于我的关注模块中自动生成的动态查询
 
+    @Column
+    @ColumnType(jdbcType = JdbcType.VARCHAR)
+    private String local;
+
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
@@ -126,5 +130,13 @@ public class Concern extends BaseEntity {
 
     public void setFromType(Integer fromType) {
         this.fromType = fromType;
+    }
+
+    public String getLocal() {
+        return local;
+    }
+
+    public void setLocal(String local) {
+        this.local = local;
     }
 }
