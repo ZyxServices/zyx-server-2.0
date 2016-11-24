@@ -2,7 +2,6 @@ package com.zyx.rpc.user.impl;
 
 import com.zyx.constants.user.UserConstants;
 import com.zyx.param.user.UserAddressParam;
-import com.zyx.rpc.common.TokenFacade;
 import com.zyx.rpc.user.UserAddressFacade;
 import com.zyx.service.user.UserAddressService;
 import com.zyx.utils.MapUtils;
@@ -27,17 +26,9 @@ public class UserAddressFacadeImpl implements UserAddressFacade {
     @Autowired
     private UserAddressService userAddressService;
 
-    @Autowired
-    private TokenFacade tokenFacade;
-
     @Override
     public Map<String, Object> insertUserAddressInfo(UserAddressParam param) {
         try {
-            // 判断token是否失效
-            Map<String, Object> map = tokenFacade.validateToken(param.getToken(), param.getUserId());
-            if (map != null) {
-                return map;
-            }
             if (userAddressService.insertAccountAddressInfo(param) == 0) {
                 return MapUtils.buildErrorMap(UserConstants.ACCOUNT_ERROR_CODE_50400, UserConstants.ACCOUNT_ERROR_CODE_50400_MSG);
             }
@@ -51,11 +42,6 @@ public class UserAddressFacadeImpl implements UserAddressFacade {
     @Override
     public Map<String, Object> queryUserAddressInfo(UserAddressParam param) {
         try {
-            // 判断token是否失效
-            Map<String, Object> map = tokenFacade.validateToken(param.getToken());
-            if (map != null) {
-                return map;
-            }
             UserAddressVo userAddressVo = userAddressService.selectAddressByAddressId(param);
             if (userAddressVo == null) {
                 return MapUtils.buildErrorMap(UserConstants.ACCOUNT_ERROR_CODE_50300, UserConstants.ACCOUNT_ERROR_CODE_50300_MSG);
@@ -70,11 +56,6 @@ public class UserAddressFacadeImpl implements UserAddressFacade {
     @Override
     public Map<String, Object> queryUserAddressList(UserAddressParam param) {
         try {
-            // 判断token是否失效
-            Map<String, Object> map = tokenFacade.validateToken(param.getToken(), param.getUserId());
-            if (map != null) {
-                return map;
-            }
             List<UserAddressVo> result = userAddressService.selectAddressList(param);
             if (result == null) {
                 return MapUtils.buildErrorMap(UserConstants.ACCOUNT_ERROR_CODE_50300, UserConstants.ACCOUNT_ERROR_CODE_50300_MSG);
@@ -89,11 +70,6 @@ public class UserAddressFacadeImpl implements UserAddressFacade {
     @Override
     public Map<String, Object> deleteUserAddressInfo(UserAddressParam param) {
         try {
-            // 判断token是否失效
-            Map<String, Object> map = tokenFacade.validateToken(param.getToken());
-            if (map != null) {
-                return map;
-            }
             if (userAddressService.deleteByAddressId(param) == 0) {
                 return MapUtils.buildErrorMap(UserConstants.ACCOUNT_ERROR_CODE_50401, UserConstants.ACCOUNT_ERROR_CODE_50401_MSG);
             }
@@ -107,11 +83,6 @@ public class UserAddressFacadeImpl implements UserAddressFacade {
     @Override
     public Map<String, Object> editReceiptAddress(UserAddressParam param) {
         try {
-            // 判断token是否失效
-            Map<String, Object> map = tokenFacade.validateToken(param.getToken(), param.getUserId());
-            if (map != null) {
-                return map;
-            }
             if (userAddressService.editReceiptAddress(param) == 0) {
                 return MapUtils.buildErrorMap(UserConstants.ACCOUNT_ERROR_CODE_50402, UserConstants.ACCOUNT_ERROR_CODE_50402_MSG);
             }
@@ -125,11 +96,6 @@ public class UserAddressFacadeImpl implements UserAddressFacade {
     @Override
     public Map<String, Object> setDefaultReceiptAddress(UserAddressParam param) {
         try {
-            // 判断token是否失效
-            Map<String, Object> map = tokenFacade.validateToken(param.getToken(), param.getUserId());
-            if (map != null) {
-                return map;
-            }
             if (userAddressService.setDefaultReceiptAddress(param) == 0) {
                 return MapUtils.buildErrorMap(UserConstants.ACCOUNT_ERROR_CODE_50402, UserConstants.ACCOUNT_ERROR_CODE_50402_MSG);
             }

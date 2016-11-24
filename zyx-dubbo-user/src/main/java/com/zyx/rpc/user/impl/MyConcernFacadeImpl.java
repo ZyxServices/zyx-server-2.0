@@ -2,7 +2,6 @@ package com.zyx.rpc.user.impl;
 
 import com.zyx.constants.user.UserConstants;
 import com.zyx.param.user.UserConcernParam;
-import com.zyx.rpc.common.TokenFacade;
 import com.zyx.rpc.user.MyConcernFacade;
 import com.zyx.service.zoom.ConcernService;
 import com.zyx.utils.MapUtils;
@@ -27,17 +26,9 @@ public class MyConcernFacadeImpl implements MyConcernFacade {
     @Autowired
     private ConcernService concernService;
 
-    @Autowired
-    private TokenFacade tokenFacade;
-
     @Override
     public Map<String, Object> myList(UserConcernParam userConcernParam) {
         try {
-            // 判断token是否失效
-            Map<String, Object> map = tokenFacade.validateTokenIncludeOther(userConcernParam.getToken(), userConcernParam.getUserId());
-            if (map != null) {
-                return map;
-            }
             List<MyFollowVo> _list = concernService.queryMyConcernList(userConcernParam);
             return MapUtils.buildSuccessMap(_list);
         } catch (Exception e) {
