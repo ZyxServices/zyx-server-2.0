@@ -47,16 +47,17 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
 
 
     @Override
-    public Map<String, Object> addCern(Integer userId, Integer type, String cernTitle, String content, String cernImgurl, String videoUrl, Integer visible) {
+    public Map<String, Object> addCern(Integer userId, Integer type, String content, String cernImgurl, String videoUrl, Integer visible, String local) {
         Concern insertCern = new Concern();
         insertCern.setCreateTime(new Date().getTime());
         Optional.ofNullable(userId).ifPresent(insertCern::setUserId);
         Optional.ofNullable(type).ifPresent(insertCern::setType);
-        Optional.ofNullable(cernTitle).ifPresent(insertCern::setTopicTitle);
+//        Optional.ofNullable(cernTitle).ifPresent(insertCern::setTopicTitle);
         Optional.ofNullable(content).ifPresent(insertCern::setTopicContent);
         Optional.ofNullable(cernImgurl).ifPresent(insertCern::setImgUrl);
         Optional.ofNullable(videoUrl).ifPresent(insertCern::setVideoUrl);
         Optional.ofNullable(visible).ifPresent(insertCern::setTopicVisible);
+        Optional.ofNullable(local).ifPresent(insertCern::setLocal);
         insertCern.setState(0);
         save(insertCern);
         return MapUtils.buildSuccessMap(Constants.SUCCESS, ZoomConstants.PG_ERROR_CODE_33000_MSG, null);
@@ -119,7 +120,7 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
             if (!Objects.equals(loginUserId, null)) {
                 ids.add(loginUserId);
             }
-            List<MyFollowVo> myFollowVos = concernMapper.myFollowList(ids, start * pageSize, pageSize);
+            List<MyFollowVo> myFollowVos = concernMapper.myFollowList(ids, (start + 1) * pageSize, pageSize);
 //            setPageViews(myFollowVos);
             return MapUtils.buildSuccessMap(ZoomConstants.SUCCESS, ZoomConstants.PG_ERROR_CODE_34000_MSG, myFollowVos);
         } catch (Exception e) {
@@ -204,8 +205,8 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
             case MODULE_EQUIP://装备控
                 return null;
             case MODULE_SPORT_RECORD://（记录）
-                SportRecord sportRecord= (SportRecord) fromObj;
-                Concern concernSport=new Concern();
+                SportRecord sportRecord = (SportRecord) fromObj;
+                Concern concernSport = new Concern();
                 concernSport.setFromId(fromId);
                 concernSport.setFromType(fromType);
                 concernSport.setCreateTime(sportRecord.getCreateTime());

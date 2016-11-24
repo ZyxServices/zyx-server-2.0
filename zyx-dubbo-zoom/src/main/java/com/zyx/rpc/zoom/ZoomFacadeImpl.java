@@ -67,13 +67,13 @@ public class ZoomFacadeImpl implements ZoomFacade {
     }
 
     @Override
-    public Map<String, Object> myFollowCon(Integer loginUserId, Integer start, Integer pageSize) {
-        return concernService.myFollowCon(loginUserId, start, pageSize);
+    public Map<String, Object> myFollowCon(Integer loginUserId, Integer page, Integer pageSize) {
+        return concernService.myFollowCon(loginUserId, page, pageSize);
     }
 
     @Override
-    public Map<String, Object> addCern(Integer userId, Integer type, String cernTitle, String content, String cernImgurl, String videoUrl, Integer visible) {
-        return concernService.addCern(userId, type, cernTitle, content, cernImgurl, videoUrl, visible);
+    public Map<String, Object> addCern(Integer userId, Integer type,  String content, String cernImgurl, String videoUrl, Integer visible,String local) {
+        return concernService.addCern(userId, type, content, cernImgurl, videoUrl, visible,local);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.zyx.service.zoom;
 
 import com.zyx.entity.zoom.Equip;
+import com.zyx.param.user.UserEquipmentParam;
 import com.zyx.service.BaseService;
 
 import java.util.Map;
@@ -18,4 +19,5 @@ public interface EquipService extends BaseService<Equip> {
 
     Map<String, Object> queryOne(Integer eId);
 
+    Map<String, Object> queryMyList(UserEquipmentParam userEquipmentParam);
 }

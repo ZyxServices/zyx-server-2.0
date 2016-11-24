@@ -65,20 +65,18 @@ public class AccountSecretFacadeImpl implements AccountSecretFacade {
         try {
             // 判断缓存中手机号码和验证码是否对应
             String redis_code = stringRedisTemplate.opsForValue().get(AccountConstants.REDIS_KEY_TYJ_PHONE_CODE + userLoginParam.getPhone());
-//        if (!userLoginParam.getCode().equals(redis_code)) {
-//            map.put(Constants.STATE, AccountConstants.ACCOUNT_ERROR_CODE_50006);
-//            map.put(Constants.ERROR_MSG, AccountConstants.ACCOUNT_ERROR_CODE_50006_MSG);
-//            return map;
-//        }
-
             if (StringUtils.isEmpty(redis_code)) {
                 return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_40011, AccountConstants.ACCOUNT_ERROR_CODE_40011_MSG);
             }
 
-            // 验证密码是否输入一致
-            if (!userLoginParam.getPassword().equals(userLoginParam.getPassword2())) {
-                return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_40012, AccountConstants.ACCOUNT_ERROR_CODE_40012_MSG);
+            if (!redis_code.equals(userLoginParam.getCode())) {
+                return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_40006, AccountConstants.ACCOUNT_ERROR_CODE_40006_MSG);
             }
+
+            // 验证密码是否输入一致
+//            if (!userLoginParam.getPassword().equals(userLoginParam.getPassword2())) {
+//                return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_40012, AccountConstants.ACCOUNT_ERROR_CODE_40012_MSG);
+//            }
 
             userLoginParam.setPassword2(userLoginParam.getPassword2());
             if (accountInfoService.renewSecret(userLoginParam) == 0) {
