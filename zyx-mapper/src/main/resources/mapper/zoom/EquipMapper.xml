@@ -83,6 +83,13 @@
         SELECT * FROM equip WHERE id=#{id}
     </select>
 
+    <select id="queryMyList" parameterType="com.zyx.param.user.UserEquipmentParam" resultMap="EquipDetailsResultMap">
+        SELECT * FROM equip WHERE account_Id = #{userId}
+        <if test="page != null and pageSize != null">
+            limit #{page}, #{pageSize}
+        </if>
+    </select>
+
     <select id="commentQuery" resultMap="commentVoMap">
         SELECT * FROM  comment WHERE comment_type=2 AND comment_id=#{commentId} ORDER BY create_time DESC
     </select>
