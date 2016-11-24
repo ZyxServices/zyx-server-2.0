@@ -37,7 +37,7 @@ public class HttpSender {
             URI base = new URI(url, false);
             method.setURI(new URI(base, "HttpBatchSendSM", false));
             method.setQueryString(new NameValuePair[]{
-                    new NameValuePair("user", account),
+                    new NameValuePair("account", account),
                     new NameValuePair("pswd", pswd),
                     new NameValuePair("mobile", mobile),
                     new NameValuePair("needstatus", String.valueOf(needstatus)),

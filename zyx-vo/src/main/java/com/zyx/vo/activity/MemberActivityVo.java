@@ -1,6 +1,7 @@
 package com.zyx.vo.activity;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Rainbow
@@ -16,7 +17,7 @@ public class MemberActivityVo implements Serializable {
     /**
      * 活动ID
      */
-    private ActivityVo activity;
+    private ActivityListVo activity;
 
     /**
      * 用户ID
@@ -41,11 +42,11 @@ public class MemberActivityVo implements Serializable {
         this.id = id;
     }
 
-    public ActivityVo getActivity() {
+    public ActivityListVo getActivity() {
         return activity;
     }
 
-    public void setActivity(ActivityVo activity) {
+    public void setActivity(ActivityListVo activity) {
         this.activity = activity;
     }
 

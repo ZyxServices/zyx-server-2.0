@@ -4,6 +4,8 @@ import com.zyx.entity.activity.ActivityMember;
 import com.zyx.mapper.BaseMapper;
 import com.zyx.param.activity.QueryActivityMemberParam;
 import com.zyx.vo.activity.ActivityVo;
+import com.zyx.vo.activity.MemberActivityVo;
+import com.zyx.vo.activity.MemberUserVo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -26,13 +28,13 @@ public interface ActivityMemberMapper extends BaseMapper<ActivityMember> {
      * @param memberParam
      * @return
      */
-    List<ActivityVo> findMemberById(QueryActivityMemberParam memberParam);
+    List<MemberUserVo> findMemberById(QueryActivityMemberParam memberParam);
 
     /**
      * 通过用户ID查询当前用户报名的活动
      * @param memberParam
      * @return
      */
-    List<ActivityVo> findMemberByUserId(QueryActivityMemberParam memberParam);
+    List<MemberActivityVo> findMemberByUserId(QueryActivityMemberParam memberParam);
 
 }
