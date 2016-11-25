@@ -33,6 +33,7 @@
         <result column="max_people" property="maxPeople" jdbcType="INTEGER"/>
         <result column="payment_type" property="paymentType" jdbcType="INTEGER"/>
         <result column="price" property="price" jdbcType="DECIMAL"/>
+        <result column="city" property="city" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
         <association property="memberPeople" column="id"
                      select="com.zyx.mapper.activity.ActivityMemberMapper.countMemberByActivityId"></association>

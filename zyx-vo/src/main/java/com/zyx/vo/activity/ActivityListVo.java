@@ -68,6 +68,12 @@ public class ActivityListVo implements Serializable {
      */
     private Integer memberPeople;
 
+
+    /**
+     * 城市
+     */
+    private String city;
+
     /**
      * 活动价格
      */
@@ -203,5 +209,13 @@ public class ActivityListVo implements Serializable {
 
     public void setCreateTime(Long createTime) {
         this.createTime = createTime;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }
