@@ -11,6 +11,7 @@ import com.zyx.param.activity.MyActivityListParam;
 import com.zyx.param.activity.QueryActivityParam;
 import com.zyx.service.activity.ActivityService;
 import com.zyx.utils.MapUtils;
+import com.zyx.vo.activity.ActivityListVo;
 import com.zyx.vo.activity.ActivityVo;
 import org.springframework.stereotype.Service;
 
@@ -95,28 +96,7 @@ public class ActivityServiceImpl implements ActivityService {
             }
             queryParam.setPageNumber((queryParam.getPageNumber() - 1) * queryParam.getNumber());
             queryParam.setNowTime(System.currentTimeMillis());
-            List<ActivityVo> activityVo = activityMapper.queryActivity(queryParam);
-            if (queryParam.getEditState() != null && queryParam.getEditState() != 0) {
-                activityVo.stream().filter(e -> e.getDescContent() != null && !e.getDescContent().equals("")).forEach(s -> {
-                    String[] strings = s.getDescContent().split("<img");
-                    List<String> editImage = new ArrayList<>();
-                    String editText = "";
-                    for (String string : strings) {
-                        if (string.contains("src=")) {
-                            editImage.add(string.substring(string.indexOf("src=\"") + 5, string.indexOf("\"/")));
-                        } else {
-                            if (editText.equals(string)) {
-                                editText = string;
-                            } else {
-                                editText += string;
-                            }
-
-                        }
-                    }
-                    s.setEditDescImgUrl(editImage);
-                    s.setDescContent(editText);
-                });
-            }
+            List<ActivityListVo> activityVo = activityMapper.queryActivity(queryParam);
             return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, activityVo);
         } else {
             return Constants.MAP_PARAM_MISS;
@@ -130,7 +110,7 @@ public class ActivityServiceImpl implements ActivityService {
                 return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10003, "分页参数无效");
             }
             listParam.setPageNumber((listParam.getPageNumber() - 1) * listParam.getNumber());
-            List<ActivityVo> myActivityList = activityMapper.myActivityList(listParam);
+            List<ActivityListVo> myActivityList = activityMapper.myActivityList(listParam);
             return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, myActivityList);
         } else {
             return Constants.MAP_PARAM_MISS;
@@ -141,6 +121,27 @@ public class ActivityServiceImpl implements ActivityService {
     public Map<String, Object> activityById(Integer activityId) {
         if (activityId != null && activityId > 0) {
             ActivityVo activityVo = activityMapper.activityById(activityId);
+            //TODO 修改查询预留
+            if (false) {
+                String[] strings = activityVo.getDescContent().split("<img");
+                List<String> editImage = new ArrayList<>();
+                String editText = "";
+                for (String string : strings) {
+                    if (string.contains("src=")) {
+                        editImage.add(string.substring(string.indexOf("src=\"") + 5, string.indexOf("\"/")));
+                    } else {
+                        if (editText.equals(string)) {
+                            editText = string;
+                        } else {
+                            editText += string;
+                        }
+
+                    }
+                }
+                activityVo.setEditDescImgUrl(editImage);
+                activityVo.setDescContent(editText);
+
+            }
             return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, activityVo);
         } else {
             return Constants.MAP_PARAM_MISS;
