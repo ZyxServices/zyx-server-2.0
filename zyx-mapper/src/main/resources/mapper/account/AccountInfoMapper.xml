@@ -33,15 +33,6 @@
 
     <resultMap id="queryAccountInfo" type="com.zyx.vo.account.QueryUserInfoVo">
         <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="name" property="name" jdbcType="VARCHAR"/>
-        <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
-        <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
-        <result column="phone" property="phone" jdbcType="INTEGER"/>
-        <result column="birthday" property="birthday" jdbcType="BIGINT"/>
-        <result column="sex" property="sex" jdbcType="INTEGER"/>
-        <result column="idcard" property="idcard" jdbcType="VARCHAR"/>
-        <result column="mask" property="mask" jdbcType="INTEGER"/>
-        <result column="offcial" property="offcial" jdbcType="INTEGER"/>
         <association property="level" column="{userId=id}" select="com.zyx.mapper.point.UserPointMapper.queryUserPointWithMap"/>
     </resultMap>
 
@@ -56,10 +47,11 @@
 
     <resultMap id="MyCenterInfoVoResultMap" type="com.zyx.vo.account.MyCenterInfoVo">
         <id column="Id" property="id" jdbcType="INTEGER"/>
-        <association property="gz" column="id" select="selectGZCount"></association>
-        <association property="fs" column="id" select="selectFSCount"></association>
-        <association property="dt" column="id" select="selectDTCount"></association>
-        <association property="accountAuth" column="id" select="selectAuthByUserId"></association>
+        <association property="gz" column="id" select="selectGZCount"/>
+        <association property="fs" column="id" select="selectFSCount"/>
+        <association property="dt" column="id" select="selectDTCount"/>
+        <association property="coin" column="id" select="selectCoinCount"/>
+        <!--<association property="accountAuth" column="id" select="selectAuthByUserId"/>-->
         <association property="level" column="{userId=id}" select="com.zyx.mapper.point.UserPointMapper.queryUserPointWithMap"/>
     </resultMap>
 
@@ -155,15 +147,19 @@
     </select>
 
     <select id="selectGZCount" parameterType="int" resultType="int">
-        SELECT count(id) FROM USER_ATTENTION WHERE from_user_id = #{user_id} and rel_type = 1
+        SELECT count(id) FROM user_attention WHERE from_user_id = #{user_id} and rel_type = 1
     </select>
 
     <select id="selectFSCount" parameterType="int" resultType="int">
-        SELECT count(id) FROM USER_ATTENTION WHERE to_user_id = #{user_id} and rel_type = 1
+        SELECT count(id) FROM user_attention WHERE to_user_id = #{user_id} and rel_type = 1
     </select>
 
     <select id="selectDTCount" parameterType="int" resultType="int">
         SELECT count(id) FROM concern WHERE user_id = #{user_id}
+    </select>
+
+    <select id="selectCoinCount" parameterType="int" resultType="java.lang.Integer">
+        SELECT coin FROM t_sport_coin WHERE user_id = #{user_id}
     </select>
 
     <select id="selectAccountAuthCount" parameterType="int" resultType="int">

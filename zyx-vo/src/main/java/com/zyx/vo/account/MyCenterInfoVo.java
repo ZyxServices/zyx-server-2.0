@@ -54,6 +54,11 @@ public class MyCenterInfoVo implements Serializable {
      */
     private Integer dt = 0;
 
+    /**
+     * 运动币
+     */
+    private Integer coin = 0;
+
     private AccountAuthVo accountAuth;
 
     private UserPointVo level;
@@ -152,6 +157,14 @@ public class MyCenterInfoVo implements Serializable {
 
     public void setDt(Integer dt) {
         this.dt = dt;
+    }
+
+    public Integer getCoin() {
+        return coin;
+    }
+
+    public void setCoin(Integer coin) {
+        this.coin = coin;
     }
 
     public AccountAuthVo getAccountAuth() {
