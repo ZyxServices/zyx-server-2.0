@@ -26,6 +26,8 @@ public class AccountAttentionVo implements Serializable {
 
     private UserPointVo level;
 
+    private String signature;
+
     public Integer getId() {
         return id;
     }
@@ -66,6 +68,18 @@ public class AccountAttentionVo implements Serializable {
         this.level = level;
     }
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
+    }
+
     @Override
     public String toString() {
         return "AccountAttentionVo{" +
@@ -73,6 +87,8 @@ public class AccountAttentionVo implements Serializable {
                 ", nickname='" + nickname + '\'' +
                 ", avatar='" + avatar + '\'' +
                 ", authInfo='" + authInfo + '\'' +
+                ", level=" + level +
+                ", signature='" + signature + '\'' +
                 '}';
     }
 }
