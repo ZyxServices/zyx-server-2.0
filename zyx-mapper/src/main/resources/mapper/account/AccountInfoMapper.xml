@@ -28,12 +28,12 @@
     <resultMap id="AccountInfoMap" type="com.zyx.vo.account.AccountInfoVo">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="phone" property="phone" jdbcType="INTEGER"/>
-        <association property="level" column="{userId=id}" select="com.zyx.mapper.point.UserPointMapper.queryUserPointWithMap"/>
+        <association property="level" column="{userId=id}" select="com.zyx.mapper.point.UserPointMapper.queryUserLevelWithView"/>
     </resultMap>
 
     <resultMap id="queryAccountInfo" type="com.zyx.vo.account.QueryUserInfoVo">
         <id column="id" property="id" jdbcType="INTEGER"/>
-        <association property="level" column="{userId=id}" select="com.zyx.mapper.point.UserPointMapper.queryUserPointWithMap"/>
+        <association property="level" column="{userId=id}" select="com.zyx.mapper.point.UserPointMapper.queryUserLevelWithView"/>
     </resultMap>
 
     <resultMap id="QueryAccountAttentionVo" type="com.zyx.vo.account.AccountAttentionVo">
@@ -42,7 +42,7 @@
         <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
         <result column="authInfo" property="authInfo" jdbcType="VARCHAR"/>
         <result column="signature" property="signature" jdbcType="VARCHAR"/>
-        <association property="level" column="{userId=id}" select="com.zyx.mapper.point.UserPointMapper.queryUserPointWithMap"/>
+        <association property="level" column="{userId=id}" select="com.zyx.mapper.point.UserPointMapper.queryUserLevelWithView"/>
     </resultMap>
 
     <resultMap id="MyCenterInfoVoResultMap" type="com.zyx.vo.account.MyCenterInfoVo">
@@ -52,7 +52,7 @@
         <association property="dt" column="id" select="selectDTCount"/>
         <association property="coin" column="id" select="selectCoinCount"/>
         <!--<association property="accountAuth" column="id" select="selectAuthByUserId"/>-->
-        <association property="level" column="{userId=id}" select="com.zyx.mapper.point.UserPointMapper.queryUserPointWithMap"/>
+        <association property="level" column="{userId=id}" select="com.zyx.mapper.point.UserPointMapper.queryUserLevelWithView"/>
     </resultMap>
 
     <select id="selectAccountByPhone" parameterType="String" resultType="int">

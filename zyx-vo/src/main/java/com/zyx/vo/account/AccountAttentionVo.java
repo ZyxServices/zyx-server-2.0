@@ -26,7 +26,7 @@ public class AccountAttentionVo implements Serializable {
 
     private UserPointVo level;
 
-    private String signature;
+    private String signature = "";
 
     public Integer getId() {
         return id;

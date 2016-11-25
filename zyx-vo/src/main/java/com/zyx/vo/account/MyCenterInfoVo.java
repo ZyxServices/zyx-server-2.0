@@ -37,7 +37,7 @@ public class MyCenterInfoVo implements Serializable {
     /**
      * 签名
      */
-    private String signature;
+    private String signature = "";
 
     /**
      * 关注数量
