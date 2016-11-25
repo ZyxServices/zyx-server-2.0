@@ -22,6 +22,9 @@
     <!-- 我的动态接口 -->
     <dubbo:service interface="com.zyx.rpc.user.MyConcernFacade" ref="myConcernFacade" timeout="10000"/>
 
+    <!-- 我的装备秀接口 -->
+    <dubbo:service interface="com.zyx.rpc.user.MyEquipmentFacade" ref="myEquipmentFacade" timeout="10000"/>
+
     <!-- 签到接口 -->
     <dubbo:service interface="com.zyx.rpc.user.UserMarkFacade" ref="userMarkFacade" timeout="10000"/>
 

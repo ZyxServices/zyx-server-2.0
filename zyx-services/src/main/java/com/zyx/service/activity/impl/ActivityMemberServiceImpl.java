@@ -8,10 +8,14 @@ import com.zyx.param.activity.ActivityMemberParam;
 import com.zyx.param.activity.QueryActivityMemberParam;
 import com.zyx.service.activity.ActivityMemberService;
 import com.zyx.utils.MapUtils;
+import com.zyx.vo.activity.ActivityListVo;
 import com.zyx.vo.activity.ActivityVo;
+import com.zyx.vo.activity.MemberActivityVo;
+import com.zyx.vo.activity.MemberUserVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -55,8 +59,8 @@ public class ActivityMemberServiceImpl implements ActivityMemberService {
             }
             memberParam.setPageNumber((memberParam.getPageNumber() - 1) * memberParam.getNumber());
 
-            List<ActivityVo> activityVos = activityMemberMapper.findMemberById(memberParam);
-            return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", activityVos);
+            List<MemberUserVo> memberActivityVos = activityMemberMapper.findMemberById(memberParam);
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", memberActivityVos);
         } else {
             return Constants.MAP_PARAM_MISS;
         }
@@ -70,8 +74,12 @@ public class ActivityMemberServiceImpl implements ActivityMemberService {
             }
             memberParam.setPageNumber((memberParam.getPageNumber() - 1) * memberParam.getNumber());
 
-            List<ActivityVo> activityVos = activityMemberMapper.findMemberByUserId(memberParam);
-            return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", activityVos);
+            List<MemberActivityVo> memberByUserId = activityMemberMapper.findMemberByUserId(memberParam);
+            List<ActivityListVo> activityListVos = new ArrayList<>();
+            memberByUserId.stream().filter(e -> e != null).forEach(s ->{
+                activityListVos.add(s.getActivity());
+            });
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", activityListVos);
         } else {
             return Constants.MAP_PARAM_MISS;
         }

@@ -4,6 +4,7 @@ import com.zyx.constants.Constants;
 import com.zyx.constants.zoom.ZoomConstants;
 import com.zyx.entity.zoom.Equip;
 import com.zyx.mapper.zoom.EquipMapper;
+import com.zyx.param.user.UserEquipmentParam;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.zoom.EquipService;
 import com.zyx.utils.MapUtils;
@@ -76,5 +77,14 @@ public class EquipServiceImpl extends BaseServiceImpl<Equip> implements EquipSer
         }
         EquipDetailsVo detailsVos = equipMapper.queryOne(eId);
         return MapUtils.buildSuccessMap(ZoomConstants.SUCCESS, ZoomConstants.SUCCESS_MSG, detailsVos);
+    }
+
+    @Override
+    public Map<String, Object> queryMyList(UserEquipmentParam userEquipmentParam) {
+        if (Objects.equals(userEquipmentParam.getUserId(), null)) {
+            return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30009, ZoomConstants.PG_ERROR_CODE_30009_MSG);
+        }
+        List<EquipDetailsVo> list = equipMapper.queryMyList(userEquipmentParam);
+        return MapUtils.buildSuccessMap(ZoomConstants.SUCCESS, ZoomConstants.SUCCESS_MSG, list);
     }
 }

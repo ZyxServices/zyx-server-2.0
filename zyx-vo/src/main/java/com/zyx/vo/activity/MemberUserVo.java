@@ -4,6 +4,7 @@ import com.zyx.vo.account.AccountAttentionVo;
 import com.zyx.vo.account.AccountAuthVo;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Rainbow
@@ -24,7 +25,7 @@ public class MemberUserVo implements Serializable{
     /**
      * 用户ID
      */
-    private AccountAttentionVo user;
+    private List<AccountAttentionVo> user;
 
     /**
      * 报名时间
@@ -52,11 +53,11 @@ public class MemberUserVo implements Serializable{
         this.activityId = activityId;
     }
 
-    public AccountAttentionVo getUser() {
+    public List<AccountAttentionVo> getUser() {
         return user;
     }
 
-    public void setUser(AccountAttentionVo user) {
+    public void setUser(List<AccountAttentionVo> user) {
         this.user = user;
     }
 

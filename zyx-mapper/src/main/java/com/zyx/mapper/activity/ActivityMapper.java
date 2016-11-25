@@ -4,6 +4,7 @@ import com.zyx.entity.activity.Activity;
 import com.zyx.mapper.BaseMapper;
 import com.zyx.param.activity.MyActivityListParam;
 import com.zyx.param.activity.QueryActivityParam;
+import com.zyx.vo.activity.ActivityListVo;
 import com.zyx.vo.activity.ActivityVo;
 import org.springframework.stereotype.Repository;
 
@@ -27,14 +28,14 @@ public interface ActivityMapper extends BaseMapper<Activity> {
      * @param queryActivityParam
      * @return
      */
-    List<ActivityVo> queryActivity(QueryActivityParam queryActivityParam);
+    List<ActivityListVo> queryActivity(QueryActivityParam queryActivityParam);
 
     /**
      * 通过用户ID 查询活动
      * @param myActivityListParam
      * @return
      */
-    List<ActivityVo> myActivityList(MyActivityListParam myActivityListParam);
+    List<ActivityListVo> myActivityList(MyActivityListParam myActivityListParam);
 
     /**
      * 通过ID查询活动详细信息

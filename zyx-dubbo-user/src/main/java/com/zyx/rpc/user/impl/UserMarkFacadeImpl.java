@@ -4,7 +4,6 @@ import com.alibaba.dubbo.common.json.JSON;
 import com.zyx.constants.account.AccountConstants;
 import com.zyx.entity.user.UserMarkInfo;
 import com.zyx.param.user.UserMarkParam;
-import com.zyx.rpc.common.TokenFacade;
 import com.zyx.rpc.user.UserMarkFacade;
 import com.zyx.service.user.UserMarkService;
 import com.zyx.utils.DateUtils;
@@ -34,17 +33,9 @@ public class UserMarkFacadeImpl implements UserMarkFacade {
     @Autowired
     private UserMarkService userMarkService;
 
-    @Autowired
-    private TokenFacade tokenFacade;
-
     @Override
     public Map<String, Object> sign(UserMarkParam userMarkParam) {
         try {
-            // 判断token是否失效
-            Map<String, Object> map = tokenFacade.validateToken(userMarkParam.getToken(), userMarkParam.getUserId());
-            if (map != null) {
-                return map;
-            }
             // 查询用户签到信息
             MarkInfoVo markInfoVo = userMarkService.queryMarkInfo(userMarkParam);
             if (markInfoVo != null) {// 查询到进行更新
@@ -60,11 +51,6 @@ public class UserMarkFacadeImpl implements UserMarkFacade {
     @Override
     public Map<String, Object> querySign(UserMarkParam userMarkParam) {
         try {
-            // 判断token是否失效
-            Map<String, Object> map = tokenFacade.validateToken(userMarkParam.getToken(), userMarkParam.getUserId());
-            if (map != null) {
-                return map;
-            }
             // 查询用户签到信息
             MarkInfoVo markInfoVo = userMarkService.queryMarkInfo(userMarkParam);
             if (markInfoVo != null) {

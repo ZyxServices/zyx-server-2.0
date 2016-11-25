@@ -18,16 +18,37 @@
         <result column="city" property="city" jdbcType="VARCHAR"/>
         <result column="target_url" property="targetUrl" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
-        <association property="user" column="user_id" select="com.zyx.mapper.account.AccountInfoMapper.selectAttentionAccountById"/>
+        <association property="user" column="user_id"
+                     select="com.zyx.mapper.account.AccountInfoMapper.selectAttentionAccountById"/>
     </resultMap>
 
-    <select id="queryActivity" parameterType="com.zyx.param.activity.QueryActivityParam" resultMap="activityVo">
+    <resultMap id="activityListVo" type="com.zyx.vo.activity.ActivityListVo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="img_urls" property="imgUrls" jdbcType="VARCHAR"/>
+        <result column="activity_type" property="activityType" jdbcType="INTEGER"/>
+        <result column="start_time" property="startTime" jdbcType="BIGINT"/>
+        <result column="end_time" property="endTime" jdbcType="BIGINT"/>
+        <result column="last_time" property="lastTime" jdbcType="BIGINT"/>
+        <result column="max_people" property="maxPeople" jdbcType="INTEGER"/>
+        <result column="payment_type" property="paymentType" jdbcType="INTEGER"/>
+        <result column="price" property="price" jdbcType="DECIMAL"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <association property="memberPeople" column="id"
+                     select="com.zyx.mapper.activity.ActivityMemberMapper.countMemberByActivityId"></association>
+        <association property="zan" column="id" select="zanExist"></association>
+        <association property="commentNumber" column="id" select="zanExist"></association>
+        <association property="user" column="user_id"
+                     select="com.zyx.mapper.account.AccountInfoMapper.selectAttentionAccountById"/>
+    </resultMap>
+
+    <select id="queryActivity" parameterType="com.zyx.param.activity.QueryActivityParam" resultMap="activityListVo">
         select * from activity where 1=1
         <if test="activityState == 1">
-           AND last_time &gt; #{nowTime}
+            AND last_time &gt; #{nowTime}
         </if>
         <if test="activityState == 2">
-           AND (end_time - start_time) &lt; 0
+            AND (end_time - start_time) &lt; 0
         </if>
         <if test="activityType == 1">
             AND activity_type = 1
@@ -35,17 +56,20 @@
         <if test="activityType == 2">
             AND activity_type = 2
         </if>
+        <if test="city != null and city != ''">
+            AND city = #{city}
+        </if>
         AND del != 1 AND mask = 0 AND type = 1
-        ORDER BY  create_time desc
+        ORDER BY create_time desc
         <if test="pageNumber != null and number != null">
             limit #{pageNumber}, #{number}
         </if>
     </select>
 
-    <select id="myActivityList" parameterType="com.zyx.param.activity.MyActivityListParam" resultMap="activityVo">
+    <select id="myActivityList" parameterType="com.zyx.param.activity.MyActivityListParam" resultMap="activityListVo">
         select * from activity where user_id = #{userId}
         AND del != 1 AND mask = 0
-        ORDER BY  create_time desc
+        ORDER BY create_time desc
         <if test="pageNumber != null and number != null">
             limit #{pageNumber}, #{number}
         </if>
@@ -53,5 +77,17 @@
 
     <select id="activityById" parameterType="java.lang.Integer" resultMap="activityVo">
         select * from activity where id = #{activityId} AND del != 1 AND mask = 0
+    </select>
+
+    <select id="activityListById" parameterType="java.lang.Integer" resultMap="activityListVo">
+        select * from activity where id = #{activityId} AND del != 1 AND mask = 0
+    </select>
+
+    <select id="zanExist" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT count(id) FROM zan WHERE body_id=#{bodyId} AND body_type=4
+    </select>
+
+    <select id="commentCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT COUNT(id) FROM comment WHERE comment_type=4 AND comment_id=#{commentId}
     </select>
 </mapper>
