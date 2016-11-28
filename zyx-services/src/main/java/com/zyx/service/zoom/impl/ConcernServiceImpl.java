@@ -120,7 +120,7 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
             if (!Objects.equals(loginUserId, null)) {
                 ids.add(loginUserId);
             }
-            List<MyFollowVo> myFollowVos = concernMapper.myFollowList(ids, (start + 1) * pageSize, pageSize);
+            List<MyFollowVo> myFollowVos = concernMapper.myFollowList(ids, (start - 1) * pageSize, pageSize);
 //            setPageViews(myFollowVos);
             return MapUtils.buildSuccessMap(ZoomConstants.SUCCESS, ZoomConstants.PG_ERROR_CODE_34000_MSG, myFollowVos);
         } catch (Exception e) {

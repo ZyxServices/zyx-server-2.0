@@ -85,4 +85,12 @@ public interface ZoomFacade {
      */
     Map<String,Object> queryOne(Integer eId);
 
+
+    /**取消关注
+     * @param fromUserId
+     * @param toUserId
+     * @return
+     */
+    Map<String,Object> unFollow(Integer fromUserId, Integer toUserId);
+
 }

@@ -34,6 +34,7 @@
         <result column="del" property="del" jdbcType="INTEGER"/>
         <result column="mask" property="mask" jdbcType="INTEGER"/>
         <result column="equip_type" property="equipType" jdbcType="INTEGER"/>
+        <result column="img_url" property="imgUrl" jdbcType="LONGVARCHAR"/>
 
     </resultMap>
 

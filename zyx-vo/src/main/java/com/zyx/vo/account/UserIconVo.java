@@ -1,5 +1,7 @@
 package com.zyx.vo.account;
 
+import com.zyx.vo.point.UserPointVo;
+
 import java.io.Serializable;
 
 /**
@@ -16,7 +18,7 @@ public class UserIconVo implements Serializable {
     private String avatar;
     private Integer authenticate;
 
-    private String level;
+    private UserPointVo level;
 
     public Integer getId() {
         return id;
@@ -50,11 +52,11 @@ public class UserIconVo implements Serializable {
         this.authenticate = authenticate;
     }
 
-    public String getLevel() {
+    public UserPointVo getLevel() {
         return level;
     }
 
-    public void setLevel(String level) {
+    public void setLevel(UserPointVo level) {
         this.level = level;
     }
 }
