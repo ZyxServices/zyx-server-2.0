@@ -58,4 +58,15 @@ public class ActivityMemberFacadeImpl implements ActivityMemberFacade {
             return Constants.MAP_500;
         }
     }
+
+    @Override
+    public Map<String, Object> delMember(QueryActivityMemberParam memberParam) {
+        try {
+            return activityMemberService.delMember(memberParam);
+        } catch (Exception e) {
+            logger.error(e);
+            e.printStackTrace();
+            return Constants.MAP_500;
+        }
+    }
 }

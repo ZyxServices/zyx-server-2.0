@@ -20,7 +20,7 @@ public class VerificationUtils {
      * @return
      */
     public static boolean dataSuccessAndDataNotNull(Map<String, Object> objectMap){
-        if(objectMap.get(Constants.SUCCESS).equals("200") && objectMap.get(Constants.DATA) != null && !objectMap.get(Constants.DATA).equals("") && !objectMap.get(Constants.DATA).equals("null")){
+        if(objectMap.get(Constants.STATE).equals(200) && objectMap.get(Constants.DATA) != null && !objectMap.get(Constants.DATA).equals("") && !objectMap.get(Constants.DATA).equals("null")){
             return true;
         }else{
             return false;
