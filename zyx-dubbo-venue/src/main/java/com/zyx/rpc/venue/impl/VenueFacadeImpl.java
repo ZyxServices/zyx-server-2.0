@@ -1,5 +1,6 @@
 package com.zyx.rpc.venue.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.zyx.constants.Constants;
 import com.zyx.entity.venue.Venue;
 import com.zyx.param.venue.FindVenueParam;
@@ -43,11 +44,15 @@ public class VenueFacadeImpl implements VenueFacade {
     @Override
     public Map<String, Object> findVenue(FindVenueParam param) {
         try {
-            String sValue = stringRedisTemplate.opsForValue().get(Constants.VENUE_REDIS_List_KEY);
+            String sValue = stringRedisTemplate.opsForValue().get(Constants.VENUE_REDIS_List_KEY + "_" + param.getPageNumber() + param.getNumber());
             if (sValue == null) {
                 Map<String, Object> map = venueService.findVenue(param);
                 if (VerificationUtils.dataSuccessAndDataNotNull(map)) {
-                    stringRedisTemplate.opsForValue().set(Constants.VENUE_REDIS_List_KEY, map.get(Constants.DATA).toString(), 2 * 60, TimeUnit.SECONDS);
+                    if(map.get(Constants.DATA) != null && !map.get(Constants.DATA).equals("null") && !map.get(Constants.DATA).equals("")){
+                        String toString = JSONObject.toJSON(map.get(Constants.DATA)).toString();
+                        String key = Constants.VENUE_REDIS_List_KEY + "_" + param.getPageNumber() + param.getNumber();
+                        stringRedisTemplate.opsForValue().set(key, toString, 2 * 60, TimeUnit.SECONDS);
+                    }
                 }
                 return map;
             } else {
