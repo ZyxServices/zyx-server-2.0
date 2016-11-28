@@ -23,6 +23,8 @@ public class UserPointVo implements Serializable {
 //
 //    private Integer pointType;
 
+    private Integer step;
+
     private Long pointCount;
 
     private String pointDesc;
@@ -41,6 +43,14 @@ public class UserPointVo implements Serializable {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public Integer getStep() {
+        return step;
+    }
+
+    public void setStep(Integer step) {
+        this.step = step;
     }
 
     public Long getPointCount() {

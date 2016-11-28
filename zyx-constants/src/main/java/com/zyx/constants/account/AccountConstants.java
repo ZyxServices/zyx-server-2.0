@@ -1,6 +1,5 @@
 package com.zyx.constants.account;
 
-import com.sun.prism.impl.BaseContext;
 import com.zyx.constants.Constants;
 
 /**

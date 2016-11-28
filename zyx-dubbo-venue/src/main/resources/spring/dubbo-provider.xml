@@ -16,6 +16,6 @@
 	<dubbo:protocol name="dubbo" port="20889" threads="200" />
 		
 	<!-- 用户服务接口 -->
-	<dubbo:service interface="com.zyx.rpc.venue.VenueFacade" ref="venueFacade" timeout="10000"/>
+	<dubbo:service interface="com.zyx.rpc.venue.VenueFacade" ref="venueFacade"/>
 
 </beans>

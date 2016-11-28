@@ -31,25 +31,29 @@
         <!--<result column="modify_time" property="modifyTime" jdbcType="BIGINT"/>-->
         <!--<result column="create_time" property="createTime" jdbcType="BIGINT"/>-->
         <!--<result column="point_type" property="pointType" jdbcType="INTEGER"/>-->
-        <result column="point_count" property="pointCount" jdbcType="BIGINT"/>
-        <association property="pointDesc" column="{point_type=point_type,point_count=point_count}" select="queryUserPointDesc"/>
+        <!--<association property="step" column="{point_type=point_type,point_count=point_count}" select="queryUserPointStep"/>-->
+        <!--<association property="pointDesc" column="{point_type=point_type,point_count=point_count}" select="queryUserPointDesc"/>-->
     </resultMap>
 
     <select id="queryUserPointNameWithMap" parameterType="java.util.Map" resultType="String">
         select asss.name as level from (select u.id, u.nickname, up.point_count, up.point_type, up.`name` from `user` as u LEFT JOIN (select user_point.*,`level`.`name` from user_point LEFT JOIN `level` ON user_point.point_type = `level`.app_type where user_id = #{userId} and point_type = 1 and user_point.point_count &gt;= `level`.min_score and user_point.point_count &lt;= `level`.max_score and `level`.del = 0 LIMIT 1) as up ON u.id = up.user_id) as asss where asss.id = #{userId}
     </select>
 
-    <select id="queryUserPointWithMap" parameterType="java.util.Map" resultMap="UserPointMap">
-        SELECT up.* FROM user_point as up where up.user_id = #{userId} and up.point_type = 1 limit 1
+    <select id="queryUserLevelWithView" parameterType="java.util.Map" resultMap="UserPointMap">
+        SELECT up.* FROM view_user_level as up where up.user_id = #{userId} and up.point_type = 1 limit 1
     </select>
 
     <select id="queryUserPoint" parameterType="com.zyx.param.point.UserPointParam" resultMap="UserPointMap">
-        SELECT up.* FROM user_point as up where up.user_id = #{userId} and up.point_type = #{pointType} limit 1
+        SELECT up.* FROM view_user_level as up where up.user_id = #{userId} and up.point_type = #{pointType} limit 1
     </select>
 
-    <select id="queryUserPointDesc" parameterType="java.util.Map" resultType="String">
-        SELECT l.`name` FROM `level` as l where l.app_type = #{point_type} and l.max_score &gt;= #{point_count} and l.min_score &lt;= #{point_count} and l.del = 0 limit 1
-    </select>
+    <!--<select id="queryUserPointDesc" parameterType="java.util.Map" resultType="String">-->
+        <!--SELECT l.`name` FROM `level` as l where l.app_type = #{point_type} and l.max_score &gt;= #{point_count} and l.min_score &lt;= #{point_count} and l.del = 0 limit 1-->
+    <!--</select>-->
+
+    <!--<select id="queryUserPointStep" parameterType="java.util.Map" resultType="Integer">-->
+        <!--SELECT l.`step` FROM `level` as l where l.app_type = #{point_type} and l.max_score &gt;= #{point_count} and l.min_score &lt;= #{point_count} and l.del = 0 limit 1-->
+    <!--</select>-->
 
     <insert id="modifyUserPoint" parameterType="com.zyx.param.point.UserPointParam">
         update user_point set modify_time = #{modifyTime}, point_count = point_count + #{pointCount} where id = #{id}

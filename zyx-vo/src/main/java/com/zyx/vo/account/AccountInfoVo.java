@@ -38,7 +38,7 @@ public class AccountInfoVo implements Serializable {
 
     private long birthday;
 
-    private String signature;
+    private String signature = "";
 
     private String address;
 

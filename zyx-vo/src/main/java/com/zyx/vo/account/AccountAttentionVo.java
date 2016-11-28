@@ -26,7 +26,9 @@ public class AccountAttentionVo implements Serializable {
 
     private UserPointVo level;
 
-    private String signature;
+    private String signature = "";
+
+    private String phone;
 
     public Integer getId() {
         return id;
@@ -78,6 +80,14 @@ public class AccountAttentionVo implements Serializable {
 
     public void setSignature(String signature) {
         this.signature = signature;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     @Override

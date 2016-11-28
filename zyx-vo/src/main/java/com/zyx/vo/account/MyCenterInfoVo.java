@@ -37,7 +37,7 @@ public class MyCenterInfoVo implements Serializable {
     /**
      * 签名
      */
-    private String signature;
+    private String signature = "";
 
     /**
      * 关注数量
@@ -53,6 +53,11 @@ public class MyCenterInfoVo implements Serializable {
      * 动态数量
      */
     private Integer dt = 0;
+
+    /**
+     * 运动币
+     */
+    private Integer coin = 0;
 
     private AccountAuthVo accountAuth;
 
@@ -152,6 +157,14 @@ public class MyCenterInfoVo implements Serializable {
 
     public void setDt(Integer dt) {
         this.dt = dt;
+    }
+
+    public Integer getCoin() {
+        return coin;
+    }
+
+    public void setCoin(Integer coin) {
+        this.coin = coin;
     }
 
     public AccountAuthVo getAccountAuth() {

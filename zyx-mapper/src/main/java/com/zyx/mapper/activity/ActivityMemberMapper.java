@@ -37,4 +37,18 @@ public interface ActivityMemberMapper extends BaseMapper<ActivityMember> {
      */
     List<MemberActivityVo> findMemberByUserId(QueryActivityMemberParam memberParam);
 
+    /**
+     * 验证是否存在数据
+     * @param memberParam
+     * @return
+     */
+    List<MemberActivityVo> verificationMember(ActivityMember memberParam);
+
+    /**
+     * 取消报名
+     * @param memberParam
+     * @return
+     */
+    int delMember(QueryActivityMemberParam memberParam);
+
 }

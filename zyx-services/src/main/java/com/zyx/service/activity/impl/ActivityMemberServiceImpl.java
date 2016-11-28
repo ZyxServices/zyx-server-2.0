@@ -40,6 +40,12 @@ public class ActivityMemberServiceImpl implements ActivityMemberService {
             activityMember.setActivityId(memberParam.getActivityId());
             activityMember.setJoinTime(System.currentTimeMillis());
             activityMember.setCreateTime(System.currentTimeMillis());
+
+            List<MemberActivityVo> memberActivityVos = activityMemberMapper.verificationMember(activityMember);
+            if(memberActivityVos != null && memberActivityVos.size() > 0){
+                return MapUtils.buildSuccessMap(ActivityConstants.AUTH_ERROR_10005, "活动报名信息已存在", null);
+            }
+
             int insert = activityMemberMapper.insert(activityMember);
             if (insert > 0) {
                 return MapUtils.buildSuccessMap(Constants.SUCCESS, "报名成功", null);
@@ -81,6 +87,20 @@ public class ActivityMemberServiceImpl implements ActivityMemberService {
             });
             return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", activityListVos);
         } else {
+            return Constants.MAP_PARAM_MISS;
+        }
+    }
+
+    @Override
+    public Map<String, Object> delMember(QueryActivityMemberParam memberParam) {
+        if(memberParam.getActivityId() != null && memberParam.getUserId() != null){
+            int i = activityMemberMapper.delMember(memberParam);
+            if(i>0){
+                return MapUtils.buildSuccessMap(Constants.SUCCESS, "取消报名成功", null);
+            }else{
+                return MapUtils.buildSuccessMap(ActivityConstants.AUTH_ERROR_10010, "取消报名失败", null);
+            }
+        }else{
             return Constants.MAP_PARAM_MISS;
         }
     }
