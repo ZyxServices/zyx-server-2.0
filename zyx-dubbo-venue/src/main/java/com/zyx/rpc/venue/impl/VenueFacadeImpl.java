@@ -44,14 +44,15 @@ public class VenueFacadeImpl implements VenueFacade {
     @Override
     public Map<String, Object> findVenue(FindVenueParam param) {
         try {
-            String sValue = stringRedisTemplate.opsForValue().get(Constants.VENUE_REDIS_List_KEY + "_" + param.getPageNumber() + param.getNumber());
+            String keyHash = "_" + param.getPageNumber() + param.getNumber();
+            Object sValue = stringRedisTemplate.opsForHash().get(Constants.VENUE_REDIS_List_KEY, keyHash);
             if (sValue == null) {
                 Map<String, Object> map = venueService.findVenue(param);
                 if (VerificationUtils.dataSuccessAndDataNotNull(map)) {
-                    if(map.get(Constants.DATA) != null && !map.get(Constants.DATA).equals("null") && !map.get(Constants.DATA).equals("")){
+                    if (map.get(Constants.DATA) != null && !map.get(Constants.DATA).equals("null") && !map.get(Constants.DATA).equals("")) {
                         String toString = JSONObject.toJSON(map.get(Constants.DATA)).toString();
-                        String key = Constants.VENUE_REDIS_List_KEY + "_" + param.getPageNumber() + param.getNumber();
-                        stringRedisTemplate.opsForValue().set(key, toString, 2 * 60, TimeUnit.SECONDS);
+                        stringRedisTemplate.opsForHash().put(Constants.VENUE_REDIS_List_KEY, "_" + param.getPageNumber() + param.getNumber(), toString);
+                        stringRedisTemplate.expire(Constants.VENUE_REDIS_List_KEY, 2 * 60, TimeUnit.SECONDS);
                     }
                 }
                 return map;
