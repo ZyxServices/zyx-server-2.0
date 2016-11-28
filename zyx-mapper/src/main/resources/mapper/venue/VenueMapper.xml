@@ -63,6 +63,9 @@
         <if test="type == 4">
             ORDER BY a.level desc
         </if>
+        <if test="pageNumber != null and number != null">
+            limit #{pageNumber}, #{number}
+        </if>
     </select>
 
     <!--<select id="selectUserFpVenus" parameterType="java.lang.Integer" resultType="com.zyx.entity.venue.Venue">-->
