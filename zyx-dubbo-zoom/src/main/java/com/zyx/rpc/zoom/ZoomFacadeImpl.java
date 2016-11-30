@@ -1,6 +1,7 @@
 package com.zyx.rpc.zoom;
 
 import com.zyx.constants.Constants;
+import com.zyx.constants.attention.UserAttentionConstants;
 import com.zyx.constants.zoom.ZoomConstants;
 import com.zyx.param.attention.AttentionParam;
 import com.zyx.service.account.AccountInfoService;
@@ -41,6 +42,9 @@ public class ZoomFacadeImpl implements ZoomFacade {
     @Resource
     private EquipService equipService;
 
+    @Resource
+    private UserAttentionService userAttentionService;
+
 
     @Override
     public Map<String, Object> addFollow(Integer fromUserId, Integer toUserId) {
@@ -48,6 +52,9 @@ public class ZoomFacadeImpl implements ZoomFacade {
             return ZoomConstants.MAP_500;
         }
         AttentionParam attentionParam = new AttentionParam(fromUserId, toUserId, 1);
+        if (userAttentionService.selectAttentionCount(attentionParam) > 0) {
+            return MapUtils.buildErrorMap(UserAttentionConstants.ATTENTION_70003, UserAttentionConstants.ATTENTION_70003_MSG);
+        }
         Integer result = attentionService.addAttention(attentionParam);
         if (result > 0) {
             return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.SUCCESS_MSG, result);
@@ -72,8 +79,8 @@ public class ZoomFacadeImpl implements ZoomFacade {
     }
 
     @Override
-    public Map<String, Object> addCern(Integer userId, Integer type,  String content, String cernImgurl, String videoUrl, Integer visible,String local) {
-        return concernService.addCern(userId, type, content, cernImgurl, videoUrl, visible,local);
+    public Map<String, Object> addCern(Integer userId, Integer type, String content, String cernImgurl, String videoUrl, Integer visible, String local) {
+        return concernService.addCern(userId, type, content, cernImgurl, videoUrl, visible, local);
     }
 
     @Override
@@ -94,5 +101,26 @@ public class ZoomFacadeImpl implements ZoomFacade {
     @Override
     public Map<String, Object> queryOne(Integer eId) {
         return equipService.queryOne(eId);
+    }
+
+    @Override
+    public Map<String, Object> unFollow(Integer fromUserId, Integer toUserId) {
+        try {
+//            // 判断token是否失效
+//            if (isTokenFailure(attentionParam.getToken())) {
+//                return UserAttentionConstants.MAP_TOKEN_FAILURE;
+//            }
+            AttentionParam attentionParam = new AttentionParam(fromUserId, toUserId);
+            attentionParam.setType(1);// 关注、粉丝
+            int result = userAttentionService.deleteAttention(attentionParam);
+            if (result == 1) {// 成功
+                return MapUtils.buildSuccessMap(UserAttentionConstants.SUCCESS, UserAttentionConstants.SUCCESS_MSG, result);
+            } else {
+                return MapUtils.buildErrorMap(UserAttentionConstants.ATTENTION_70004, UserAttentionConstants.ATTENTION_70004_MSG);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return UserAttentionConstants.MAP_500;
+        }
     }
 }

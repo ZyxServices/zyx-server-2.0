@@ -37,6 +37,10 @@ public class Equip extends BaseEntity {
     @ColumnType(jdbcType = JdbcType.INTEGER)
     private Integer equipType;
 
+    @Column
+    @ColumnType(jdbcType = JdbcType.LONGVARCHAR)
+    private String imgUrl;
+
     public String getTitle() {
         return title;
     }
@@ -91,5 +95,13 @@ public class Equip extends BaseEntity {
 
     public void setEquipType(Integer equipType) {
         this.equipType = equipType;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }

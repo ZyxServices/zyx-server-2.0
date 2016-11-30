@@ -46,7 +46,8 @@
         <!--<association property="zanCounts" column="id" select="zanSelect"/>-->
         <!--<association property="commentCounts" column="id" select="commentSelect"/>-->
         <!--<association property="userVo" column="user_id" select="userSelect"/>-->
-        <!--<association property="userAuthVo" column="user_id" select="userAuthSelect"/>-->
+        <association property="userAuthVo" column="user_id" select="userAuthSelect"/>
+        <association property="userIconVo" column="user_id" select="userSelect"/>
     </resultMap>
 
     <resultMap id="ConcernMyMapSwitch" type="com.zyx.vo.zoom.MyFollowVo" extends="ConcernResultMap">
@@ -63,8 +64,8 @@
 
 
     <!--<resultMap id="LiveInfoMap" type="com.zyx.vo.zoom.MyFollowVo" extends="ConcernMyMapSwitch">-->
-        <!--<association property="zanCounts" column="from_id" select="LiveZanSelect"/>-->
-        <!--<association property="commentCounts" column="from_id" select="LiveCommentSelect"/>-->
+    <!--<association property="zanCounts" column="from_id" select="LiveZanSelect"/>-->
+    <!--<association property="commentCounts" column="from_id" select="LiveCommentSelect"/>-->
     <!--</resultMap>-->
 
     <resultMap id="ActivityMap" type="com.zyx.vo.zoom.MyFollowVo" extends="ConcernMyMapSwitch">
@@ -73,8 +74,8 @@
     </resultMap>
 
     <!--<resultMap id="CircleItemMap" type="com.zyx.vo.zoom.MyFollowVo" extends="ConcernMyMapSwitch">-->
-        <!--<association property="zanCounts" column="from_id" select="CircleItemZanSelect"/>-->
-        <!--<association property="commentCounts" column="from_id" select="CircleItemCommentSelect"/>-->
+    <!--<association property="zanCounts" column="from_id" select="CircleItemZanSelect"/>-->
+    <!--<association property="commentCounts" column="from_id" select="CircleItemCommentSelect"/>-->
     <!--</resultMap>-->
 
     <resultMap id="userAttentionResultMap" type="com.zyx.entity.attention.UserAttention">
@@ -85,7 +86,15 @@
         <result column="rel_type" property="relType" jdbcType="INTEGER"/>
     </resultMap>
 
-    <select id="userSelect" parameterType="int" resultType="com.zyx.vo.account.UserIconVo">
+    <resultMap id="userSelectResultMap" type="com.zyx.vo.account.UserIconVo" >
+        <id column="Id" property="id" jdbcType="INTEGER"/>
+        <result column="nickName" property="nickName" jdbcType="VARCHAR"/>
+        <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
+        <result column="authenticate" property="authenticate" jdbcType="INTEGER"/>
+        <association property="level" column="{userId=id}" select="com.zyx.mapper.point.UserPointMapper.queryUserPointWithMap"/>
+    </resultMap>
+
+    <select id="userSelect" parameterType="int" resultMap="userSelectResultMap">
         SELECT nickname,avatar,id,authenticate FROM `user` WHERE id=#{user_id}
     </select>
 
@@ -97,13 +106,13 @@
         SELECT COUNT(id) FROM zan WHERE zan.body_type=1 AND zan.body_id=#{concernId}
     </select>
     <!--<select id="LiveZanSelect" parameterType="int" resultType="int">-->
-        <!--SELECT COUNT(id) FROM zan WHERE zan.body_type=4 AND zan.body_id=#{concernId}-->
+    <!--SELECT COUNT(id) FROM zan WHERE zan.body_type=4 AND zan.body_id=#{concernId}-->
     <!--</select>-->
     <select id="ActivityZanSelect" parameterType="int" resultType="int">
         SELECT COUNT(id) FROM zan WHERE zan.body_type=1 AND zan.body_id=#{concernId}
     </select>
     <!--<select id="CircleItemZanSelect" parameterType="int" resultType="int">-->
-        <!--SELECT COUNT(id) FROM zan WHERE zan.body_type=5 AND zan.body_id=#{concernId}-->
+    <!--SELECT COUNT(id) FROM zan WHERE zan.body_type=5 AND zan.body_id=#{concernId}-->
     <!--</select>-->
 
     <select id="commentSelect" parameterType="int" resultType="int">
@@ -111,7 +120,7 @@
     </select>
 
     <!--<select id="LiveCommentSelect" parameterType="int" resultType="int">-->
-        <!--SELECT COUNT(id) FROM comment WHERE comment.comment_type=4 AND comment_id=#{concernId}-->
+    <!--SELECT COUNT(id) FROM comment WHERE comment.comment_type=4 AND comment_id=#{concernId}-->
     <!--</select>-->
 
     <select id="ActivityCommentSelect" parameterType="int" resultType="int">
@@ -188,7 +197,7 @@
                 SELECT id FROM USER_ATTENTION where from_user_id = #{loginUserId} AND  to_user_id=#{cocernCreateId}
     </select>
 
-    <select id="getOne"  resultMap="ConcernMyMap">
+    <select id="getOne" resultMap="ConcernMyMap">
         SELECT * FROM concern WHERE id=#{id} AND state = 0
     </select>
 
