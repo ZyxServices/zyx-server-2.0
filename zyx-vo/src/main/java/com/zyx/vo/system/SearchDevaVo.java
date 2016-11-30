@@ -20,6 +20,8 @@ public class SearchDevaVo implements Serializable {
 
     private String imageUrl;
 
+    private Long createTime;
+
     public Integer getId() {
         return id;
     }
@@ -50,5 +52,13 @@ public class SearchDevaVo implements Serializable {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
     }
 }

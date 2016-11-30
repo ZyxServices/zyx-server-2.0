@@ -17,10 +17,6 @@ public class SearchDevaParam implements Serializable {
       */
     private Integer model;
 
-    private Integer number;
-
-    private Integer pageNumber;
-
     public Integer getModel() {
         return model;
     }
@@ -29,19 +25,4 @@ public class SearchDevaParam implements Serializable {
         this.model = model;
     }
 
-    public Integer getNumber() {
-        return number;
-    }
-
-    public void setNumber(Integer number) {
-        this.number = number;
-    }
-
-    public Integer getPageNumber() {
-        return pageNumber;
-    }
-
-    public void setPageNumber(Integer pageNumber) {
-        this.pageNumber = pageNumber;
-    }
 }
