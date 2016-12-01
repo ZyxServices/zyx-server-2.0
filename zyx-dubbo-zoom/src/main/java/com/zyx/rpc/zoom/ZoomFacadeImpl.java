@@ -4,6 +4,7 @@ import com.zyx.constants.Constants;
 import com.zyx.constants.attention.UserAttentionConstants;
 import com.zyx.constants.zoom.ZoomConstants;
 import com.zyx.param.attention.AttentionParam;
+import com.zyx.param.user.UserConcernParam;
 import com.zyx.service.account.AccountInfoService;
 import com.zyx.service.attention.UserAttentionService;
 import com.zyx.service.zoom.ConcernService;
@@ -122,5 +123,10 @@ public class ZoomFacadeImpl implements ZoomFacade {
             e.printStackTrace();
             return UserAttentionConstants.MAP_500;
         }
+    }
+
+    @Override
+    public Map<String, Object> getRecommend(UserConcernParam userConcernParam) {
+        return concernService.getRecommend(userConcernParam);
     }
 }

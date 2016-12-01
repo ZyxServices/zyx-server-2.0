@@ -19,6 +19,14 @@ public class UserConcernParam extends BaseParam {
     private Integer pageSize;
 
     private Integer page;
+    public UserConcernParam() {
+    }
+
+    public UserConcernParam(Integer userId, Integer page, Integer pageSize) {
+        this.userId = userId;
+        this.page = page;
+        this.pageSize = pageSize;
+    }
 
     public Integer getUserId() {
         return userId;

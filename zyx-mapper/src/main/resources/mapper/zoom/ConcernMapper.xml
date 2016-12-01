@@ -86,12 +86,13 @@
         <result column="rel_type" property="relType" jdbcType="INTEGER"/>
     </resultMap>
 
-    <resultMap id="userSelectResultMap" type="com.zyx.vo.account.UserIconVo" >
+    <resultMap id="userSelectResultMap" type="com.zyx.vo.account.UserIconVo">
         <id column="Id" property="id" jdbcType="INTEGER"/>
         <result column="nickName" property="nickName" jdbcType="VARCHAR"/>
         <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
         <result column="authenticate" property="authenticate" jdbcType="INTEGER"/>
-        <association property="level" column="{userId=id}" select="com.zyx.mapper.point.UserPointMapper.queryUserPointWithMap"/>
+        <association property="level" column="{userId=id}"
+                     select="com.zyx.mapper.point.UserPointMapper.queryUserLevelWithView"/>
     </resultMap>
 
     <select id="userSelect" parameterType="int" resultMap="userSelectResultMap">
@@ -205,5 +206,23 @@
     <update id="delConcern">
         UPDATE concern SET state=-1 WHERE id=#{id}
     </update>
+
+    <select id="getRecommend" resultType="java.util.List" resultMap="ConcernMyMapSwitch">
+        <!--SELECT * FROM concern WHERE user_id IN-->
+        <!--<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">-->
+            <!--#{item}-->
+        <!--</foreach>-->
+        <!--AND state = 0-->
+        <!--ORDER BY create_time DESC-->
+        <!--LIMIT #{start},#{end}-->
+        SELECT *,(SELECT count(id) from `comment` where comment_type=1 AND comment_id=concern.id) AS commentCounts FROM
+        concern WHERE user_id IN
+        <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        AND state = 0
+        ORDER BY commentCounts DESC
+        LIMIT #{start},#{end}
+    </select>
 
 </mapper>

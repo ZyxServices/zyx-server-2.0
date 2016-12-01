@@ -12,8 +12,11 @@ import com.zyx.mapper.system.ZanMapper;
 import com.zyx.param.attention.AttentionParam;
 import com.zyx.param.user.UserConcernParam;
 import com.zyx.service.BaseServiceImpl;
+import com.zyx.service.account.AccountInfoService;
 import com.zyx.service.zoom.ConcernService;
 import com.zyx.utils.MapUtils;
+import com.zyx.vo.account.AccountAttentionVo;
+import com.zyx.vo.attention.AttentionVo;
 import com.zyx.vo.zoom.MyFollowVo;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +43,9 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
 
     @Resource
     private ZanMapper zanMapper;
+
+    @Resource
+    private AccountInfoService accountInfoService;
 
     public ConcernServiceImpl() {
         super(Concern.class);
@@ -264,6 +270,20 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
             e.printStackTrace();
             return ZoomConstants.MAP_500;
         }
+    }
+
+    @Override
+    public Map<String, Object> getRecommend(UserConcernParam userConcernParam) {
+        List<AccountAttentionVo> accountAttentionVos = accountInfoService.getNoAttentionUser(userConcernParam.getUserId());
+        List<Integer> ids = new ArrayList<>();
+        if (accountAttentionVos.size() > 0) {
+            ids.addAll(accountAttentionVos.stream().map(AccountAttentionVo::getId).collect(Collectors.toList()));
+        }
+        List<MyFollowVo> myFollowVos = concernMapper.getRecommend(ids, (userConcernParam.getPage() - 1) * userConcernParam.getPage(), userConcernParam.getPageSize());
+//            setPageViews(myFollowVos);
+        return MapUtils.buildSuccessMap(ZoomConstants.SUCCESS, ZoomConstants.PG_ERROR_CODE_34000_MSG, myFollowVos);
+
+
     }
 
 }
