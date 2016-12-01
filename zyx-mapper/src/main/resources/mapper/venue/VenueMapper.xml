@@ -44,10 +44,10 @@
         SELECT a.*,
         ROUND(6378.137 * 2 *
         ASIN(SQRT(POW(
-        SIN((#{lng}*PI()/180-a.latitude*PI()/180)/2),2)+
-        COS(#{lng}*PI()/180)*
+        SIN((#{lat}*PI()/180-a.latitude*PI()/180)/2),2)+
+        COS(#{lat}*PI()/180)*
         COS(a.latitude*PI()/180)*
-        POW(SIN((#{lat}*PI()/180-a.longitude*PI()/180)/2)
+        POW(SIN((#{lng}*PI()/180-a.longitude*PI()/180)/2)
         ,2)))*1000) AS distance,
         (SELECT COUNT(id) FROM t_sport_record b WHERE a.id = b.venue_id) AS pnumber
         FROM t_venue a WHERE del != 1
