@@ -4,6 +4,7 @@ import com.zyx.entity.zoom.Equip;
 import com.zyx.mapper.BaseMapper;
 import com.zyx.param.user.UserEquipmentParam;
 import com.zyx.vo.zoom.EquipDetailsVo;
+import com.zyx.vo.zoom.EquipListVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -23,4 +24,6 @@ public interface EquipMapper extends BaseMapper<Equip> {
     EquipDetailsVo queryOne(@Param("id") Integer id);
 
     List<EquipDetailsVo> queryMyList(UserEquipmentParam userEquipmentParam);
+
+    List<EquipListVo> queryByLabelId(@Param("tagId") Integer tagId);
 }

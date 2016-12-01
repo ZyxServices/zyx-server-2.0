@@ -20,4 +20,6 @@ public interface EquipService extends BaseService<Equip> {
     Map<String, Object> queryOne(Integer eId);
 
     Map<String, Object> queryMyList(UserEquipmentParam userEquipmentParam);
+
+    Map<String, Object> queryByLabelId(Integer tagId);
 }

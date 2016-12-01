@@ -12,7 +12,8 @@ import java.util.Map;
  */
 public interface ZoomFacade {
     /**
-     *  添加关注（人）
+     * 添加关注（人）
+     *
      * @param fromUserId
      * @param toUserId
      * @return
@@ -20,25 +21,28 @@ public interface ZoomFacade {
     Map<String, Object> addFollow(Integer fromUserId, Integer toUserId);
 
     /**
-     *  添加关注列表获取未关注的用户（认证通过）
+     * 添加关注列表获取未关注的用户（认证通过）
+     *
      * @param loginUserId
      * @return
      */
-    Map<String,Object> getNoAttentionUser(Integer loginUserId);
+    Map<String, Object> getNoAttentionUser(Integer loginUserId);
 
     /**
      * 获取动态详情
+     *
      * @param concernId
      * @return
      */
-    Map<String, Object> getOneConcern(Integer concernId,Integer accountId);
+    Map<String, Object> getOneConcern(Integer concernId, Integer accountId);
 
     /**
      * 根据登录用户获取该用户关注动态列表
+     *
      * @param loginUserId
      * @return
      */
-    Map<String, Object> myFollowCon(Integer loginUserId,Integer page,Integer pageSize);
+    Map<String, Object> myFollowCon(Integer loginUserId, Integer page, Integer pageSize);
 
     /**
      * 发布动态(多模块)
@@ -50,7 +54,7 @@ public interface ZoomFacade {
      * @param visible
      * @return
      */
-    Map<String, Object> addCern(Integer userId, Integer type,  String content, String cernImgurl, String videoUrl, Integer visible,String local);
+    Map<String, Object> addCern(Integer userId, Integer type, String content, String cernImgurl, String videoUrl, Integer visible, String local);
 
     /**
      * 各模块点赞
@@ -63,44 +67,55 @@ public interface ZoomFacade {
     Map<String, Object> addZan(Integer body_id, Integer body_type, Integer account_id);
 
     /**
-     *
      * @param title
      * @param content
      * @param accountId
      * @param labelId
      * @return
      */
-    Map<String, Object> addEquip(String title, String content, Integer accountId,Integer labelId);
+    Map<String, Object> addEquip(String title, String content, Integer accountId, Integer labelId);
 
 
     /**
      * 装备控列表
+     *
      * @param eId
      * @return
      */
-    Map<String,Object> queryEquip(Integer eId);
+    Map<String, Object> queryEquip(Integer eId);
 
     /**
      * 装备秀详情
+     *
      * @param eId
      * @return
      */
-    Map<String,Object> queryOne(Integer eId);
+    Map<String, Object> queryOne(Integer eId);
 
 
-    /**取消关注
+    /**
+     * 取消关注
+     *
      * @param fromUserId
      * @param toUserId
      * @return
      */
-    Map<String,Object> unFollow(Integer fromUserId, Integer toUserId);
+    Map<String, Object> unFollow(Integer fromUserId, Integer toUserId);
 
 
     /**
-     *  动态用户对象，推荐动态
+     * 动态用户对象，推荐动态
+     *
      * @param userConcernParam
      * @return
      */
-    Map<String,Object> getRecommend(UserConcernParam userConcernParam);
+    Map<String, Object> getRecommend(UserConcernParam userConcernParam);
+
+    /**
+     * 根据标签id获取装备秀列表
+     * @param labelId
+     * @return
+     */
+    Map<String, Object> queryEquipByLabelId(Integer labelId);
 
 }

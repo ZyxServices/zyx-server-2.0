@@ -132,4 +132,10 @@
         SELECT * FROM reply WHERE reply_parent_id=#{parentId}
     </select>
 
+    <select id="queryByLabelId" parameterType="java.lang.Integer" resultMap="EquipCustomResultMap">
+        SELECT * FROM equip WHERE del=0 AND mask=0
+        <if test="tagId!=null">
+            AND label_id=#{tagId}
+        </if>
+    </select>
 </mapper>

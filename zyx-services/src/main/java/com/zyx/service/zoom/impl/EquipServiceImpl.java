@@ -9,6 +9,7 @@ import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.zoom.EquipService;
 import com.zyx.utils.MapUtils;
 import com.zyx.vo.zoom.EquipDetailsVo;
+import com.zyx.vo.zoom.EquipListVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -86,5 +87,19 @@ public class EquipServiceImpl extends BaseServiceImpl<Equip> implements EquipSer
         }
         List<EquipDetailsVo> list = equipMapper.queryMyList(userEquipmentParam);
         return MapUtils.buildSuccessMap(ZoomConstants.SUCCESS, ZoomConstants.SUCCESS_MSG, list);
+    }
+
+    @Override
+    public Map<String, Object> queryByLabelId(Integer tagId) {
+        try {
+            if (Objects.equals(tagId, null)) {
+                return MapUtils.buildSuccessMap(ZoomConstants.PG_ERROR_CODE_30027, ZoomConstants.PG_ERROR_CODE_30027_MSG, null);
+            }
+            List<EquipListVo> equipListVos = equipMapper.queryByLabelId(tagId);
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.SUCCESS_MSG, equipListVos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
