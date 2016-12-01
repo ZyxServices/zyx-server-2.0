@@ -52,9 +52,10 @@
 
     <resultMap id="searchDevaVo" type="com.zyx.vo.system.SearchDevaVo">
         <id column="id" property="id" jdbcType="INTEGER"/>
-        <id column="title" property="title" jdbcType="VARCHAR"/>
-        <id column="content" property="content" jdbcType="VARCHAR"/>
-        <id column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <result column="model" property="model" jdbcType="INTEGER"/>
+        <result column="model_id" property="modelId" jdbcType="INTEGER"/>
+        <result column="image_url" property="imageUrl" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
     </resultMap>
 
 
@@ -131,10 +132,7 @@
     </select>
 
     <select id="devaSearch" parameterType="com.zyx.param.system.SearchDevaParam" resultMap="searchDevaVo">
-        SELECT * FROM devaluation WHERE del = 0 AND state != 0 AND area = #{model} ORDER BY sequence
-        <if test="pageNumber != null and number != null">
-            limit #{pageNumber}, #{number}
-        </if>
+        SELECT * FROM devaluation WHERE del = 0 AND state = 1 AND area = #{model} ORDER BY sequence
     </select>
 
 

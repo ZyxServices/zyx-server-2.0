@@ -75,11 +75,7 @@ public class SearchServiceImpl implements SearchService {
 
     @Override
     public Map<String, Object> devaSearch(SearchDevaParam searchDevaParam) {
-        if(searchDevaParam.getModel() != null && searchDevaParam.getModel() > 0 && searchDevaParam.getNumber() != null && searchDevaParam.getPageNumber() != null){
-            if (searchDevaParam.getPageNumber() == 0) {
-                return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10003, "分页参数无效");
-            }
-            searchDevaParam.setPageNumber((searchDevaParam.getPageNumber() - 1) * searchDevaParam.getNumber());
+        if(searchDevaParam.getModel() != null && searchDevaParam.getModel() > 0){
             List<SearchDevaVo> searchDevaVos = searchMapper.devaSearch(searchDevaParam);
             return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, searchDevaVos);
         }else{
