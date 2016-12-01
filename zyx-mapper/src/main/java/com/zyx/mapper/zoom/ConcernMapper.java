@@ -32,5 +32,7 @@ public interface ConcernMapper extends BaseMapper<Concern> {
 
     Integer delConcern(@Param("id") Integer id);
 
+    List<MyFollowVo> getRecommend(@Param("ids") List<Integer> ids, @Param("start") Integer start, @Param("end") Integer end);
+
 
 }

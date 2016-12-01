@@ -33,7 +33,7 @@
         <result column="comment_content" property="commentContent" jdbcType="LONGVARCHAR"/>
         <result column="comment_state" property="commentState" jdbcType="INTEGER"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
-        <result column="comment_img_path" property="commentImgPath" jdbcType="VARCHAR"/>
+        <result column="comment_img_path" property="commentImgPath" jdbcType="LONGVARCHAR"/>
     </resultMap>
 
     <resultMap id="commentVoMap" type="com.zyx.vo.system.CommentVo" extends="CommentResultMap">
