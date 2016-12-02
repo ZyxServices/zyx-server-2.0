@@ -40,7 +40,22 @@ public class SportRecordServiceImpl extends BaseServiceImpl<SportRecord> impleme
 
     @Override
     public List<CityFootprintVo> getCityFootprints(Integer userId) {
-        return sportRecordMapper.selectCityFootprints(userId);
+        List<FootprintVo> list = sportRecordMapper.selectFullCityFootprints(userId);
+        if(list==null||list.isEmpty())
+            return  null;
+        List cityfts = new ArrayList<>();
+        CityFootprintVo tmpVo=null;
+        for (FootprintVo vo:list){
+            if(tmpVo==null||!tmpVo.getCity().equals(vo.getCity())){
+                tmpVo = new CityFootprintVo();
+                tmpVo.setCity(vo.getCity());
+                tmpVo.setFootprints(new ArrayList<FootprintVo>());
+                cityfts.add(tmpVo);
+            }
+            tmpVo.setFpNumber(tmpVo.getFpNumber()==null?vo.getFpNumber():(vo.getFpNumber()+tmpVo.getFpNumber()));
+            tmpVo.getFootprints().add(vo);
+        }
+        return cityfts;
     }
 
     @Override

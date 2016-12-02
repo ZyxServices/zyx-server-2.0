@@ -41,8 +41,7 @@ public class Test extends TestCase {
 					"classpath:spring/spring-context.xml");
 
 			SportCoinFacade test = (SportCoinFacade) context.getBean("sportCoinFacade");
-			test.modify(2, CoinConstants.OperType.PUBLISH_ACTIVITY.getOperType());
-			System.out.println(JSON.toJSONString(test.search(1)));
+			System.out.println(JSON.toJSONString(test.getDayCoinLog(168,-1)));
 		} catch (Exception e) {
 			e.printStackTrace();
 			// log.error("== DubboProvider context start error:",e);

@@ -35,6 +35,9 @@ public interface SportRecordMapper extends BaseMapper<SportRecord> {
      */
     List<FootprintVo> selectVenueFootprints(@Param("userId") Integer userId, @Param("city") String city);
 
+
+    List<FootprintVo> selectFullCityFootprints(@Param("userId") Integer userId);
+
     /**
      * 获取排行信息
      *

@@ -41,7 +41,7 @@ public interface CoinConstants {
         /**
          * 发布动态
          */
-        PUBLISH_DYNAMIC(7),
+        PUBLISH_CONCERN(7),
 
         /**
          * 老带新

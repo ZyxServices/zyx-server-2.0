@@ -73,15 +73,15 @@ public class Test extends TestCase {
 //			param.setUserId(1);
 //			System.out.println(JSON.toJSONString(test.getHistoryRecords(param)));
 
-			RankParam param = new RankParam();
-			System.out.println(JSON.toJSONString(test.getRanks(param)));
-			param.setUserId(169);
-			System.out.println(JSON.toJSONString(test.getSelfRank(param)));
+//			RankParam param = new RankParam();
+//			System.out.println(JSON.toJSONString(test.getRanks(param)));
+//			param.setUserId(169);
+//			System.out.println(JSON.toJSONString(test.getSelfRank(param)));
 //			test.getFootprints(1,null);
 
 //			System.out.println(JSON.toJSONString(test.getVenueFootprints(1,"北京")));
 
-//			System.out.println(JSON.toJSONString(test.getCityFootprints(1)));
+			System.out.println(JSON.toJSONString(test.getCityFootprints(168)));
 		} catch (Exception e) {
 			e.printStackTrace();
 			// log.error("== DubboProvider context start error:",e);

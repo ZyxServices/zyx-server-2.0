@@ -75,15 +75,28 @@
         <result column="fp_number" property="fpNumber"></result>
     </resultMap>
     <select id="selectCityFootprints" resultMap="CityFootprintVO">
+
         SELECT
-        vsiv.city,COUNT(vsiv.venue_id)AS fp_number
+        venue.city,COUNT(record.venue_id)AS fp_number
+        FROM
+        t_sport_record record LEFT JOIN t_venue venue ON record.`venue_id` = venue.`id`
+        WHERE
+        record.user_id=${userId}
+        GROUP BY
+        record.`venue_id`
+
+    </select>
+
+    <select id="selectFullCityFootprints" resultMap="FootprintVO">
+        SELECT
+        vsiv.city,vsiv.venue_id,vsiv.venue_name,vsiv.address,COUNT(vsiv.venue_id)AS fp_number,vsiv.longitude,vsiv.latitude
         FROM
         t_sport_record LEFT JOIN view_sport_info_venue vsiv ON t_sport_record.`sport_info_id` = vsiv.`id`
         WHERE
         t_sport_record.user_id=#{userId}
-        GROUP BY vsiv.city
+	    GROUP BY vsiv.venue_id
+	    ORDER BY city
     </select>
-
 
     <resultMap id="RankVo" type="com.zyx.vo.record.RankVo">
         <result column="row_num" property="rankNum"></result>

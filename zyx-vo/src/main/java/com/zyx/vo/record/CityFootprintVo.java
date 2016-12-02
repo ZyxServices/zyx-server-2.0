@@ -1,5 +1,7 @@
 package com.zyx.vo.record;
 
+import java.util.List;
+
 import java.io.Serializable;
 
 /**
@@ -8,6 +10,8 @@ import java.io.Serializable;
 public class CityFootprintVo implements Serializable {
     private String city;
     private Integer fpNumber;
+
+    private List<FootprintVo> footprints;
 
     public String getCity() {
         return city;
@@ -23,5 +27,13 @@ public class CityFootprintVo implements Serializable {
 
     public void setFpNumber(Integer fpNumber) {
         this.fpNumber = fpNumber;
+    }
+
+    public List<FootprintVo> getFootprints() {
+        return footprints;
+    }
+
+    public void setFootprints(List<FootprintVo> footprints) {
+        this.footprints = footprints;
     }
 }

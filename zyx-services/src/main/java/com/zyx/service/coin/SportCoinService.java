@@ -12,6 +12,7 @@ import java.util.List;
  * Created by MrDeng on 2016/10/31.
  */
 public interface SportCoinService extends BaseService<SportCoin> {
+    public void modifyCoin(Integer userId,Integer operType);
     public void modifyCoin(Integer userId,Integer operType,Long coin);
     public List<SportCoinVo> getSportCoins();
     public SportCoinVo getSportCoin(Integer userId);
