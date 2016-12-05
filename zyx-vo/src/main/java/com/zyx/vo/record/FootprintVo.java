@@ -12,7 +12,7 @@ public class FootprintVo implements Serializable {
     private String venueName;
     private String address;
 
-    private String fpNumber;
+    private Integer fpNumber;
 
     private Double longitude;
     private Double latitude;
@@ -49,11 +49,11 @@ public class FootprintVo implements Serializable {
         this.address = address;
     }
 
-    public String getFpNumber() {
+    public Integer getFpNumber() {
         return fpNumber;
     }
 
-    public void setFpNumber(String fpNumber) {
+    public void setFpNumber(Integer fpNumber) {
         this.fpNumber = fpNumber;
     }
 

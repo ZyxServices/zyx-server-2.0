@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyx.mapper.coin.CoinLogMapper">
+
+	<!-- 用户信息表 -->
+	 <sql id="coinLog"> t_coin_log</sql>
+
+	<resultMap id="CoinDayLogVo" type="com.zyx.vo.coin.CoinDayLogVo">
+		<result column="oper_id" property="operId"></result>
+		<result column="oper_times" property="operTimes"></result>
+	</resultMap>
+
+	<select id="countOperLog" resultMap="CoinDayLogVo">
+		SELECT
+		oper_id AS oper_id,
+		COUNT(oper_id) AS oper_times
+		FROM t_coin_log
+		WHERE
+		user_id = ${userId}
+		AND
+		create_time >= ${startTime}
+		AND
+		${endTime} >=create_time
+		GROUP BY oper_id
+	</select>
+</mapper>
