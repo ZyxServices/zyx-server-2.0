@@ -34,4 +34,7 @@
     <!-- 地址接口 -->
     <dubbo:service interface="com.zyx.rpc.user.UserInfoFacade" ref="userInfoFacade" timeout="10000"/>
 
+    <!-- 意见反馈接口 -->
+    <dubbo:service interface="com.zyx.rpc.user.UserSuggestionFacade" ref="userSuggestionFacade" timeout="10000"/>
+
 </beans>
