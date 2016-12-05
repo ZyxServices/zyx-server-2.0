@@ -13,7 +13,7 @@ import java.util.Map;
  * Create by XiaoWei on 2016/11/17
  */
 public interface EquipService extends BaseService<Equip> {
-    Map<String, Object> addEquip(String title, String content, Integer accountId, Integer labelId);
+    Map<String, Object> addEquip(String title, String content, Integer accountId, Integer labelId,String imgUrls);
 
     Map<String, Object> queryEquip(Integer eId);
 

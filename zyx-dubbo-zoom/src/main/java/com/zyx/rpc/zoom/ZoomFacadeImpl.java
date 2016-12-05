@@ -90,8 +90,8 @@ public class ZoomFacadeImpl implements ZoomFacade {
     }
 
     @Override
-    public Map<String, Object> addEquip(String title, String content, Integer accountId, Integer labelId) {
-        return equipService.addEquip(title, content, accountId, labelId);
+    public Map<String, Object> addEquip(String title, String content, Integer accountId, Integer labelId,String imgUrls) {
+        return equipService.addEquip(title, content, accountId, labelId,imgUrls);
     }
 
     @Override

@@ -78,6 +78,7 @@
         <if test="id!=null">
             AND id=#{id}
         </if>
+        ORDER BY create_time DESC
     </select>
 
     <select id="queryOne" parameterType="java.lang.Integer" resultMap="EquipDetailsResultMap">
@@ -137,5 +138,6 @@
         <if test="tagId!=null">
             AND label_id=#{tagId}
         </if>
+        ORDER BY create_time DESC
     </select>
 </mapper>
