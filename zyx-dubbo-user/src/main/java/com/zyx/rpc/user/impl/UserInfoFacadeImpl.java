@@ -1,11 +1,13 @@
 package com.zyx.rpc.user.impl;
 
 import com.zyx.constants.account.AccountConstants;
+import com.zyx.constants.coin.CoinConstants;
 import com.zyx.param.account.AccountInfoParam;
 import com.zyx.param.account.AccountLoginParam;
 import com.zyx.param.account.UserAuthParam;
 import com.zyx.rpc.user.UserInfoFacade;
 import com.zyx.service.account.AccountInfoService;
+import com.zyx.service.coin.SportCoinService;
 import com.zyx.utils.MapUtils;
 import com.zyx.vo.account.AccountAuthVo;
 import com.zyx.vo.account.AccountInfoVo;
@@ -29,7 +31,8 @@ public class UserInfoFacadeImpl implements UserInfoFacade {
 
     @Autowired
     private AccountInfoService accountInfoService;
-
+    @Autowired
+    SportCoinService sportCoinService;
     @Override
     public Map<String, Object> queryAccountInfo(String token, int userId) {
         try {
@@ -53,6 +56,8 @@ public class UserInfoFacadeImpl implements UserInfoFacade {
             param.setId(userId);
             param.setToken(token);
             if (accountInfoService.updateAccountByParam(param) >= 1) {
+                //完善用户信息 获得运动币
+                sportCoinService.modifyCoin(userId, CoinConstants.OperType.REFINED_INFO);
                 return MapUtils.buildSuccessMap("用户信息修改成功");
             }
             return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_40002, AccountConstants.ACCOUNT_ERROR_CODE_40002_MSG);

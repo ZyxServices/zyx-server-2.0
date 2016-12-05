@@ -29,8 +29,8 @@ public class SportCoinServiceImpl extends BaseServiceImpl<SportCoin> implements 
     CoinLogMapper coinLogMapper;
 
     @Override
-    public void modifyCoin(Integer userId, Integer operType) {
-        modifyCoin(userId,operType,null);
+    public void modifyCoin(Integer userId,  CoinConstants.OperType operType) {
+        modifyCoin(userId,operType.getOperType(),null);
     }
 
     @Override

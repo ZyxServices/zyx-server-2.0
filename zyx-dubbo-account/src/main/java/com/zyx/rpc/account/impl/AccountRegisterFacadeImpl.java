@@ -1,11 +1,13 @@
 package com.zyx.rpc.account.impl;
 
 import com.zyx.constants.account.AccountConstants;
+import com.zyx.constants.coin.CoinConstants;
 import com.zyx.entity.account.AccountInfo;
 import com.zyx.entity.attention.UserAttention;
 import com.zyx.param.account.AccountLoginParam;
 import com.zyx.rpc.account.AccountRegisterFacade;
 import com.zyx.service.account.AccountInfoService;
+import com.zyx.service.coin.SportCoinService;
 import com.zyx.utils.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -31,6 +33,9 @@ public class AccountRegisterFacadeImpl implements AccountRegisterFacade {
 
     @Autowired
     protected RedisTemplate<String, String> stringRedisTemplate;
+
+    @Autowired
+    SportCoinService sportCoinService;
 
     @Override
     public Map<String, Object> validatePhone(AccountLoginParam userLoginParam) {
@@ -98,6 +103,8 @@ public class AccountRegisterFacadeImpl implements AccountRegisterFacade {
             if (accountInfoService.insertAccountInfo(accountInfo, userAttention) == 0) {
                 return MapUtils.buildErrorMap(AccountConstants.ACCOUNT_ERROR_CODE_40010, AccountConstants.ACCOUNT_ERROR_CODE_40010_MSG);
             }
+            if(accountInfo.getId()!=null)
+                sportCoinService.modifyCoin(accountInfo.getId(), CoinConstants.OperType.NEW_USER);
             return MapUtils.buildSuccessMap(AccountConstants.SUCCESS, AccountConstants.ACCOUNT_SUCCESS_CODE_40013_MSG, accountInfo);
         } catch (Exception e) {
             e.printStackTrace();
