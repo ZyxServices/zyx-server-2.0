@@ -39,9 +39,19 @@ public class CourseVo implements Serializable {
     private String labelName;
 
     /**
+     * 用户ID
+     */
+    private Integer userId;
+
+    /**
      * 图片url
      */
     private String imgUrls;
+
+    /**
+     * 是否关注
+     */
+    private boolean isconcern;
 
     /**
      * 回复数量
@@ -129,5 +139,21 @@ public class CourseVo implements Serializable {
 
     public void setCommentNumber(Integer commentNumber) {
         this.commentNumber = commentNumber;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public boolean isconcern() {
+        return isconcern;
+    }
+
+    public void setIsconcern(boolean isconcern) {
+        this.isconcern = isconcern;
     }
 }

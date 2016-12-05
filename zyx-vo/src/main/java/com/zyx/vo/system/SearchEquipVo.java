@@ -25,10 +25,10 @@ public class SearchEquipVo implements Serializable {
      */
     private String content;
 
-    /***
-     * 内容
+    /**
+     * 图片
      */
-    private List<String> contentImages;
+    private String imgUrl;
 
     /**
      * 创建时间
@@ -59,19 +59,19 @@ public class SearchEquipVo implements Serializable {
         this.content = content;
     }
 
-    public List<String> getContentImages() {
-        return contentImages;
-    }
-
-    public void setContentImages(List<String> contentImages) {
-        this.contentImages = contentImages;
-    }
-
     public Long getCreateTime() {
         return createTime;
     }
 
     public void setCreateTime(Long createTime) {
         this.createTime = createTime;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }

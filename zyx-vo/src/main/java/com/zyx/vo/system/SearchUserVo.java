@@ -1,5 +1,7 @@
 package com.zyx.vo.system;
 
+import com.zyx.vo.point.UserPointVo;
+
 import java.io.Serializable;
 
 /**
@@ -18,7 +20,7 @@ public class SearchUserVo implements Serializable {
 
     private String nickname;
 
-    private String pointDesc;
+    private UserPointVo level;
 
     public Integer getId() {
         return id;
@@ -44,11 +46,11 @@ public class SearchUserVo implements Serializable {
         this.nickname = nickname;
     }
 
-    public String getPointDesc() {
-        return pointDesc;
+    public UserPointVo getLevel() {
+        return level;
     }
 
-    public void setPointDesc(String pointDesc) {
-        this.pointDesc = pointDesc;
+    public void setLevel(UserPointVo level) {
+        this.level = level;
     }
 }
