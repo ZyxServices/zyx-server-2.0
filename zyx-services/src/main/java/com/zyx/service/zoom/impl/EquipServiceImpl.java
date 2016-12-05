@@ -35,7 +35,7 @@ public class EquipServiceImpl extends BaseServiceImpl<Equip> implements EquipSer
 
 
     @Override
-    public Map<String, Object> addEquip(String title, String content, Integer accountId, Integer labelId) {
+    public Map<String, Object> addEquip(String title, String content, Integer accountId, Integer labelId,String imgUrls) {
         if (Objects.equals(title, null) || Objects.equals(title, "")) {
             return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30006, ZoomConstants.PG_ERROR_CODE_30006_MSG);
         }
@@ -58,6 +58,7 @@ public class EquipServiceImpl extends BaseServiceImpl<Equip> implements EquipSer
         e.setLabelId(labelId);
         e.setMask(0);
         e.setDel(0);
+        e.setImgUrl(imgUrls);
         Integer result = save(e);
         if (result > 0) {
             return MapUtils.buildSuccessMap(ZoomConstants.SUCCESS, ZoomConstants.SUCCESS_MSG, null);
