@@ -44,6 +44,11 @@ public class CourseVo implements Serializable {
     private String imgUrls;
 
     /**
+     * 回复数量
+     */
+    private Integer commentNumber;
+
+    /**
      * 创建时间
      */
     private Long createTime;
@@ -116,5 +121,13 @@ public class CourseVo implements Serializable {
 
     public void setCreateTime(Long createTime) {
         this.createTime = createTime;
+    }
+
+    public Integer getCommentNumber() {
+        return commentNumber;
+    }
+
+    public void setCommentNumber(Integer commentNumber) {
+        this.commentNumber = commentNumber;
     }
 }

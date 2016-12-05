@@ -38,7 +38,7 @@
         <association property="memberPeople" column="id"
                      select="com.zyx.mapper.activity.ActivityMemberMapper.countMemberByActivityId"></association>
         <association property="zan" column="id" select="zanExist"></association>
-        <association property="commentNumber" column="id" select="zanExist"></association>
+        <association property="commentNumber" column="id" select="commentCount"></association>
         <association property="user" column="user_id"
                      select="com.zyx.mapper.account.AccountInfoMapper.selectAttentionAccountById"/>
     </resultMap>
