@@ -273,13 +273,13 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
     }
 
     @Override
-    public Map<String, Object> getRecommend(UserConcernParam userConcernParam) {
+    public Map<String, Object> getRecommend(Integer loginUserId,UserConcernParam userConcernParam) {
         List<AccountAttentionVo> accountAttentionVos = accountInfoService.getNoAttentionUser(userConcernParam.getUserId());
         List<Integer> ids = new ArrayList<>();
         if (accountAttentionVos.size() > 0) {
             ids.addAll(accountAttentionVos.stream().map(AccountAttentionVo::getId).collect(Collectors.toList()));
         }
-        List<MyFollowVo> myFollowVos = concernMapper.getRecommend(ids, (userConcernParam.getPage() - 1) * userConcernParam.getPage(), userConcernParam.getPageSize());
+        List<MyFollowVo> myFollowVos = concernMapper.getRecommend(loginUserId,ids, (userConcernParam.getPage() - 1) * userConcernParam.getPage(), userConcernParam.getPageSize());
 //            setPageViews(myFollowVos);
         return MapUtils.buildSuccessMap(ZoomConstants.SUCCESS, ZoomConstants.PG_ERROR_CODE_34000_MSG, myFollowVos);
 

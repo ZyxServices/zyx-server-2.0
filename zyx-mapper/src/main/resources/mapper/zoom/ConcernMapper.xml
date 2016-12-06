@@ -215,7 +215,7 @@
         <!--AND state = 0-->
         <!--ORDER BY create_time DESC-->
         <!--LIMIT #{start},#{end}-->
-        SELECT *,(SELECT count(id) from `comment` where comment_type=1 AND comment_id=concern.id) AS commentCounts FROM
+        SELECT *,(SELECT count(id) from `comment` where comment_type=1 AND comment_id=concern.id) AS commentCounts,(SELECT COUNT(id) from user_attention WHERE from_user_id=#{loginUserId} AND to_user_id=user_id) as isFollow FROM
         concern WHERE user_id IN
         <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
             #{item}
