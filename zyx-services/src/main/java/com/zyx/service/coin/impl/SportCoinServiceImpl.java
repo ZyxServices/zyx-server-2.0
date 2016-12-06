@@ -8,11 +8,13 @@ import com.zyx.mapper.coin.SportCoinMapper;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.coin.CoinLogService;
 import com.zyx.service.coin.SportCoinService;
+import com.zyx.utils.TimeAreaUtil;
 import com.zyx.vo.coin.SportCoinVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by MrDeng on 2016/10/31.
@@ -44,6 +46,10 @@ public class SportCoinServiceImpl extends BaseServiceImpl<SportCoin> implements 
         }
         //TODO 验证当天是否达到操作上限次数
 //        COIN_DAY_OPER_UPPER_TIMES
+        Map<String,Long> timeArea= TimeAreaUtil.getDayTimeArea(0);
+        Long countTimes = coinLogMapper.countOperTimes(userId,operType,timeArea.get(TimeAreaUtil.TIME_AREA_START),timeArea.get(TimeAreaUtil.TIME_AREA_END));
+        if(countTimes!=null&&countTimes>=CoinConstants.COIN_DAY_OPER_UPPER_TIMES.get(operType))
+            return;
         if(coin==null)
             coin = CoinConstants.COIN_OPER_NUMBER.get(operType);
         //实际操作
