@@ -11,6 +11,14 @@
 
     <artifactId>zyx-dubbo-activity</artifactId>
     <dependencies>
+
+        <dependency>
+            <groupId>tiyujia-parent</groupId>
+            <artifactId>zyx-constants</artifactId>
+            <version>${zyx.constants.version}</version>
+        </dependency>
+
+
         <dependency>
             <groupId>antlr</groupId>
             <artifactId>antlr</artifactId>

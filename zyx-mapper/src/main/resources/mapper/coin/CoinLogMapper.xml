@@ -23,4 +23,18 @@
 		${endTime} >=create_time
 		GROUP BY oper_id
 	</select>
+
+	<select id="countOperTimes" resultType="java.lang.Integer">
+		SELECT
+		COUNT(oper_id)
+		FROM t_coin_log
+		WHERE
+		user_id = ${userId}
+		AND
+		oper_id=${operId}
+		AND
+		create_time >= ${startTime}
+		AND
+		${endTime} >=create_time
+	</select>
 </mapper>

@@ -2,11 +2,13 @@ package com.zyx.rpc.zoom;
 
 import com.zyx.constants.Constants;
 import com.zyx.constants.attention.UserAttentionConstants;
+import com.zyx.constants.coin.CoinConstants;
 import com.zyx.constants.zoom.ZoomConstants;
 import com.zyx.param.attention.AttentionParam;
 import com.zyx.param.user.UserConcernParam;
 import com.zyx.service.account.AccountInfoService;
 import com.zyx.service.attention.UserAttentionService;
+import com.zyx.service.coin.SportCoinService;
 import com.zyx.service.zoom.ConcernService;
 import com.zyx.service.zoom.EquipService;
 import com.zyx.service.zoom.ZanService;
@@ -46,6 +48,8 @@ public class ZoomFacadeImpl implements ZoomFacade {
     @Resource
     private UserAttentionService userAttentionService;
 
+    @Resource
+    SportCoinService sportCoinService;
 
     @Override
     public Map<String, Object> addFollow(Integer fromUserId, Integer toUserId) {
@@ -81,17 +85,27 @@ public class ZoomFacadeImpl implements ZoomFacade {
 
     @Override
     public Map<String, Object> addCern(Integer userId, Integer type, String content, String cernImgurl, String videoUrl, Integer visible, String local) {
-        return concernService.addCern(userId, type, content, cernImgurl, videoUrl, visible, local);
+        Map map = concernService.addCern(userId, type, content, cernImgurl, videoUrl, visible, local);
+        if (null != map && !map.isEmpty() && map.get(ZoomConstants.STATE).equals(ZoomConstants.SUCCESS))
+            sportCoinService.modifyCoin(userId, CoinConstants.OperType.PUBLISH_COMMENT);
+        return map;
     }
 
     @Override
     public Map<String, Object> addZan(Integer body_id, Integer body_type, Integer account_id) {
-        return zanService.addZan(body_id, body_type, account_id);
+        Map map = zanService.addZan(body_id, body_type, account_id);
+        //点赞 获取运动币
+        if (null != map && !map.isEmpty() && map.get(ZoomConstants.STATE).equals(ZoomConstants.SUCCESS))
+            sportCoinService.modifyCoin(account_id, CoinConstants.OperType.LIKED);
+        return map;
     }
 
     @Override
     public Map<String, Object> addEquip(String title, String content, Integer accountId, Integer labelId,String imgUrls) {
-        return equipService.addEquip(title, content, accountId, labelId,imgUrls);
+        Map map = equipService.addEquip(title, content, accountId, labelId,imgUrls);
+        if (null != map && !map.isEmpty() && map.get(ZoomConstants.STATE).equals(ZoomConstants.SUCCESS))
+            sportCoinService.modifyCoin(accountId, CoinConstants.OperType.PUBLISH_COMMENT);
+        return map;
     }
 
     @Override

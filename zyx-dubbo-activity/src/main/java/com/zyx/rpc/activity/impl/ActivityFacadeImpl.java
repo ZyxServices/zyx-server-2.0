@@ -1,11 +1,14 @@
 package com.zyx.rpc.activity.impl;
 
 import com.zyx.constants.Constants;
+import com.zyx.constants.coin.CoinConstants;
+import com.zyx.constants.zoom.ZoomConstants;
 import com.zyx.param.activity.ActivityParam;
 import com.zyx.param.activity.MyActivityListParam;
 import com.zyx.param.activity.QueryActivityParam;
 import com.zyx.rpc.activity.ActivityFacade;
 import com.zyx.service.activity.ActivityService;
+import com.zyx.service.coin.SportCoinService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
@@ -25,13 +28,18 @@ public class ActivityFacadeImpl implements ActivityFacade {
 
     @Resource
     private ActivityService activityService;
-
+    @Resource
+    SportCoinService sportCoinService;
     private static Logger logger = Logger.getLogger(ActivityFacadeImpl.class);
 
     @Override
     public Map<String, Object> insertActivity(ActivityParam activityParam) {
         try {
-            return activityService.insterActivity(activityParam);
+             Map map=activityService.insterActivity(activityParam);
+            //发布活动 获得运动币
+            if (null != map && !map.isEmpty() && map.get(ZoomConstants.STATE).equals(ZoomConstants.SUCCESS))
+                sportCoinService.modifyCoin(activityParam.getUserId(), CoinConstants.OperType.PUBLISH_COMMENT);
+            return map;
         } catch (Exception e) {
             logger.error(e);
             e.printStackTrace();

@@ -1,6 +1,9 @@
 package com.zyx.rpc.system.impl;
 
+import com.zyx.constants.coin.CoinConstants;
+import com.zyx.constants.zoom.ZoomConstants;
 import com.zyx.rpc.system.CommentFacade;
+import com.zyx.service.coin.SportCoinService;
 import com.zyx.service.system.CommentService;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +20,16 @@ import java.util.Map;
 public class CommentFacadeImpl implements CommentFacade {
     @Resource
     private CommentService commentService;
+    @Resource
+    SportCoinService sportCoinService;
 
     @Override
-    public Map<String, Object> addComment(Integer commentType, Integer commentId, String commentContent, Integer commentAccount, Integer commentState,String commentImgPath) {
-        return commentService.addComment(commentType, commentId, commentContent, commentAccount, commentState,commentImgPath);
+    public Map<String, Object> addComment(Integer commentType, Integer commentId, String commentContent, Integer commentAccount, Integer commentState, String commentImgPath) {
+
+        Map map = commentService.addComment(commentType, commentId, commentContent, commentAccount, commentState, commentImgPath);
+        if (null != map && !map.isEmpty() && map.get(ZoomConstants.STATE).equals(ZoomConstants.SUCCESS))
+            sportCoinService.modifyCoin(commentAccount, CoinConstants.OperType.PUBLISH_COMMENT);
+        return map;
     }
 
     @Override

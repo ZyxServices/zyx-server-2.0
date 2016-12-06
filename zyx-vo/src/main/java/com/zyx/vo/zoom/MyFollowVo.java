@@ -16,6 +16,7 @@ public class MyFollowVo extends Concern {
     private Integer zanCounts;
     private Integer commentCounts;
     UserAuthVo userAuthVo;
+    Integer isFollow;
 //    PageViews pageViews;
 
     public Integer getZanCounts() {
@@ -51,7 +52,15 @@ public class MyFollowVo extends Concern {
         this.userAuthVo = userAuthVo;
     }
 
-//    public PageViews getPageViews() {
+    public Integer getIsFollow() {
+        return isFollow;
+    }
+
+    public void setIsFollow(Integer isFollow) {
+        this.isFollow = isFollow;
+    }
+
+    //    public PageViews getPageViews() {
 //        return pageViews;
 //    }
 //

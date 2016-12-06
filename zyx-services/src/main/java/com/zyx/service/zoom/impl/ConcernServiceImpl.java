@@ -279,11 +279,11 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
         if (accountAttentionVos.size() > 0) {
             ids.addAll(accountAttentionVos.stream().map(AccountAttentionVo::getId).collect(Collectors.toList()));
         }
-        List<MyFollowVo> myFollowVos = concernMapper.getRecommend(ids, (userConcernParam.getPage() - 1) * userConcernParam.getPage(), userConcernParam.getPageSize());
-//            setPageViews(myFollowVos);
+        List<MyFollowVo> myFollowVos = new ArrayList<>();
+        if (ids.size() > 0) {
+            myFollowVos = concernMapper.getRecommend(userConcernParam.getUserId(), ids, (userConcernParam.getPage() - 1) * userConcernParam.getPage(), userConcernParam.getPageSize());
+        }
         return MapUtils.buildSuccessMap(ZoomConstants.SUCCESS, ZoomConstants.PG_ERROR_CODE_34000_MSG, myFollowVos);
-
-
     }
 
 }
