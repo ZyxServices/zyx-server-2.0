@@ -28,17 +28,20 @@
     <resultMap id="AccountInfoMap" type="com.zyx.vo.account.AccountInfoVo">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="phone" property="phone" jdbcType="INTEGER"/>
-        <association property="level" column="{userId=id}" select="com.zyx.mapper.point.UserPointMapper.queryUserLevelWithView"/>
+        <association property="level" column="{userId=id}"
+                     select="com.zyx.mapper.point.UserPointMapper.queryUserLevelWithView"/>
     </resultMap>
 
     <resultMap id="queryAccountInfo" type="com.zyx.vo.account.QueryUserInfoVo">
         <id column="id" property="id" jdbcType="INTEGER"/>
-        <association property="level" column="{userId=id}" select="com.zyx.mapper.point.UserPointMapper.queryUserLevelWithView"/>
+        <association property="level" column="{userId=id}"
+                     select="com.zyx.mapper.point.UserPointMapper.queryUserLevelWithView"/>
     </resultMap>
 
     <resultMap id="QueryAccountAttentionVo" type="com.zyx.vo.account.AccountAttentionVo">
         <id column="id" property="id" jdbcType="INTEGER"/>
-        <association property="level" column="{userId=id}" select="com.zyx.mapper.point.UserPointMapper.queryUserLevelWithView"/>
+        <association property="level" column="{userId=id}"
+                     select="com.zyx.mapper.point.UserPointMapper.queryUserLevelWithView"/>
     </resultMap>
 
     <resultMap id="MyCenterInfoVoResultMap" type="com.zyx.vo.account.MyCenterInfoVo">
@@ -48,14 +51,16 @@
         <association property="dt" column="id" select="selectDTCount"/>
         <association property="coin" column="id" select="selectCoinCount"/>
         <!--<association property="accountAuth" column="id" select="selectAuthByUserId"/>-->
-        <association property="level" column="{userId=id}" select="com.zyx.mapper.point.UserPointMapper.queryUserLevelWithView"/>
+        <association property="level" column="{userId=id}"
+                     select="com.zyx.mapper.point.UserPointMapper.queryUserLevelWithView"/>
     </resultMap>
 
     <select id="selectAccountByPhone" parameterType="String" resultType="int">
         select count("id") from user where phone = #{phone}
     </select>
 
-    <select id="selectAccountByParam" parameterType="com.zyx.param.account.AccountLoginParam" resultMap="AccountInfoMap">
+    <select id="selectAccountByParam" parameterType="com.zyx.param.account.AccountLoginParam"
+            resultMap="AccountInfoMap">
         select * from user where 1 = 1
         <if test="phone != null and phone != ''">
             and phone = #{phone}
@@ -193,10 +198,14 @@
     </update>
 
     <select id="getNoAttentionUser" resultMap="QueryAccountAttentionVo" parameterType="java.lang.Integer">
-      SELECT `user`.id,`user`.nickname,`user`.avatar,user_auth.authinfo,`user`.signature FROM `user` INNER JOIN user_auth ON `user`.id = user_auth.user_id
-       <if test="loginUserId !=-1">
-           where `user`.id not in (SELECT to_user_id from user_attention where from_user_id=#{loginUserId})
-       </if>
+        SELECT `user`.id,`user`.nickname,`user`.avatar,user_auth.authinfo,`user`.signature,`user`.phone
+        <if test="loginUserId !=-1">
+            ,(SELECT COUNT(id) from user_attention WHERE from_user_id=#{loginUserId} AND to_user_id=user_id) as isFollow
+        </if>
+        FROM `user` INNER JOIN user_auth ON `user`.id = user_auth.user_id
+        <if test="loginUserId !=-1">
+            where `user`.id not in (SELECT to_user_id from user_attention where from_user_id=#{loginUserId})
+        </if>
     </select>
 
 </mapper>

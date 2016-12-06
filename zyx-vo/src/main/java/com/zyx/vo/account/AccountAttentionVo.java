@@ -30,6 +30,8 @@ public class AccountAttentionVo implements Serializable {
 
     private String phone;
 
+    private Integer isFollow=0;
+
     public Integer getId() {
         return id;
     }
@@ -90,6 +92,14 @@ public class AccountAttentionVo implements Serializable {
         this.phone = phone;
     }
 
+    public Integer getIsFollow() {
+        return isFollow;
+    }
+
+    public void setIsFollow(Integer isFollow) {
+        this.isFollow = isFollow;
+    }
+
     @Override
     public String toString() {
         return "AccountAttentionVo{" +
@@ -99,6 +109,8 @@ public class AccountAttentionVo implements Serializable {
                 ", authInfo='" + authInfo + '\'' +
                 ", level=" + level +
                 ", signature='" + signature + '\'' +
+                ", phone='" + phone + '\'' +
+                ", isFollow=" + isFollow +
                 '}';
     }
 }
