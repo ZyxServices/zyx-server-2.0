@@ -140,8 +140,8 @@ public class ZoomFacadeImpl implements ZoomFacade {
     }
 
     @Override
-    public Map<String, Object> getRecommend(UserConcernParam userConcernParam) {
-        return concernService.getRecommend(userConcernParam);
+    public Map<String, Object> getRecommend(Integer loginUserId,UserConcernParam userConcernParam) {
+        return concernService.getRecommend(loginUserId,userConcernParam);
     }
 
     @Override
