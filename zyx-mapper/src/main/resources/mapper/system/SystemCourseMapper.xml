@@ -16,8 +16,8 @@
         <result column="label_id" property="labelId" jdbcType="INTEGER"/>
         <result column="label_name" property="labelName" jdbcType="VARCHAR"/>
         <result column="img_urls" property="imgUrls" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
-        <association property="commentNumber" column="id" select="commentCount"></association>
     </resultMap>
 
     <select id="findCourseLabel" resultMap="courseLabelVo">
@@ -40,14 +40,10 @@
     </select>
 
     <select id="findCourseById" parameterType="java.lang.Integer" resultMap="courseVo">
-        SELECT a.id, a.title, a.content,
+        SELECT a.id, a.title, a.content,a.user_id,
          a.course_type, a.content, a.label_id, a.img_urls,
         a.create_time, b.state, b.label_name
         FROM t_course a LEFT JOIN t_course_label b ON a.label_id = b.id
         WHERE a.del = 0 AND a.mask = 0 AND b.state = 0 AND a.id = #{courseId}
-    </select>
-
-    <select id="commentCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
-        SELECT COUNT(id) FROM comment WHERE comment_type=2 AND comment_id=#{commentId}
     </select>
 </mapper>

@@ -3,7 +3,9 @@ package com.zyx.service.system.impl;
 import com.zyx.constants.Constants;
 import com.zyx.constants.activity.ActivityConstants;
 import com.zyx.mapper.system.SystemCourseMapper;
+import com.zyx.param.attention.AttentionParam;
 import com.zyx.param.system.CourseParam;
+import com.zyx.service.attention.UserAttentionService;
 import com.zyx.service.system.SystemCourseService;
 import com.zyx.utils.MapUtils;
 import com.zyx.vo.system.CourseLabelVo;
@@ -27,6 +29,8 @@ public class SystemCourseServiceImpl implements SystemCourseService {
 
     @Resource
     private SystemCourseMapper systemCourseMapper;
+    @Resource
+    private UserAttentionService userAttentionService;
 
     @Override
     public Map<String, Object> findCourseLabel() {
@@ -49,11 +53,27 @@ public class SystemCourseServiceImpl implements SystemCourseService {
     }
 
     @Override
-    public Map<String, Object> findCourseById(Integer courseId) {
+    public Map<String, Object> findCourseById(Integer userId, Integer courseId) {
         if (courseId != null && courseId > 0) {
             CourseVo courseVo = systemCourseMapper.findCourseById(courseId);
+            if(courseVo != null){
+                if (userId != null) {
+                    AttentionParam param = new AttentionParam();
+                    param.setFromId(userId);
+                    param.setToId(courseVo.getUserId());
+                    param.setType(1);
+                    int i = userAttentionService.selectAttentionCount(param);
+                    if (i > 0) {
+                        courseVo.setIsconcern(true);
+                    } else {
+                        courseVo.setIsconcern(false);
+                    }
+                } else {
+                    courseVo.setIsconcern(false);
+                }
+            }
             return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, courseVo);
-        }else{
+        } else {
             return Constants.MAP_PARAM_MISS;
         }
     }

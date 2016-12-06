@@ -49,9 +49,9 @@ public class SystemCourseFacadeImpl implements SystemCourseFacade {
     }
 
     @Override
-    public Map<String, Object> findCourseById(Integer courseId) {
+    public Map<String, Object> findCourseById(Integer userId, Integer courseId) {
         try {
-            return systemCourseService.findCourseById(courseId);
+            return systemCourseService.findCourseById(userId, courseId);
         } catch (Exception e) {
             logger.error(e);
             e.printStackTrace();

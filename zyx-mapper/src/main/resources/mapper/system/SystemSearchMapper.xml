@@ -41,13 +41,15 @@
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
         <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
-        <association property="pointDesc" column="{point_type=temp_type,point_count=temp_count}" select="com.zyx.mapper.point.UserPointMapper.queryUserPointDesc"/>
+        <association property="level" column="{userId=id}" select="com.zyx.mapper.point.UserPointMapper.queryUserLevelWithView"/>
     </resultMap>
 
     <resultMap id="searchEquipVo" type="com.zyx.vo.system.SearchEquipVo">
         <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="img_url" property="imgUrl" jdbcType="VARCHAR"/>
         <result column="topic_content" property="topicContent" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
     </resultMap>
 
     <resultMap id="searchDevaVo" type="com.zyx.vo.system.SearchDevaVo">
@@ -134,7 +136,4 @@
     <select id="devaSearch" parameterType="com.zyx.param.system.SearchDevaParam" resultMap="searchDevaVo">
         SELECT * FROM devaluation WHERE del = 0 AND state = 1 AND area = #{model} ORDER BY sequence
     </select>
-
-
-
 </mapper>
