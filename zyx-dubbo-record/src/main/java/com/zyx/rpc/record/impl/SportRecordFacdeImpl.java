@@ -94,4 +94,9 @@ public class SportRecordFacdeImpl implements SportRecordFacade {
     public SportOverviewVo getSelfRecordOverview(Integer userId) {
         return sportRecordService.getRecordOverview(userId);
     }
+
+    @Override
+    public List<SportInfoLevelVo> getSportInfoLevel(Integer venueId) {
+        return sportRecordService.getSportInfoLevel(venueId);
+    }
 }
