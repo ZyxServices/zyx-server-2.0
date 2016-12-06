@@ -27,6 +27,8 @@ public class UserMsgParam extends BaseParam {
 
     private String toContent;
 
+    private Integer msgType;
+
     private Pager pager;
 
     public Integer getId() {
@@ -91,6 +93,14 @@ public class UserMsgParam extends BaseParam {
 
     public void setToContent(String toContent) {
         this.toContent = toContent;
+    }
+
+    public Integer getMsgType() {
+        return msgType;
+    }
+
+    public void setMsgType(Integer msgType) {
+        this.msgType = msgType;
     }
 
     public Pager getPager() {

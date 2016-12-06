@@ -5,6 +5,7 @@ import com.zyx.mapper.system.UserMsgMapper;
 import com.zyx.param.account.UserMsgParam;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.system.UserMsgService;
+import com.zyx.vo.account.MsgCountVo;
 import com.zyx.vo.account.MsgVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,7 +31,7 @@ public class UserMsgServiceImpl extends BaseServiceImpl<UserMsgInfo> implements 
     }
 
     @Override
-    public Long queryMsgCount(UserMsgParam userMsgParam) {
+    public List<MsgCountVo> queryMsgCount(UserMsgParam userMsgParam) {
         return userMsgMapper.queryMsgCount(userMsgParam);
     }
 
@@ -42,5 +43,10 @@ public class UserMsgServiceImpl extends BaseServiceImpl<UserMsgInfo> implements 
     @Override
     public int deleteMsg(UserMsgParam userMsgParam) {
         return userMsgMapper.deleteMsg(userMsgParam);
+    }
+
+    @Override
+    public int setMsgState(UserMsgParam userMsgParam) {
+        return userMsgMapper.setMsgState(userMsgParam);
     }
 }
