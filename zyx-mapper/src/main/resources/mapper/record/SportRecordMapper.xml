@@ -19,6 +19,7 @@
         <!--type为运动类型1-攀岩 暂不开放使用-->
         <!--<result column="type" property="type"></result>-->
         <result column="sport_info_id" property="sportInfoId"></result>
+        <result column="score" property="score"></result>
         <result column="spend_time" property="spendTime"></result>
         <result column="concern_id" property="concernId"></result>
         <result column="venue_id" property="venueId"></result>
