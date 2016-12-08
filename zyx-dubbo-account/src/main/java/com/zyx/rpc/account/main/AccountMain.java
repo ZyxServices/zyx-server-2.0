@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.zyx.rpc.main;
+package com.zyx.rpc.account.main;
 
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.extension.ExtensionLoader;

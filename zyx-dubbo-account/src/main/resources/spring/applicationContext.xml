@@ -22,7 +22,7 @@
 
     <!-- 采用注释的方式配置bean -->
     <context:annotation-config/>
-    <context:component-scan base-package="com.zyx.manager.*,com.zyx.*.account,com.zyx.*.common,com.zyx.*.coin,com.zyx.*.user"/>
+    <context:component-scan base-package="com.zyx.manager.*,com.zyx.*.account,com.zyx.*.common,com.zyx.*.coin,com.zyx.*.user,com.zyx.*.point"/>
 
     <!-- 读入配置属性文件 -->
     <context:property-placeholder location="classpath:service.properties"/>
@@ -67,8 +67,9 @@
         <property name="mapperLocations">
             <list>
                 <value>classpath*:mapper/account/*.xml</value>
-                <value>classpath*:mapper/record/*.xml</value>
+                <value>classpath*:mapper/coin/*.xml</value>
                 <value>classpath*:mapper/user/*.xml</value>
+                <value>classpath*:mapper/point/*.xml</value>
             </list>
         </property>
         <property name="typeAliasesPackage"
@@ -101,7 +102,8 @@
     <aop:config>
         <aop:pointcut id="appService" expression="
         (execution(* com.zyx.service.account..*Service*.*(..)))
-         or (execution(* com.zyx.service.record..*Service*.*(..)))
+         or (execution(* com.zyx.service.coin..*Service*.*(..)))
+          or (execution(* com.zyx.service.point..*Service*.*(..)))
          or(execution(* com.zyx.service.user..*Service*.*(..)))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="appService"/>
     </aop:config>
