@@ -8,6 +8,7 @@ import java.io.Serializable;
 public class SportInfoLevelVo implements Serializable {
     private Integer id;
     private String level;
+    private Integer score;
 
     public Integer getId() {
         return id;
@@ -23,5 +24,13 @@ public class SportInfoLevelVo implements Serializable {
 
     public void setLevel(String level) {
         this.level = level;
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
     }
 }
