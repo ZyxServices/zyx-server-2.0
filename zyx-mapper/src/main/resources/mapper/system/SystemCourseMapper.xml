@@ -17,6 +17,7 @@
         <result column="label_name" property="labelName" jdbcType="VARCHAR"/>
         <result column="img_urls" property="imgUrls" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <association property="commentNumber" column="id" select="commentCount"></association>
     </resultMap>
 
@@ -25,7 +26,7 @@
     </select>
 
     <select id="findCourseList" parameterType="com.zyx.param.system.CourseParam" resultMap="courseVo">
-        SELECT a.id, a.title, a.content,
+        SELECT a.id, a.title, a.content,a.user_id,
         a.course_type, a.content, a.label_id, a.img_urls,
         a.create_time, b.state, b.label_name
         FROM t_course a LEFT JOIN t_course_label b ON a.label_id = b.id
