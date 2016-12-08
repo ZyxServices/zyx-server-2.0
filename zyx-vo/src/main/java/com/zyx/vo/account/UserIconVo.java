@@ -13,6 +13,7 @@ import java.io.Serializable;
  * 注：用户头像信息
  */
 public class UserIconVo implements Serializable {
+    private static final long serialVersionUID = 2853608443977734717L;
     private Integer id;
     private String nickName;
     private String avatar;

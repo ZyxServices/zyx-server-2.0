@@ -71,6 +71,7 @@
                 <value>classpath*:mapper/coin/*.xml</value>
                 <value>classpath*:mapper/attention/*.xml</value>
                 <value>classpath*:mapper/account/*.xml</value>
+                <value>classpath*:mapper/point/*.xml</value>
             </list>
         </property>
         <property name="typeAliasesPackage"

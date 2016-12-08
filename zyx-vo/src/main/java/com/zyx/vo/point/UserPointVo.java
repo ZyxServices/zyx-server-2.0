@@ -13,21 +13,23 @@ import java.io.Serializable;
 public class UserPointVo implements Serializable {
     private static final long serialVersionUID = 3537211022312671716L;
 
-//    private Integer id;
-//
-//    private Integer userId;
+    private Integer id;
 
-//    private Long modifyTime;
-//
-//    private Long createTime;
-//
-//    private Integer pointType;
+//    private Integer userId;
 
     private Integer step;
 
     private Long pointCount;
 
     private String pointDesc;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getStep() {
         return step;
