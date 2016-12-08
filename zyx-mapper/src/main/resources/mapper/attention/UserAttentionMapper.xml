@@ -37,15 +37,15 @@
     </select>
 
     <select id="myGZList" parameterType="int" resultMap="MyCenterGZVoResultMap">
-        SELECT * FROM user_attention where from_user_id = #{fromId}
+        SELECT * FROM user_attention where from_user_id = #{fromId} and to_user_id != #{fromId} and rel_type = 1
     </select>
 
     <select id="myFSList" parameterType="int" resultMap="MyCenterFSVoResultMap">
-        SELECT * FROM user_attention where to_user_id = #{toId}
+        SELECT * FROM user_attention where to_user_id = #{toId} and from_user_id != #{toId} and rel_type = 1
     </select>
 
     <select id="myDKGZList" parameterType="int" resultMap="MyCenterDKGZVoResultMap">
-        SELECT * FROM user_attention where from_user_id = #{fromId}
+        SELECT * FROM user_attention where from_user_id = #{fromId} and to_user_id != #{fromId} and rel_type = 1
     </select>
 
     <delete id="deleteAttention" parameterType="com.zyx.param.attention.AttentionParam">

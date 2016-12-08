@@ -32,7 +32,7 @@ public class MyCenterInfoVo implements Serializable {
     /**
      * 是否认证字段0未认证，1待审核，2已认证，3认证失败
      */
-    private Integer authenticate;
+//    private Integer authenticate;
 
     /**
      * 签名
@@ -59,7 +59,7 @@ public class MyCenterInfoVo implements Serializable {
      */
     private Integer coin = 0;
 
-    private AccountAuthVo accountAuth;
+//    private AccountAuthVo accountAuth;
 
     private UserPointVo level;
 
@@ -119,14 +119,6 @@ public class MyCenterInfoVo implements Serializable {
         this.birthday = birthday;
     }
 
-    public Integer getAuthenticate() {
-        return authenticate;
-    }
-
-    public void setAuthenticate(Integer authenticate) {
-        this.authenticate = authenticate;
-    }
-
     public String getSignature() {
         return signature;
     }
@@ -167,14 +159,6 @@ public class MyCenterInfoVo implements Serializable {
         this.coin = coin;
     }
 
-    public AccountAuthVo getAccountAuth() {
-        return accountAuth;
-    }
-
-    public void setAccountAuth(AccountAuthVo accountAuth) {
-        this.accountAuth = accountAuth;
-    }
-
     public UserPointVo getLevel() {
         return level;
     }
@@ -193,12 +177,10 @@ public class MyCenterInfoVo implements Serializable {
                 ", avatar='" + avatar + '\'' +
                 ", address='" + address + '\'' +
                 ", birthday=" + birthday +
-                ", authenticate=" + authenticate +
                 ", signature='" + signature + '\'' +
                 ", gz=" + gz +
                 ", fs=" + fs +
                 ", dt=" + dt +
-                ", accountAuth=" + accountAuth +
                 '}';
     }
 }

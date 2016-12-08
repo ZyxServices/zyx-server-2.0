@@ -21,7 +21,7 @@
         <result column="create_time" property="create_time" jdbcType="BIGINT"/>
         <result column="distance" property="distance" jdbcType="BIGINT"/>
         <result column="pnumber" property="pnumber" jdbcType="BIGINT"/>
-
+        <association property="commentNumber" column="id" select="commentCount"></association>
     </resultMap>
 
     <sql id="FULL_COLUMS">id,create_time,type,name,longitude,latitude,city,mark,description</sql>
