@@ -7,10 +7,11 @@
     <resultMap id="SportInfoLevelVo" type="com.zyx.vo.record.SportInfoLevelVo">
         <result column="id" property="id"></result>
         <result column="level" property="level"></result>
+        <result column="score" property="score"></result>
     </resultMap>
     <select id="selectSportInfoLevel" resultMap="SportInfoLevelVo">
         SELECT
-        id,LEVEL
+        id,LEVEL,score
         FROM t_sport_info
         WHERE
         venue_id=${venueId}
