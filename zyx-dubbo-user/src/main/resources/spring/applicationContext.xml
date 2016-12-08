@@ -22,7 +22,7 @@
 
     <!-- 采用注释的方式配置bean -->
     <context:annotation-config/>
-    <context:component-scan base-package="com.zyx.*.user,com.zyx.*.coin"/>
+    <context:component-scan base-package="com.zyx.*.user,com.zyx.*.coin,com.zyx.*.zoom"/>
 
     <!-- 读入配置属性文件 -->
     <context:property-placeholder location="classpath:service.properties"/>
@@ -67,11 +67,12 @@
         <property name="mapperLocations">
             <list>
                 <value>classpath*:mapper/user/*.xml</value>
+                <value>classpath*:mapper/zoom/*.xml</value>
                 <value>classpath*:mapper/coin/*.xml</value>
             </list>
         </property>
         <property name="typeAliasesPackage"
-                  value="com.zyx.entity.user,com.zyx.entity.coin"/>
+                  value="com.zyx.entity.user,com.zyx.entity.coin,com.zyx.entity.zoom"/>
         <property name="plugins">
             <bean class="com.github.pagehelper.PageHelper">
             </bean>
@@ -99,6 +100,7 @@
 
     <aop:config>
         <aop:pointcut id="appService" expression="execution(* com.zyx.service.user..*Service*.*(..)),
+        execution(* com.zyx.service.zoom..*Service*.*(..)),
         execution(* com.zyx.service.coin..*Service*.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="appService"/>
     </aop:config>

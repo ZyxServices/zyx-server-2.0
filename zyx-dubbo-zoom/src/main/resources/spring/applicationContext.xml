@@ -75,7 +75,7 @@
             </list>
         </property>
         <property name="typeAliasesPackage"
-                  value="com.zyx.entity.zoom,com.zyx.entity.coin,com.zyx.entity.user,com.zyx.entity.account"/>
+                  value="com.zyx.entity.zoom,com.zyx.entity.coin,com.zyx.entity.user,com.zyx.entity.account,com.zyx.entity.attention,,com.zyx.entity.point"/>
         <property name="plugins">
             <bean class="com.github.pagehelper.PageHelper">
             </bean>
