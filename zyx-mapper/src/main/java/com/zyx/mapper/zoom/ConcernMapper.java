@@ -4,6 +4,7 @@ import com.zyx.entity.attention.UserAttention;
 import com.zyx.entity.zoom.Concern;
 import com.zyx.mapper.BaseMapper;
 import com.zyx.param.user.UserConcernParam;
+import com.zyx.vo.account.UserIconVo;
 import com.zyx.vo.zoom.MyFollowVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -32,7 +33,12 @@ public interface ConcernMapper extends BaseMapper<Concern> {
 
     Integer delConcern(@Param("id") Integer id);
 
-    List<MyFollowVo> getRecommend(@Param("loginUserId")Integer loginUserId,@Param("ids") List<Integer> ids, @Param("start") Integer start, @Param("end") Integer end);
+    List<MyFollowVo> getRecommend(@Param("loginUserId") Integer loginUserId, @Param("ids") List<Integer> ids, @Param("start") Integer start, @Param("end") Integer end);
+
+    List<UserIconVo> getConcernZanUser(@Param("concernId") Integer concernId, @Param("max") Integer max);
+
+    Integer getConcernZanUserCount(@Param("concernId") Integer concernId);
+
 
 
 }

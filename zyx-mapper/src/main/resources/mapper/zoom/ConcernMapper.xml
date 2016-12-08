@@ -43,9 +43,8 @@
     <resultMap id="ConcernMyMap" type="com.zyx.vo.zoom.MyFollowVo" extends="ConcernResultMap">
         <!--<result column="zan_counts" property="zanCounts" jdbcType="VARCHAR"/>-->
         <!--<result column="comment_counts" property="commentCounts" jdbcType="VARCHAR"/>-->
-        <!--<association property="zanCounts" column="id" select="zanSelect"/>-->
-        <!--<association property="commentCounts" column="id" select="commentSelect"/>-->
-        <!--<association property="userVo" column="user_id" select="userSelect"/>-->
+        <association property="zanCounts" column="id" select="zanSelect"/>
+        <association property="commentCounts" column="id" select="commentSelect"/>
         <association property="userAuthVo" column="user_id" select="userAuthSelect"/>
         <association property="userIconVo" column="user_id" select="userSelect"/>
     </resultMap>
@@ -210,12 +209,14 @@
     <select id="getRecommend" resultType="java.util.List" resultMap="ConcernMyMapSwitch">
         <!--SELECT * FROM concern WHERE user_id IN-->
         <!--<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">-->
-            <!--#{item}-->
+        <!--#{item}-->
         <!--</foreach>-->
         <!--AND state = 0-->
         <!--ORDER BY create_time DESC-->
         <!--LIMIT #{start},#{end}-->
-        SELECT *,(SELECT count(id) from `comment` where comment_type=1 AND comment_id=concern.id) AS commentCounts,(SELECT COUNT(id) from user_attention WHERE from_user_id=#{loginUserId} AND to_user_id=user_id) as isFollow FROM
+        SELECT *,(SELECT count(id) from `comment` where comment_type=1 AND comment_id=concern.id) AS
+        commentCounts,(SELECT COUNT(id) from user_attention WHERE from_user_id=#{loginUserId} AND to_user_id=user_id) as
+        isFollow FROM
         concern WHERE user_id IN
         <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
             #{item}
@@ -223,6 +224,28 @@
         AND state = 0
         ORDER BY commentCounts DESC
         LIMIT #{start},#{end}
+    </select>
+    <select id="getConcernZanUser" parameterType="java.lang.Integer" resultMap="userSelectResultMap">
+        SELECT
+        `user`.id,
+        `user`.nickname,
+        `user`.avatar
+        FROM
+        zan
+        INNER JOIN concern ON zan.body_id = concern.id
+        INNER JOIN `user` ON zan.account_id = `user`.id
+        WHERE zan.body_type=1 AND concern.id=#{concernId}
+        LIMIT 0,#{max}
+    </select>
+
+    <select id="getConcernZanUserCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT
+        COUNT(`user`.id) as counts
+        FROM
+        zan
+        INNER JOIN concern ON zan.body_id = concern.id
+        INNER JOIN `user` ON zan.account_id = `user`.id
+        WHERE zan.body_type=1 AND concern.id=#{concernId}
     </select>
 
 </mapper>

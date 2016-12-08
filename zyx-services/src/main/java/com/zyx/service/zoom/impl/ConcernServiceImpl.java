@@ -16,6 +16,7 @@ import com.zyx.service.account.AccountInfoService;
 import com.zyx.service.zoom.ConcernService;
 import com.zyx.utils.MapUtils;
 import com.zyx.vo.account.AccountAttentionVo;
+import com.zyx.vo.account.UserIconVo;
 import com.zyx.vo.attention.AttentionVo;
 import com.zyx.vo.zoom.MyFollowVo;
 import org.springframework.stereotype.Service;
@@ -284,6 +285,25 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
             myFollowVos = concernMapper.getRecommend(userConcernParam.getUserId(), ids, (userConcernParam.getPage() - 1) * userConcernParam.getPage(), userConcernParam.getPageSize());
         }
         return MapUtils.buildSuccessMap(ZoomConstants.SUCCESS, ZoomConstants.PG_ERROR_CODE_34000_MSG, myFollowVos);
+    }
+
+    @Override
+    public Map<String, Object> getConcernZanUser(Integer concernId, Integer max) {
+        if (Objects.equals(concernId, null)) {
+            return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30021, ZoomConstants.PG_ERROR_CODE_30021_MSG);
+        }
+        try {
+            max = Optional.ofNullable(max).orElse(5);
+            List<UserIconVo> userIconVos = concernMapper.getConcernZanUser(concernId, max);
+            Integer counts = concernMapper.getConcernZanUserCount(concernId);
+            Map<String, Object> map = new HashMap<>();
+            map.put("totalCount", counts);
+            map.put("userList", userIconVos);
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.SUCCESS_MSG, map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return MAP_500;
+        }
     }
 
 }

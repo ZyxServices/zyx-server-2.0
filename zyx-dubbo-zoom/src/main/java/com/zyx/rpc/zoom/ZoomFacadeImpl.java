@@ -101,8 +101,8 @@ public class ZoomFacadeImpl implements ZoomFacade {
     }
 
     @Override
-    public Map<String, Object> addEquip(String title, String content, Integer accountId, Integer labelId,String imgUrls) {
-        Map map = equipService.addEquip(title, content, accountId, labelId,imgUrls);
+    public Map<String, Object> addEquip(String title, String content, Integer accountId, Integer labelId, String imgUrls) {
+        Map map = equipService.addEquip(title, content, accountId, labelId, imgUrls);
         if (null != map && !map.isEmpty() && map.get(ZoomConstants.STATE).equals(ZoomConstants.SUCCESS))
             sportCoinService.modifyCoin(accountId, CoinConstants.OperType.PUBLISH_COMMENT);
         return map;
@@ -148,5 +148,10 @@ public class ZoomFacadeImpl implements ZoomFacade {
     public Map<String, Object> queryEquipByLabelId(Integer labelId) {
 
         return equipService.queryByLabelId(labelId);
+    }
+
+    @Override
+    public Map<String, Object> getConcernZanUser(Integer concernId, Integer max) {
+        return concernService.getConcernZanUser(concernId, max);
     }
 }

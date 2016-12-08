@@ -38,4 +38,6 @@ public interface ConcernService extends BaseService<Concern> {
 
     Map<String,Object> getRecommend(UserConcernParam userConcernParam);
 
+    Map<String,Object> getConcernZanUser(Integer concernId,Integer max);
+
 }

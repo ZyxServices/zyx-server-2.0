@@ -38,7 +38,15 @@
 
     </resultMap>
 
-    <select id="userSelect" parameterType="int" resultType="com.zyx.vo.account.UserIconVo">
+    <resultMap id="UserIconVoMap" type="com.zyx.vo.account.UserIconVo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="nickname"  property="nickName" jdbcType="VARCHAR"/>
+        <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
+        <result column="authenticate" property="authenticate" jdbcType="INTEGER"/>
+        <association property="level" column="{userId=id}" select="com.zyx.mapper.point.UserPointMapper.queryUserLevelWithView"/>
+    </resultMap>
+
+    <select id="userSelect" parameterType="int" resultMap="UserIconVoMap">
         SELECT nickname,avatar,id,authenticate FROM `user` WHERE id=#{user_id}
     </select>
 

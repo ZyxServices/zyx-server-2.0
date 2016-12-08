@@ -118,4 +118,13 @@ public interface ZoomFacade {
      */
     Map<String, Object> queryEquipByLabelId(Integer labelId);
 
+
+    /**
+     *  根据动态id获取点赞用户列表
+     * @param concernId
+     * @param max
+     * @return
+     */
+    Map<String,Object> getConcernZanUser(Integer concernId,Integer max);
+
 }
