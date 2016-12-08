@@ -21,6 +21,7 @@
         <result column="create_time" property="create_time" jdbcType="BIGINT"/>
         <result column="distance" property="distance" jdbcType="BIGINT"/>
         <result column="pnumber" property="pnumber" jdbcType="BIGINT"/>
+
     </resultMap>
 
     <sql id="FULL_COLUMS">id,create_time,type,name,longitude,latitude,city,mark,description</sql>
@@ -66,6 +67,10 @@
         <if test="pageNumber != null and number != null">
             limit #{pageNumber}, #{number}
         </if>
+    </select>
+
+    <select id="commentCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT COUNT(id) FROM comment WHERE comment_type=4 AND comment_id=#{commentId}
     </select>
 
     <!--<select id="selectUserFpVenus" parameterType="java.lang.Integer" resultType="com.zyx.entity.venue.Venue">-->
