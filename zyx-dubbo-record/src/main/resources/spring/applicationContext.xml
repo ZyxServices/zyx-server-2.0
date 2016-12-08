@@ -67,11 +67,12 @@
         <property name="mapperLocations">
             <list>
                 <value>classpath*:mapper/record/*.xml</value>
+                <value>classpath*:mapper/venue/*.xml</value>
                 <value>classpath*:mapper/coin/*.xml</value>
             </list>
         </property>
         <property name="typeAliasesPackage"
-                  value="com.zyx.entity.pg,com.zyx.*.coin,com.zyx.*.record"/>
+                  value="com.zyx.entity.record,com.zyx.*.coin,com.zyx.*.record"/>
         <property name="plugins">
             <bean class="com.github.pagehelper.PageHelper">
             </bean>
@@ -98,7 +99,9 @@
     <aop:aspectj-autoproxy/>
 
     <aop:config>
-        <aop:pointcut id="appService" expression="execution(* com.zyx.service.record..*Service*.*(..)),execution(* com.zyx.service.coin..*Service*.*(..))"/>
+        <aop:pointcut id="appService" expression="execution(* com.zyx.service.record..*Service*.*(..)),
+        execution(* com.zyx.service.venue..*Service*.*(..)),
+        execution(* com.zyx.service.coin..*Service*.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="appService"/>
     </aop:config>
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
