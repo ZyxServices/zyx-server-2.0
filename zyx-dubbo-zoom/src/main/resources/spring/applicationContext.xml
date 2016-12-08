@@ -22,7 +22,7 @@
 
     <!-- 采用注释的方式配置bean -->
     <context:annotation-config/>
-    <context:component-scan base-package="com.zyx.*.zoom,com.zyx.*.coin,com.zyx.*.user,com.zyx.*.account"/>
+    <context:component-scan base-package="com.zyx.*.zoom,com.zyx.*.coin,com.zyx.*.user,com.zyx.*.account,com.zyx.*.attention,com.zyx.*.point"/>
 
     <!-- 读入配置属性文件 -->
     <context:property-placeholder location="classpath:service.properties"/>
@@ -69,7 +69,9 @@
                 <value>classpath*:mapper/zoom/*.xml</value>
                 <value>classpath*:mapper/coin/*.xml</value>
                 <value>classpath*:mapper/user/*.xml</value>
+                <value>classpath*:mapper/point/*.xml</value>
                 <value>classpath*:mapper/account/*.xml</value>
+                <value>classpath*:mapper/attention/*.xml</value>
             </list>
         </property>
         <property name="typeAliasesPackage"
@@ -103,7 +105,8 @@
         <aop:pointcut id="appService" expression="execution(* com.zyx.service.zoom..*Service*.*(..)),
         execution(* com.zyx.service.user..*Service*.*(..)),
         execution(* com.zyx.service.account..*Service*.*(..)),
-        execution(* com.zyx.service.coin..*Service*.*(..))"/>
+        execution(* com.zyx.service.point..*Service*.*(..)),
+        execution(* com.zyx.service.attention.*Service*.*(..)),"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="appService"/>
     </aop:config>
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
@@ -119,30 +122,30 @@
     </bean>
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 
-    <!--<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">-->
-        <!--<property name="maxIdle" value="${redis.maxIdle}"/>-->
-        <!--<property name="maxWaitMillis" value="${redis.maxWaitMillis}"/>-->
-        <!--<property name="testOnBorrow" value="${redis.testOnBorrow}"/>-->
-    <!--</bean>-->
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="${redis.maxIdle}"/>
+        <property name="maxWaitMillis" value="${redis.maxWaitMillis}"/>
+        <property name="testOnBorrow" value="${redis.testOnBorrow}"/>
+    </bean>
 
-    <!--<bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"-->
-          <!--p:hostName="${redis.host}" p:port="${redis.port}" p:poolConfig-ref="poolConfig"/>-->
+    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+          p:hostName="${redis.host}" p:port="${redis.port}" p:poolConfig-ref="poolConfig"/>
 
-    <!--<bean id="stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">-->
-        <!--<property name="connectionFactory" ref="connectionFactory"/>-->
-    <!--</bean>-->
+    <bean id="stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+    </bean>
 
-    <!--<bean id="stringRedisSerializer" class="org.springframework.data.redis.serializer.StringRedisSerializer"/>-->
+    <bean id="stringRedisSerializer" class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
 
-    <!--<bean id="jdkSerializationRedisSerializer"-->
-          <!--class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>-->
+    <bean id="jdkSerializationRedisSerializer"
+          class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
 
-    <!--<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">-->
-        <!--<property name="connectionFactory" ref="connectionFactory"/>-->
-        <!--&lt;!&ndash; 新增 &ndash;&gt;-->
-        <!--<property name="keySerializer" ref="stringRedisSerializer"/>-->
-        <!--<property name="hashKeySerializer" ref="stringRedisSerializer"/>-->
-        <!--<property name="valueSerializer" ref="jdkSerializationRedisSerializer"/>-->
-        <!--<property name="hashValueSerializer" ref="jdkSerializationRedisSerializer"/>-->
-    <!--</bean>-->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <!-- 新增 -->
+        <property name="keySerializer" ref="stringRedisSerializer"/>
+        <property name="hashKeySerializer" ref="stringRedisSerializer"/>
+        <property name="valueSerializer" ref="jdkSerializationRedisSerializer"/>
+        <property name="hashValueSerializer" ref="jdkSerializationRedisSerializer"/>
+    </bean>
 </beans>
