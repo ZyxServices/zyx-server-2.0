@@ -33,13 +33,13 @@ import java.util.List;
  *
  * @author william.liangf
  */
-public class ActivityDubbo {
+public class ActivityMain {
 
     public static final String CONTAINER_KEY = "dubbo.container";
 
     public static final String SHUTDOWN_HOOK_KEY = "dubbo.shutdown.hook";
 
-    private static final Logger logger = LoggerFactory.getLogger(ActivityDubbo.class);
+    private static final Logger logger = LoggerFactory.getLogger(ActivityMain.class);
 
     private static final ExtensionLoader<Container> loader = ExtensionLoader.getExtensionLoader(Container.class);
 
@@ -68,9 +68,9 @@ public class ActivityDubbo {
                             } catch (Throwable t) {
                                 logger.error(t.getMessage(), t);
                             }
-                            synchronized (ActivityDubbo.class) {
+                            synchronized (ActivityMain.class) {
                                 running = false;
-                                ActivityDubbo.class.notify();
+                                ActivityMain.class.notify();
                             }
                         }
                     }
@@ -87,10 +87,10 @@ public class ActivityDubbo {
             logger.error(e.getMessage(), e);
             System.exit(1);
         }
-        synchronized (ActivityDubbo.class) {
+        synchronized (ActivityMain.class) {
             while (running) {
                 try {
-                    ActivityDubbo.class.wait();
+                    ActivityMain.class.wait();
                 } catch (Throwable e) {
                 }
             }
