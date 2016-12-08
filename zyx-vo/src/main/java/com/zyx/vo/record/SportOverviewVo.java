@@ -10,20 +10,20 @@ public class SportOverviewVo implements Serializable{
     /**
      * 运动次数
      */
-    private Integer sportTimes;
+    private Integer sportTimes=0;
     /**
      * 总分
      */
-    private Integer totalScore;
+    private Integer totalScore=0;
     /**
      * 足迹个数
      */
-    private Integer fpNumber;
+    private Integer fpNumber=0;
 
     /**
      * 城市数量
      */
-    private Integer cityNumber;
+    private Integer cityNumber=0;
 
     public Integer getSportTimes() {
         return sportTimes;
