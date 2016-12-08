@@ -10,6 +10,7 @@ public class SportRecordVo implements Serializable {
     private Long createTime;
     private Integer userId;
     private Integer sportInfoId;
+    private Integer score;
     /**
      * 运动时间
      */
@@ -61,6 +62,14 @@ public class SportRecordVo implements Serializable {
 
     public void setSportInfoId(Integer sportInfoId) {
         this.sportInfoId = sportInfoId;
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
     }
 
     public Long getSpendTime() {

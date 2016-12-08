@@ -3,6 +3,7 @@ package com.zyx.mapper.system;
 import com.zyx.entity.account.UserMsgInfo;
 import com.zyx.mapper.BaseMapper;
 import com.zyx.param.account.UserMsgParam;
+import com.zyx.vo.account.MsgCountVo;
 import com.zyx.vo.account.MsgVo;
 import org.springframework.stereotype.Repository;
 
@@ -18,9 +19,11 @@ import java.util.List;
  */
 @Repository("userMsgMapper")
 public interface UserMsgMapper extends BaseMapper<UserMsgInfo> {
-    Long queryMsgCount(UserMsgParam userMsgParam);
+    List<MsgCountVo> queryMsgCount(UserMsgParam userMsgParam);
 
     List<MsgVo> queryMsgList(UserMsgParam userMsgParam);
 
     int deleteMsg(UserMsgParam userMsgParam);
+
+    int setMsgState(UserMsgParam userMsgParam);
 }

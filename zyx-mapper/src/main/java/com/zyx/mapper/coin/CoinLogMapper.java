@@ -14,7 +14,7 @@ import java.util.List;
  */
 @Repository("coinLogMapper")
 public interface CoinLogMapper extends BaseMapper<CoinLog> {
-    public List<CoinDayLogVo> countOperLog(@Param(value = "userId") Integer userId, @Param(value = "startTime")long start,@Param(value = "endTime") long end);
-    Long countOperTimes(@Param(value = "userId") Integer userId, @Param(value = "operId") Integer operId,
-                                             @Param(value = "startTime")long start,@Param(value = "endTime") long end);
+    public List<CoinDayLogVo> countOperLog(@Param(value = "userId") Integer userId, @Param(value = "startTime")Long start,@Param(value = "endTime") Long end);
+    Integer countOperTimes(@Param(value = "userId") Integer userId, @Param(value = "operId") Integer operId,
+                                             @Param(value = "startTime")Long start,@Param(value = "endTime") Long end);
 }

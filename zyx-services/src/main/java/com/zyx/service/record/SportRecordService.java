@@ -23,4 +23,6 @@ public interface SportRecordService extends BaseService<SportRecord> {
     List<RankVo> getRankList(RankParam param);
 
     RankVo getSelfRank(RankParam param);
+
+    List<SportInfoLevelVo> getSportInfoLevel(Integer venueId);
 }

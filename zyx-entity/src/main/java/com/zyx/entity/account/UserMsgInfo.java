@@ -26,6 +26,10 @@ public class UserMsgInfo extends BaseEntity {
 
     private String toContent;
 
+    private Integer msgType = 1;
+
+    private Integer msgState = 0;
+
     public Integer getFromUserId() {
         return fromUserId;
     }
@@ -72,5 +76,21 @@ public class UserMsgInfo extends BaseEntity {
 
     public void setToContent(String toContent) {
         this.toContent = toContent;
+    }
+
+    public Integer getMsgType() {
+        return msgType;
+    }
+
+    public void setMsgType(Integer msgType) {
+        this.msgType = msgType;
+    }
+
+    public Integer getMsgState() {
+        return msgState;
+    }
+
+    public void setMsgState(Integer msgState) {
+        this.msgState = msgState;
     }
 }

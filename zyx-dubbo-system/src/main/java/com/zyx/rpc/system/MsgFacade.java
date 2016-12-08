@@ -22,4 +22,5 @@ public interface MsgFacade {
 
     Map<String, Object> queryMsgList(UserMsgParam userMsgParam);
 
+    Map<String, Object> setMsgState(UserMsgParam userMsgParam);
 }

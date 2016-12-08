@@ -34,11 +34,11 @@
 			<artifactId>zyx-services</artifactId>
 			<version>${zyx.services.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>tiyujia-parent</groupId>
-			<artifactId>zyx-config</artifactId>
-			<version>${zyx.config.version}</version>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>tiyujia-parent</groupId>-->
+			<!--<artifactId>zyx-config</artifactId>-->
+			<!--<version>${zyx.config.version}</version>-->
+		<!--</dependency>-->
 
 		<dependency>
 			<groupId>tiyujia-parent</groupId>

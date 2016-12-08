@@ -51,4 +51,6 @@ public interface SportRecordMapper extends BaseMapper<SportRecord> {
      * @return
      */
     RankVo selectSelfRank(RankParam param);
+
+
 }

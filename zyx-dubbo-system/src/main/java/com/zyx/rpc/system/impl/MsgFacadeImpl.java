@@ -41,20 +41,18 @@ public class MsgFacadeImpl implements MsgFacade {
     public Map<String, Object> insertMsg(UserMsgParam userMsgParam) {
         try {
             // 判断token是否失效
-//            Map<String, Object> map = validateToken(userMsgParam.getToken(), userMsgParam.getFromUserId());
-//            if (map != null) {
-//                return map;
-//            }
+            Map<String, Object> map = validateToken(userMsgParam.getToken(), userMsgParam.getFromUserId());
+            if (map != null) {
+                return map;
+            }
             UserMsgInfo userMsgInfo = checkAndBuildUserMsgInfo(userMsgParam);
             if (userMsgInfo == null) {
                 return Constants.MAP_PARAM_MISS;
             }
-            int result = userMsgService.save(userMsgInfo);
-            if (result == 1) {
-                return MapUtils.buildSuccessMap(result);
-            } else {
-                return MapUtils.buildErrorMap(Constants.ERROR, Constants.ERROR_MSG);
+            if (userMsgService.save(userMsgInfo) == 1) {
+                return MapUtils.buildSuccessMap(1);
             }
+            return MapUtils.buildErrorMap(Constants.ERROR, Constants.ERROR_MSG);
         } catch (Exception e) {
             e.printStackTrace();
             return Constants.MAP_500;
@@ -111,8 +109,23 @@ public class MsgFacadeImpl implements MsgFacade {
         }
     }
 
+    @Override
+    public Map<String, Object> setMsgState(UserMsgParam userMsgParam) {
+        try {
+            // 判断token是否失效
+            Map<String, Object> map = validateToken(userMsgParam.getToken(), userMsgParam.getToUserId());
+            if (map != null) {
+                return map;
+            }
+            return MapUtils.buildSuccessMap(userMsgService.setMsgState(userMsgParam));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Constants.MAP_500;
+        }
+    }
+
     private UserMsgInfo checkAndBuildUserMsgInfo(UserMsgParam userMsgParam) {
-        if (userMsgParam.getFromUserId() == null || userMsgParam.getToUserId() == null) {
+        if (userMsgParam.getFromUserId() == null || userMsgParam.getToUserId() == null || userMsgParam.getMsgType() == null) {
             return null;
         }
 
@@ -128,6 +141,7 @@ public class MsgFacadeImpl implements MsgFacade {
         userMsgInfo.setFromContent(userMsgParam.getFromContent());
         userMsgInfo.setToContent(userMsgParam.getToContent());
         userMsgInfo.setCreateTime(System.currentTimeMillis());
+        userMsgInfo.setMsgType(userMsgParam.getMsgType());
         return userMsgInfo;
     }
 

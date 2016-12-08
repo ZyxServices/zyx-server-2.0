@@ -75,6 +75,11 @@ public class FindVenueVo implements Serializable {
      */
     private Integer pnumber;
 
+    /**
+     * 回复数量
+     */
+    private Integer commentNumber;
+
     public Integer getId() {
         return id;
     }
@@ -193,5 +198,13 @@ public class FindVenueVo implements Serializable {
 
     public void setPnumber(Integer pnumber) {
         this.pnumber = pnumber;
+    }
+
+    public Integer getCommentNumber() {
+        return commentNumber;
+    }
+
+    public void setCommentNumber(Integer commentNumber) {
+        this.commentNumber = commentNumber;
     }
 }

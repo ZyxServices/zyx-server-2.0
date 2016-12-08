@@ -1,4 +1,4 @@
-package com.zyx.rpc.zoom;
+package com.zyx.rpc.zoom.impl;
 
 import com.zyx.constants.Constants;
 import com.zyx.constants.attention.UserAttentionConstants;
@@ -6,6 +6,7 @@ import com.zyx.constants.coin.CoinConstants;
 import com.zyx.constants.zoom.ZoomConstants;
 import com.zyx.param.attention.AttentionParam;
 import com.zyx.param.user.UserConcernParam;
+import com.zyx.rpc.zoom.ZoomFacade;
 import com.zyx.service.account.AccountInfoService;
 import com.zyx.service.attention.UserAttentionService;
 import com.zyx.service.coin.SportCoinService;

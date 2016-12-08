@@ -31,8 +31,8 @@ public class SportCoinServiceImpl extends BaseServiceImpl<SportCoin> implements 
     CoinLogMapper coinLogMapper;
 
     @Override
-    public void modifyCoin(Integer userId,  CoinConstants.OperType operType) {
-        modifyCoin(userId,operType.getOperType(),null);
+    public void modifyCoin(Integer userId, CoinConstants.OperType operType) {
+        modifyCoin(userId, operType.getOperType(), null);
     }
 
     @Override
@@ -41,16 +41,20 @@ public class SportCoinServiceImpl extends BaseServiceImpl<SportCoin> implements 
         clog.setUserId(userId);
         clog.setOperId(operType);
         int count = coinLogMapper.selectCount(clog);
-        if(CoinConstants.COIN_TOTAL_OPER_UPPER_TIMES.get(operType)==null||CoinConstants.COIN_TOTAL_OPER_UPPER_TIMES.get(operType) <= count) {
+        if (CoinConstants.COIN_TOTAL_OPER_UPPER_TIMES.get(operType) == null || CoinConstants.COIN_TOTAL_OPER_UPPER_TIMES.get(operType) <= count) {
             return;
         }
         //TODO 验证当天是否达到操作上限次数
 //        COIN_DAY_OPER_UPPER_TIMES
-        Map<String,Long> timeArea= TimeAreaUtil.getDayTimeArea(0);
-        Long countTimes = coinLogMapper.countOperTimes(userId,operType,timeArea.get(TimeAreaUtil.TIME_AREA_START),timeArea.get(TimeAreaUtil.TIME_AREA_END));
-        if(countTimes!=null&&countTimes>=CoinConstants.COIN_DAY_OPER_UPPER_TIMES.get(operType))
+        //TODO 验证当天是否达到操作上限次数
+        //        COIN_DAY_OPER_UPPER_TIMES
+        Map<String, Long> timeArea = TimeAreaUtil.getDayTimeArea(0);
+        Integer countTimes = coinLogMapper.countOperTimes(userId, operType, timeArea.get(TimeAreaUtil.TIME_AREA_START), timeArea.get(TimeAreaUtil.TIME_AREA_END));
+        System.out.println("**********************" + countTimes + "     " + timeArea);
+        if (countTimes != null && countTimes >= CoinConstants.COIN_DAY_OPER_UPPER_TIMES.get(operType))
             return;
-        if(coin==null)
+
+        if (coin == null)
             coin = CoinConstants.COIN_OPER_NUMBER.get(operType);
         //实际操作
         SportCoin record = new SportCoin();

@@ -13,9 +13,27 @@ import java.util.List;
  * Create by XiaoWei on 2016/11/22
  */
 public class EquipDetailsVo extends Equip {
+    private Integer commentCounts = 0;
+    private Integer zanCounts = 0;
     private UserIconVo userIconVo;
     private String labelName;
     private List<CommentVo> commentVos;
+
+    public Integer getCommentCounts() {
+        return commentCounts;
+    }
+
+    public void setCommentCounts(Integer commentCounts) {
+        this.commentCounts = commentCounts;
+    }
+
+    public Integer getZanCounts() {
+        return zanCounts;
+    }
+
+    public void setZanCounts(Integer zanCounts) {
+        this.zanCounts = zanCounts;
+    }
 
     public UserIconVo getUserIconVo() {
         return userIconVo;

@@ -21,6 +21,8 @@ public class MsgVo implements Serializable {
     private Integer bodyId;
     private Integer bodyType;
 
+    private Integer msgType;
+
     private Long createTime;
 
     private UserIconVo userVo;
@@ -65,6 +67,14 @@ public class MsgVo implements Serializable {
 
     public void setBodyType(Integer bodyType) {
         this.bodyType = bodyType;
+    }
+
+    public Integer getMsgType() {
+        return msgType;
+    }
+
+    public void setMsgType(Integer msgType) {
+        this.msgType = msgType;
     }
 
     public Long getCreateTime() {

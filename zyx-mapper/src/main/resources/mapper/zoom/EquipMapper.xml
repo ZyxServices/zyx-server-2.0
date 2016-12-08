@@ -76,6 +76,8 @@
     </resultMap>
 
     <resultMap id="EquipDetailsResultMap" type="com.zyx.vo.zoom.EquipDetailsVo" extends="EquipResultMap">
+        <association property="zanCounts" column="id" select="zanSelect"/>
+        <association property="commentCounts" column="id" select="commentSelect"/>
         <association property="userIconVo" column="account_id" select="userSelect"/>
         <association property="labelName" column="label_id" select="labelSelect"/>
         <collection property="commentVos" column="id" select="commentQuery"/>

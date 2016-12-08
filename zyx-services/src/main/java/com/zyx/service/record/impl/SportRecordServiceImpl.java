@@ -3,6 +3,7 @@ package com.zyx.service.record.impl;
 import com.alibaba.fastjson.JSON;
 import com.zyx.entity.record.SportRecord;
 import com.zyx.mapper.record.SportRecordMapper;
+import com.zyx.mapper.venue.SportInfoMapper;
 import com.zyx.param.record.RankParam;
 import com.zyx.param.record.SportRecordParam;
 import com.zyx.service.BaseServiceImpl;
@@ -22,6 +23,8 @@ public class SportRecordServiceImpl extends BaseServiceImpl<SportRecord> impleme
 
     @Autowired
     SportRecordMapper sportRecordMapper;
+    @Autowired
+    SportInfoMapper sportInfoMapper;
     public SportRecordServiceImpl() {
         super(SportRecord.class);
     }
@@ -73,5 +76,10 @@ public class SportRecordServiceImpl extends BaseServiceImpl<SportRecord> impleme
     @Override
     public RankVo getSelfRank(RankParam param) {
         return sportRecordMapper.selectSelfRank(param);
+    }
+
+    @Override
+    public List<SportInfoLevelVo> getSportInfoLevel(Integer venueId) {
+        return sportInfoMapper.selectSportInfoLevel(venueId);
     }
 }
