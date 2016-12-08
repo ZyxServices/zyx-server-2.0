@@ -148,11 +148,11 @@
     </select>
 
     <select id="selectGZCount" parameterType="int" resultType="int">
-        SELECT count(id) FROM user_attention WHERE from_user_id = #{user_id} and rel_type = 1
+        SELECT count(id) as gz FROM `user` WHERE del != 1 and `user`.id in (select ua.to_user_id from user_attention as ua where ua.from_user_id = #{user_id} and ua.to_user_id != #{user_id})
     </select>
 
     <select id="selectFSCount" parameterType="int" resultType="int">
-        SELECT count(id) FROM user_attention WHERE to_user_id = #{user_id} and rel_type = 1
+        SELECT count(id) as fs FROM `user` WHERE del != 1 and `user`.id in (select ua.from_user_id from user_attention as ua where ua.to_user_id = #{user_id} and ua.from_user_id != #{user_id})
     </select>
 
     <select id="selectDTCount" parameterType="int" resultType="int">
