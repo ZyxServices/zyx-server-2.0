@@ -115,10 +115,10 @@
     </select>
     <select id="selectUserIcon" parameterType="java.lang.Integer" resultType="com.zyx.vo.account.UserIconVo">
           SELECT
-          u.nickname,u.avatar,u.authenticate
-          FROM user u
+          u.nickname,u.avatar,u.authenticate,l.`step`,l.`name` AS level_name
+          FROM USER u LEFT JOIN LEVEL l ON u.`level_id`=l.`id`
           WHERE
-          id=#{userId}
+          u.id=#{userId}
     </select>
 
     <select id="selectSelfRank" resultMap="RankVo" parameterType="com.zyx.param.record.RankParam">

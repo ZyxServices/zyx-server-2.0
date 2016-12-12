@@ -19,6 +19,9 @@ public class UserIconVo implements Serializable {
     private String avatar;
     private Integer authenticate;
 
+    private Integer step;
+    private String levelName;
+
     private UserPointVo level;
 
     public Integer getId() {
@@ -59,5 +62,21 @@ public class UserIconVo implements Serializable {
 
     public void setLevel(UserPointVo level) {
         this.level = level;
+    }
+
+    public Integer getStep() {
+        return step;
+    }
+
+    public void setStep(Integer step) {
+        this.step = step;
+    }
+
+    public String getLevelName() {
+        return levelName;
+    }
+
+    public void setLevelName(String levelName) {
+        this.levelName = levelName;
     }
 }
