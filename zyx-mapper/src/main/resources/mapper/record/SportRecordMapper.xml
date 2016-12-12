@@ -114,7 +114,7 @@
         LIMIT ${offset},${pageSize}
     </select>
     <select id="selectUserIcon" parameterType="java.lang.Integer" resultType="com.zyx.vo.account.UserIconVo">
-        SELECT u.nickname,u.avatar,u.authenticate,l.`step`,l.`name` AS level_name
+        SELECT u.nickname,u.avatar,u.authenticate,l.`step` ,l.`name` AS levelName
         FROM user u LEFT JOIN level l ON u.`level_id`=l.`id`
         WHERE
         u.id=#{userId}

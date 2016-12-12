@@ -72,7 +72,7 @@
             </list>
         </property>
         <property name="typeAliasesPackage"
-                  value="com.zyx.entity.record,com.zyx.*.coin,com.zyx.*.record"/>
+                  value="com.zyx.entity.record,com.zyx.entity.coin,com.zyx.entity.record"/>
         <property name="plugins">
             <bean class="com.github.pagehelper.PageHelper">
             </bean>
