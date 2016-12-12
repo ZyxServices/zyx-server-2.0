@@ -114,11 +114,10 @@
         LIMIT ${offset},${pageSize}
     </select>
     <select id="selectUserIcon" parameterType="java.lang.Integer" resultType="com.zyx.vo.account.UserIconVo">
-          SELECT
-          u.nickname,u.avatar,u.authenticate,l.`step`,l.`name` AS level_name
-          FROM USER u LEFT JOIN LEVEL l ON u.`level_id`=l.`id`
-          WHERE
-          u.id=#{userId}
+        SELECT u.nickname,u.avatar,u.authenticate,l.`step`,l.`name` AS level_name
+        FROM user u LEFT JOIN level l ON u.`level_id`=l.`id`
+        WHERE
+        u.id=#{userId}
     </select>
 
     <select id="selectSelfRank" resultMap="RankVo" parameterType="com.zyx.param.record.RankParam">
