@@ -133,4 +133,12 @@
         user_id=#{userId}
         ORDER BY total_score
     </select>
+
+    <select id="selectRecordUserIcon" resultType="com.zyx.vo.account.UserIconVo" parameterType="com.zyx.param.record.SportRecordParam" >
+        SELECT
+        DISTINCT(u.`id`),u.`avatar`,u.`nickname`
+        FROM user u LEFT JOIN t_sport_record sr ON u.`id`=sr.`user_id`
+        WHERE sr.`venue_id`=${venueId}
+        LIMIT ${offset},${pageSize}
+    </select>
 </mapper>
