@@ -4,6 +4,7 @@ import com.zyx.entity.record.SportRecord;
 import com.zyx.mapper.BaseMapper;
 import com.zyx.param.record.RankParam;
 import com.zyx.param.record.SportRecordParam;
+import com.zyx.vo.account.UserIconVo;
 import com.zyx.vo.record.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -52,5 +53,5 @@ public interface SportRecordMapper extends BaseMapper<SportRecord> {
      */
     RankVo selectSelfRank(RankParam param);
 
-
+    List<UserIconVo> selectRecordUserIcon(SportRecordParam param);
 }

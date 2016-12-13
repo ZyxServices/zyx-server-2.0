@@ -8,6 +8,7 @@ import com.zyx.param.record.RankParam;
 import com.zyx.param.record.SportRecordParam;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.record.SportRecordService;
+import com.zyx.vo.account.UserIconVo;
 import com.zyx.vo.record.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -81,5 +82,10 @@ public class SportRecordServiceImpl extends BaseServiceImpl<SportRecord> impleme
     @Override
     public List<SportInfoLevelVo> getSportInfoLevel(Integer venueId) {
         return sportInfoMapper.selectSportInfoLevel(venueId);
+    }
+
+    @Override
+    public List<UserIconVo> getRecordUserIcon(SportRecordParam param) {
+        return sportRecordMapper.selectRecordUserIcon( param);
     }
 }
