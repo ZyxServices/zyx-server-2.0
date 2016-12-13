@@ -10,6 +10,7 @@ import com.zyx.rpc.record.SportRecordFacade;
 import com.zyx.service.record.SportRecordService;
 import com.zyx.service.venue.SportInfoService;
 import com.zyx.service.venue.VenueService;
+import com.zyx.vo.account.UserIconVo;
 import com.zyx.vo.record.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -98,5 +99,14 @@ public class SportRecordFacdeImpl implements SportRecordFacade {
     @Override
     public List<SportInfoLevelVo> getSportInfoLevel(Integer venueId) {
         return sportRecordService.getSportInfoLevel(venueId);
+    }
+
+    @Override
+    public List<UserIconVo> getRecordUserIcon(Integer venueId, Integer pageSize, Integer pageNum) {
+        SportRecordParam param = new SportRecordParam();
+        param.setVenueId(venueId);
+        param.setPageNum(pageNum);
+        param.setPageSize(pageSize);
+        return sportRecordService.getRecordUserIcon(param );
     }
 }

@@ -4,6 +4,7 @@ import com.zyx.entity.record.SportRecord;
 import com.zyx.param.record.RankParam;
 import com.zyx.param.record.SportRecordParam;
 import com.zyx.service.BaseService;
+import com.zyx.vo.account.UserIconVo;
 import com.zyx.vo.record.*;
 
 import java.util.List;
@@ -25,4 +26,6 @@ public interface SportRecordService extends BaseService<SportRecord> {
     RankVo getSelfRank(RankParam param);
 
     List<SportInfoLevelVo> getSportInfoLevel(Integer venueId);
+
+    List<UserIconVo> getRecordUserIcon(SportRecordParam param);
 }
