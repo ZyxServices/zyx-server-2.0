@@ -12,7 +12,7 @@
 	default-autowire="byName" default-lazy-init="false">
 
 	<!--&lt;!&ndash; 采用注释的方式配置bean &ndash;&gt;-->
-	<!--<context:annotation-config />-->
+	<context:annotation-config />
 
 	<!-- 配置要扫描的包 -->
 	<!--<context:component-scan base-package="com" />-->
