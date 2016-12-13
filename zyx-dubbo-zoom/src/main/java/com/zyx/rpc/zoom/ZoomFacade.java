@@ -116,7 +116,7 @@ public interface ZoomFacade {
      * @param labelId
      * @return
      */
-    Map<String, Object> queryEquipByLabelId(Integer labelId);
+    Map<String, Object> queryEquipByLabelId(Integer labelId,Integer loginUserId,Integer start,Integer pageSize);
 
 
     /**

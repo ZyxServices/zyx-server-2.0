@@ -16,8 +16,9 @@ public class EquipListVo extends Equip implements Serializable {
     private Integer commentCounts;
     private Integer zanCounts;
     private UserIconVo userIconVo;
-    private UserAuthVo userAuthVo;
+    private String authInfo;
     private String labelName;
+    private Integer zans;
 
     public Integer getCommentCounts() {
         return commentCounts;
@@ -43,12 +44,12 @@ public class EquipListVo extends Equip implements Serializable {
         this.userIconVo = userIconVo;
     }
 
-    public UserAuthVo getUserAuthVo() {
-        return userAuthVo;
+    public Integer getZans() {
+        return zans;
     }
 
-    public void setUserAuthVo(UserAuthVo userAuthVo) {
-        this.userAuthVo = userAuthVo;
+    public void setZans(Integer zans) {
+        this.zans = zans;
     }
 
     public String getLabelName() {
@@ -57,5 +58,14 @@ public class EquipListVo extends Equip implements Serializable {
 
     public void setLabelName(String labelName) {
         this.labelName = labelName;
+    }
+
+
+    public String getAuthInfo() {
+        return authInfo;
+    }
+
+    public void setAuthInfo(String authInfo) {
+        this.authInfo = authInfo;
     }
 }

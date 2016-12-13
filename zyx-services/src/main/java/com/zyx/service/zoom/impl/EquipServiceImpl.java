@@ -13,10 +13,7 @@ import com.zyx.vo.zoom.EquipListVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * @author XiaoWei
@@ -35,7 +32,7 @@ public class EquipServiceImpl extends BaseServiceImpl<Equip> implements EquipSer
 
 
     @Override
-    public Map<String, Object> addEquip(String title, String content, Integer accountId, Integer labelId,String imgUrls) {
+    public Map<String, Object> addEquip(String title, String content, Integer accountId, Integer labelId, String imgUrls) {
         if (Objects.equals(title, null) || Objects.equals(title, "")) {
             return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30006, ZoomConstants.PG_ERROR_CODE_30006_MSG);
         }
@@ -91,12 +88,14 @@ public class EquipServiceImpl extends BaseServiceImpl<Equip> implements EquipSer
     }
 
     @Override
-    public Map<String, Object> queryByLabelId(Integer tagId) {
+    public Map<String, Object> queryByLabelId(Integer tagId, Integer loginUserId, Integer start, Integer pageSize) {
         try {
             if (Objects.equals(tagId, null)) {
                 return MapUtils.buildSuccessMap(ZoomConstants.PG_ERROR_CODE_30027, ZoomConstants.PG_ERROR_CODE_30027_MSG, null);
             }
-            List<EquipListVo> equipListVos = equipMapper.queryByLabelId(tagId);
+            start = Optional.ofNullable(start).orElse(1);
+            pageSize = Optional.ofNullable(pageSize).orElse(10);
+            List<EquipListVo> equipListVos = equipMapper.queryByLabelId(tagId, loginUserId, (start - 1) * pageSize, pageSize);
             return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.SUCCESS_MSG, equipListVos);
         } catch (Exception e) {
             e.printStackTrace();
