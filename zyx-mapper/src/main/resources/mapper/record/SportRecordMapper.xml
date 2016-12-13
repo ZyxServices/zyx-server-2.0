@@ -134,7 +134,7 @@
         ORDER BY total_score
     </select>
 
-    <select id="selectSelfRank" resultType="com.zyx.vo.account.UserIconVo" >
+    <select id="selectRecordUserIcon" resultType="com.zyx.vo.account.UserIconVo" parameterType="com.zyx.param.record.SportRecordParam" >
         SELECT
         DISTINCT(u.`id`),u.`avatar`,u.`nickname`
         FROM USER u LEFT JOIN t_sport_record sr ON u.`id`=sr.`user_id`
