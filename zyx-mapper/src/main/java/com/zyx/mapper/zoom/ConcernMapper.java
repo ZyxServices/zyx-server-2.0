@@ -29,7 +29,7 @@ public interface ConcernMapper extends BaseMapper<Concern> {
 
     List<MyFollowVo> starConcern(@Param("start") Integer max, @Param("end") Integer end);
 
-    MyFollowVo getOne(@Param("id") Integer concernId);
+    MyFollowVo getOne(@Param("id") Integer concernId, @Param("loginUserId") Integer loginUserId);
 
     Integer delConcern(@Param("id") Integer id);
 
@@ -38,7 +38,6 @@ public interface ConcernMapper extends BaseMapper<Concern> {
     List<UserIconVo> getConcernZanUser(@Param("concernId") Integer concernId, @Param("max") Integer max);
 
     Integer getConcernZanUserCount(@Param("concernId") Integer concernId);
-
 
 
 }

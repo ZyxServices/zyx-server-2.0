@@ -75,7 +75,7 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
         if (id == null) {
             return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30021, ZoomConstants.PG_ERROR_CODE_30021_MSG);
         }
-        Concern concernFind = concernMapper.getOne(id);
+        Concern concernFind = concernMapper.getOne(id,loginUserId);
         if (concernFind != null) {
             if (Objects.equals(concernFind.getUserId(), loginUserId)) {
                 Integer result = concernMapper.delConcern(id);
@@ -235,7 +235,7 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
             if (Objects.equals(concernId, null)) {
                 return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30021, ZoomConstants.PG_ERROR_CODE_30021_MSG);
             }
-            MyFollowVo myFollowVo = concernMapper.getOne(concernId);
+            MyFollowVo myFollowVo = concernMapper.getOne(concernId,accountId);
 //            if (!Objects.equals(myFollowVo, null)) {
 //                myFollowVo.setTopicContent("<p>" + myFollowVo.getTopicContent() + "</p>");
 //                if (myFollowVo.getImgUrl() != null) {

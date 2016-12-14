@@ -48,6 +48,10 @@ public class Concern extends BaseEntity {
     @ColumnType(jdbcType = JdbcType.VARCHAR)
     private String local;
 
+    @Column
+    @ColumnType(jdbcType = JdbcType.INTEGER)
+    private Integer appType;
+
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
@@ -138,5 +142,13 @@ public class Concern extends BaseEntity {
 
     public void setLocal(String local) {
         this.local = local;
+    }
+
+    public Integer getAppType() {
+        return appType;
+    }
+
+    public void setAppType(Integer appType) {
+        this.appType = appType;
     }
 }

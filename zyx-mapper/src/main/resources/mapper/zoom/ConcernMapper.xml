@@ -32,20 +32,19 @@
         <result column="topic_title" property="topicTitle" jdbcType="VARCHAR"/>
         <result column="topic_content" property="topicContent" jdbcType="VARCHAR"/>
         <result column="img_url" property="imgUrl" jdbcType="INTEGER"/>
-        <result column="video_url" property="videoUrl" jdbcType="INTEGER"/>
+        <result column="video_url" property="videoUrl" jdbcType="VARCHAR"/>
         <result column="topic_visible" property="videoUrl" jdbcType="INTEGER"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
         <result column="from_id" property="fromId" jdbcType="INTEGER"/>
         <result column="from_type" property="fromType" jdbcType="INTEGER"/>
         <result column="local" property="local" jdbcType="VARCHAR"/>
+        <result column="appType" property="appType" jdbcType="INTEGER"/>
     </resultMap>
 
     <resultMap id="ConcernMyMap" type="com.zyx.vo.zoom.MyFollowVo" extends="ConcernResultMap">
-        <!--<result column="zan_counts" property="zanCounts" jdbcType="VARCHAR"/>-->
-        <!--<result column="comment_counts" property="commentCounts" jdbcType="VARCHAR"/>-->
         <association property="zanCounts" column="id" select="zanSelect"/>
         <association property="commentCounts" column="id" select="commentSelect"/>
-        <association property="userAuthVo" column="user_id" select="userAuthSelect"/>
+        <association property="authInfo" column="user_id" select="userAuthSelect"/>
         <association property="userIconVo" column="user_id" select="userSelect"/>
     </resultMap>
 
@@ -55,7 +54,7 @@
         <association property="zanCounts" column="id" select="zanSelect"/>
         <association property="commentCounts" column="id" select="commentSelect"/>
         <association property="userIconVo" column="user_id" select="userSelect"/>
-        <association property="userAuthVo" column="user_id" select="userAuthSelect"/>
+        <association property="authInfo" column="user_id" select="userAuthSelect"/>
         <discriminator javaType="java.lang.Integer" column="from_type">
             <case value="1" resultMap="ActivityMap"/>
         </discriminator>
@@ -98,7 +97,7 @@
         SELECT nickname,avatar,id,authenticate FROM `user` WHERE id=#{user_id}
     </select>
 
-    <select id="userAuthSelect" parameterType="int" resultType="com.zyx.vo.zoom.UserAuthVo">
+    <select id="userAuthSelect" parameterType="int" resultType="java.lang.String">
         SELECT authInfo FROM `user_auth` WHERE user_id=#{user_id}
     </select>
 
@@ -198,7 +197,11 @@
     </select>
 
     <select id="getOne" resultMap="ConcernMyMap">
-        SELECT * FROM concern WHERE id=#{id} AND state = 0
+        SELECT *
+        <if test="loginUserId!=null">
+            ,(SELECT COUNT(id) FROM user_attention WHERE from_user_id=#{loginUserId} AND to_user_id=concern.user_id) as follow
+        </if>
+        FROM concern WHERE id=#{id} AND state = 0
     </select>
 
 
