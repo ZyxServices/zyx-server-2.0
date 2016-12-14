@@ -40,7 +40,6 @@ public class TokenFacadeImpl implements TokenFacade {
         // 验证token
         TokenModel model = manager.getToken(anthorization);
         if (manager.checkToken(model)) {
-            System.out.println(model.getToken());
             return true;
         }
         return true;

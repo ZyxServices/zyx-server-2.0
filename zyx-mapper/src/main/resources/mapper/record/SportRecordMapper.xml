@@ -114,11 +114,10 @@
         LIMIT ${offset},${pageSize}
     </select>
     <select id="selectUserIcon" parameterType="java.lang.Integer" resultType="com.zyx.vo.account.UserIconVo">
-          SELECT
-          u.nickname,u.avatar,u.authenticate
-          FROM user u
-          WHERE
-          id=#{userId}
+        SELECT u.nickname,u.avatar,u.authenticate,l.`step` ,l.`name` AS levelName
+        FROM user u LEFT JOIN level l ON u.`level_id`=l.`id`
+        WHERE
+        u.id=#{userId}
     </select>
 
     <select id="selectSelfRank" resultMap="RankVo" parameterType="com.zyx.param.record.RankParam">
@@ -133,5 +132,13 @@
         WHERE
         user_id=#{userId}
         ORDER BY total_score
+    </select>
+
+    <select id="selectRecordUserIcon" resultType="com.zyx.vo.account.UserIconVo" parameterType="com.zyx.param.record.SportRecordParam" >
+        SELECT
+        DISTINCT(u.`id`),u.`avatar`,u.`nickname`
+        FROM user u LEFT JOIN t_sport_record sr ON u.`id`=sr.`user_id`
+        WHERE sr.`venue_id`=${venueId}
+        LIMIT ${offset},${pageSize}
     </select>
 </mapper>

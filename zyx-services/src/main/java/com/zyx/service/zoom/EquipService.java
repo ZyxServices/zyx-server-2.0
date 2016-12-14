@@ -21,5 +21,5 @@ public interface EquipService extends BaseService<Equip> {
 
     Map<String, Object> queryMyList(UserEquipmentParam userEquipmentParam);
 
-    Map<String, Object> queryByLabelId(Integer tagId);
+    Map<String, Object> queryByLabelId(Integer tagId,Integer loginUserId,Integer start,Integer pageSize);
 }

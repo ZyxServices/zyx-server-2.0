@@ -40,23 +40,24 @@
 
     <resultMap id="UserIconVoMap" type="com.zyx.vo.account.UserIconVo">
         <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="nickname"  property="nickName" jdbcType="VARCHAR"/>
+        <result column="nickname" property="nickName" jdbcType="VARCHAR"/>
         <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
         <result column="authenticate" property="authenticate" jdbcType="INTEGER"/>
-        <association property="level" column="{userId=id}" select="com.zyx.mapper.point.UserPointMapper.queryUserLevelWithView"/>
+        <association property="level" column="{userId=id}"
+                     select="com.zyx.mapper.point.UserPointMapper.queryUserLevelWithView"/>
     </resultMap>
 
     <select id="userSelect" parameterType="int" resultMap="UserIconVoMap">
         SELECT nickname,avatar,id,authenticate FROM `user` WHERE id=#{user_id}
     </select>
 
-    <select id="userAuthSelect" parameterType="int" resultType="com.zyx.vo.zoom.UserAuthVo">
-        SELECT authInfo FROM `user_auth` WHERE user_id=#{user_id}
+    <select id="userAuthSelect" parameterType="int" resultType="java.lang.String">
+        SELECT authInfo FROM user_auth WHERE user_id=#{user_id}
     </select>
 
 
     <select id="zanSelect" parameterType="int" resultType="int">
-        SELECT COUNT(id) FROM zan WHERE zan.body_type=2 AND zan.body_id=#{concernId}
+        SELECT COUNT(id) FROM zan WHERE zan.body_type=2 AND zan.body_id=#{equipId}
     </select>
 
     <select id="commentSelect" parameterType="int" resultType="int">
@@ -71,7 +72,7 @@
         <association property="zanCounts" column="id" select="zanSelect"/>
         <association property="commentCounts" column="id" select="commentSelect"/>
         <association property="userIconVo" column="account_id" select="userSelect"/>
-        <association property="userAuthVo" column="account_id   " select="userAuthSelect"/>
+        <association property="authInfo" column="account_id" select="userAuthSelect"/>
         <association property="labelName" column="label_id" select="labelSelect"/>
     </resultMap>
 
@@ -144,10 +145,15 @@
     </select>
 
     <select id="queryByLabelId" parameterType="java.lang.Integer" resultMap="EquipCustomResultMap">
-        SELECT * FROM equip WHERE del=0 AND mask=0
+        SELECT *
+        <if test="loginUserId!=-1||loginUserId!=null">
+            ,(SELECT COUNT(id) FROM zan WHERE body_type=2 AND body_id=equip.id AND account_id=#{loginUserId}) AS zans
+        </if>
+        FROM equip WHERE del=0 AND mask=0
         <if test="tagId!=null">
             AND label_id=#{tagId}
         </if>
         ORDER BY create_time DESC
+        LIMIT #{start},#{end}
     </select>
 </mapper>

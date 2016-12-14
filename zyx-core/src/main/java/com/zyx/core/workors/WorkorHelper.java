@@ -17,9 +17,7 @@ public class WorkorHelper {
         if(redisTemplate==null||redisTemplate.opsForList()==null){
             throw  new RedisNullException("redis cache queue connect failure");
         }else{
-            System.out.println("提交任务");
             redisTemplate.opsForList().leftPush("tq", workor);
-            System.out.println("提交任务后任务条数："+redisTemplate.opsForList().size("tq"));
         }
     }
 

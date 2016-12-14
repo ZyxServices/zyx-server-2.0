@@ -22,7 +22,7 @@
 
     <!-- 采用注释的方式配置bean -->
     <context:annotation-config/>
-    <context:component-scan base-package="com.zyx.*.point"/>
+    <context:component-scan base-package="com.zyx.*.point,com.zyx.*.user"/>
 
     <!-- 读入配置属性文件 -->
     <context:property-placeholder location="classpath:service.properties"/>
@@ -66,11 +66,12 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations">
             <list>
+                <value>classpath*:mapper/point/*.xml</value>
                 <value>classpath*:mapper/user/*.xml</value>
             </list>
         </property>
         <property name="typeAliasesPackage"
-                  value="com.zyx.entity.point"/>
+                  value="com.zyx.entity.point,com.zyx.entity.user"/>
         <property name="plugins">
             <bean class="com.github.pagehelper.PageHelper">
             </bean>
@@ -97,7 +98,7 @@
     <aop:aspectj-autoproxy/>
 
     <aop:config>
-        <aop:pointcut id="appService" expression="execution(* com.zyx.service.point..*Service*.*(..))"/>
+        <aop:pointcut id="appService" expression="execution(* com.zyx.service.point..*Service*.*(..)),execution(* com.zyx.service.user..*Service*.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="appService"/>
     </aop:config>
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
