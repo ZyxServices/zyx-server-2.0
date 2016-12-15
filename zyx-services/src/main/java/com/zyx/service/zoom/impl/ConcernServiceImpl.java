@@ -65,6 +65,7 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
         Optional.ofNullable(videoUrl).ifPresent(insertCern::setVideoUrl);
         Optional.ofNullable(visible).ifPresent(insertCern::setTopicVisible);
         Optional.ofNullable(local).ifPresent(insertCern::setLocal);
+        insertCern.setAppType(1);
         insertCern.setState(0);
         save(insertCern);
         return MapUtils.buildSuccessMap(Constants.SUCCESS, ZoomConstants.PG_ERROR_CODE_33000_MSG, null);
