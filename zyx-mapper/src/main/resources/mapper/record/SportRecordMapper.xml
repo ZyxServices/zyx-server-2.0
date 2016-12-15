@@ -29,9 +29,9 @@
     </resultMap>
 
     <select id="selectRecordOverview" resultMap="SportOverviewVo" parameterType="java.lang.Integer">
-        SELECT COUNT(DISTINCT(t_sport_record.id))AS times,COUNT(DISTINCT(vsiv.venue_id))AS ft_number ,SUM(vsiv.score)AS total_score,COUNT(DISTINCT(vsiv.city))  AS city_number
+        SELECT COUNT(DISTINCT(t_sport_record.id))AS times,COUNT(DISTINCT(t_sport_record.venue_id))AS ft_number ,SUM(t_sport_record.score)AS total_score,COUNT(DISTINCT(t_venue.city))  AS city_number
         FROM t_sport_record
-        LEFT JOIN view_sport_info_venue vsiv ON t_sport_record.sport_info_id=vsiv.id
+        LEFT JOIN t_venue ON t_sport_record.`venue_id`=t_venue.`id`
         WHERE
         t_sport_record.user_id = ${userId}
     </select>
@@ -40,8 +40,8 @@
         SELECT
         *
         FROM
-        t_sport_record LEFT JOIN view_sport_info_venue vsiv
-        ON t_sport_record.`sport_info_id` = vsiv.id
+        t_sport_record LEFT JOIN t_venue
+        ON t_sport_record.`venue_id` = t_venue.`id`
         WHERE
         t_sport_record.`user_id`=#{userId}
         ORDER BY t_sport_record.`create_time` DESC
@@ -60,15 +60,15 @@
     </resultMap>
 
     <select id="selectVenueFootprints" resultMap="FootprintVO">
-        SELECT
-        vsiv.city,vsiv.venue_id,vsiv.venue_name,vsiv.address,COUNT(vsiv.venue_id)AS fp_number,vsiv.longitude,vsiv.latitude
+       SELECT
+        t_venue.city,t_sport_record.venue_id,t_venue.name AS venue_name,t_venue.address,COUNT(t_sport_record.`venue_id`)AS fp_number,t_venue.`longitude`,t_venue.`latitude`
         FROM
-        t_sport_record LEFT JOIN view_sport_info_venue vsiv ON t_sport_record.`sport_info_id` = vsiv.`id`
+        t_sport_record LEFT JOIN t_venue  ON t_sport_record.`venue_id` = t_venue.`id`
         WHERE
         t_sport_record.user_id=#{userId}
         AND
         city=#{city}
-	    GROUP BY vsiv.venue_id
+	    GROUP BY t_sport_record.venue_id
     </select>
 
     <resultMap id="CityFootprintVO" type="com.zyx.vo.record.CityFootprintVo">
@@ -89,13 +89,13 @@
     </select>
 
     <select id="selectFullCityFootprints" resultMap="FootprintVO">
-        SELECT
-        vsiv.city,vsiv.venue_id,vsiv.venue_name,vsiv.address,COUNT(vsiv.venue_id)AS fp_number,vsiv.longitude,vsiv.latitude
+         SELECT
+        t_venue.city,t_sport_record.venue_id,t_venue.name AS venue_name,t_venue.address,COUNT(t_sport_record.venue_id)AS fp_number,t_venue.longitude,t_venue.latitude
         FROM
-        t_sport_record LEFT JOIN view_sport_info_venue vsiv ON t_sport_record.`sport_info_id` = vsiv.`id`
+        t_sport_record LEFT JOIN t_venue  ON t_sport_record.`venue_id` = t_venue.`id`
         WHERE
         t_sport_record.user_id=#{userId}
-	    GROUP BY vsiv.venue_id
+	    GROUP BY t_sport_record.venue_id
 	    ORDER BY city
     </select>
 
@@ -106,9 +106,9 @@
         <association column="user_id" property="userIconVo" select="selectUserIcon"></association>
     </resultMap>
     <select id="selectRankList" resultMap="RankVo" parameterType="com.zyx.param.record.RankParam">
-        SELECT @row := @row + 1 AS row_num,sr.user_id,SUM(si.score) AS total_score
+        SELECT @row := @row + 1 AS row_num,sr.user_id,SUM(sr.score) AS total_score
         FROM
-        t_sport_record sr LEFT JOIN t_sport_info si ON sr.sport_info_id=si.id,(SELECT @row := 0) r
+        t_sport_record sr ,(SELECT @row := 0) r
         GROUP BY sr.user_id
         ORDER BY total_score DESC
         LIMIT ${offset},${pageSize}
@@ -124,10 +124,11 @@
         SELECT
         *
         FROM(
-        SELECT @row := @row + 1 AS row_num,sr.user_id,SUM(si.score) AS total_score
+        SELECT @row := @row + 1 AS row_num,sr.user_id,SUM(sr.score) AS total_score
         FROM
-        t_sport_record sr LEFT JOIN t_sport_info si ON sr.sport_info_id=si.id,(SELECT @row := 0) r
+        t_sport_record sr ,(SELECT @row := 0) r
         GROUP BY sr.user_id
+        ORDER BY total_score DESC
         ) sort_table
         WHERE
         user_id=#{userId}
