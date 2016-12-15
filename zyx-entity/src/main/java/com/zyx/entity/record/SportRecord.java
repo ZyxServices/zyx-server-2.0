@@ -12,12 +12,12 @@ import javax.persistence.Table;
 public class SportRecord extends BaseEntity{
     private Integer userId;
     private Integer type;
-//    private String level;
+    private String level;
     private Integer venueId;
     /**
      * 运动场馆编号
      */
-    private Integer sportInfoId;
+//    private Integer sportInfoId;
     /**
      * 运动时间
      */
@@ -25,7 +25,7 @@ public class SportRecord extends BaseEntity{
 //    /**
 //     * 荣誉值得分
 //     */
-//    private Integer score;
+    private Integer score;
 
     private Integer concernId;
 
@@ -45,13 +45,13 @@ public class SportRecord extends BaseEntity{
         this.type = type;
     }
 
-//    public String getLevel() {
-//        return level;
-//    }
-//
-//    public void setLevel(String level) {
-//        this.level = level;
-//    }
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
 
 
     public Integer getVenueId() {
@@ -61,14 +61,14 @@ public class SportRecord extends BaseEntity{
     public void setVenueId(Integer venueId) {
         this.venueId = venueId;
     }
-
-    public Integer getSportInfoId() {
-        return sportInfoId;
-    }
-
-    public void setSportInfoId(Integer sportInfoId) {
-        this.sportInfoId = sportInfoId;
-    }
+//
+//    public Integer getSportInfoId() {
+//        return sportInfoId;
+//    }
+//
+//    public void setSportInfoId(Integer sportInfoId) {
+//        this.sportInfoId = sportInfoId;
+//    }
 
     public Long getSpendTime() {
         return spendTime;
@@ -78,13 +78,13 @@ public class SportRecord extends BaseEntity{
         this.spendTime = spendTime;
     }
 
-//    public Integer getScore() {
-//        return score;
-//    }
-//
-//    public void setScore(Integer score) {
-//        this.score = score;
-//    }
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
 
     public Integer getConcernId() {
         return concernId;
