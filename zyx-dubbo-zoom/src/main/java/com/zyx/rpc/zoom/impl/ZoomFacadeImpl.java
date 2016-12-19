@@ -146,12 +146,17 @@ public class ZoomFacadeImpl implements ZoomFacade {
     }
 
     @Override
-    public Map<String, Object> queryEquipByLabelId(Integer labelId,Integer loginUserId,Integer start,Integer pageSize) {
-        return equipService.queryByLabelId(labelId,loginUserId,start,pageSize);
+    public Map<String, Object> queryEquipByLabelId(Integer labelId, Integer loginUserId, Integer start, Integer pageSize) {
+        return equipService.queryByLabelId(labelId, loginUserId, start, pageSize);
     }
 
     @Override
     public Map<String, Object> getConcernZanUser(Integer concernId, Integer max) {
         return concernService.getConcernZanUser(concernId, max);
+    }
+
+    @Override
+    public Map<String, Object> delCern(Integer id, Integer loginUserId) {
+        return concernService.delCern(id, loginUserId);
     }
 }
