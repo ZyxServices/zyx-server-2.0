@@ -35,7 +35,7 @@ public class ActivityFacadeImpl implements ActivityFacade {
     @Override
     public Map<String, Object> insertActivity(ActivityParam activityParam) {
         try {
-             Map map=activityService.insterActivity(activityParam);
+            Map map = activityService.insterActivity(activityParam);
             //发布活动 获得运动币
             if (null != map && !map.isEmpty() && map.get(ZoomConstants.STATE).equals(ZoomConstants.SUCCESS))
                 sportCoinService.modifyCoin(activityParam.getUserId(), CoinConstants.OperType.PUBLISH_COMMENT);
@@ -73,6 +73,17 @@ public class ActivityFacadeImpl implements ActivityFacade {
     public Map<String, Object> activityById(Integer activityId) {
         try {
             return activityService.activityById(activityId);
+        } catch (Exception e) {
+            logger.error(e);
+            e.printStackTrace();
+            return Constants.MAP_500;
+        }
+    }
+
+    @Override
+    public Map<String, Object> delActivityById(Integer activityId, Integer userId) {
+        try {
+            return activityService.delActivityById(activityId, userId);
         } catch (Exception e) {
             logger.error(e);
             e.printStackTrace();

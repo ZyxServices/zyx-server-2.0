@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -143,6 +144,24 @@ public class ActivityServiceImpl implements ActivityService {
 
             }
             return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, activityVo);
+        } else {
+            return Constants.MAP_PARAM_MISS;
+        }
+    }
+
+    @Override
+    public Map<String, Object> delActivityById(Integer activityId, Integer userId) {
+        if (activityId != null && userId != null) {
+            Map<String,Object> map = new HashMap<>();
+            map.put("activityId",activityId);
+            map.put("userId",userId);
+            int delActivityById = activityMapper.delActivityById(map);
+            activityMapper.delConcern(map);
+            if(delActivityById > 0){
+                return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, "删除成功");
+            }else{
+                return MapUtils.buildSuccessMap(ActivityConstants.AUTH_ERROR_10011, Constants.MSG_ERROR, "删除失败");
+            }
         } else {
             return Constants.MAP_PARAM_MISS;
         }

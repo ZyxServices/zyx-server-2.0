@@ -43,4 +43,14 @@ public interface ActivityMapper extends BaseMapper<Activity> {
      * @return
      */
     ActivityVo activityById(Integer activityId);
+
+    /**
+     * 通过ID删除活动
+     *
+     * @param map
+     * @return
+     */
+    int delActivityById(Map<String,Object> map);
+
+    int delConcern(Map<String,Object> map);
 }

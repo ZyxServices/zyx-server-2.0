@@ -91,4 +91,13 @@
     <select id="commentCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
         SELECT COUNT(id) FROM comment WHERE comment_type=4 AND comment_id=#{commentId}
     </select>
+
+    <delete id="delActivityById" parameterType="java.util.Map">
+        DELETE FROM activity WHERE id = #{activityId} AND user_id = #{userId}
+    </delete>
+
+    <delete id="delConcern" parameterType="java.util.Map">
+        DELETE FROM concern WHERE from_id = #{activityId} AND user_id = #{userId} AND from_type = 1
+    </delete>
+
 </mapper>
