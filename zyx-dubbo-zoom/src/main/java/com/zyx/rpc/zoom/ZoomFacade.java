@@ -127,4 +127,13 @@ public interface ZoomFacade {
      */
     Map<String,Object> getConcernZanUser(Integer concernId,Integer max);
 
+
+    /**
+     * 删除动态（软）
+     * @param id
+     * @param loginUserId
+     * @return
+     */
+    Map<String, Object> delCern(Integer id, Integer loginUserId);
+
 }
