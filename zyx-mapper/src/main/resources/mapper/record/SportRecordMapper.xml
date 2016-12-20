@@ -23,7 +23,7 @@
         <result column="spend_time" property="spendTime"></result>
         <result column="concern_id" property="concernId"></result>
         <result column="venue_id" property="venueId"></result>
-        <result column="venue_name" property="venueName"></result>
+        <result column="name" property="venueName"></result>
         <result column="path" property="path"></result>
         <result column="level" property="level"></result>
     </resultMap>
