@@ -9,8 +9,8 @@
 
     <resultMap id="MyCenterFSVoResultMap" type="com.zyx.vo.attention.AttentionVo">
         <id column="Id" property="id" jdbcType="INTEGER"/>
-        <association property="attentions" column="from_user_id"
-                     select="com.zyx.mapper.account.AccountInfoMapper.selectAttentionAccountById"></association>
+        <association property="attentions" column="{to_user_id=to_user_id,from_user_id=from_user_id}"
+                     select="com.zyx.mapper.account.AccountInfoMapper.selectAttentionAccountByFTId"></association>
     </resultMap>
 
     <resultMap id="MyCenterDKGZVoResultMap" type="com.zyx.vo.attention.AttentionVo">

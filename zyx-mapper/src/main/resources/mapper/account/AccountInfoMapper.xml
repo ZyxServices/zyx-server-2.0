@@ -92,6 +92,10 @@
         SELECT u.id,u.nickname,u.avatar,u.signature,ua.authinfo as authInfo,u.phone FROM user as u LEFT JOIN user_auth as ua ON u.id = ua.user_id WHERE u.id = #{id} AND u.del != 1
     </select>
 
+    <select id="selectAttentionAccountByFTId" parameterType="java.util.Map" resultMap="QueryAccountAttentionVo">
+        SELECT u.id,u.nickname,u.avatar,u.signature,u.phone,(select COUNT(id) from user_attention where from_user_id = #{to_user_id} and to_user_id = #{from_user_id}) as isFollow FROM user as u WHERE u.id = #{from_user_id} AND u.del != 1;
+    </select>
+
     <select id="selectAttentionDKAccountById" parameterType="java.lang.Integer" resultMap="QueryAccountAttentionVo">
         SELECT * FROM user WHERE id = #{id} AND del != 1 AND authenticate = 2
     </select>
