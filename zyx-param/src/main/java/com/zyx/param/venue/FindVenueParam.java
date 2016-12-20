@@ -37,6 +37,11 @@ public class FindVenueParam implements Serializable {
      */
     private Integer pageNumber;
 
+    /**
+     * 城市
+     */
+    private String city;
+
     public Integer getType() {
         return type;
     }
@@ -75,5 +80,13 @@ public class FindVenueParam implements Serializable {
 
     public void setPageNumber(Integer pageNumber) {
         this.pageNumber = pageNumber;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

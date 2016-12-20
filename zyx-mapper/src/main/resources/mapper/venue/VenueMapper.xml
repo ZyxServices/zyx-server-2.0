@@ -52,6 +52,9 @@
         ,2)))*1000) AS distance,
         (SELECT COUNT(id) FROM t_sport_record b WHERE a.id = b.venue_id) AS pnumber
         FROM t_venue a WHERE del != 1
+        <if test="city != null and city != ''">
+            AND city = #{city}
+        </if>
         <if test="type == 1">
             ORDER BY a.create_time desc
         </if>
