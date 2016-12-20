@@ -33,7 +33,7 @@
         <result column="topic_content" property="topicContent" jdbcType="VARCHAR"/>
         <result column="img_url" property="imgUrl" jdbcType="INTEGER"/>
         <result column="video_url" property="videoUrl" jdbcType="VARCHAR"/>
-        <result column="topic_visible" property="videoUrl" jdbcType="INTEGER"/>
+        <result column="topic_visible" property="topicVisible" jdbcType="INTEGER"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
         <result column="from_id" property="fromId" jdbcType="INTEGER"/>
         <result column="from_type" property="fromType" jdbcType="INTEGER"/>

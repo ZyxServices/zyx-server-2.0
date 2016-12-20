@@ -90,9 +90,6 @@ public class EquipServiceImpl extends BaseServiceImpl<Equip> implements EquipSer
     @Override
     public Map<String, Object> queryByLabelId(Integer tagId, Integer loginUserId, Integer start, Integer pageSize) {
         try {
-            if (Objects.equals(tagId, null)) {
-                return MapUtils.buildSuccessMap(ZoomConstants.PG_ERROR_CODE_30027, ZoomConstants.PG_ERROR_CODE_30027_MSG, null);
-            }
             start = Optional.ofNullable(start).orElse(1);
             pageSize = Optional.ofNullable(pageSize).orElse(10);
             List<EquipListVo> equipListVos = equipMapper.queryByLabelId(tagId, loginUserId, (start - 1) * pageSize, pageSize);
