@@ -112,7 +112,7 @@ public class ZoomFacadeImpl implements ZoomFacade {
         Map map = concernService.addCern(userId, type, content, cernImgurl, videoUrl, visible, local);
         if (null != map && !map.isEmpty() && map.get(ZoomConstants.STATE).equals(ZoomConstants.SUCCESS))
             sportCoinService.modifyCoin(userId, CoinConstants.OperType.PUBLISH_COMMENT);
-        if(recordId!=null&&type!=null&&type==ZoomConstants.CONCERN_TYPE.SHOW_RECORD){
+        if(recordId!=null){
             Concern conc = (Concern) map.get(Constants.DATA);
             if(null!=conc&&conc.getId()!=null){
                 SportRecord entity = new SportRecord();
