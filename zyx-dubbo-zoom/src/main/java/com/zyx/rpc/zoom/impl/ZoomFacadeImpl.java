@@ -90,16 +90,25 @@ public class ZoomFacadeImpl implements ZoomFacade {
         return concernService.myFollowCon(loginUserId, page, pageSize);
     }
 
-    @Override
-    public Map<String, Object> addCern(Integer userId, Integer type, String content, String cernImgurl, String videoUrl, Integer visible, String local) {
-        Map map = concernService.addCern(userId, type, content, cernImgurl, videoUrl, visible, local);
-        if (null != map && !map.isEmpty() && map.get(ZoomConstants.STATE).equals(ZoomConstants.SUCCESS))
-            sportCoinService.modifyCoin(userId, CoinConstants.OperType.PUBLISH_COMMENT);
-        return map;
-    }
+//    @Override
+//    public Map<String, Object> addCern(Integer userId, Integer type, String content, String cernImgurl, String videoUrl, Integer visible, String local) {
+//        Map map = concernService.addCern(userId, type, content, cernImgurl, videoUrl, visible, local);
+//        if (null != map && !map.isEmpty() && map.get(ZoomConstants.STATE).equals(ZoomConstants.SUCCESS))
+//            sportCoinService.modifyCoin(userId, CoinConstants.OperType.PUBLISH_COMMENT);
+//        if(recordId!=null&&type!=null&&type==ZoomConstants.CONCERN_TYPE.SHOW_RECORD){
+//            Concern conc = (Concern) map.get(Constants.DATA);
+//            if(null!=conc&&conc.getId()!=null){
+//                SportRecord entity = new SportRecord();
+//                entity.setId(recordId);
+//                entity.setConcernId(conc.getId());
+//                sportRecordService.updateNotNull(entity);
+//            }
+//        }
+//        return map;
+//    }
 
     @Override
-    public Map<String, Object> showSportRecord(Integer userId, Integer type, String content, String cernImgurl, String videoUrl, Integer visible, String local,Integer recordId) {
+    public Map<String, Object> addCern(Integer userId, Integer type, String content, String cernImgurl, String videoUrl, Integer visible, String local,Integer recordId) {
         Map map = concernService.addCern(userId, type, content, cernImgurl, videoUrl, visible, local);
         if (null != map && !map.isEmpty() && map.get(ZoomConstants.STATE).equals(ZoomConstants.SUCCESS))
             sportCoinService.modifyCoin(userId, CoinConstants.OperType.PUBLISH_COMMENT);
