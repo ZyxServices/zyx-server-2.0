@@ -32,6 +32,7 @@ public class SportRecordVo implements Serializable {
     private String path;
     private String level;
 
+    private String imgUrls;
     public Integer getId() {
         return id;
     }
@@ -118,5 +119,13 @@ public class SportRecordVo implements Serializable {
 
     public void setLevel(String level) {
         this.level = level;
+    }
+
+    public String getImgUrls() {
+        return imgUrls;
+    }
+
+    public void setImgUrls(String imgUrls) {
+        this.imgUrls = imgUrls;
     }
 }
