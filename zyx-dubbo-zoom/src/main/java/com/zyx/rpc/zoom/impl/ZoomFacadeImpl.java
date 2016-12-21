@@ -4,12 +4,15 @@ import com.zyx.constants.Constants;
 import com.zyx.constants.attention.UserAttentionConstants;
 import com.zyx.constants.coin.CoinConstants;
 import com.zyx.constants.zoom.ZoomConstants;
+import com.zyx.entity.record.SportRecord;
+import com.zyx.entity.zoom.Concern;
 import com.zyx.param.attention.AttentionParam;
 import com.zyx.param.user.UserConcernParam;
 import com.zyx.rpc.zoom.ZoomFacade;
 import com.zyx.service.account.AccountInfoService;
 import com.zyx.service.attention.UserAttentionService;
 import com.zyx.service.coin.SportCoinService;
+import com.zyx.service.record.SportRecordService;
 import com.zyx.service.zoom.ConcernService;
 import com.zyx.service.zoom.EquipService;
 import com.zyx.service.zoom.ZanService;
@@ -52,6 +55,9 @@ public class ZoomFacadeImpl implements ZoomFacade {
     @Resource
     SportCoinService sportCoinService;
 
+    @Resource
+    SportRecordService sportRecordService;
+
     @Override
     public Map<String, Object> addFollow(Integer fromUserId, Integer toUserId) {
         if (Objects.equals(fromUserId, null) || Objects.equals(toUserId, null)) {
@@ -84,14 +90,39 @@ public class ZoomFacadeImpl implements ZoomFacade {
         return concernService.myFollowCon(loginUserId, page, pageSize);
     }
 
+//    @Override
+//    public Map<String, Object> addCern(Integer userId, Integer type, String content, String cernImgurl, String videoUrl, Integer visible, String local) {
+//        Map map = concernService.addCern(userId, type, content, cernImgurl, videoUrl, visible, local);
+//        if (null != map && !map.isEmpty() && map.get(ZoomConstants.STATE).equals(ZoomConstants.SUCCESS))
+//            sportCoinService.modifyCoin(userId, CoinConstants.OperType.PUBLISH_COMMENT);
+//        if(recordId!=null&&type!=null&&type==ZoomConstants.CONCERN_TYPE.SHOW_RECORD){
+//            Concern conc = (Concern) map.get(Constants.DATA);
+//            if(null!=conc&&conc.getId()!=null){
+//                SportRecord entity = new SportRecord();
+//                entity.setId(recordId);
+//                entity.setConcernId(conc.getId());
+//                sportRecordService.updateNotNull(entity);
+//            }
+//        }
+//        return map;
+//    }
+
     @Override
-    public Map<String, Object> addCern(Integer userId, Integer type, String content, String cernImgurl, String videoUrl, Integer visible, String local) {
+    public Map<String, Object> addCern(Integer userId, Integer type, String content, String cernImgurl, String videoUrl, Integer visible, String local,Integer recordId) {
         Map map = concernService.addCern(userId, type, content, cernImgurl, videoUrl, visible, local);
         if (null != map && !map.isEmpty() && map.get(ZoomConstants.STATE).equals(ZoomConstants.SUCCESS))
             sportCoinService.modifyCoin(userId, CoinConstants.OperType.PUBLISH_COMMENT);
+        if(recordId!=null){
+            Concern conc = (Concern) map.get(Constants.DATA);
+            if(null!=conc&&conc.getId()!=null){
+                SportRecord entity = new SportRecord();
+                entity.setId(recordId);
+                entity.setConcernId(conc.getId());
+                sportRecordService.updateNotNull(entity);
+            }
+        }
         return map;
     }
-
     @Override
     public Map<String, Object> addZan(Integer body_id, Integer body_type, Integer account_id) {
         Map map = zanService.addZan(body_id, body_type, account_id);
