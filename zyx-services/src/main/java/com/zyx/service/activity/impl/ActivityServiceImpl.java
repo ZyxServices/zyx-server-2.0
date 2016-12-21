@@ -77,6 +77,7 @@ public class ActivityServiceImpl implements ActivityService {
                 concern.setTopicVisible(1);
                 concern.setUserId(param.getUserId());
                 concern.setState(0);
+                concern.setAppType(1);
                 concernMapper.insert(concern);
                 return MapUtils.buildSuccessMap(Constants.SUCCESS, "发布成功", null);
             } else {
