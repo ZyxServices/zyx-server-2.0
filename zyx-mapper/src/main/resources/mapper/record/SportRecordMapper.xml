@@ -57,11 +57,12 @@
         <result column="fp_number" property="fpNumber"></result>
         <result column="longitude" property="longitude"></result>
         <result column="latitude" property="latitude"></result>
+        <result column="img_urls" property="imgUrls"></result>
     </resultMap>
 
     <select id="selectVenueFootprints" resultMap="FootprintVO">
        SELECT
-        t_venue.city,t_sport_record.venue_id,t_venue.name AS venue_name,t_venue.address,COUNT(t_sport_record.`venue_id`)AS fp_number,t_venue.`longitude`,t_venue.`latitude`
+        t_venue.city,t_venue.img_urls,t_sport_record.venue_id,t_venue.name AS venue_name,t_venue.address,COUNT(t_sport_record.`venue_id`)AS fp_number,t_venue.`longitude`,t_venue.`latitude`
         FROM
         t_sport_record LEFT JOIN t_venue  ON t_sport_record.`venue_id` = t_venue.`id`
         WHERE
@@ -74,12 +75,11 @@
     <resultMap id="CityFootprintVO" type="com.zyx.vo.record.CityFootprintVo">
         <result column="city" property="city"></result>
         <result column="fp_number" property="fpNumber"></result>
-        <result column="img_urls" property="imgUrls"></result>
     </resultMap>
     <select id="selectCityFootprints" resultMap="CityFootprintVO">
 
         SELECT
-        venue.city,COUNT(record.venue_id)AS fp_number,venue.`img_urls`
+        venue.city,COUNT(record.venue_id)AS fp_number
         FROM
         t_sport_record record LEFT JOIN t_venue venue ON record.`venue_id` = venue.`id`
         WHERE
@@ -91,7 +91,7 @@
 
     <select id="selectFullCityFootprints" resultMap="FootprintVO">
          SELECT
-        t_venue.city,t_sport_record.venue_id,t_venue.name AS venue_name,t_venue.address,COUNT(t_sport_record.venue_id)AS fp_number,t_venue.longitude,t_venue.latitude
+        t_venue.city,t_venue.img_urls,t_sport_record.venue_id,t_venue.name AS venue_name,t_venue.address,COUNT(t_sport_record.venue_id)AS fp_number,t_venue.longitude,t_venue.latitude
         FROM
         t_sport_record LEFT JOIN t_venue  ON t_sport_record.`venue_id` = t_venue.`id`
         WHERE
