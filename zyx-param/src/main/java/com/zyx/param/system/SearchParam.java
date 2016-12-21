@@ -29,6 +29,11 @@ public class SearchParam implements Serializable {
      */
     private Integer model;
 
+    /**
+     * 当前登录用户ID
+     */
+    private Integer userId;
+
     public String getCharacter() {
         return character;
     }
@@ -59,5 +64,13 @@ public class SearchParam implements Serializable {
 
     public void setModel(Integer model) {
         this.model = model;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }

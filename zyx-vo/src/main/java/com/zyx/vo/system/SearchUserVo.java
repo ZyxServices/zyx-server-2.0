@@ -22,6 +22,8 @@ public class SearchUserVo implements Serializable {
 
     private UserPointVo level;
 
+    private boolean toFollowers;
+
     public Integer getId() {
         return id;
     }
@@ -52,5 +54,17 @@ public class SearchUserVo implements Serializable {
 
     public void setLevel(UserPointVo level) {
         this.level = level;
+    }
+
+    public boolean isToFollowers() {
+        return toFollowers;
+    }
+
+    public void setToFollowers(int toFollowers) {
+        if(toFollowers <= 0){
+            this.toFollowers = false;
+        }else{
+            this.toFollowers = true;
+        }
     }
 }
