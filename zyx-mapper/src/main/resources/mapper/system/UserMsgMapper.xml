@@ -51,7 +51,7 @@
                     <case value="0" resultMap="CourseMap"/>
                     <case value="1" resultMap="ConcernMap"/>
                     <case value="2" resultMap="EquipMap"/>
-                    <case value="4" resultMap="ActivityMap"/>
+                    <case value="3" resultMap="ActivityMap"/>
                     <case value="99" resultMap="UserMap"/>
                 </discriminator>
             </case>
