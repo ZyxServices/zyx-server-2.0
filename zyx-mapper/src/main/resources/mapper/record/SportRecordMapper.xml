@@ -74,11 +74,12 @@
     <resultMap id="CityFootprintVO" type="com.zyx.vo.record.CityFootprintVo">
         <result column="city" property="city"></result>
         <result column="fp_number" property="fpNumber"></result>
+        <result column="img_urls" property="imgUrls"></result>
     </resultMap>
     <select id="selectCityFootprints" resultMap="CityFootprintVO">
 
         SELECT
-        venue.city,COUNT(record.venue_id)AS fp_number
+        venue.city,COUNT(record.venue_id)AS fp_number,,venue.`img_urls`
         FROM
         t_sport_record record LEFT JOIN t_venue venue ON record.`venue_id` = venue.`id`
         WHERE
