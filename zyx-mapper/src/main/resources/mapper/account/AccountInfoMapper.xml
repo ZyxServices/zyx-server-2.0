@@ -204,7 +204,7 @@
     <select id="getNoAttentionUser" resultMap="QueryAccountAttentionVo" parameterType="java.lang.Integer">
         SELECT `user`.id,`user`.nickname,`user`.avatar,`user`.signature,`user`.phone
         <if test="loginUserId !=-1">
-            ,(SELECT COUNT(id) from user_attention WHERE from_user_id=#{loginUserId} AND to_user_id=user_id) as isFollow
+            ,(SELECT COUNT(id) from user_attention WHERE from_user_id=#{loginUserId} AND to_user_id=id) as isFollow
         </if>
         FROM `user`
         <if test="loginUserId !=-1">
