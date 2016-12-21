@@ -1,5 +1,6 @@
 package com.zyx.rpc.record;
 
+import com.zyx.entity.record.SportRecord;
 import com.zyx.entity.venue.SportInfo;
 import com.zyx.entity.venue.Venue;
 import com.zyx.param.record.RankParam;
@@ -48,7 +49,7 @@ public interface SportRecordFacade {
      * @param 
      * @param spendTime
      */
-    public void uploadSportRecord(Integer userId, Integer type,Integer venueId, String level,Integer score, Long spendTime);
+    public SportRecord uploadSportRecord(Integer userId, Integer type, Integer venueId, String level, Integer score, Long spendTime);
 
 
     /**
