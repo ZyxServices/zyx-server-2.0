@@ -47,6 +47,8 @@ public class QueryActivityParam implements Serializable {
      */
     private Integer editState;
 
+    private Integer userId;
+
     public Integer getActivityState() {
         return activityState;
     }
@@ -101,5 +103,13 @@ public class QueryActivityParam implements Serializable {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }
