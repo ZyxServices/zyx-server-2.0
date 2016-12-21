@@ -91,6 +91,8 @@ public class ActivityListVo implements Serializable {
 
     private Long createTime;
 
+    private boolean toZan;
+
     public Integer getId() {
         return id;
     }
@@ -217,5 +219,17 @@ public class ActivityListVo implements Serializable {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public boolean isToZan() {
+        return toZan;
+    }
+
+    public void setToZan(int toZan) {
+        if(toZan <= 0){
+            this.toZan = false;
+        }else{
+            this.toZan = true;
+        }
     }
 }
