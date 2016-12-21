@@ -104,6 +104,8 @@ public class ActivityVo implements Serializable {
      */
     private List<String> editDescImgUrl;
 
+    private boolean zan;
+
     public Integer getId() {
         return id;
     }
@@ -246,5 +248,17 @@ public class ActivityVo implements Serializable {
 
     public void setPaymentType(Integer paymentType) {
         this.paymentType = paymentType;
+    }
+
+    public boolean isZan() {
+        return zan;
+    }
+
+    public void setZan(int zan) {
+        if(zan <= 0){
+            this.zan = false;
+        }else{
+            this.zan = true;
+        }
     }
 }

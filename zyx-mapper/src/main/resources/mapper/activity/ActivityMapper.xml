@@ -18,6 +18,7 @@
         <result column="city" property="city" jdbcType="VARCHAR"/>
         <result column="target_url" property="targetUrl" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <result column="zan" property="zan" jdbcType="INTEGER"/>
         <association property="user" column="user_id"
                      select="com.zyx.mapper.account.AccountInfoMapper.selectAttentionAccountById"/>
     </resultMap>
@@ -76,8 +77,8 @@
         </if>
     </select>
 
-    <select id="activityById" parameterType="java.lang.Integer" resultMap="activityVo">
-        select * from activity where id = #{activityId} AND del != 1 AND mask = 0
+    <select id="activityById" parameterType="java.util.Map" resultMap="activityVo">
+        select a.*,count(b.id) as zan from activity a LEFT JOIN zan b ON b.body_id = a.id AND b.account_id = #{userId} where a.id = #{activityId} AND a.del != 1 AND a.mask = 0
     </select>
 
     <select id="activityListById" parameterType="java.lang.Integer" resultMap="activityListVo">
