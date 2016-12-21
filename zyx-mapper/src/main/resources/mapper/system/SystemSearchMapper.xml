@@ -21,6 +21,7 @@
         <result column="mark" property="mark" jdbcType="VARCHAR"/>
         <result column="img_urls" property="imgUrl" jdbcType="VARCHAR"/>
         <result column="level" property="level" jdbcType="INTEGER"/>
+        <result column="pnumber" property="pnumber" jdbcType="INTEGER"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
         <association property="commentNumber" column="id" select="commentCount"></association>
     </resultMap>
@@ -76,12 +77,12 @@
     </select>
 
     <select id="searchVenues" parameterType="com.zyx.param.system.SearchParam" resultMap="searchVenuesVo">
-        SELECT * FROM t_venue WHERE 1=1
+        SELECT a.*,(SELECT COUNT(id) FROM t_sport_record b WHERE a.id = b.venue_id) AS pnumber FROM t_venue a WHERE 1=1
         <if test="character != null">
-            AND (name LIKE CONCAT('%',#{character},'%')
-            OR description LIKE CONCAT('%',#{character},'%'))
+            AND (a.name LIKE CONCAT('%',#{character},'%')
+            OR a.description LIKE CONCAT('%',#{character},'%'))
         </if>
-        AND del != 1 ORDER BY create_time desc
+        AND a.del != 1 ORDER BY a.create_time desc
         <if test="pageNumber != null and number != null">
             limit #{pageNumber}, #{number}
         </if>
