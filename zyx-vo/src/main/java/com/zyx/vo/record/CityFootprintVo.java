@@ -10,6 +10,7 @@ import java.io.Serializable;
 public class CityFootprintVo implements Serializable {
     private String city;
     private Integer fpNumber;
+    private Integer imgUrls;
 
     private List<FootprintVo> footprints;
 
@@ -35,5 +36,13 @@ public class CityFootprintVo implements Serializable {
 
     public void setFootprints(List<FootprintVo> footprints) {
         this.footprints = footprints;
+    }
+
+    public Integer getImgUrls() {
+        return imgUrls;
+    }
+
+    public void setImgUrls(Integer imgUrls) {
+        this.imgUrls = imgUrls;
     }
 }
