@@ -43,6 +43,7 @@
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
         <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
+        <result column="toFollowers" property="toFollowers" jdbcType="INTEGER"/>
         <association property="level" column="{userId=id}" select="com.zyx.mapper.point.UserPointMapper.queryUserLevelWithView"/>
     </resultMap>
 
@@ -112,7 +113,8 @@
     </select>
 
     <select id="searchUser" parameterType="com.zyx.param.system.SearchParam" resultMap="searchUserVo">
-        SELECT a.id,a.nickname,a.avatar,b.point_type as temp_type,b.point_count as temp_count
+        SELECT a.id, a.nickname, a.avatar, b.point_type as temp_type, b.point_count as temp_count,
+        (SELECT count(id) FROM user_attention c WHERE c.from_user_id = 166 AND c.to_user_id = 162) as toFollowers
         FROM user a LEFT JOIN user_point b ON a.id = b.user_id AND b.point_type = 1
         where 1=1
         <if test="character != null">
