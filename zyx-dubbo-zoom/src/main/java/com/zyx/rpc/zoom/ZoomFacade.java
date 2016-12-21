@@ -57,6 +57,19 @@ public interface ZoomFacade {
     Map<String, Object> addCern(Integer userId, Integer type, String content, String cernImgurl, String videoUrl, Integer visible, String local);
 
     /**
+     * 发布动态(多模块)
+     *
+     * @param userId
+     * @param content
+     * @param cernImgurl
+     * @param videoUrl
+     * @param visible
+     * @param recordId
+     * @return
+     */
+    Map<String, Object> showSportRecord(Integer userId, Integer type, String content, String cernImgurl, String videoUrl, Integer visible, String local,Integer recordId);
+
+    /**
      * 各模块点赞
      *
      * @param body_id

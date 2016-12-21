@@ -156,4 +156,9 @@ public interface ZoomConstants extends Constants {
     String PG_ERROR_CODE_30041_MSG = "该用户没有关注该模块数据";
 
     String PG_RESULT = "result";
+
+
+    public interface CONCERN_TYPE{
+        public static int SHOW_RECORD=1;
+    }
 }

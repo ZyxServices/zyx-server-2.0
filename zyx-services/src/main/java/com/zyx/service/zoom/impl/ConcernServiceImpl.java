@@ -68,7 +68,7 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
         insertCern.setAppType(1);
         insertCern.setState(0);
         save(insertCern);
-        return MapUtils.buildSuccessMap(Constants.SUCCESS, ZoomConstants.PG_ERROR_CODE_33000_MSG, null);
+        return MapUtils.buildSuccessMap(Constants.SUCCESS, ZoomConstants.PG_ERROR_CODE_33000_MSG, insertCern);
     }
 
     @Override
