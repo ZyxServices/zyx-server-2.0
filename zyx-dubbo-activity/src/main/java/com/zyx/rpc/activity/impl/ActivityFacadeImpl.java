@@ -70,9 +70,9 @@ public class ActivityFacadeImpl implements ActivityFacade {
     }
 
     @Override
-    public Map<String, Object> activityById(Integer activityId) {
+    public Map<String, Object> activityById(Integer activityId, Integer userId) {
         try {
-            return activityService.activityById(activityId);
+            return activityService.activityById(activityId, userId);
         } catch (Exception e) {
             logger.error(e);
             e.printStackTrace();
