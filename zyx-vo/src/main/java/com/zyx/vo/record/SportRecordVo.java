@@ -18,7 +18,7 @@ public class SportRecordVo implements Serializable {
     /**
      * 对应show动态ID
      */
-    private Integer concenId;
+    private Integer concernId;
 
 
     /**
@@ -81,12 +81,12 @@ public class SportRecordVo implements Serializable {
         this.spendTime = spendTime;
     }
 
-    public Integer getConcenId() {
-        return concenId;
+    public Integer getConcernId() {
+        return concernId;
     }
 
-    public void setConcenId(Integer concenId) {
-        this.concenId = concenId;
+    public void setConcernId(Integer concernId) {
+        this.concernId = concernId;
     }
 
     public Integer getVenueId() {
