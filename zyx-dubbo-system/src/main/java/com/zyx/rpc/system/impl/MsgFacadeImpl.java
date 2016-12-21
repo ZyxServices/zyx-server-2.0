@@ -40,11 +40,6 @@ public class MsgFacadeImpl implements MsgFacade {
     @Override
     public Map<String, Object> insertMsg(UserMsgParam userMsgParam) {
         try {
-            // 判断token是否失效
-            Map<String, Object> map = validateToken(userMsgParam.getToken(), userMsgParam.getFromUserId());
-            if (map != null) {
-                return map;
-            }
             UserMsgInfo userMsgInfo = checkAndBuildUserMsgInfo(userMsgParam);
             if (userMsgInfo == null) {
                 return Constants.MAP_PARAM_MISS;
