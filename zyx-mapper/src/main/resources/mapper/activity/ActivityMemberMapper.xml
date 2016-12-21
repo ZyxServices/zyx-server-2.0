@@ -27,7 +27,11 @@
     </select>
 
     <select id="findMemberByUserId" parameterType="com.zyx.param.activity.QueryActivityMemberParam" resultMap="memberUserVo">
-        select * from activity_member where user_id = #{userId}
+        select a.*,count(b.id) as toZan from activity_member a LEFT JOIN zan b ON b.body_id = a.activity_id
+        <if test="userId != null ">
+            AND b.account_id = #{userId}
+        </if>
+        where user_id = #{userId}
         AND del != 1 AND mask = 0
         ORDER BY  create_time desc
         <if test="pageNumber != null and number != null">
