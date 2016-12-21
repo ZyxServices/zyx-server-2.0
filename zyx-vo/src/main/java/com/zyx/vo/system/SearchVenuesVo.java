@@ -26,6 +26,8 @@ public class SearchVenuesVo implements Serializable {
 
     private Long createTime;
 
+    private int commentNumber;
+
     public Integer getId() {
         return id;
     }
@@ -88,5 +90,13 @@ public class SearchVenuesVo implements Serializable {
 
     public void setCreateTime(Long createTime) {
         this.createTime = createTime;
+    }
+
+    public int getCommentNumber() {
+        return commentNumber;
+    }
+
+    public void setCommentNumber(int commentNumber) {
+        this.commentNumber = commentNumber;
     }
 }

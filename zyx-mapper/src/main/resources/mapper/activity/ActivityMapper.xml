@@ -89,7 +89,7 @@
     </select>
 
     <select id="commentCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
-        SELECT COUNT(id) FROM comment WHERE comment_type=4 AND comment_id=#{commentId}
+        SELECT COUNT(id) FROM comment WHERE comment_type=3 AND comment_id=#{commentId}
     </select>
 
     <delete id="delActivityById" parameterType="java.util.Map">

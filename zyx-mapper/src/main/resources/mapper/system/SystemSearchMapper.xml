@@ -22,6 +22,7 @@
         <result column="img_urls" property="imgUrl" jdbcType="VARCHAR"/>
         <result column="level" property="level" jdbcType="INTEGER"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <association property="commentNumber" column="id" select="commentCount"></association>
     </resultMap>
 
     <resultMap id="searchCourseVo" type="com.zyx.vo.system.SearchCourseVo">
@@ -136,5 +137,9 @@
 
     <select id="devaSearch" parameterType="com.zyx.param.system.SearchDevaParam" resultMap="searchDevaVo">
         SELECT * FROM devaluation WHERE del = 0 AND state = 1 AND area = #{model} ORDER BY sequence
+    </select>
+
+    <select id="commentCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT COUNT(id) FROM comment WHERE comment_type=4 AND comment_id=#{commentId}
     </select>
 </mapper>
