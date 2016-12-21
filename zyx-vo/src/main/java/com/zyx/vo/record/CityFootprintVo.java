@@ -11,6 +11,7 @@ public class CityFootprintVo implements Serializable {
     private String city;
     private Integer fpNumber;
 
+
     private List<FootprintVo> footprints;
 
     public String getCity() {

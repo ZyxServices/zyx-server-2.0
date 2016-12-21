@@ -17,6 +17,7 @@ public class FootprintVo implements Serializable {
     private Double longitude;
     private Double latitude;
 
+    private String imgUrls;
     public String getCity() {
         return city;
     }
@@ -71,5 +72,13 @@ public class FootprintVo implements Serializable {
 
     public void setLatitude(Double latitude) {
         this.latitude = latitude;
+    }
+
+    public String getImgUrls() {
+        return imgUrls;
+    }
+
+    public void setImgUrls(String imgUrls) {
+        this.imgUrls = imgUrls;
     }
 }
