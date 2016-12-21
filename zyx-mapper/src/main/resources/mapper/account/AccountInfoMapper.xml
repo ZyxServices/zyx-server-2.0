@@ -202,11 +202,11 @@
     </update>
 
     <select id="getNoAttentionUser" resultMap="QueryAccountAttentionVo" parameterType="java.lang.Integer">
-        SELECT `user`.id,`user`.nickname,`user`.avatar,user_auth.authinfo,`user`.signature,`user`.phone
+        SELECT `user`.id,`user`.nickname,`user`.avatar,`user`.signature,`user`.phone
         <if test="loginUserId !=-1">
             ,(SELECT COUNT(id) from user_attention WHERE from_user_id=#{loginUserId} AND to_user_id=user_id) as isFollow
         </if>
-        FROM `user` INNER JOIN user_auth ON `user`.id = user_auth.user_id
+        FROM `user`
         <if test="loginUserId !=-1">
             where `user`.id not in (SELECT to_user_id from user_attention where from_user_id=#{loginUserId})
         </if>
