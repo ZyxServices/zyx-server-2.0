@@ -256,8 +256,8 @@ public class ActivityVo implements Serializable {
         return zan;
     }
 
-    public void setZan(int zan) {
-        if(zan <= 0){
+    public void setZan(Integer zan) {
+        if(zan != null && zan <= 0){
             this.zan = false;
         }else{
             this.zan = true;

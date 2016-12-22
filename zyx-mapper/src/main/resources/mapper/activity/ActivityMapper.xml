@@ -48,7 +48,7 @@
     </resultMap>
 
     <select id="queryActivity" parameterType="com.zyx.param.activity.QueryActivityParam" resultMap="activityListVo">
-        select a.*,count(b.id) as toZan from activity a LEFT JOIN zan b ON b.body_id = a.id
+        select a.*,b.id as toZan from activity a LEFT JOIN zan b ON b.body_id = a.id
         <if test="userId != null ">
             AND b.account_id = #{userId}
         </if>
@@ -89,7 +89,7 @@
     </select>
 
     <select id="activityById" parameterType="java.util.Map" resultMap="activityVo">
-        select a.*,count(b.id) as zan from activity a LEFT JOIN zan b ON b.body_id = a.id
+        select a.*,b.id as zan from activity a LEFT JOIN zan b ON b.body_id = a.id
         <if test="userId != null ">
             AND b.account_id = #{userId}
         </if>
