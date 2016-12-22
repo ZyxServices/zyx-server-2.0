@@ -27,7 +27,7 @@
     </select>
 
     <select id="findMemberByUserId" parameterType="com.zyx.param.activity.QueryActivityMemberParam" resultMap="memberUserVo">
-        select a.*,count(b.id) as toZan from activity_member a LEFT JOIN zan b ON b.body_id = a.activity_id
+        select a.*,b.id as toZan from activity_member a LEFT JOIN zan b ON b.body_id = a.activity_id
         <if test="userId != null ">
             AND b.account_id = #{userId}
         </if>

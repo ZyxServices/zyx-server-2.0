@@ -19,6 +19,8 @@
         <result column="target_url" property="targetUrl" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
         <result column="zan" property="zan" jdbcType="INTEGER"/>
+        <association property="memberPeople" column="id"
+                     select="com.zyx.mapper.activity.ActivityMemberMapper.countMemberByActivityId"></association>
         <association property="user" column="user_id"
                      select="com.zyx.mapper.account.AccountInfoMapper.selectAttentionAccountById"/>
     </resultMap>
@@ -74,7 +76,7 @@
     </select>
 
     <select id="myActivityList" parameterType="com.zyx.param.activity.MyActivityListParam" resultMap="activityListVo">
-        select a.*,count(b.id) as toZan from activity a LEFT JOIN zan b ON b.body_id = a.id
+        select a.*,b.id as toZan from activity a LEFT JOIN zan b ON b.body_id = a.id
         <if test="userId != null ">
             AND b.account_id = #{userId}
         </if>

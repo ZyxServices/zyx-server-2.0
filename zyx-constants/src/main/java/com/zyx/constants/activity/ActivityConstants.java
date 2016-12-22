@@ -51,4 +51,8 @@ public interface ActivityConstants {
     int AUTH_ERROR_10010 = 10010;
     //删除失败
     int AUTH_ERROR_10011 = 10011;
+    //活动不存在
+    int AUTH_ERROR_10012 = 10012;
+    //活动报名人数已满
+    int AUTH_ERROR_10013 = 10013;
 }

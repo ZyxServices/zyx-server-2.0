@@ -3,11 +3,14 @@ package com.zyx.service.activity.impl;
 import com.zyx.constants.Constants;
 import com.zyx.constants.activity.ActivityConstants;
 import com.zyx.entity.activity.Activity;
+import com.zyx.entity.activity.ActivityMember;
 import com.zyx.entity.zoom.Concern;
 import com.zyx.mapper.activity.ActivityMapper;
+import com.zyx.mapper.activity.ActivityMemberMapper;
 import com.zyx.mapper.zoom.ConcernMapper;
 import com.zyx.param.activity.ActivityParam;
 import com.zyx.param.activity.MyActivityListParam;
+import com.zyx.param.activity.QueryActivityMemberParam;
 import com.zyx.param.activity.QueryActivityParam;
 import com.zyx.service.activity.ActivityService;
 import com.zyx.utils.MapUtils;
@@ -37,6 +40,9 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Resource
     private ConcernMapper concernMapper;
+
+    @Resource
+    private ActivityMemberMapper activityMemberMapper;
 
     @Override
     public Map<String, Object> insterActivity(ActivityParam param) {
@@ -160,6 +166,12 @@ public class ActivityServiceImpl implements ActivityService {
             map.put("activityId", activityId);
             map.put("userId", userId);
             int delActivityById = activityMapper.delActivityById(map);
+
+            QueryActivityMemberParam queryActivityMemberParam = new QueryActivityMemberParam();
+            queryActivityMemberParam.setUserId(userId);
+            queryActivityMemberParam.setActivityId(activityId);
+
+            activityMemberMapper.delMember(queryActivityMemberParam);
             activityMapper.delConcern(map);
             if (delActivityById > 0) {
                 return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, "删除成功");

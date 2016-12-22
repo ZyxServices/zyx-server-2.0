@@ -225,8 +225,8 @@ public class ActivityListVo implements Serializable {
         return toZan;
     }
 
-    public void setToZan(int toZan) {
-        if(toZan <= 0){
+    public void setToZan(Integer toZan) {
+        if(toZan == null || toZan <= 0){
             this.toZan = false;
         }else{
             this.toZan = true;

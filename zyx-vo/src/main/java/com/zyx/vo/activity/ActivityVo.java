@@ -106,6 +106,8 @@ public class ActivityVo implements Serializable {
 
     private boolean zan;
 
+    private int memberPeople;
+
     public Integer getId() {
         return id;
     }
@@ -260,5 +262,13 @@ public class ActivityVo implements Serializable {
         }else{
             this.zan = true;
         }
+    }
+
+    public int getMemberPeople() {
+        return memberPeople;
+    }
+
+    public void setMemberPeople(int memberPeople) {
+        this.memberPeople = memberPeople;
     }
 }

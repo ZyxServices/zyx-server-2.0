@@ -3,6 +3,7 @@ package com.zyx.service.activity.impl;
 import com.zyx.constants.Constants;
 import com.zyx.constants.activity.ActivityConstants;
 import com.zyx.entity.activity.ActivityMember;
+import com.zyx.mapper.activity.ActivityMapper;
 import com.zyx.mapper.activity.ActivityMemberMapper;
 import com.zyx.param.activity.ActivityMemberParam;
 import com.zyx.param.activity.QueryActivityMemberParam;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,8 +34,12 @@ public class ActivityMemberServiceImpl implements ActivityMemberService {
     @Resource
     private ActivityMemberMapper activityMemberMapper;
 
+    @Resource
+    private ActivityMapper activityMapper;
+
     @Override
     public Map<String, Object> insertMember(ActivityMemberParam memberParam) {
+
         if (memberParam.getUserId() != null && memberParam.getActivityId() != null) {
             ActivityMember activityMember = new ActivityMember();
             activityMember.setUserId(memberParam.getUserId());
@@ -42,9 +48,22 @@ public class ActivityMemberServiceImpl implements ActivityMemberService {
             activityMember.setCreateTime(System.currentTimeMillis());
 
             List<MemberActivityVo> memberActivityVos = activityMemberMapper.verificationMember(activityMember);
-            if(memberActivityVos != null && memberActivityVos.size() > 0){
+            if (memberActivityVos != null && memberActivityVos.size() > 0) {
                 return MapUtils.buildSuccessMap(ActivityConstants.AUTH_ERROR_10005, "活动报名信息已存在", null);
             }
+            Map<String, Object> map = new HashMap<>();
+            map.put("activityId", memberParam.getActivityId());
+            ActivityVo vo = activityMapper.activityById(map);
+            if (vo != null) {
+                if (vo.getMaxPeople() != null && vo.getMaxPeople() > 0) {
+                    if ((vo.getMaxPeople() - vo.getMemberPeople()) <= 0) {
+                        return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10013, "活动报名人数已满");
+                    }
+                }
+            } else {
+                return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10012, "活动不存在");
+            }
+
 
             int insert = activityMemberMapper.insert(activityMember);
             if (insert > 0) {
@@ -82,7 +101,7 @@ public class ActivityMemberServiceImpl implements ActivityMemberService {
 
             List<MemberActivityVo> memberByUserId = activityMemberMapper.findMemberByUserId(memberParam);
             List<ActivityListVo> activityListVos = new ArrayList<>();
-            memberByUserId.stream().filter(e -> e != null).forEach(s ->{
+            memberByUserId.stream().filter(e -> e != null).forEach(s -> {
                 activityListVos.add(s.getActivity());
             });
             return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", activityListVos);
@@ -93,14 +112,14 @@ public class ActivityMemberServiceImpl implements ActivityMemberService {
 
     @Override
     public Map<String, Object> delMember(QueryActivityMemberParam memberParam) {
-        if(memberParam.getActivityId() != null && memberParam.getUserId() != null){
+        if (memberParam.getActivityId() != null && memberParam.getUserId() != null) {
             int i = activityMemberMapper.delMember(memberParam);
-            if(i>0){
+            if (i > 0) {
                 return MapUtils.buildSuccessMap(Constants.SUCCESS, "取消报名成功", null);
-            }else{
+            } else {
                 return MapUtils.buildSuccessMap(ActivityConstants.AUTH_ERROR_10010, "取消报名失败", null);
             }
-        }else{
+        } else {
             return Constants.MAP_PARAM_MISS;
         }
     }
