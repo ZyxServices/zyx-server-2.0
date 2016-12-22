@@ -29,5 +29,5 @@
     <!--回复-->
     <dubbo:service interface="com.zyx.rpc.system.ReplyFacade" ref="replyFacade"/>
     <!-- 消息 -->
-    <dubbo:service interface="com.zyx.rpc.system.MsgFacade" ref="msgFacade"/>
+    <dubbo:service interface="com.zyx.rpc.system.MsgFacade" ref="msgFacade" timeout="100000"/>
 </beans>

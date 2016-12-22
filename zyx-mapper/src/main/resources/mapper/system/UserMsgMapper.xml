@@ -35,12 +35,36 @@
         <result column="body_type" property="bodyType" jdbcType="INTEGER"/>
         <result column="msg_type" property="msgType" jdbcType="INTEGER"/>
         <association property="userVo" column="from_user_id" select="UserVoSelect"/>
-        <discriminator javaType="java.lang.Integer" column="body_type">
-            <case value="0" resultMap="CourseMap"/>
-            <case value="1" resultMap="ConcernMap"/>
-            <case value="2" resultMap="EquipMap"/>
-            <case value="4" resultMap="ActivityMap"/>
-            <case value="99" resultMap="UserMap"/>
+        <discriminator javaType="java.lang.Integer" column="msg_type">
+            <case value="1">
+                <discriminator javaType="java.lang.Integer" column="body_type">
+                    <case value="0" resultMap="CourseMap"/>
+                    <case value="1" resultMap="ConcernMap"/>
+                    <case value="2" resultMap="EquipMap"/>
+                    <case value="3" resultMap="ActivityMap"/>
+                    <case value="4" resultMap="VenueMap"/>
+                    <case value="99" resultMap="UserMap"/>
+                </discriminator>
+            </case>
+            <case value="2">
+                <discriminator javaType="java.lang.Integer" column="body_type">
+                    <case value="0" resultMap="CourseMap"/>
+                    <case value="1" resultMap="ConcernMap"/>
+                    <case value="2" resultMap="EquipMap"/>
+                    <case value="3" resultMap="ActivityMap"/>
+                    <case value="99" resultMap="UserMap"/>
+                </discriminator>
+            </case>
+            <case value="3">
+                <discriminator javaType="java.lang.Integer" column="body_type">
+                    <case value="0" resultMap="CourseMap"/>
+                    <case value="1" resultMap="ConcernMap"/>
+                    <case value="2" resultMap="EquipMap"/>
+                    <case value="3" resultMap="RecordMap"/>
+                    <case value="4" resultMap="ActivityMap"/>
+                    <case value="99" resultMap="UserMap"/>
+                </discriminator>
+            </case>
         </discriminator>
     </resultMap>
 
@@ -65,6 +89,14 @@
 
     <resultMap id="ConcernMap" type="com.zyx.vo.account.MsgVo" extends="MsgResultMap">
         <association property="toObject" column="body_id" select="ConcernMapSelect"/>
+    </resultMap>
+
+    <resultMap id="VenueMap" type="com.zyx.vo.account.MsgVo" extends="MsgResultMap">
+        <association property="toObject" column="body_id" select="VenueMapSelect"/>
+    </resultMap>
+
+    <resultMap id="RecordMap" type="com.zyx.vo.account.MsgVo" extends="MsgResultMap">
+        <association property="toObject" column="body_id" select="RecordMapSelect"/>
     </resultMap>
 
     <resultMap id="UserMap" type="com.zyx.vo.account.MsgVo" extends="MsgResultMap">
@@ -105,6 +137,14 @@
 
     <select id="CourseMapSelect" parameterType="int" resultMap="MsgToResultMap">
         select c.img_urls as to_uri,c.title as to_content from t_course as c where c.id = #{bodyId}
+    </select>
+
+    <select id="VenueMapSelect" parameterType="int" resultMap="MsgToResultMap">
+        select c.img_urls as to_uri,c.name as to_content from t_venue as c where c.id = #{bodyId}
+    </select>
+
+    <select id="RecordMapSelect" parameterType="int" resultMap="MsgToResultMap">
+        select c.score as to_uri,c.level as to_content from t_sport_record as c where c.id = #{bodyId}
     </select>
 
     <select id="EquipMapSelect" parameterType="int" resultMap="MsgToResultMap">

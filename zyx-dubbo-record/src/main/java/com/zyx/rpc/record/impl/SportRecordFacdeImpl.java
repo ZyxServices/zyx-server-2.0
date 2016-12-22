@@ -42,7 +42,7 @@ public class SportRecordFacdeImpl implements SportRecordFacade {
     }
 
     @Override
-    public void uploadSportRecord(Integer userId, Integer type,Integer venueId, String level,Integer score, Long spendTime) {
+    public SportRecord uploadSportRecord(Integer userId, Integer type,Integer venueId, String level,Integer score, Long spendTime) {
         SportRecord entity = new SportRecord();
         entity.setUserId(userId);
         entity.setType(type);
@@ -52,6 +52,7 @@ public class SportRecordFacdeImpl implements SportRecordFacade {
         entity.setSpendTime(spendTime);
         entity.setCreateTime(System.currentTimeMillis());
         sportRecordService.save(entity);
+        return entity;
     }
 
     @Override

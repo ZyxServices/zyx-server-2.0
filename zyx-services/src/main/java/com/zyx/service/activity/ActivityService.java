@@ -37,7 +37,7 @@ public interface ActivityService {
      * @param activityId
      * @return
      */
-    Map<String, Object> activityById(Integer activityId);
+    Map<String, Object> activityById(Integer activityId, Integer userId);
 
     /**
      * 通过ID删除活动

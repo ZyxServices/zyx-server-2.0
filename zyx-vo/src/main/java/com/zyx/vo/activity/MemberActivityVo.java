@@ -34,6 +34,8 @@ public class MemberActivityVo implements Serializable {
      */
     private Long createTime;
 
+    private boolean toZan;
+
     public Integer getId() {
         return id;
     }
@@ -72,5 +74,17 @@ public class MemberActivityVo implements Serializable {
 
     public void setCreateTime(Long createTime) {
         this.createTime = createTime;
+    }
+
+    public boolean isToZan() {
+        return toZan;
+    }
+
+    public void setToZan(int toZan) {
+        if(toZan <= 0){
+            this.toZan = false;
+        }else{
+            this.toZan = true;
+        }
     }
 }

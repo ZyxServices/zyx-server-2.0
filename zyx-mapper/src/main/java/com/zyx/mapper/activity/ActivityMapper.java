@@ -39,10 +39,10 @@ public interface ActivityMapper extends BaseMapper<Activity> {
 
     /**
      * 通过ID查询活动详细信息
-     * @param activityId
+     * @param map
      * @return
      */
-    ActivityVo activityById(Integer activityId);
+    ActivityVo activityById(Map<String, Object> map);
 
     /**
      * 通过ID删除活动

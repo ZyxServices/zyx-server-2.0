@@ -77,6 +77,7 @@ public class ActivityServiceImpl implements ActivityService {
                 concern.setTopicVisible(1);
                 concern.setUserId(param.getUserId());
                 concern.setState(0);
+                concern.setAppType(1);
                 concernMapper.insert(concern);
                 return MapUtils.buildSuccessMap(Constants.SUCCESS, "发布成功", null);
             } else {
@@ -119,9 +120,12 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public Map<String, Object> activityById(Integer activityId) {
+    public Map<String, Object> activityById(Integer activityId, Integer userId) {
         if (activityId != null && activityId > 0) {
-            ActivityVo activityVo = activityMapper.activityById(activityId);
+            Map<String, Object> map = new HashMap<>();
+            map.put("activityId", activityId);
+            map.put("userId", userId);
+            ActivityVo activityVo = activityMapper.activityById(map);
             //TODO 修改查询预留
             if (false) {
                 String[] strings = activityVo.getDescContent().split("<img");
@@ -152,14 +156,14 @@ public class ActivityServiceImpl implements ActivityService {
     @Override
     public Map<String, Object> delActivityById(Integer activityId, Integer userId) {
         if (activityId != null && userId != null) {
-            Map<String,Object> map = new HashMap<>();
-            map.put("activityId",activityId);
-            map.put("userId",userId);
+            Map<String, Object> map = new HashMap<>();
+            map.put("activityId", activityId);
+            map.put("userId", userId);
             int delActivityById = activityMapper.delActivityById(map);
             activityMapper.delConcern(map);
-            if(delActivityById > 0){
+            if (delActivityById > 0) {
                 return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, "删除成功");
-            }else{
+            } else {
                 return MapUtils.buildSuccessMap(ActivityConstants.AUTH_ERROR_10011, Constants.MSG_ERROR, "删除失败");
             }
         } else {

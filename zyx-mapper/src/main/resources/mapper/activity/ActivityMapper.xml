@@ -18,6 +18,7 @@
         <result column="city" property="city" jdbcType="VARCHAR"/>
         <result column="target_url" property="targetUrl" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <result column="zan" property="zan" jdbcType="INTEGER"/>
         <association property="user" column="user_id"
                      select="com.zyx.mapper.account.AccountInfoMapper.selectAttentionAccountById"/>
     </resultMap>
@@ -35,6 +36,7 @@
         <result column="price" property="price" jdbcType="DECIMAL"/>
         <result column="city" property="city" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <result column="toZan" property="toZan" jdbcType="INTEGER"/>
         <association property="memberPeople" column="id"
                      select="com.zyx.mapper.activity.ActivityMemberMapper.countMemberByActivityId"></association>
         <association property="zan" column="id" select="zanExist"></association>
@@ -44,31 +46,39 @@
     </resultMap>
 
     <select id="queryActivity" parameterType="com.zyx.param.activity.QueryActivityParam" resultMap="activityListVo">
-        select * from activity where 1=1
+        select a.*,count(b.id) as toZan from activity a LEFT JOIN zan b ON b.body_id = a.id
+        <if test="userId != null ">
+            AND b.account_id = #{userId}
+        </if>
+        where 1=1
         <if test="activityState == 1">
-            AND last_time &gt; #{nowTime}
+            AND a.last_time &gt; #{nowTime}
         </if>
         <if test="activityState == 2">
-            AND (end_time - start_time) &lt; 0
+            AND (a.end_time - a.start_time) &lt; 0
         </if>
         <if test="activityType == 1">
-            AND activity_type = 1
+            AND a.activity_type = 1
         </if>
         <if test="activityType == 2">
-            AND activity_type = 2
+            AND a.activity_type = 2
         </if>
         <if test="city != null and city != ''">
-            AND city = #{city}
+            AND a.city = #{city}
         </if>
-        AND del != 1 AND mask = 0 AND type = 1
-        ORDER BY create_time desc
+        AND a.del != 1 AND a.mask = 0 AND a.type = 1
+        ORDER BY a.create_time desc
         <if test="pageNumber != null and number != null">
             limit #{pageNumber}, #{number}
         </if>
     </select>
 
     <select id="myActivityList" parameterType="com.zyx.param.activity.MyActivityListParam" resultMap="activityListVo">
-        select * from activity where user_id = #{userId}
+        select a.*,count(b.id) as toZan from activity a LEFT JOIN zan b ON b.body_id = a.id
+        <if test="userId != null ">
+            AND b.account_id = #{userId}
+        </if>
+        where user_id = #{userId}
         AND del != 1 AND mask = 0
         ORDER BY create_time desc
         <if test="pageNumber != null and number != null">
@@ -76,8 +86,12 @@
         </if>
     </select>
 
-    <select id="activityById" parameterType="java.lang.Integer" resultMap="activityVo">
-        select * from activity where id = #{activityId} AND del != 1 AND mask = 0
+    <select id="activityById" parameterType="java.util.Map" resultMap="activityVo">
+        select a.*,count(b.id) as zan from activity a LEFT JOIN zan b ON b.body_id = a.id
+        <if test="userId != null ">
+            AND b.account_id = #{userId}
+        </if>
+        where a.id = #{activityId} AND a.del != 1 AND a.mask = 0
     </select>
 
     <select id="activityListById" parameterType="java.lang.Integer" resultMap="activityListVo">
