@@ -93,7 +93,7 @@
     </select>
 
     <select id="queryOne" parameterType="java.lang.Integer" resultMap="EquipDetailsResultMap">
-        SELECT * FROM equip WHERE id=#{id}
+        SELECT * FROM equip WHERE id=#{id} AND del = 0
     </select>
 
     <select id="queryMyList" parameterType="com.zyx.param.user.UserEquipmentParam" resultMap="EquipDetailsResultMap">
@@ -101,6 +101,7 @@
         <if test="page != null and pageSize != null">
             limit #{page}, #{pageSize}
         </if>
+        AND  del = 0
     </select>
 
     <select id="commentQuery" resultMap="commentVoMap">
@@ -156,4 +157,8 @@
         ORDER BY create_time DESC
         LIMIT #{start},#{end}
     </select>
+
+    <update id="delEquip" >
+        UPDATE equip SET del = 1 WHERE id=#{id}
+    </update>
 </mapper>

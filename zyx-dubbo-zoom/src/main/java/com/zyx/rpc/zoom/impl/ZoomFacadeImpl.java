@@ -99,13 +99,13 @@ public class ZoomFacadeImpl implements ZoomFacade {
     }
 
     @Override
-    public Map<String, Object> showSportRecord(Integer userId, Integer type, String content, String cernImgurl, String videoUrl, Integer visible, String local,Integer recordId) {
+    public Map<String, Object> showSportRecord(Integer userId, Integer type, String content, String cernImgurl, String videoUrl, Integer visible, String local, Integer recordId) {
         Map map = concernService.addCern(userId, type, content, cernImgurl, videoUrl, visible, local);
         if (null != map && !map.isEmpty() && map.get(ZoomConstants.STATE).equals(ZoomConstants.SUCCESS))
             sportCoinService.modifyCoin(userId, CoinConstants.OperType.PUBLISH_COMMENT);
-        if(recordId!=null&&type!=null&&type==ZoomConstants.CONCERN_TYPE.SHOW_RECORD){
+        if (recordId != null && type != null && type == ZoomConstants.CONCERN_TYPE.SHOW_RECORD) {
             Concern conc = (Concern) map.get(Constants.DATA);
-            if(null!=conc&&conc.getId()!=null){
+            if (null != conc && conc.getId() != null) {
                 SportRecord entity = new SportRecord();
                 entity.setId(recordId);
                 entity.setConcernId(conc.getId());
@@ -114,6 +114,7 @@ public class ZoomFacadeImpl implements ZoomFacade {
         }
         return map;
     }
+
     @Override
     public Map<String, Object> addZan(Integer body_id, Integer body_type, Integer account_id) {
         Map map = zanService.addZan(body_id, body_type, account_id);
@@ -180,5 +181,10 @@ public class ZoomFacadeImpl implements ZoomFacade {
     @Override
     public Map<String, Object> delCern(Integer id, Integer loginUserId) {
         return concernService.delCern(id, loginUserId);
+    }
+
+    @Override
+    public Map<String, Object> delEquip(Integer id, Integer loginUserId) {
+        return equipService.delEquip(id, loginUserId);
     }
 }

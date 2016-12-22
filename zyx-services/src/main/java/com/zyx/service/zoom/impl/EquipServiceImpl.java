@@ -99,4 +99,32 @@ public class EquipServiceImpl extends BaseServiceImpl<Equip> implements EquipSer
         }
         return null;
     }
+
+    @Override
+    public Map<String, Object> delEquip(Integer id, Integer loginUserId) {
+        try {
+            if (Objects.equals(id, null)) {
+                return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30024, ZoomConstants.PG_ERROR_CODE_30024_MSG);
+            }
+            if (Objects.equals(loginUserId, null)) {
+                return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30026, ZoomConstants.PG_ERROR_CODE_30026_MSG);
+            }
+            Equip equipFind = equipMapper.queryOne(id);
+            if (equipFind != null) {
+                if (!Objects.equals(equipFind.getAccountId(), loginUserId)) {
+                    return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30029, ZoomConstants.PG_ERROR_CODE_30029_MSG);
+                }else{
+                    Integer result=equipMapper.delEquip(id);
+                    if(result>0){
+                        return MapUtils.buildSuccessMap(ZoomConstants.SUCCESS, ZoomConstants.PG_ERROR_CODE_39000_MSG,null);
+                    }
+                    return ZoomConstants.MAP_500;
+                }
+            }
+            return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30031, ZoomConstants.PG_ERROR_CODE_30031_MSG);
+        }catch (Exception e){
+            e.printStackTrace();
+            return ZoomConstants.MAP_500;
+        }
+    }
 }

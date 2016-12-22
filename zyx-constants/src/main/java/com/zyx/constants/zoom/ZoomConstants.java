@@ -105,13 +105,13 @@ public interface ZoomConstants extends Constants {
     String PG_ERROR_CODE_30023_MSG = "可见范围设置不能为空";
 
     int PG_ERROR_CODE_30024 = 30024;
-    String PG_ERROR_CODE_30024_MSG = "圈子类型名称不能为空";
+    String PG_ERROR_CODE_30024_MSG = "装备秀id不能为空";
 
     int PG_ERROR_CODE_30025 = 30025;
     String PG_ERROR_CODE_30025_MSG = "圈子类型id不能为空";
 
     int PG_ERROR_CODE_30026 = 30026;
-    String PG_ERROR_CODE_30026_MSG = "标签名称不能为空";
+    String PG_ERROR_CODE_30026_MSG = "登录用户id不能为空";
 
     int PG_ERROR_CODE_30027 = 30027;
     String PG_ERROR_CODE_30027_MSG = "标签id不能为空";
@@ -122,8 +122,8 @@ public interface ZoomConstants extends Constants {
     int PG_ERROR_CODE_30029 = 30029;
     String PG_ERROR_CODE_30029_MSG = "该用户没有权限";
 
-    int PG_ERROR_CODE_30031 = 30031;
     String PG_ERROR_CODE_30031_MSG = "数据不存在";
+    int PG_ERROR_CODE_30031 = 30031;
 
     int PG_ERROR_CODE_30032 = 30032;
     String PG_ERROR_CODE_30032_MSG = "置顶排序不能为空";

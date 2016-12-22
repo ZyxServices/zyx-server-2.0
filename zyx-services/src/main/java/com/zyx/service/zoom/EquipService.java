@@ -13,7 +13,7 @@ import java.util.Map;
  * Create by XiaoWei on 2016/11/17
  */
 public interface EquipService extends BaseService<Equip> {
-    Map<String, Object> addEquip(String title, String content, Integer accountId, Integer labelId,String imgUrls);
+    Map<String, Object> addEquip(String title, String content, Integer accountId, Integer labelId, String imgUrls);
 
     Map<String, Object> queryEquip(Integer eId);
 
@@ -21,5 +21,7 @@ public interface EquipService extends BaseService<Equip> {
 
     Map<String, Object> queryMyList(UserEquipmentParam userEquipmentParam);
 
-    Map<String, Object> queryByLabelId(Integer tagId,Integer loginUserId,Integer start,Integer pageSize);
+    Map<String, Object> queryByLabelId(Integer tagId, Integer loginUserId, Integer start, Integer pageSize);
+
+    Map<String, Object> delEquip(Integer id, Integer loginUserId);
 }

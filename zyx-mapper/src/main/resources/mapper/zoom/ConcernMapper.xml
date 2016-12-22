@@ -135,7 +135,7 @@
     </select>
 
     <select id="starRandom" resultMap="ConcernResultMap">
-        SELECT * FROM concern where type=#{type}
+        SELECT * FROM concern where type=#{type} AND state = 0
         GROUP BY create_time
         <if test="n !=null">
             limit 0, #{n}
@@ -147,6 +147,7 @@
         <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
             #{item}
         </foreach>
+        AND state = 0
     </select>
 
     <select id="myListCount" parameterType="int" resultType="int">

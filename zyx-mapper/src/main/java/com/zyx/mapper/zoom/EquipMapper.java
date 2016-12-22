@@ -26,4 +26,6 @@ public interface EquipMapper extends BaseMapper<Equip> {
     List<EquipDetailsVo> queryMyList(UserEquipmentParam userEquipmentParam);
 
     List<EquipListVo> queryByLabelId(@Param("tagId") Integer tagId, @Param("loginUserId") Integer loginUserId, @Param("start") Integer start, @Param("end") Integer end);
+
+    Integer delEquip(@Param("id") Integer id);
 }
