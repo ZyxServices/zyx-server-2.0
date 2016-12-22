@@ -107,11 +107,17 @@
         <association column="user_id" property="userIconVo" select="selectUserIcon"></association>
     </resultMap>
     <select id="selectRankList" resultMap="RankVo" parameterType="com.zyx.param.record.RankParam">
-        SELECT @row := @row + 1 AS row_num,sr.user_id,SUM(sr.score) AS total_score
+        SELECT @row := @row + 1 AS row_num,sr.*
         FROM
-        t_sport_record sr ,(SELECT @row := 0) r
-        GROUP BY sr.user_id
-        ORDER BY total_score DESC
+        (
+            SELECT
+            sr.user_id,SUM(sr.score) AS total_score
+            FROM
+            t_sport_record sr
+             GROUP BY sr.user_id
+            ORDER BY total_score DESC
+        )
+        sr ,(SELECT @row := 0) r
         LIMIT ${offset},${pageSize}
     </select>
     <select id="selectUserIcon" parameterType="java.lang.Integer" resultType="com.zyx.vo.account.UserIconVo">
@@ -122,21 +128,27 @@
     </select>
 
     <select id="selectSelfRank" resultMap="RankVo" parameterType="com.zyx.param.record.RankParam">
-        SELECT
+       SELECT
         *
         FROM(
-        SELECT @row := @row + 1 AS row_num,sr.user_id,SUM(sr.score) AS total_score
+        SELECT @row := @row + 1 AS row_num,sr.*
         FROM
-        t_sport_record sr ,(SELECT @row := 0) r
-        GROUP BY sr.user_id
-        ORDER BY total_score DESC
+        (
+            SELECT
+            sr.user_id,SUM(sr.score) AS total_score
+            FROM
+            t_sport_record sr
+             GROUP BY sr.user_id
+            ORDER BY total_score DESC
+        )
+        sr ,(SELECT @row := 0) r
         ) sort_table
         WHERE
         user_id=#{userId}
-        ORDER BY total_score
     </select>
 
-    <select id="selectRecordUserIcon" resultType="com.zyx.vo.account.UserIconVo" parameterType="com.zyx.param.record.SportRecordParam" >
+    <select id="selectRecordUserIcon" resultType="com.zyx.vo.account.UserIconVo"
+            parameterType="com.zyx.param.record.SportRecordParam">
         SELECT
         DISTINCT(u.`id`),u.`avatar`,u.`nickname`
         FROM user u LEFT JOIN t_sport_record sr ON u.`id`=sr.`user_id`
