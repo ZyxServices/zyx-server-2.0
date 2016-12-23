@@ -48,7 +48,11 @@
     </resultMap>
 
     <select id="queryActivity" parameterType="com.zyx.param.activity.QueryActivityParam" resultMap="activityListVo">
-        select a.*,b.id as toZan from activity a LEFT JOIN zan b ON b.body_id = a.id
+        SELECT a.*,IF(EXISTS(SELECT * FROM zan b WHERE b.body_id = a.id
+        <if test="userId != null ">
+            AND b.account_id = #{userId}
+        </if>
+        ),1,0) AS toZan from activity a
         <if test="userId != null ">
             AND b.account_id = #{userId}
         </if>
@@ -76,23 +80,20 @@
     </select>
 
     <select id="myActivityList" parameterType="com.zyx.param.activity.MyActivityListParam" resultMap="activityListVo">
-        select a.*,b.id as toZan from activity a LEFT JOIN zan b ON b.body_id = a.id
-        <if test="userId != null ">
-            AND b.account_id = #{userId}
-        </if>
-        where user_id = #{userId}
-        AND del != 1 AND mask = 0
-        ORDER BY create_time desc
+        select a.*,IF(EXISTS(SELECT * FROM zan b WHERE b.body_id = a.id AND b.account_id = #{userId}),1,0) AS toZan from activity a
+        where user_id = #{userId} AND a.del != 1 AND a.mask = 0 AND a.type = 1
+        ORDER BY a.create_time desc
         <if test="pageNumber != null and number != null">
             limit #{pageNumber}, #{number}
         </if>
     </select>
 
     <select id="activityById" parameterType="java.util.Map" resultMap="activityVo">
-        select a.*,b.id as zan from activity a LEFT JOIN zan b ON b.body_id = a.id
+        SELECT a.*,IF(EXISTS(SELECT * FROM zan b WHERE b.body_id = a.id
         <if test="userId != null ">
             AND b.account_id = #{userId}
         </if>
+        ),1,0) AS toZan FROM activity a
         where a.id = #{activityId} AND a.del != 1 AND a.mask = 0
     </select>
 
