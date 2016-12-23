@@ -97,11 +97,10 @@
     </select>
 
     <select id="queryMyList" parameterType="com.zyx.param.user.UserEquipmentParam" resultMap="EquipDetailsResultMap">
-        SELECT * FROM equip WHERE account_Id = #{userId}
+        SELECT * FROM equip WHERE account_Id = #{userId} AND del = 0
         <if test="page != null and pageSize != null">
             limit #{page}, #{pageSize}
         </if>
-        AND  del = 0
     </select>
 
     <select id="commentQuery" resultMap="commentVoMap">
