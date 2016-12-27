@@ -114,4 +114,7 @@
         DELETE FROM concern WHERE from_id = #{activityId} AND user_id = #{userId} AND from_type = 1
     </delete>
 
+    <delete id="delDevaluation" parameterType="java.util.Map">
+        DELETE FROM devaluation WHERE model = #{model} AND model_id = #{model_id} AND app_type = 1
+    </delete>
 </mapper>

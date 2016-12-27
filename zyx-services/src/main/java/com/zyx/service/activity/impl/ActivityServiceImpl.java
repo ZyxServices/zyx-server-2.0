@@ -3,7 +3,6 @@ package com.zyx.service.activity.impl;
 import com.zyx.constants.Constants;
 import com.zyx.constants.activity.ActivityConstants;
 import com.zyx.entity.activity.Activity;
-import com.zyx.entity.activity.ActivityMember;
 import com.zyx.entity.zoom.Concern;
 import com.zyx.mapper.activity.ActivityMapper;
 import com.zyx.mapper.activity.ActivityMemberMapper;
@@ -173,6 +172,12 @@ public class ActivityServiceImpl implements ActivityService {
 
             activityMemberMapper.delMember(queryActivityMemberParam);
             activityMapper.delConcern(map);
+
+            Map<String, Object> map1 = new HashMap<>();
+            map1.put("model_id", activityId);
+            map1.put("model", 1);
+            activityMapper.delDevaluation(map1);
+
             if (delActivityById > 0) {
                 return MapUtils.buildSuccessMap(Constants.SUCCESS, Constants.MSG_SUCCESS, "删除成功");
             } else {

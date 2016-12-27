@@ -32,6 +32,7 @@ public interface ActivityMapper extends BaseMapper<Activity> {
 
     /**
      * 通过用户ID 查询活动
+     *
      * @param myActivityListParam
      * @return
      */
@@ -39,6 +40,7 @@ public interface ActivityMapper extends BaseMapper<Activity> {
 
     /**
      * 通过ID查询活动详细信息
+     *
      * @param map
      * @return
      */
@@ -50,7 +52,9 @@ public interface ActivityMapper extends BaseMapper<Activity> {
      * @param map
      * @return
      */
-    int delActivityById(Map<String,Object> map);
+    int delActivityById(Map<String, Object> map);
 
-    int delConcern(Map<String,Object> map);
+    int delConcern(Map<String, Object> map);
+
+    int delDevaluation(Map<String, Object> map);
 }
