@@ -38,7 +38,7 @@ public class ActivityFacadeImpl implements ActivityFacade {
             Map map = activityService.insterActivity(activityParam);
             //发布活动 获得运动币
             if (null != map && !map.isEmpty() && map.get(ZoomConstants.STATE).equals(ZoomConstants.SUCCESS))
-                sportCoinService.modifyCoin(activityParam.getUserId(), CoinConstants.OperType.PUBLISH_COMMENT);
+                sportCoinService.modifyCoin(activityParam.getUserId(), CoinConstants.OperType.PUBLISH_ACTIVITY);
             return map;
         } catch (Exception e) {
             logger.error(e);

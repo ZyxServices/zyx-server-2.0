@@ -104,6 +104,7 @@ public class ActivityMemberServiceImpl implements ActivityMemberService {
             memberByUserId.stream().filter(e -> e != null).forEach(s -> {
                 activityListVos.add(s.getActivity());
             });
+
             return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", activityListVos);
         } else {
             return Constants.MAP_PARAM_MISS;

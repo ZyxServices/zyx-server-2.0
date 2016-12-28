@@ -118,7 +118,7 @@ public class ZoomFacadeImpl implements ZoomFacade {
     public Map<String, Object> addCern(Integer userId, Integer type, String content, String cernImgurl, String videoUrl, Integer visible, String local,Integer recordId) {
         Map map = concernService.addCern(userId, type, content, cernImgurl, videoUrl, visible, local);
         if (null != map && !map.isEmpty() && map.get(ZoomConstants.STATE).equals(ZoomConstants.SUCCESS))
-            sportCoinService.modifyCoin(userId, CoinConstants.OperType.PUBLISH_COMMENT);
+            sportCoinService.modifyCoin(userId, CoinConstants.OperType.PUBLISH_CONCERN);
         if(recordId!=null){
             Concern conc = (Concern) map.get(Constants.DATA);
             if (null != conc && conc.getId() != null) {
@@ -144,7 +144,7 @@ public class ZoomFacadeImpl implements ZoomFacade {
     public Map<String, Object> addEquip(String title, String content, Integer accountId, Integer labelId, String imgUrls) {
         Map map = equipService.addEquip(title, content, accountId, labelId, imgUrls);
         if (null != map && !map.isEmpty() && map.get(ZoomConstants.STATE).equals(ZoomConstants.SUCCESS))
-            sportCoinService.modifyCoin(accountId, CoinConstants.OperType.PUBLISH_COMMENT);
+            sportCoinService.modifyCoin(accountId, CoinConstants.OperType.EQUIP_SHOW);
         return map;
     }
 
