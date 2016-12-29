@@ -76,7 +76,7 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
         if (id == null) {
             return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30021, ZoomConstants.PG_ERROR_CODE_30021_MSG);
         }
-        Concern concernFind = concernMapper.getOne(id,loginUserId);
+        Concern concernFind = concernMapper.getOne(id, loginUserId);
         if (concernFind != null) {
             if (Objects.equals(concernFind.getUserId(), loginUserId)) {
                 Integer result = concernMapper.delConcern(id);
@@ -236,7 +236,7 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
             if (Objects.equals(concernId, null)) {
                 return MapUtils.buildErrorMap(ZoomConstants.PG_ERROR_CODE_30021, ZoomConstants.PG_ERROR_CODE_30021_MSG);
             }
-            MyFollowVo myFollowVo = concernMapper.getOne(concernId,accountId);
+            MyFollowVo myFollowVo = concernMapper.getOne(concernId, accountId);
 //            if (!Objects.equals(myFollowVo, null)) {
 //                myFollowVo.setTopicContent("<p>" + myFollowVo.getTopicContent() + "</p>");
 //                if (myFollowVo.getImgUrl() != null) {
@@ -283,7 +283,9 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
         }
         List<MyFollowVo> myFollowVos = new ArrayList<>();
         if (ids.size() > 0) {
-            myFollowVos = concernMapper.getRecommend(userConcernParam.getUserId(), ids, (userConcernParam.getPage() - 1) * userConcernParam.getPage(), userConcernParam.getPageSize());
+            int start = (userConcernParam.getPage() - 1) * userConcernParam.getPageSize();
+            int pageSize = userConcernParam.getPageSize();
+            myFollowVos = concernMapper.getRecommend(userConcernParam.getUserId(), ids, start, pageSize);
         }
         return MapUtils.buildSuccessMap(ZoomConstants.SUCCESS, ZoomConstants.PG_ERROR_CODE_34000_MSG, myFollowVos);
     }
